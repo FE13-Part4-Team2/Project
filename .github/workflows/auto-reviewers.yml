@@ -1,4 +1,4 @@
-name: Auto Assign Random Reviewers
+name: Auto Assign Reviewers
 
 on:
   pull_request:
@@ -8,14 +8,14 @@ jobs:
   assign-reviewers:
     runs-on: ubuntu-latest
     steps:
-      - name: Assign reviewers randomly
-        uses: action-js/review-rotator@v1
+      - name: Assign random reviewers
+        uses: tzkhan/pr-reviewers-action@v1.0.6
         with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
           reviewers: |
             ARON-Y
             hyeonjiroh
             jjaneyxx
             MySoupRice
-          count: 2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          number-of-reviewers: 2
+          skip-author: true
