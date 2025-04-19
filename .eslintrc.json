@@ -57,7 +57,12 @@
   },
   "overrides": [
     {
-      "files": ["src/components/**/*.tsx", "src/components/**/*.jsx"],
+      "files": [
+        "src/components/**/*.tsx",
+        "src/components/**/*.jsx",
+        "src/app/**/*.tsx",
+        "src/app/**/*.jsx"
+      ],
       "rules": {
         "import/prefer-default-export": "error",
         "import/no-named-export": "error",
