@@ -1,3 +1,3 @@
 export default function ArticleDetailPage() {
-  return <div>ArticleDetailPage</div>;
+  return <div>Article Detail Page</div>;
 }

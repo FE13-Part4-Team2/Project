@@ -1,3 +1,3 @@
 export default function AddTeamPage() {
-  return <div>AddTeamPage</div>;
+  return <div>Add Team Page</div>;
 }

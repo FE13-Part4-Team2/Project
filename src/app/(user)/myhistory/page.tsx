@@ -1,3 +1,3 @@
 export default function MyHistoryPage() {
-  return <div>MyHistoryPage</div>;
+  return <div>MyHistory Page</div>;
 }

@@ -1,3 +1,3 @@
 export default function AddArticlePage() {
-  return <div>AddArticlePage</div>;
+  return <div>Add Article Page</div>;
 }

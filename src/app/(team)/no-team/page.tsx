@@ -1,3 +1,3 @@
 export default function NoTeamPage() {
-  return <div>NoTeamPage</div>;
+  return <div>No Team Page</div>;
 }
