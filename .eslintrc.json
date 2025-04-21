@@ -26,12 +26,6 @@
     "es6": true
   },
   "rules": {
-    "prettier/prettier": [
-      "error",
-      {
-        "endOfLine": "auto"
-      }
-    ],
     "jsx-a11y/label-has-associated-control": [
       "error",
       {
@@ -42,7 +36,6 @@
     ],
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
-    "no-console": "error",
     "react/jsx-props-no-spreading": "off",
     "tailwindcss/no-custom-classname": "off",
     "@typescript-eslint/no-unused-vars": "warn",
