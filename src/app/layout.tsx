@@ -1,8 +1,8 @@
 import './globals.css';
 
+import { Montserrat } from 'next/font/google';
 // import type { Metadata } from 'next';
 import localFont from 'next/font/local';
-import { Montserrat } from 'next/font/google';
 
 import CustomToastContainer from '@/components/common/CustomToastContainer';
 
