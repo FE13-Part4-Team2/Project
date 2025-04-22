@@ -9,9 +9,10 @@ const Header = () => {
   const toggleMenu = () => setMenuOpen((prev) => !prev);
 
   return (
-    <header className="h-[79px] w-full border-b border-gray-100 bg-[#1E293B] shadow-sm">
-      <div className="mx-auto flex h-full w-full max-w-[1920px] items-center justify-between px-5 py-2.5 text-sm leading-6 lg:px-[80px] lg:py-[20px]">
-        <nav className="mr-[165px] flex items-center justify-between gap-[40px]">
+    <header className="h-[60px] w-full border-b border-gray-100 bg-[#1E293B] px-6 py-5">
+      <div className="mx-auto flex h-full w-full max-w-[1920px] items-center justify-between text-sm leading-6 text-amber-50">
+        <nav className="flex items-center justify-between gap-[40px]">
+          <img src="/icon/gnb-menu.svg" className="block md:hidden" />
           <Link
             href="/"
             className="flex w-[107px] items-center justify-between gap-0.5"
@@ -24,13 +25,16 @@ const Header = () => {
             <img src="icon/coworkers.svg" />
           </Link>
 
-          <nav className="hidden items-center gap-6 md:flex">
-            <Link
-              href="/wikilist"
-              className="text-md font-medium hover:text-gray-400"
-            >
-              경영관리팀
-            </Link>
+          <nav className="hidden items-center gap-8 md:flex">
+            <nav className="ml-8 flex gap-3">
+              <Link
+                href="/wikilist"
+                className="text-md font-medium hover:text-gray-400"
+              >
+                경영관리팀
+              </Link>
+              <img src="/icon/check.svg" />
+            </nav>
             <Link
               href="/boards"
               className="text-md font-medium hover:text-gray-400"
@@ -40,11 +44,12 @@ const Header = () => {
           </nav>
         </nav>
 
-        <button onClick={toggleMenu}>
-          <img
-            src="/icon/user.svg"
-            className="cursor-pointer hover:text-green-300"
-          />
+        <button
+          onClick={toggleMenu}
+          className="ml-[20] flex cursor-pointer gap-3 hover:text-amber-100"
+        >
+          <img src="/icon/user.svg" className="" />
+          사용자
         </button>
       </div>
     </header>
