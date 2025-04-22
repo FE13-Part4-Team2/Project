@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://fe-project-cowokers.vercel.app/13-2/:path*"
+    }
+  ]
+}
