@@ -1,7 +1,7 @@
 'use client';
 
-import { toast } from 'react-toastify';
 import Cookies from 'js-cookie';
+import { toast } from 'react-toastify';
 
 export default function LogoutButton() {
   const handleLogout = () => {

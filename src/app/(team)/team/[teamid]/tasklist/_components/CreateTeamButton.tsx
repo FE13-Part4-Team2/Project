@@ -1,6 +1,7 @@
 'use client';
 
 import { toast } from 'react-toastify';
+
 import { postGroup } from '@/lib/apis/group';
 
 export default function CreateTeamButton() {
@@ -12,6 +13,7 @@ export default function CreateTeamButton() {
 
       toast.success(id);
     } catch (error) {
+      console.error('Failed to create team :', error);
       toast.error('팀 생성 실패');
     }
   };

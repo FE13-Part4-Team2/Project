@@ -1,7 +1,7 @@
-import LoginButton from './_components/LoginButton';
-import LogoutButton from './_components/LogoutButton';
 import CreateTeamButton from './_components/CreateTeamButton';
 import DeleteTeamButton from './_components/DeleteTeamButton';
+import LoginButton from './_components/LoginButton';
+import LogoutButton from './_components/LogoutButton';
 import TeamInfo from './_components/TeamInfo';
 
 export default function TaskListPage() {
@@ -15,7 +15,7 @@ export default function TaskListPage() {
       <CreateTeamButton />
       <br />
       <DeleteTeamButton />
-      <TeamInfo />
+      {/* <TeamInfo /> */}
     </div>
   );
 }

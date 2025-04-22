@@ -1,10 +1,12 @@
 import Cookies from 'js-cookie';
-import fetcher from '../fetcher';
+
 import {
   GetGroupResponse,
   PostGroupBody,
   PostGroupResponse,
 } from '@/types/group';
+
+import fetcher from '../fetcher';
 
 export async function getGroup({
   groupId,

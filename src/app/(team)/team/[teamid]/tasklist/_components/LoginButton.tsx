@@ -2,6 +2,7 @@
 
 import Cookies from 'js-cookie';
 import { toast } from 'react-toastify';
+
 import { postLogin } from '@/lib/apis/auth';
 
 export default function LoginButton() {
@@ -26,6 +27,7 @@ export default function LoginButton() {
 
       toast.success('로그인 성공');
     } catch (error) {
+      console.error('Failed to login :', error);
       toast.error('로그인 실패');
     }
   };

@@ -1,4 +1,5 @@
 import { cookies } from 'next/headers';
+
 import { getGroup } from '@/lib/apis/group';
 
 export default async function TeamInfo() {
