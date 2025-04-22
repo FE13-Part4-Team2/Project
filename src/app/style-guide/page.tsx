@@ -4,6 +4,9 @@ export default function StyleGuide() {
       <strong className="text-2xl-semibold mt-16">폰트사이즈</strong>
       <div className="mt-6 mb-10 flex w-full max-w-[800px] flex-col items-center justify-center">
         {/* 폰트 리스트 */}
+        <p className="text-4xl-medium font-(--font-montserrat)">
+          font-(--font-montserrat)
+        </p>
         <p className="text-4xl-medium">Pretendard 4XL Medium (40px / 48px)</p>
         <p className="text-3xl-bold">Pretendard 3XL Bold (32px / 38px)</p>
         <p className="text-3xl-semibold">
