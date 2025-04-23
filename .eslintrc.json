@@ -1,5 +1,6 @@
 {
   "root": true,
+
   "parser": "@typescript-eslint/parser",
 
   "extends": [
@@ -9,22 +10,17 @@
     "plugin:react-hooks/recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:jsx-a11y/recommended",
-    "prettier"
+    "prettier" // turn of eslint format rules
   ],
-  "plugins": [
-    "react",
-    "react-hooks",
-    "@typescript-eslint",
-    "jsx-a11y",
-    "import",
-    "prettier",
-    "simple-import-sort"
-  ],
+
+  // 코드가 실행될 환경을 지정
   "env": {
     "browser": true,
     "node": true,
-    "es6": true
+    "es6": true // ES6+ 문법을 허용
   },
+
+  // 웹 접근성을 위한 label 과 input 태그 연결
   "rules": {
     "jsx-a11y/label-has-associated-control": [
       "error",
@@ -34,54 +30,15 @@
         }
       }
     ],
-    "react/react-in-jsx-scope": "off",
-    "react/prop-types": "off",
-    "react/jsx-props-no-spreading": "off",
-    "tailwindcss/no-custom-classname": "off",
-    "@typescript-eslint/no-unused-vars": "warn",
-    "simple-import-sort/imports": "error",
-    "simple-import-sort/exports": "error",
-    "import/order": "off",
-    "react/function-component-definition": "off",
-    "react/require-default-props": "off",
-    "import/no-extraneous-dependencies": "off",
-    "jsx-a11y/no-static-element-interactions": "off",
-    "jsx-a11y/click-events-have-key-events": "off"
+    // JSX 문법 사용 시, React 가 import 되어 있지 않을 때 발생하는 경고
+    "react/react-in-jsx-scope": "off"
   },
-  "overrides": [
-    {
-      "files": [
-        "src/components/**/*.tsx",
-        "src/components/**/*.jsx",
-        "src/app/**/*.tsx",
-        "src/app/**/*.jsx"
-      ],
-      "rules": {
-        "import/prefer-default-export": "error",
-        "import/no-named-export": "error",
-        "import/no-default-export": "off"
-      }
-    },
-    {
-      "files": [
-        "src/utils/**/*.ts",
-        "src/utils/**/*.js",
-        "src/hooks/**/*.ts",
-        "src/hooks/**/*.js",
-        "src/constants/**/*.ts",
-        "src/constants/**/*.js"
-      ],
-      "rules": {
-        "import/prefer-default-export": "off",
-        "import/no-default-export": "error",
-        "import/no-named-export": "off"
-      }
-    }
-  ],
+
   "settings": {
     "react": {
-      "version": "detect"
+      "version": "detect" // 자동으로 설치된 React 버전을 감지
     },
+
     "import/resolver": {
       "typescript": { "project": "./tsconfig.json" }
     }
@@ -91,5 +48,8 @@
     "ecmaFeatures": { "jsx": true },
     "ecmaVersion": 2021
   },
+
+  // ELint 가 검사하지 않을 파일, 폴더
+  // 의존성 폴더, Next.js 설정 파일은 Lint 대상이 아님
   "ignorePatterns": ["node_modules/", "next.config.mjs"]
 }
