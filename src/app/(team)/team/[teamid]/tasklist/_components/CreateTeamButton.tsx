@@ -7,9 +7,13 @@ import { postGroups } from '@/lib/apis/group';
 export default function CreateTeamButton() {
   const handleCreateTeam = async () => {
     try {
-      const { id } = await postGroups({
+      const data = await postGroups({
         name: 'Test',
       });
+
+      if (!data) return;
+
+      const { id } = data;
 
       toast.success(id);
     } catch (error) {

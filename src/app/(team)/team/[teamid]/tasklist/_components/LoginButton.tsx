@@ -8,10 +8,14 @@ import { postLogin } from '@/lib/apis/auth';
 export default function LoginButton() {
   const handleLogin = async () => {
     try {
-      const { accessToken, refreshToken } = await postLogin({
+      const data = await postLogin({
         email: 'test1111@email.com',
         password: 'test1111*',
       });
+
+      if (!data) return;
+
+      const { accessToken, refreshToken } = data;
 
       localStorage.setItem('accessToken', accessToken);
       Cookies.set('accessToken', accessToken, {
