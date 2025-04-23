@@ -3,7 +3,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { ToastContainer, Zoom } from 'react-toastify';
 
-const CustomToastContainer = () => {
+const ToastStyle = () => {
   return (
     <ToastContainer
       limit={2}
@@ -19,4 +19,4 @@ const CustomToastContainer = () => {
   );
 };
 
-export default CustomToastContainer;
+export default ToastStyle;
