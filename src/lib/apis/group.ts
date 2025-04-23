@@ -8,7 +8,7 @@ import {
 
 import fetcher from '../fetcher';
 
-export async function getGroup({
+export async function getGroupsById({
   groupId,
   token,
 }: {
@@ -22,7 +22,16 @@ export async function getGroup({
   });
 }
 
-export async function postGroup(
+export async function deleteGroupsById(groupId: number): Promise<null> {
+  const token = Cookies.get('accessToken');
+  return fetcher<undefined, null>({
+    url: `/groups/${groupId}`,
+    method: 'DELETE',
+    token,
+  });
+}
+
+export async function postGroups(
   body: PostGroupBody
 ): Promise<PostGroupResponse> {
   const token = Cookies.get('accessToken');
@@ -31,14 +40,5 @@ export async function postGroup(
     method: 'POST',
     token,
     body,
-  });
-}
-
-export async function deleteGroup(groupId: number): Promise<null> {
-  const token = Cookies.get('accessToken');
-  return fetcher<undefined, null>({
-    url: `/groups/${groupId}`,
-    method: 'DELETE',
-    token,
   });
 }
