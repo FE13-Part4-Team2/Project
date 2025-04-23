@@ -93,9 +93,9 @@ const Header = () => {
           <div className="relative">
             <button
               onClick={() => setUserDropdownOpen((prev) => !prev)}
-              className="ml-[20] flex cursor-pointer gap-3 hover:text-amber-100"
+              className="flex cursor-pointer gap-3 hover:text-amber-100"
             >
-              <img src="/icon/user.svg" className="" />
+              <img src="/icon/user.svg" />
               사용자
             </button>
 
