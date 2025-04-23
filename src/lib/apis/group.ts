@@ -4,7 +4,7 @@ import {
   GetGroupResponse,
   PostGroupBody,
   PostGroupResponse,
-} from '@/types/group';
+} from '@/lib/apis/types/group';
 
 import fetcher from '../fetcher';
 
