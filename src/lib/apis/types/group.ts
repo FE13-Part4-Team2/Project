@@ -19,6 +19,7 @@ export interface GetGroupResponse {
 }
 
 export interface PostGroupBody {
+  image?: string | null;
   name: string;
 }
 

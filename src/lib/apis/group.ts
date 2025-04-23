@@ -35,10 +35,16 @@ export async function postGroups(
   body: PostGroupBody
 ): Promise<PostGroupResponse> {
   const token = Cookies.get('accessToken');
-  return fetcher<PostGroupBody, PostGroupResponse>({
+
+  const payload = {
+    name: body.name,
+    ...(body.image ? { image: body.image } : {}),
+  };
+
+  return fetcher<typeof payload, PostGroupResponse>({
     url: '/groups',
     method: 'POST',
     token,
-    body,
+    body: payload,
   });
 }
