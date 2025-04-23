@@ -4,12 +4,12 @@ const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default async function fetcher<B, R>({
   url,
-  methodType,
+  method,
   token,
   body = undefined,
 }: {
   url: string;
-  methodType: 'GET' | 'POST' | 'PATCH' | 'DELETE';
+  method: 'GET' | 'POST' | 'PATCH' | 'DELETE';
   token?: string;
   body?: B;
 }): Promise<R> {
@@ -23,7 +23,7 @@ export default async function fetcher<B, R>({
     }
 
     return fetch(`${BASE_URL}${url}`, {
-      method: methodType,
+      method,
       headers,
       body: body ? JSON.stringify(body) : undefined,
     });

@@ -17,7 +17,7 @@ export async function getGroup({
 }): Promise<GetGroupResponse> {
   return fetcher<undefined, GetGroupResponse>({
     url: `/groups/${groupId}`,
-    methodType: 'GET',
+    method: 'GET',
     token,
   });
 }
@@ -28,7 +28,7 @@ export async function postGroup(
   const token = Cookies.get('accessToken');
   return fetcher<PostGroupBody, PostGroupResponse>({
     url: '/groups',
-    methodType: 'POST',
+    method: 'POST',
     token,
     body,
   });
@@ -38,7 +38,7 @@ export async function deleteGroup(groupId: number): Promise<null> {
   const token = Cookies.get('accessToken');
   return fetcher<undefined, null>({
     url: `/groups/${groupId}`,
-    methodType: 'DELETE',
+    method: 'DELETE',
     token,
   });
 }
