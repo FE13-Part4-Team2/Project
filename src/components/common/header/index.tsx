@@ -36,7 +36,7 @@ const Header = () => {
             <nav className="hidden items-center gap-8 md:flex">
               <nav className="relative ml-8 flex gap-3">
                 <Link
-                  href="/boards"
+                  href="/team/{teamid}"
                   className="text-md font-medium hover:text-gray-400"
                 >
                   경영관리팀
@@ -72,9 +72,11 @@ const Header = () => {
                       </div>
                     ))}
 
-                    <button className="mt-2 h-12 w-[186px] cursor-pointer rounded-md border border-white py-1 transition-all hover:bg-white hover:text-[#1E293B]">
-                      + 팀 추가하기
-                    </button>
+                    <Link href="/add-team">
+                      <button className="mt-2 h-12 w-[186px] cursor-pointer rounded-md border border-white py-1 transition-all hover:bg-white hover:text-[#1E293B]">
+                        + 팀 추가하기
+                      </button>
+                    </Link>
                   </div>
                 )}
               </nav>
@@ -100,7 +102,7 @@ const Header = () => {
             {isUserDropdownOpen && (
               <div className="absolute right-0 z-50 mt-2 flex w-[135px] flex-col items-center justify-center rounded-md bg-[#1E293B] text-center text-sm text-[14px] whitespace-nowrap text-white">
                 <Link
-                  href="/history"
+                  href="/myhistory"
                   className={`${menuItemClass} rounded-t-md`}
                   onClick={() => setUserDropdownOpen(false)}
                 >
@@ -114,7 +116,7 @@ const Header = () => {
                   계정 설정
                 </Link>
                 <Link
-                  href="/teams"
+                  href="/join-team"
                   className={menuItemClass}
                   onClick={() => setUserDropdownOpen(false)}
                 >
@@ -134,12 +136,13 @@ const Header = () => {
         </div>
       </header>
 
-      {(isSideMenuOpen || isTeamMenuOpen) && (
+      {(isSideMenuOpen || isTeamMenuOpen || isUserDropdownOpen) && (
         <div
           className="fixed inset-0 z-40"
           onClick={() => {
             setSideMenuOpen(false);
             setTeamMenuOpen(false);
+            setUserDropdownOpen(false);
           }}
         />
       )}
@@ -162,7 +165,7 @@ const Header = () => {
           <ul className="flex flex-col gap-5 text-sm font-normal text-white">
             <li>
               <Link
-                href="/boards"
+                href="/team/{teamid}"
                 onClick={() => setSideMenuOpen(false)}
                 className="hover:text-green-400"
               >
@@ -171,7 +174,7 @@ const Header = () => {
             </li>
             <li>
               <Link
-                href="/boards"
+                href="/team/{teamid}"
                 onClick={() => setSideMenuOpen(false)}
                 className="hover:text-green-400"
               >
@@ -180,7 +183,7 @@ const Header = () => {
             </li>
             <li>
               <Link
-                href="/boards"
+                href="/team/{teamid}"
                 onClick={() => setSideMenuOpen(false)}
                 className="hover:text-green-400"
               >
@@ -189,7 +192,7 @@ const Header = () => {
             </li>
             <li>
               <Link
-                href="/boards"
+                href="/team/{teamid}"
                 onClick={() => setSideMenuOpen(false)}
                 className="hover:text-green-400"
               >
