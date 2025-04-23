@@ -14,11 +14,11 @@ const Header = () => {
   return (
     <>
       <header className="h-[60px] w-full border-b border-gray-100 bg-[#1E293B] px-6 py-5">
-        <div className="mx-auto flex h-full w-full max-w-[1920px] items-center justify-between text-sm leading-6 text-amber-50">
+        <div className="mx-auto flex h-full w-full max-w-[1920px] items-center justify-between text-sm leading-6 text-white">
           <nav className="flex items-center justify-between gap-[40px]">
             <img
               src="/icon/gnb_menu.svg"
-              className="block cursor-pointer md:hidden"
+              className="tablet:hidden block cursor-pointer"
               onClick={() => setSideMenuOpen(true)}
             />
             <Link
@@ -33,11 +33,11 @@ const Header = () => {
               <img src="icon/coworkers.svg" />
             </Link>
 
-            <nav className="hidden items-center gap-8 md:flex">
+            <nav className="tablet:flex hidden items-center gap-8">
               <nav className="relative ml-8 flex gap-3">
                 <Link
                   href="/team/{teamid}"
-                  className="text-md font-medium hover:text-gray-400"
+                  className="text-md font-medium hover:text-gray-700"
                 >
                   경영관리팀
                 </Link>
@@ -83,7 +83,7 @@ const Header = () => {
 
               <Link
                 href="/boards"
-                className="text-md font-medium hover:text-gray-400"
+                className="text-md font-medium hover:text-gray-700"
               >
                 자유게시판
               </Link>
@@ -162,12 +162,12 @@ const Header = () => {
             </button>
           </div>
 
-          <ul className="flex flex-col gap-5 text-sm font-normal text-white">
+          <ul className="flex flex-col gap-6 text-sm font-normal text-white">
             <li>
               <Link
                 href="/team/{teamid}"
                 onClick={() => setSideMenuOpen(false)}
-                className="hover:text-green-400"
+                className="hover:text-green-700"
               >
                 경영관리팀{' '}
               </Link>
@@ -176,7 +176,7 @@ const Header = () => {
               <Link
                 href="/team/{teamid}"
                 onClick={() => setSideMenuOpen(false)}
-                className="hover:text-green-400"
+                className="hover:text-green-700"
               >
                 프로덕트팀
               </Link>
@@ -185,7 +185,7 @@ const Header = () => {
               <Link
                 href="/team/{teamid}"
                 onClick={() => setSideMenuOpen(false)}
-                className="hover:text-green-400"
+                className="hover:text-green-700"
               >
                 마케팅팀
               </Link>
@@ -194,7 +194,7 @@ const Header = () => {
               <Link
                 href="/team/{teamid}"
                 onClick={() => setSideMenuOpen(false)}
-                className="hover:text-green-400"
+                className="hover:text-green-700"
               >
                 콘텐츠팀
               </Link>
@@ -203,7 +203,7 @@ const Header = () => {
               <Link
                 href="/boards"
                 onClick={() => setSideMenuOpen(false)}
-                className="hover:text-green-400"
+                className="hover:text-green-700"
               >
                 자유게시판
               </Link>
