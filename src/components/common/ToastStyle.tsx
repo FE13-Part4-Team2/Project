@@ -1,17 +1,17 @@
 'use client';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { ToastContainer, Zoom } from 'react-toastify';
+import { ToastContainer, Flip } from 'react-toastify';
 
 const ToastStyle = () => {
   return (
     <ToastContainer
       limit={2}
-      position="top-center"
+      position="bottom-center"
       autoClose={3000}
       newestOnTop={true}
       hideProgressBar={false}
-      transition={Zoom}
+      transition={Flip}
       draggable
       pauseOnHover
       pauseOnFocusLoss
