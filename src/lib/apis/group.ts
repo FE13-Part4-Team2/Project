@@ -14,7 +14,7 @@ export async function getGroupsById({
 }: {
   groupId: number;
   token: string;
-}): Promise<GetGroupResponse> {
+}): Promise<GetGroupResponse | null> {
   return fetcher<undefined, GetGroupResponse>({
     url: `/groups/${groupId}`,
     method: 'GET',
@@ -33,7 +33,7 @@ export async function deleteGroupsById(groupId: number): Promise<null> {
 
 export async function postGroups(
   body: PostGroupBody
-): Promise<PostGroupResponse> {
+): Promise<PostGroupResponse | null> {
   const token = Cookies.get('accessToken');
 
   const payload = {

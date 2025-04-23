@@ -12,7 +12,7 @@ export default async function fetcher<B, R>({
   method: 'GET' | 'POST' | 'PATCH' | 'DELETE';
   token?: string;
   body?: B;
-}): Promise<R> {
+}): Promise<R | null> {
   const request = async (accessToken?: string): Promise<Response> => {
     const headers: HeadersInit = {
       Accept: 'application/json',
@@ -41,5 +41,5 @@ export default async function fetcher<B, R>({
     throw new Error(`Error ${res.status}: ${res.statusText}`);
   }
 
-  return res.status === 204 ? (null as R) : res.json();
+  return res.status === 204 ? null : res.json();
 }
