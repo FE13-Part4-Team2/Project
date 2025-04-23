@@ -10,7 +10,7 @@
     "plugin:react-hooks/recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:jsx-a11y/recommended",
-    "prettier" // turn of eslint format rules
+    "prettier" // prettier 과 충돌하는 ESLint 규칙을 끔
   ],
 
   // 코드가 실행될 환경을 지정
