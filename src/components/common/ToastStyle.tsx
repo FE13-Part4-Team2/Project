@@ -1,7 +1,7 @@
 'use client';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { ToastContainer, Flip } from 'react-toastify';
+import { Flip, ToastContainer } from 'react-toastify';
 
 const ToastStyle = () => {
   return (
