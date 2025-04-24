@@ -4,7 +4,7 @@ interface User {
   image: string | null;
 }
 
-export interface TaskBody {
+export interface RecurringTaskBody {
   name: string;
   description: string;
   startDate: string;
@@ -13,21 +13,47 @@ export interface TaskBody {
   monthDay: number | null;
 }
 
-export interface TaskResponse {
+export interface RecurringTaskResponse {
   id: number;
   name: string;
   description: string;
+  createdAt: string;
+  updatedAt: string;
+  startDate: string;
+  frequencyType: 'ONCE' | 'DAILY' | 'WEEKLY' | 'MONTHLY';
+  weekDays: number[];
+  monthDay: number | null;
+  taskListId: number;
+  groupId: number;
+  writerId: number;
+}
+
+export interface TaskBody {
+  name: string;
+  description: string;
+  done: boolean;
+}
+
+export interface TaskResponse {
+  id: number;
+  updatedAt: string;
   date: string;
   doneAt: string | null;
-  updatedAt: string;
-  user: User | null;
   recurringId: number;
+  name: string;
+  description: string;
+  frequency: 'ONCE' | 'DAILY' | 'WEEKLY' | 'MONTHLY';
   deletedAt: string | null;
+  user: User | null;
   displayIndex: number;
+  recurring: RecurringTaskResponse;
   writer: User;
   doneBy: {
     user: User | null;
   };
   commentCount: number;
-  frequency: 'ONCE' | 'DAILY' | 'WEEKLY' | 'MONTHLY';
+}
+
+export interface TaskOrderBody {
+  displayIndex: number;
 }

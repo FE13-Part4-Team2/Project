@@ -8,6 +8,7 @@ import {
   GroupMemberResponse,
   GroupResponse,
 } from '@/lib/apis/group/type';
+import { TaskResponse } from '@/lib/apis/task/type';
 
 export async function getGroup({
   groupId,
@@ -152,8 +153,8 @@ export async function getGroupTasks({
   groupId: number;
   date: string;
   token: string;
-}): Promise<GroupMemberResponse | null> {
-  return fetcher<undefined, GroupMemberResponse>({
+}): Promise<TaskResponse[] | null> {
+  return fetcher<undefined, TaskResponse[]>({
     url: `/groups/${groupId}/tasks?date=${date}`,
     method: 'GET',
     token,
