@@ -8,12 +8,12 @@ export interface UserBody {
 export interface UserResponse {
   id: number;
   nickname: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
   image: string | null;
-  teamId: string;
-  email: string;
-  memberships: UserMembershipResponse[];
+  teamId?: string;
+  email?: string;
+  memberships?: UserMembershipResponse[];
 }
 
 export interface UserGroupResponse {
@@ -47,7 +47,7 @@ export interface ResetPasswordToEmailBody {
 export interface ResetPasswordBody {
   passwordConfirmation: string;
   password: string;
-  token: string;
+  token?: string;
 }
 
 export interface MessageResponse {

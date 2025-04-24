@@ -13,9 +13,9 @@ export interface ArticleResponse {
   createdAt: string;
   updatedAt: string;
   writer: UserResponse;
-  content: string;
+  content?: string;
   likeCount: number;
-  isLiked: boolean;
+  isLiked?: boolean;
   commentCount: number;
 }
 
@@ -25,6 +25,5 @@ export interface ArticleListResponse {
 }
 
 export interface MessageResponse {
-  id: number;
   message: string;
 }

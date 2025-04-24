@@ -9,5 +9,7 @@ export interface CommentResponse {
   content: string;
   createdAt: string;
   updatedAt: string;
+  taskId?: number;
+  userId?: number;
   user: UserResponse;
 }

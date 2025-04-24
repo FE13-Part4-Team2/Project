@@ -18,6 +18,5 @@ export interface ArticleCommentListResponse {
 }
 
 export interface MessageResponse {
-  id: number;
   message: string;
 }
