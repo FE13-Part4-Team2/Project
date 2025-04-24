@@ -1,3 +1,5 @@
+// 회원가입 페이지 사용 인풋
+
 import React, { useState } from 'react';
 import BaseInput from '@/components/common/Input/InputBase';
 import {
@@ -55,8 +57,12 @@ const InputSignup = ({
       <BaseInput
         {...props}
         label={label}
-        labelClassName="text-lg-medium"
         value={value}
+        onChange={handleChange}
+        isInvalid={isInvalid}
+        containerClassName="relative h-[48px] bg-slate-800"
+        inputClassName="placeholder:text-slate-500 pr-6"
+        // 암호화
         type={
           pattern === 'password' || pattern === 'passwordMatch'
             ? showPassword
@@ -64,7 +70,6 @@ const InputSignup = ({
               : 'password'
             : (props.type ?? 'text')
         }
-        // 암호화 아이콘
         rightIcon={
           pattern === 'password' || pattern === 'passwordMatch' ? (
             <button
@@ -80,10 +85,6 @@ const InputSignup = ({
             </button>
           ) : undefined
         }
-        onChange={handleChange}
-        isInvalid={isInvalid}
-        containerClassName="relative h-[48px] bg-slate-800"
-        inputClassName="placeholder:text-slate-500 pr-6"
       />
       {isInvalid && (
         <p className="text-danger text-md-medium mt-2">{invalidMessage}</p>

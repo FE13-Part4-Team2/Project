@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import InputBase from '@/components/common/Input/InputBase';
 import InputSignup from '@/components/common/Input/InputSignup';
+import InputChangeInfo from '@/components/common/Input/InputChangeInfo';
+import InputToggle from '@/components/common/Input/InputToggle';
 
 export default function LandingPage() {
   const [name, setName] = useState('');
@@ -47,6 +49,14 @@ export default function LandingPage() {
           placeholder="비밀번호를 한 번 더 입력해 주세요"
           invalidMessage="비밀번호 확인이 틀렸습니다."
           onValueChange={setPasswordMatch}
+        />
+        <InputChangeInfo label="이메일" placeholder="codeit@codeit.com" />
+        <InputChangeInfo label="비밀번호" />
+        <InputToggle
+          varient="deep"
+          options={['한 번', '매일', '주 반복', '월 반복']}
+          placeholder="반복 안 함"
+          onOptionSelect={(val) => setCycle(val)}
         />
       </div>
     </div>

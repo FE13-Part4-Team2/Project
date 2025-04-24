@@ -1,0 +1,58 @@
+// 할 일 생성 모달(할 일 주기 선택),
+// 자유게시판(정렬 선택) 사용 인풋
+
+import React, { useState } from 'react';
+import BaseInput from '@/components/common/Input/InputBase';
+import IconRenderer from '@/components/common/Icons/IconRenderer';
+
+interface InputToggleProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  varient?: 'pale' | 'deep';
+  options: string[];
+  onOptionSelect: (value: string) => void;
+}
+
+const InputToggle = ({
+  varient,
+  options,
+  onOptionSelect,
+  ...props
+}: InputToggleProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div className="relative">
+      <BaseInput
+        {...props}
+        containerClassName={`relative h-[48px]
+          ${varient === 'pale' ? 'bg-slate-700' : 'bg-slate-800'} `}
+        rightIcon={
+          <button
+            type="button"
+            onClick={() => setIsOpen((prev) => !prev)}
+            className="absolute top-1/2 right-3 -translate-y-1/2"
+          >
+            <IconRenderer name="ToggleIcon" />
+          </button>
+        }
+      />
+      {isOpen && (
+        <ul className="absolute top-full z-10 mt-1 w-full rounded-md bg-slate-700 shadow-md">
+          {options.map((option) => (
+            <li
+              key={option}
+              onClick={() => {
+                onOptionSelect(option);
+                setIsOpen(false);
+              }}
+              className="cursor-pointer px-4 py-2 text-sm hover:bg-slate-600"
+            >
+              {option}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+};
+
+export default InputToggle;

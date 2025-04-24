@@ -3,7 +3,7 @@
 import React from 'react';
 import { InputBaseStyle } from '@/components/common/Input/style';
 
-interface BaseInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface InputBaseProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
@@ -13,7 +13,7 @@ interface BaseInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   inputClassName?: string;
 }
 
-const InputBase = React.forwardRef<HTMLInputElement, BaseInputProps>(
+const InputBase = React.forwardRef<HTMLInputElement, InputBaseProps>(
   (
     {
       label,
@@ -29,7 +29,9 @@ const InputBase = React.forwardRef<HTMLInputElement, BaseInputProps>(
   ) => {
     return (
       <div className="flex w-full flex-col gap-2">
-        {label && <label className={`${labelClassName}`}>{label}</label>}
+        {label && (
+          <label className={`text-lg-medium ${labelClassName}`}>{label}</label>
+        )}
         {/* 입력창 */}
         <div className={`${InputBaseStyle(isInvalid)} ${containerClassName}`}>
           {leftIcon && <span className="mr-2">{leftIcon}</span>}
