@@ -1,12 +1,4 @@
-interface User {
-  id: number;
-  nickname: string;
-  createdAt: string;
-  updatedAt: string;
-  image: string | null;
-  teamId: string;
-  email: string;
-}
+import { UserResponse } from '@/lib/apis/user/type';
 
 export interface OAuthAppBody {
   appSecret: '클라이언트 id';
@@ -38,7 +30,7 @@ export interface AuthBody {
 }
 
 export interface AuthResponse {
-  user: User;
+  user: UserResponse;
   accessToken: string;
   refreshToken: string;
 }

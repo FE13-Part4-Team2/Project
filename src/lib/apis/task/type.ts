@@ -1,8 +1,4 @@
-interface User {
-  id: number;
-  nickname: string;
-  image: string | null;
-}
+import { UserResponse } from '@/lib/apis/user/type';
 
 export interface RecurringTaskBody {
   name: string;
@@ -44,12 +40,12 @@ export interface TaskResponse {
   description: string;
   frequency: 'ONCE' | 'DAILY' | 'WEEKLY' | 'MONTHLY';
   deletedAt: string | null;
-  user: User | null;
+  user: UserResponse | null;
   displayIndex: number;
   recurring: RecurringTaskResponse;
-  writer: User;
+  writer: UserResponse;
   doneBy: {
-    user: User | null;
+    user: UserResponse | null;
   };
   commentCount: number;
 }

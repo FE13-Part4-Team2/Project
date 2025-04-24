@@ -1,3 +1,5 @@
+import { TaskListResponse } from '@/lib/apis/taskList/type';
+
 export interface GroupBody {
   image?: string | null;
   name: string;
@@ -10,7 +12,7 @@ export interface GroupResponse {
   updatedAt: string;
   teamId: string;
   members: GroupMemberResponse[];
-  taskLists: string[]; // 수정 필요
+  taskLists: TaskListResponse[];
 }
 
 export interface GroupInvitationBody {
