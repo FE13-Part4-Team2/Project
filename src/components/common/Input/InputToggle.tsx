@@ -6,13 +6,13 @@ import BaseInput from '@/components/common/Input/InputBase';
 import IconRenderer from '@/components/common/Icons/IconRenderer';
 
 interface InputToggleProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  varient?: 'pale' | 'deep';
+  variant?: 'pale' | 'deep';
   options: string[];
   onOptionSelect: (value: string) => void;
 }
 
 const InputToggle = ({
-  varient,
+  variant,
   options,
   onOptionSelect,
   ...props
@@ -24,7 +24,7 @@ const InputToggle = ({
       <BaseInput
         {...props}
         containerClassName={`relative h-[48px]
-          ${varient === 'pale' ? 'bg-slate-700' : 'bg-slate-800'} `}
+          ${variant === 'pale' ? 'bg-slate-700' : 'bg-slate-800'} `}
         rightIcon={
           <button
             type="button"
