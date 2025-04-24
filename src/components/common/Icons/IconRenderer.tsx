@@ -1,6 +1,6 @@
 'use client';
 
-import Icons from '@/components/common/Icons.tsx/Index';
+import Icons from '@/components/common/Icons';
 
 interface Props {
   name: keyof typeof Icons;
