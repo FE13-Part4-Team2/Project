@@ -1,36 +1,50 @@
 import React, { useState } from 'react';
 import BaseInput from '@/components/common/Input/InputBase';
 import {
+  validateName,
   validateEmail,
   validatePassword,
   validatePasswordMatch,
-} from '@/hooks/inputValidation';
+} from '@/utils/inputValidation';
 
 interface InputSignupProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
   invalidMessage?: string;
-  pattern?: string;
+  pattern?: 'name' | 'email' | 'password' | 'passwordMatch';
+  value: string;
   onValueChange: (value: string) => void;
+  originalPassword?: string;
 }
 
 const InputSignup = ({
   label,
+  value,
   pattern,
   invalidMessage = '올바른 값을 입력해주세요',
   onValueChange,
+  originalPassword,
   ...props
 }: InputSignupProps) => {
-  const [value, setValue] = useState('');
   const [isInvalid, setIsInvalid] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
-    setValue(val);
     onValueChange(val);
 
-    if (pattern) {
-      const regex = new RegExp(pattern);
-      setIsInvalid(!regex.test(val));
+    if (pattern === 'name') {
+      setIsInvalid(!validateName(val));
+    }
+
+    if (pattern === 'email') {
+      setIsInvalid(!validateEmail(val));
+    }
+
+    if (pattern === 'password') {
+      setIsInvalid(!validatePassword(val));
+    }
+
+    if (pattern === 'passwordMatch') {
+      setIsInvalid(!validatePasswordMatch(originalPassword ?? '', val));
     }
   };
 
