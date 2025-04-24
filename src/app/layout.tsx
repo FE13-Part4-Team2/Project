@@ -1,11 +1,11 @@
-import './globals.css';
+import '@/app/styles/globals.css';
 
 import { Montserrat } from 'next/font/google';
-// import type { Metadata } from 'next';
+
 import localFont from 'next/font/local';
 
-import CustomToastContainer from '@/components/common/CustomToastContainer';
-import Header from '@/components/common/header';
+import ToastStyle from '@/components/common/ToastStyle';
+import { Metadata } from 'next';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -30,10 +30,10 @@ const montserrat = Montserrat({
   variable: '--font-montserrat',
 });
 
-// export const metadata: Metadata = {
-//   title: 'Coworkers',
-//   description: '업무 배정 및 현황 공유 서비스',
-// };
+export const metadata: Metadata = {
+  title: 'Coworkers',
+  description: '업무 배정 및 현황 공유 서비스',
+};
 
 export default function RootLayout({
   children,
@@ -45,7 +45,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <CustomToastContainer />
+        <ToastStyle />
         <Header />
         {children}
       </body>
