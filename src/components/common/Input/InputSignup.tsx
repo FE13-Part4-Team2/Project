@@ -23,7 +23,7 @@ const InputSignup = ({
   label,
   value,
   pattern,
-  invalidMessage = '올바른 값을 입력해주세요',
+  invalidMessage = '올바른 값을 입력해 주세요',
   onValueChange,
   originalPassword,
   ...props
