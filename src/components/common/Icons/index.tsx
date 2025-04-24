@@ -53,7 +53,12 @@ const Icons = {
     />
   ),
   CheckIcon: ({ size = 24, className, onClick }: IconProps) => (
-    <Check width={size} height={size} className={className} onClick={onClick} />
+    <Check
+      width={size}
+      height={size}
+      className={`#F8FAFC ${className}`}
+      onClick={onClick}
+    />
   ),
 
   CheckGreenIcon: ({ size = 24, className, onClick }: IconProps) => (
@@ -234,7 +239,12 @@ const Icons = {
     />
   ),
   XIcon: ({ size = 24, className, onClick }: IconProps) => (
-    <X width={size} height={size} className={className} onClick={onClick} />
+    <X
+      width={size}
+      height={size}
+      className={`text-[#64748B] ${className}`}
+      onClick={onClick}
+    />
   ),
 };
 

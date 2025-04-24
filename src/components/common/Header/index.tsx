@@ -20,7 +20,7 @@ const Header = () => {
           <nav className="flex items-center justify-between">
             <IconRenderer
               name="GnbMenuIcon"
-              className="tablet:hidden mr-4 block cursor-pointer"
+              className="tablet:hidden mr-4 block cursor-pointer hover:text-gray-700"
               onClick={() => setSideMenuOpen(true)}
             />
             <Link
@@ -41,7 +41,7 @@ const Header = () => {
                 </Link>
                 <IconRenderer
                   name="CheckIcon"
-                  className={`cursor-pointer ${isTeamMenuOpen ? 'rotate-180 transform' : ''}`}
+                  className={`z-41 cursor-pointer hover:text-gray-700 ${isTeamMenuOpen ? 'rotate-180 transform' : ''}`}
                   onClick={() => setTeamMenuOpen((prev) => !prev)}
                 />
 
@@ -94,7 +94,7 @@ const Header = () => {
           <div className="relative">
             <button
               onClick={() => setUserDropdownOpen((prev) => !prev)}
-              className="group flex cursor-pointer items-center gap-3 hover:text-gray-700"
+              className="group relative z-41 flex cursor-pointer items-center gap-3 hover:text-gray-700"
             >
               <IconRenderer
                 name="UserIcon"
@@ -163,7 +163,7 @@ const Header = () => {
               onClick={() => setSideMenuOpen(false)}
               className="cursor-pointer"
             >
-              <IconRenderer name="XIcon" />
+              <IconRenderer name="XIcon" className="hover:text-green-100" />
             </button>
           </div>
 
