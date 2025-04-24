@@ -46,7 +46,7 @@ const Header = () => {
                 />
 
                 {isTeamMenuOpen && (
-                  <div className="absolute top-[45px] left-[-180px] z-50 flex w-[218px] flex-col gap-4 rounded-xl bg-[#1E293B] p-4">
+                  <div className="desktop:left-[-180px] absolute top-[45px] left-[-140px] z-50 flex w-[218px] flex-col gap-4 rounded-xl bg-[#1E293B] p-4">
                     {[
                       { name: '경영관리 팀', image: '/img/team-1.jpg' },
                       { name: '프로덕트 팀', image: '/img/team-2.jpg' },
@@ -57,7 +57,7 @@ const Header = () => {
                         className="flex cursor-pointer items-center justify-between gap-2 rounded-md px-2 py-2 transition-all hover:bg-[#334155]"
                       >
                         <Image
-                          src={team.image}
+                          src="/icon/close.svg"
                           alt=""
                           width={24}
                           height={24}
