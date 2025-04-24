@@ -1,0 +1,48 @@
+/* 토스트 커스텀 디자인 */
+@import 'tailwindcss';
+
+.Toastify__toast {
+  width: fit-content !important;
+  max-width: 380px !important;
+  min-width: 200px;
+  white-space: normal !important;
+  text-align: center !important;
+  margin: 0 auto !important;
+  word-break: keep-all; /* 단어 단위로 줄바꿈 */
+  border-radius: 16px;
+  background-color: white !important;
+  padding: 16px 24px !important;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+}
+
+.Toastify__toast--success {
+  color: #10b981 !important;
+}
+
+.Toastify__toast--error {
+  color: #f43f5e !important;
+}
+
+.Toastify__close-button {
+  display: none !important;
+}
+
+/* default icon */
+.Toastify__toast-icon svg {
+  fill: #10b981 !important;
+}
+
+/* type icon */
+.Toastify__toast--error .Toastify__toast-icon svg {
+  fill: #f43f5e !important;
+}
+
+.Toastify__progress-bar--success {
+  background: #10b981 !important;
+}
+
+.Toastify__progress-bar--error {
+  background: #f43f5e !important;
+}
