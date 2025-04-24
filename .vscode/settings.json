@@ -4,5 +4,6 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
-  "cSpell.words": ["pretendard"]
+  "cSpell.words": ["pretendard"],
+  "typescript.preferences.importModuleSpecifier": "non-relative"
 }
