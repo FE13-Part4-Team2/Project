@@ -1,32 +1,45 @@
-export interface GetGroupResponse {
+export interface GroupBody {
+  image?: string | null;
+  name: string;
+}
+export interface GroupResponse {
   id: number;
   name: string;
   image: string | null;
   createdAt: string;
   updatedAt: string;
   teamId: string;
-  members: [
-    {
-      userId: number;
-      groupId: number;
-      userName: string;
-      userEmail: string;
-      userImage: string | null;
-      role: string; // 나중에 "ADMIN" | "MEMBER"(?)으로 바꿔도 될 것 같다.
-    },
-  ];
-  taskLists: string[];
+  members: GroupMemberResponse[];
+  taskLists: string[]; // 수정 필요
 }
 
-export interface PostGroupBody {
-  image?: string | null;
-  name: string;
+export interface GroupInvitationBody {
+  userEmail: string;
+  token: string;
 }
 
-export interface PostGroupResponse {
-  id: number;
-  name: string;
-  image: string | null;
-  createdAt: string;
-  updatedAt: string;
+export interface GroupInvitationResponse {
+  groupId: number;
+}
+
+export interface GroupMemberBody {
+  userEmail: string;
+}
+
+export interface GroupMemberResponse {
+  userId: number;
+  groupId: number;
+  userName: string;
+  userEmail: string;
+  userImage: string | null;
+  role: 'ADMIN' | 'MEMBER';
+}
+
+export interface GroupTasksResponse {
+  userId: number;
+  groupId: number;
+  userName: string;
+  userEmail: string;
+  userImage: string | null;
+  role: 'ADMIN' | 'MEMBER';
 }

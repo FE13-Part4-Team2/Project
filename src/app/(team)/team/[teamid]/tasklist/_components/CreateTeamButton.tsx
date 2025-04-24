@@ -2,12 +2,12 @@
 
 import { toast } from 'react-toastify';
 
-import { postGroups } from '@/lib/apis/group';
+import { postGroup } from '@/lib/apis/group';
 
 export default function CreateTeamButton() {
   const handleCreateTeam = async () => {
     try {
-      const data = await postGroups({
+      const data = await postGroup({
         name: 'Test',
       });
 
