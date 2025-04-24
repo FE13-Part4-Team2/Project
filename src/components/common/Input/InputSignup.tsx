@@ -6,12 +6,13 @@ import {
   validatePassword,
   validatePasswordMatch,
 } from '@/utils/inputValidation';
+import IconRenderer from '@/components/common/Icons/IconRenderer';
 
 interface InputSignupProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  label: string;
+  label?: string;
+  value: string;
   invalidMessage?: string;
   pattern?: 'name' | 'email' | 'password' | 'passwordMatch';
-  value: string;
   onValueChange: (value: string) => void;
   originalPassword?: string;
 }
@@ -26,6 +27,7 @@ const InputSignup = ({
   ...props
 }: InputSignupProps) => {
   const [isInvalid, setIsInvalid] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
@@ -49,17 +51,42 @@ const InputSignup = ({
   };
 
   return (
-    <div className="flex w-full flex-col gap-1">
-      <label className="text-sm text-white">{label}</label>
+    <div>
       <BaseInput
         {...props}
+        label={label}
+        labelClassName="text-lg-medium"
         value={value}
+        type={
+          pattern === 'password' || pattern === 'passwordMatch'
+            ? showPassword
+              ? 'text'
+              : 'password'
+            : (props.type ?? 'text')
+        }
+        // 암호화 아이콘
+        rightIcon={
+          pattern === 'password' || pattern === 'passwordMatch' ? (
+            <button
+              onClick={() => setShowPassword(!showPassword)}
+              type="button"
+              className="absolute top-1/2 right-3 -translate-y-1/2"
+            >
+              {showPassword ? (
+                <IconRenderer name="VisbilityOnIcon" />
+              ) : (
+                <IconRenderer name="VisbilityOffIcon" />
+              )}
+            </button>
+          ) : undefined
+        }
         onChange={handleChange}
         isInvalid={isInvalid}
-        customClassName="h-[48px] bg-slate-800"
+        containerClassName="relative h-[48px] bg-slate-800"
+        inputClassName="placeholder:text-slate-500 pr-6"
       />
       {isInvalid && (
-        <p className="text-danger text-md-medium">{invalidMessage}</p>
+        <p className="text-danger text-md-medium mt-2">{invalidMessage}</p>
       )}
     </div>
   );

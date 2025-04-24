@@ -4,23 +4,42 @@ import React from 'react';
 import { InputBaseStyle } from '@/components/common/Input/style';
 
 interface BaseInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  label?: string;
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
   isInvalid?: boolean;
-  customClassName?: string;
+  labelClassName?: string;
+  containerClassName?: string;
+  inputClassName?: string;
 }
 
 const InputBase = React.forwardRef<HTMLInputElement, BaseInputProps>(
-  ({ leftIcon, rightIcon, isInvalid, customClassName = '', ...props }, ref) => {
+  (
+    {
+      label,
+      leftIcon,
+      rightIcon,
+      isInvalid,
+      labelClassName = '',
+      containerClassName = '',
+      inputClassName = '',
+      ...props
+    },
+    ref
+  ) => {
     return (
-      <div className={`${InputBaseStyle(isInvalid)} ${customClassName}`}>
-        {leftIcon && <span className="mr-2">{leftIcon}</span>}
-        <input
-          ref={ref}
-          {...props}
-          className="text-lg-regular flex-1 bg-transparent placeholder-slate-500 outline-none"
-        />
-        {rightIcon && <span className="ml-2">{rightIcon}</span>}
+      <div className="flex w-full flex-col gap-2">
+        {label && <label className={`${labelClassName}`}>{label}</label>}
+        {/* 입력창 */}
+        <div className={`${InputBaseStyle(isInvalid)} ${containerClassName}`}>
+          {leftIcon && <span className="mr-2">{leftIcon}</span>}
+          <input
+            ref={ref}
+            {...props}
+            className={`flex-1 outline-none ${inputClassName}`}
+          />
+          {rightIcon && <span className="ml-2">{rightIcon}</span>}
+        </div>
       </div>
     );
   }
