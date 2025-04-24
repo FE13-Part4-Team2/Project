@@ -24,9 +24,9 @@ export interface OAuthBody {
 
 export interface AuthBody {
   email: string;
-  nickname: string;
+  nickname?: string;
   password: string;
-  passwordConfirmation: string;
+  passwordConfirmation?: string;
 }
 
 export interface AuthResponse {

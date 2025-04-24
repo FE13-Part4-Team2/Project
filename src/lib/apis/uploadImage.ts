@@ -1,5 +1,5 @@
 import Cookies from 'js-cookie';
-import getNewAccessToken from '@/lib/getNewToken';
+import getNewAccessToken from '@/lib/apis/getNewToken';
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
