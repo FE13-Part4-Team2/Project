@@ -6,6 +6,7 @@ import localFont from 'next/font/local';
 
 import ToastStyle from '@/components/common/ToastStyle';
 import { Metadata } from 'next';
+import Header from '@/components/common/header';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
