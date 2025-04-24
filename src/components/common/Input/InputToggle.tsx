@@ -1,5 +1,6 @@
 // 할 일 생성 모달(할 일 주기 선택),
 // 자유게시판(정렬 선택) 사용 인풋
+'use client';
 
 import React, { useState } from 'react';
 import BaseInput from '@/components/common/Input/InputBase';

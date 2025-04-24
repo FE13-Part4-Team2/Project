@@ -1,4 +1,5 @@
 // 회원가입 페이지 사용 인풋
+'use client';
 
 import React, { useState } from 'react';
 import BaseInput from '@/components/common/Input/InputBase';
