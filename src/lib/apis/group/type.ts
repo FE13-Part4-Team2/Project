@@ -4,6 +4,7 @@ export interface GroupBody {
   image?: string | null;
   name: string;
 }
+
 export interface GroupResponse {
   id: number;
   name: string;
