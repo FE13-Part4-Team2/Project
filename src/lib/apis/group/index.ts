@@ -1,5 +1,5 @@
 import Cookies from 'js-cookie';
-
+import fetcher from '@/lib/fetcher';
 import {
   GroupBody,
   GroupInvitationBody,
@@ -7,9 +7,7 @@ import {
   GroupMemberBody,
   GroupMemberResponse,
   GroupResponse,
-} from '@/lib/apis/types/group';
-
-import fetcher from '../fetcher';
+} from '@/lib/apis/group/type';
 
 export async function getGroup({
   groupId,

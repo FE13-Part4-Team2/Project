@@ -1,4 +1,4 @@
-import { TaskResponse } from './task';
+import { TaskResponse } from '@/lib/apis/task/type';
 
 export interface TaskListBody {
   name: string;

@@ -1,8 +1,7 @@
 'use client';
 
-import { toast } from 'react-toastify';
-
 import { deleteGroup } from '@/lib/apis/group';
+import { toast } from 'react-toastify';
 
 export default function DeleteTeamButton() {
   const groupId = 2202;

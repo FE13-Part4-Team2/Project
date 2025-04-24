@@ -1,11 +1,10 @@
 import Cookies from 'js-cookie';
-
-import fetcher from '../fetcher';
+import fetcher from '@/lib/fetcher';
 import {
   TaskListBody,
   TaskListOrderBody,
   TaskListResponse,
-} from './types/taskList';
+} from '@/lib/apis/taskList/type';
 
 export async function getTaskList({
   groupId,

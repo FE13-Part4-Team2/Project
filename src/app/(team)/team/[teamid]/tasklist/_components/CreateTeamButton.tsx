@@ -1,8 +1,7 @@
 'use client';
 
-import { toast } from 'react-toastify';
-
 import { postGroup } from '@/lib/apis/group';
+import { toast } from 'react-toastify';
 
 export default function CreateTeamButton() {
   const handleCreateTeam = async () => {
