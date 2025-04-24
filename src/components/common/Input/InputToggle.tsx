@@ -29,14 +29,15 @@ const InputToggle = ({
           <button
             type="button"
             onClick={() => setIsOpen((prev) => !prev)}
-            className="absolute top-1/2 right-3 -translate-y-1/2"
+            className="absolute top-1/2 right-3 -translate-y-1/2 outline-none"
           >
             <IconRenderer name="ToggleIcon" />
           </button>
         }
       />
+      {/* 임시 드롭다운 메뉴 */}
       {isOpen && (
-        <ul className="absolute top-full z-10 mt-1 w-full rounded-md bg-slate-700 shadow-md">
+        <ul className="absolute top-full z-10 mt-1 w-full rounded-[12px] bg-slate-700">
           {options.map((option) => (
             <li
               key={option}

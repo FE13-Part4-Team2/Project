@@ -75,7 +75,7 @@ const InputSignup = ({
             <button
               onClick={() => setShowPassword(!showPassword)}
               type="button"
-              className="absolute top-1/2 right-3 -translate-y-1/2"
+              className="absolute top-1/2 right-3 -translate-y-1/2 outline-none"
             >
               {showPassword ? (
                 <IconRenderer name="VisbilityOnIcon" />
