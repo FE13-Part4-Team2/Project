@@ -10,13 +10,16 @@ import CheckWhite from '@/assets/icons/check_white.svg';
 import CheckboxDefault from '@/assets/icons/checkbox_default.svg';
 import CheckboxActive from '@/assets/icons/chekcbox_active.svg';
 import Comment from '@/assets/icons/comment.svg';
+import Cowrkers from '@/assets/icons/coworkers.svg';
 import Done from '@/assets/icons/done.svg';
 import Gear from '@/assets/icons/gear.svg';
 import GnbMenu from '@/assets/icons/gnb_menu.svg';
 import Img from '@/assets/icons/img.svg';
 import Left from '@/assets/icons/left.svg';
 import List from '@/assets/icons/list.svg';
+import Logo from '@/assets/icons/logo.svg';
 import Plus from '@/assets/icons/plus.svg';
+import ProfileImage from '@/assets/icons/profile_image.svg';
 import PrograssDone from '@/assets/icons/progress_done.svg';
 import PrograssOngoing from '@/assets/icons/progress_ongoing.svg';
 import Repair from '@/assets/icons/repair.svg';
@@ -93,6 +96,14 @@ const Icons = {
       onClick={onClick}
     />
   ),
+  CowrkersIcon: ({ size = 24, className, onClick }: IconProps) => (
+    <Cowrkers
+      width={size}
+      height={size}
+      className={className}
+      onClick={onClick}
+    />
+  ),
   DoneIcon: ({ size = 24, className, onClick }: IconProps) => (
     <Done width={size} height={size} className={className} onClick={onClick} />
   ),
@@ -107,6 +118,7 @@ const Icons = {
       onClick={onClick}
     />
   ),
+
   ImgIcon: ({ size = 24, className, onClick }: IconProps) => (
     <Img
       width={size}
@@ -121,8 +133,19 @@ const Icons = {
   ListIcon: ({ size = 24, className, onClick }: IconProps) => (
     <List width={size} height={size} className={className} onClick={onClick} />
   ),
+  LogoIcon: ({ size = 24, className, onClick }: IconProps) => (
+    <Logo width={size} height={size} className={className} onClick={onClick} />
+  ),
   PlusIcon: ({ size = 24, className, onClick }: IconProps) => (
     <Plus width={size} height={size} className={className} onClick={onClick} />
+  ),
+  ProgileImageIcon: ({ size = 24, className, onClick }: IconProps) => (
+    <ProfileImage
+      width={size}
+      height={size}
+      className={className}
+      onClick={onClick}
+    />
   ),
   PrograssDoneIcon: ({ size = 24, className, onClick }: IconProps) => (
     <PrograssDone
