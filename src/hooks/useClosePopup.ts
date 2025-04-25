@@ -7,7 +7,13 @@ export const useClosePopup = (
 ) => {
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) {
+      const target = e.target as Node | null;
+
+      if (
+        ref.current &&
+        target instanceof Node &&
+        !ref.current.contains(target)
+      ) {
         onClose();
       }
     };
@@ -25,5 +31,5 @@ export const useClosePopup = (
       document.removeEventListener('mousedown', handleClickOutside);
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [ref, onClose]);
+  }, [onClose]);
 };
