@@ -7,6 +7,7 @@ import {
   MessageResponse,
 } from '@/lib/apis/articleComment/type';
 
+// 게시글 댓글 작성 (POST /articles/:articleId/comments)
 export async function postArticleComment({
   articleId,
   body,
@@ -23,6 +24,7 @@ export async function postArticleComment({
   });
 }
 
+// 게시글 댓글 목록 조회 (GET /articles/:articleId/comments)
 export async function getArticleList({
   articleId,
   limit,
@@ -46,6 +48,7 @@ export async function getArticleList({
   });
 }
 
+// 게시글 댓글 수정 (PATCH /comments/:commentId)
 export async function patchArticleComment({
   commentId,
   body,
@@ -62,6 +65,7 @@ export async function patchArticleComment({
   });
 }
 
+// 게시글 댓글 삭제 (DELETE /comments/:commentId)
 export async function deleteArticleComment(
   commentId: number
 ): Promise<MessageResponse | null> {
