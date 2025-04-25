@@ -34,13 +34,13 @@ const InputBase = React.forwardRef<HTMLInputElement, InputBaseProps>(
         )}
         {/* 입력창 */}
         <div className={`${InputBaseStyle(isInvalid)} ${containerClassName}`}>
-          {leftIcon && <span className="mr-2">{leftIcon}</span>}
+          {leftIcon && <span className="mr-2 outline-none">{leftIcon}</span>}
           <input
             ref={ref}
             {...props}
-            className={`flex-1 outline-none ${inputClassName}`}
+            className={`flex-1 pr-6 outline-none ${inputClassName}`}
           />
-          {rightIcon && <span className="ml-2">{rightIcon}</span>}
+          {rightIcon && <span className="ml-2 outline-none">{rightIcon}</span>}
         </div>
       </div>
     );

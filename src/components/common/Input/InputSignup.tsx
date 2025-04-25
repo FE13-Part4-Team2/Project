@@ -62,7 +62,7 @@ const InputSignup = ({
         onChange={handleChange}
         isInvalid={isInvalid}
         containerClassName="relative h-[48px] bg-slate-800"
-        inputClassName="placeholder:text-slate-500 pr-6"
+        inputClassName="placeholder:text-slate-500"
         // 암호화
         type={
           pattern === 'password' || pattern === 'passwordMatch'

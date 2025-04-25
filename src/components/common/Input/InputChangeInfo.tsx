@@ -6,16 +6,21 @@ import BaseInput from '@/components/common/Input/InputBase';
 
 interface InputChangeInfoProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
+  variant?: 'pale' | 'deep';
   label?: string;
 }
 
-const InputChangeInfo = ({ label, ...props }: InputChangeInfoProps) => {
+const InputChangeInfo = ({
+  variant,
+  label,
+  ...props
+}: InputChangeInfoProps) => {
   return (
     <BaseInput
       {...props}
       label={label}
-      containerClassName="h-[48px] bg-slate-700"
-      inputClassName="placeholder:text-slate-400 pr-6"
+      containerClassName={`h-[48px] ${variant === 'pale' ? 'bg-slate-700' : 'bg-slate-800'} `}
+      inputClassName={`${variant === 'pale' ? 'placeholder:text-slate-400' : 'placeholder:text-white'}`}
     />
   );
 };
