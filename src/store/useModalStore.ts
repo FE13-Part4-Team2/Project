@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { ReactNode } from 'react';
 
-interface ModalProps {
+interface ModalOptions {
   variant?: 'oneButton' | 'twoButton' | 'danger';
   title?: string;
   description?: string;
@@ -9,15 +9,15 @@ interface ModalProps {
 }
 
 interface ModalState {
-  props: ModalProps;
+  options: ModalOptions;
   content?: ReactNode | null;
-  openModal: (props: ModalProps, content?: ReactNode) => void;
+  openModal: (options: ModalOptions, content?: ReactNode) => void;
   closeModal: () => void;
 }
 
 export const useModalStore = create<ModalState>((set) => ({
-  props: {},
+  options: {},
   content: null,
-  openModal: (props, content) => set({ props, content }),
-  closeModal: () => set({ props: {}, content: null }),
+  openModal: (options, content) => set({ options, content }),
+  closeModal: () => set({ options: {}, content: null }),
 }));

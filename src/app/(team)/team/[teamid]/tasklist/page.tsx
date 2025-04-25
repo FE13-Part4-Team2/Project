@@ -1,17 +1,11 @@
-'use client';
-
 import ModalButton from '@/app/(team)/team/[teamid]/tasklist/_components/ModalButton';
 import CreateTeamButton from './_components/CreateTeamButton';
 import DeleteTeamButton from './_components/DeleteTeamButton';
 import LoginButton from './_components/LoginButton';
 import LogoutButton from './_components/LogoutButton';
-import Modal from '@/components/common/Modal';
-import { useState } from 'react';
 // import TeamInfo from './_components/TeamInfo';
 
 export default function TaskListPage() {
-  const [isOpen, setIsOpen] = useState(false);
-
   return (
     <>
       <div>
@@ -25,9 +19,8 @@ export default function TaskListPage() {
         <DeleteTeamButton />
         {/* <TeamInfo /> */}
         <br />
-        <ModalButton onClick={() => setIsOpen(true)} />
+        <ModalButton />
       </div>
-      <Modal isOpen={isOpen} />
     </>
   );
 }
