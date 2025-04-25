@@ -19,6 +19,7 @@ const InputToggle = ({ variant, onClick, ...props }: InputToggleProps) => {
         onClick={onClick}
         containerClassName={`relative h-[48px]
           ${variant === 'pale' ? 'bg-slate-700' : 'bg-slate-800'} `}
+        inputClassName="text-md-regular"
         rightIcon={
           <button
             type="button"
