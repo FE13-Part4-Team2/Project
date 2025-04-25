@@ -27,13 +27,13 @@ export async function getArticleList({
   articleId,
   limit,
   cursor,
+  token,
 }: {
   articleId: number;
   limit: number;
   cursor?: number;
+  token: string;
 }): Promise<ArticleCommentListResponse | null> {
-  const token = Cookies.get('accessToken');
-
   let query = `limit=${limit}`;
   if (cursor) {
     query += `&cursor=${cursor}`;

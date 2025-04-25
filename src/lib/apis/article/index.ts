@@ -31,14 +31,14 @@ export async function getArticleList({
   pageSize,
   order,
   keyword,
+  token,
 }: {
   page: number;
   pageSize: number;
   order: 'recent' | 'like';
   keyword?: string;
+  token: string;
 }): Promise<ArticleListResponse | null> {
-  const token = Cookies.get('accessToken');
-
   let query = `page=${page}&pageSize=${pageSize}&orderBy=${order}`;
   if (keyword) {
     query += `&keyword=${keyword}`;
