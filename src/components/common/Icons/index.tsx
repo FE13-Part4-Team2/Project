@@ -9,7 +9,7 @@ import CheckGreen from '@/assets/icons/check_green.svg';
 import CheckWhite from '@/assets/icons/check_white.svg';
 import Check from '@/assets/icons/check.svg';
 import CheckboxDefault from '@/assets/icons/checkbox_default.svg';
-import CheckboxActive from '@/assets/icons/chekcbox_active.svg';
+import CheckboxActive from '@/assets/icons/checkbox_active.svg';
 import Comment from '@/assets/icons/comment.svg';
 import Coworkers from '@/assets/icons/coworkers.svg';
 import Done from '@/assets/icons/done.svg';
