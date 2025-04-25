@@ -1,7 +1,7 @@
 // Input 컴포넌트 유효성 검사 유틸
 
-export function validateName(value: string, minLength = 8) {
-  return value.length <= minLength;
+export function validateName(value: string, maxLength = 8) {
+  return value.length <= maxLength;
 }
 
 export function validateEmail(value: string) {
