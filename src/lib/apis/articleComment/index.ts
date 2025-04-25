@@ -8,7 +8,7 @@ import {
 } from '@/lib/apis/articleComment/type';
 
 // 게시글 댓글 작성 (POST /articles/:articleId/comments)
-export async function postArticleComment({
+export async function postCommentByArticleId({
   articleId,
   body,
 }: {
@@ -25,7 +25,7 @@ export async function postArticleComment({
 }
 
 // 게시글 댓글 목록 조회 (GET /articles/:articleId/comments)
-export async function getArticleList({
+export async function getCommentsByArticleId({
   articleId,
   limit,
   cursor,
@@ -49,7 +49,7 @@ export async function getArticleList({
 }
 
 // 게시글 댓글 수정 (PATCH /comments/:commentId)
-export async function patchArticleComment({
+export async function patchCommentByArticleId({
   commentId,
   body,
 }: {
@@ -66,7 +66,7 @@ export async function patchArticleComment({
 }
 
 // 게시글 댓글 삭제 (DELETE /comments/:commentId)
-export async function deleteArticleComment(
+export async function deleteCommentByArticleId(
   commentId: number
 ): Promise<MessageResponse | null> {
   const token = Cookies.get('accessToken');
