@@ -7,7 +7,7 @@ const Toast = () => {
   return (
     <ToastContainer
       limit={2}
-      position="bottom-center"
+      position="top-center"
       autoClose={3000}
       newestOnTop={true}
       hideProgressBar={false}
