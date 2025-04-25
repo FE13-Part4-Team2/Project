@@ -1,7 +1,7 @@
 // 기본 인풋
 
 import React from 'react';
-import { InputBaseStyle } from '@/components/common/Input/style';
+import { inputBaseStyle } from '@/components/common/Input/style';
 
 interface InputBaseProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
@@ -33,7 +33,7 @@ const InputBase = React.forwardRef<HTMLInputElement, InputBaseProps>(
           <label className={`text-lg-medium ${labelClassName}`}>{label}</label>
         )}
         {/* 입력창 */}
-        <div className={`${InputBaseStyle(isInvalid)} ${containerClassName}`}>
+        <div className={`${inputBaseStyle(isInvalid)} ${containerClassName}`}>
           {leftIcon && <span className="mr-2 outline-none">{leftIcon}</span>}
           <input
             ref={ref}
