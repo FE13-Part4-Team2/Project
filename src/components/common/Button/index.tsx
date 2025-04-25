@@ -12,7 +12,7 @@ import {
 } from '@/components/common/Button/style';
 import { twMerge } from 'tailwind-merge';
 import clsx from 'clsx';
-import Check from '@/assets/icons/check.svg';
+import Check from '@/assets/icons/check_white.svg';
 import CheckGreen from '@/assets/icons/check_green.svg';
 import Plus from '@/assets/icons/plus.svg';
 
