@@ -1,6 +1,5 @@
 // 계정 설정 페이지 사용 인풋
 'use client';
-
 import React from 'react';
 import BaseInput from '@/components/common/Input/InputBase';
 

@@ -1,6 +1,5 @@
 // 회원가입 페이지 사용 인풋
 'use client';
-
 import React, { useState } from 'react';
 import BaseInput from '@/components/common/Input/InputBase';
 import {
@@ -63,7 +62,7 @@ const InputSignup = ({
         isInvalid={isInvalid}
         containerClassName="relative h-[48px] bg-slate-800"
         inputClassName="placeholder:text-slate-500"
-        // 암호화
+        // 비밀번호만 암호화
         type={
           pattern === 'password' || pattern === 'passwordMatch'
             ? showPassword

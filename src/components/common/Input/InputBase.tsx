@@ -1,5 +1,4 @@
 // 기본 인풋
-
 import React from 'react';
 import { inputBaseStyle } from '@/components/common/Input/style';
 
