@@ -20,7 +20,7 @@ const InputChangeInfo = ({
       {...props}
       label={label}
       containerClassName={`h-[48px] ${variant === 'pale' ? 'bg-slate-700' : 'bg-slate-800'} `}
-      inputClassName={`${variant === 'pale' ? 'placeholder:text-slate-400' : 'placeholder:text-white'}`}
+      inputClassName={`${variant === 'pale' ? 'placeholder:text-slate-400' : 'placeholder:text-slate-50'}`}
     />
   );
 };
