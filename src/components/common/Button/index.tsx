@@ -9,7 +9,7 @@ import {
   iconStyles,
   ButtonVariant,
   ButtonStyleType,
-} from '@/components/common/button/style';
+} from '@/components/common/Button/style';
 import { twMerge } from 'tailwind-merge';
 import clsx from 'clsx';
 import Check from '@/assets/icons/check.svg';
