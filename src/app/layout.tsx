@@ -22,9 +22,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className={`${pretendard.variable}`}>
-      <body className={`antialiased`}>
+      <body className="antialiased">
         <ToastStyle />
-        {children}
+        <div id="modal-root"></div>
+        <main>{children}</main>
       </body>
     </html>
   );

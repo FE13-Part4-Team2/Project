@@ -1,12 +1,10 @@
 'use client';
 
-export default function ModalButton() {
-  const handleModalOpen = () => {};
-
+export default function ModalButton({ onClick }: { onClick: () => void }) {
   return (
     <button
       type="button"
-      onClick={handleModalOpen}
+      onClick={onClick}
       className="bg-[#000000] text-[#ffffffff]"
     >
       모달
