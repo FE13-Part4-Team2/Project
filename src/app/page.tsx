@@ -1,7 +1,9 @@
+import LandingTopSection from '@/components/Landing/LandingTopSection';
+
 export default function LandingPage() {
   return (
-    <div>
-      <h1>Landing Page</h1>
+    <div className="flex h-screen w-full flex-col">
+      <LandingTopSection />
     </div>
   );
 }
