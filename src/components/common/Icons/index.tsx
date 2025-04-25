@@ -135,12 +135,7 @@ const Icons = {
   ),
 
   ImgIcon: ({ size = 24, className, onClick }: IconProps) => (
-    <Img
-      width={size}
-      height={size}
-      className={`text-[#64748B] ${className}`}
-      onClick={onClick}
-    />
+    <Img width={size} height={size} className={className} onClick={onClick} />
   ),
   LeftIcon: ({ size = 24, className, onClick }: IconProps) => (
     <Left width={size} height={size} className={className} onClick={onClick} />
@@ -249,7 +244,12 @@ const Icons = {
     />
   ),
   XIcon: ({ size = 24, className, onClick }: IconProps) => (
-    <X width={size} height={size} className={className} onClick={onClick} />
+    <X
+      width={size}
+      height={size}
+      className={`text-[#64748B] ${className}`}
+      onClick={onClick}
+    />
   ),
 };
 
