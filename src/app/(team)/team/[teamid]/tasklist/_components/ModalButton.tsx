@@ -12,9 +12,14 @@ export default function ModalButton() {
       onClick={() => {
         openModal(
           {
-            variant: 'default',
+            variant: 'danger',
             title: '제목',
             description: '설명',
+            button: {
+              number: 2,
+              text: '버튼',
+              onRequest: () => {},
+            },
           },
           <TestModal />
         );

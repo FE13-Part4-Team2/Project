@@ -8,7 +8,7 @@ interface ModalOptions {
   button?: {
     number: 1 | 2;
     text: string;
-    onClick: () => void;
+    onRequest: () => void;
   };
 }
 
