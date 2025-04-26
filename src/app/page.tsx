@@ -1,8 +1,7 @@
-export default function Home() {
+export default function LandingPage() {
   return (
     <div>
-      <h1>Test Page</h1>
-      <span>For Issue test</span>
+      <h1>Landing Page</h1>
     </div>
   );
 }
