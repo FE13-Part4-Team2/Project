@@ -2,15 +2,21 @@ import { create } from 'zustand';
 import { ReactNode } from 'react';
 
 interface ModalOptions {
-  variant?: 'oneButton' | 'twoButton' | 'danger';
+  variant?: 'default' | 'danger' | 'taskForm';
   title?: string;
   description?: string;
-  onSubmit?: () => void;
+  button?: {
+    number: 1 | 2;
+    text: string;
+    onClick: () => void;
+  };
 }
 
 interface ModalState {
   options: ModalOptions;
   content?: ReactNode | null;
+  isValid?: boolean;
+  setIsValid?: (isValid: boolean) => void;
   openModal: (options: ModalOptions, content?: ReactNode) => void;
   closeModal: () => void;
 }
@@ -18,6 +24,8 @@ interface ModalState {
 export const useModalStore = create<ModalState>((set) => ({
   options: {},
   content: null,
+  isValid: false,
+  setIsValid: (isValid) => set({ isValid }),
   openModal: (options, content) => set({ options, content }),
-  closeModal: () => set({ options: {}, content: null }),
+  closeModal: () => set({ options: {}, content: null, isValid: false }),
 }));

@@ -3,7 +3,7 @@
 import { useModalStore } from '@/store/useModalStore';
 
 export default function Modal() {
-  const { options, content, closeModal } = useModalStore();
+  const { options, content, isValid, closeModal } = useModalStore();
   // const { variant, title, description, onSubmit } = options;
 
   if (!options || !content) return;
@@ -13,7 +13,9 @@ export default function Modal() {
       <div className="flex h-[50vh] w-[50vh] items-center justify-center rounded border-none bg-white">
         <div className="text-black">
           {content}
-          <button onClick={closeModal}>닫기</button>
+          <button onClick={closeModal} disabled={!isValid}>
+            닫기
+          </button>
         </div>
       </div>
     </div>
