@@ -3,7 +3,8 @@
 import React from 'react';
 
 import Alert from '@/assets/icons/alert.svg';
-import BtnEnter from '@/assets/icons/btn_enter.svg';
+import Arrow from '@/assets/icons/arrow.svg';
+import ArrowTop from '@/assets/icons/arrow_top.svg';
 import Calendar from '@/assets/icons/calendar.svg';
 import CheckGreen from '@/assets/icons/check_green.svg';
 import CheckWhite from '@/assets/icons/check_white.svg';
@@ -13,19 +14,19 @@ import CheckboxActive from '@/assets/icons/checkbox_active.svg';
 import Comment from '@/assets/icons/comment.svg';
 import Coworkers from '@/assets/icons/coworkers.svg';
 import Done from '@/assets/icons/done.svg';
+import Edit from '@/assets/icons/edit.svg';
 import Gear from '@/assets/icons/gear.svg';
 import GnbMenu from '@/assets/icons/gnb_menu.svg';
 import Img from '@/assets/icons/img.svg';
-import Left from '@/assets/icons/left.svg';
 import List from '@/assets/icons/list.svg';
 import Logo from '@/assets/icons/logo.svg';
+import Member from '@/assets/icons/member.svg';
 import Plus from '@/assets/icons/plus.svg';
 import ProfileImage from '@/assets/icons/profile_image.svg';
 import ProgressDone from '@/assets/icons/progress_done.svg';
 import ProgressOngoing from '@/assets/icons/progress_ongoing.svg';
 import Repair from '@/assets/icons/repair.svg';
 import Repeat from '@/assets/icons/repeat.svg';
-import Right from '@/assets/icons/right.svg';
 import Search from '@/assets/icons/search.svg';
 import ThreeDots from '@/assets/icons/three_dots.svg';
 import Time from '@/assets/icons/time.svg';
@@ -41,15 +42,32 @@ interface IconProps {
   onClick?: React.MouseEventHandler<SVGElement>;
 }
 
+interface FlipIconProps extends IconProps {
+  flip?: boolean;
+}
+
 const Icons = {
   AlertIcon: ({ size = 24, className, onClick }: IconProps) => (
     <Alert width={size} height={size} className={className} onClick={onClick} />
   ),
-  BtnEnterIcon: ({ size = 24, className, onClick }: IconProps) => (
-    <BtnEnter
+  ArrowIcon: ({
+    size = 24,
+    className,
+    onClick,
+    flip = false,
+  }: FlipIconProps) => (
+    <Arrow
       width={size}
       height={size}
-      className={`text-[#10B981] ${className}`}
+      className={` ${className ?? ''} ${flip ? '-scale-x-100 transform' : ''} `}
+      onClick={onClick}
+    />
+  ),
+  ArrowTopIcon: ({ size = 24, className, onClick }: IconProps) => (
+    <ArrowTop
+      width={size}
+      height={size}
+      className={className}
       onClick={onClick}
     />
   ),
@@ -66,7 +84,7 @@ const Icons = {
     <CheckGreen
       width={size}
       height={size}
-      className={className}
+      className={`text-[#10B981] ${className}`}
       onClick={onClick}
     />
   ),
@@ -122,6 +140,9 @@ const Icons = {
   DoneIcon: ({ size = 24, className, onClick }: IconProps) => (
     <Done width={size} height={size} className={className} onClick={onClick} />
   ),
+  EditIcon: ({ size = 24, className, onClick }: IconProps) => (
+    <Edit width={size} height={size} className={className} onClick={onClick} />
+  ),
   GearIcon: ({ size = 24, className, onClick }: IconProps) => (
     <Gear width={size} height={size} className={className} onClick={onClick} />
   ),
@@ -137,14 +158,19 @@ const Icons = {
   ImgIcon: ({ size = 24, className, onClick }: IconProps) => (
     <Img width={size} height={size} className={className} onClick={onClick} />
   ),
-  LeftIcon: ({ size = 24, className, onClick }: IconProps) => (
-    <Left width={size} height={size} className={className} onClick={onClick} />
-  ),
   ListIcon: ({ size = 24, className, onClick }: IconProps) => (
     <List width={size} height={size} className={className} onClick={onClick} />
   ),
   LogoIcon: ({ size = 24, className, onClick }: IconProps) => (
     <Logo width={size} height={size} className={className} onClick={onClick} />
+  ),
+  MemberIcon: ({ size = 24, className, onClick }: IconProps) => (
+    <Member
+      width={size}
+      height={size}
+      className={className}
+      onClick={onClick}
+    />
   ),
   PlusIcon: ({ size = 24, className, onClick }: IconProps) => (
     <Plus width={size} height={size} className={className} onClick={onClick} />
@@ -188,9 +214,6 @@ const Icons = {
       className={className}
       onClick={onClick}
     />
-  ),
-  RightIcon: ({ size = 24, className, onClick }: IconProps) => (
-    <Right width={size} height={size} className={className} onClick={onClick} />
   ),
   SearchIcon: ({ size = 24, className, onClick }: IconProps) => (
     <Search
