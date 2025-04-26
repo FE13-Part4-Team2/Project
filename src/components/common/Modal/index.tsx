@@ -28,13 +28,15 @@ export default function Modal() {
           variant == 'taskForm' ? 'gap-8 px-6 pt-8' : 'gap-6 px-[52px] pt-12'
         )}
       >
-        <button
-          type="button"
-          onClick={closeModal}
-          className="absolute top-4 right-6 size-7 rounded-full hover:bg-amber-50"
-        >
-          <IconRenderer name="XIcon" />
-        </button>
+        {button?.number == 1 && (
+          <button
+            type="button"
+            onClick={closeModal}
+            className="absolute top-4 right-6 size-6 rounded-full transition-colors duration-100 hover:bg-slate-700"
+          >
+            <IconRenderer name="XIcon" />
+          </button>
+        )}
         <div
           className={clsx(
             'flex flex-col overflow-hidden',
