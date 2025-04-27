@@ -4,11 +4,13 @@ import Image from 'next/image';
 import clsx from 'clsx';
 import IconRenderer from '@/components/common/Icons/IconRenderer';
 import { motion } from 'framer-motion';
+import TextBounce from '@/components/Landing/TextBounce';
 
 const LandingTopTest = () => {
   return (
     <section className="flex h-screen w-full flex-col items-center text-center">
       <div className="mt-20">
+        <TextBounce />
         <h1 className="laptop:text-[48px] tablet:text-[40px] text-[24px] font-semibold">
           함께 만들어가는 투두 리스트
           <IconRenderer
@@ -48,31 +50,41 @@ const LandingTopTest = () => {
           />
         </motion.div>
         {/* 인부 모션 */}
-        <motion.div
-          initial={{ x: -300 }}
-          animate={{ x: 50 }}
-          transition={{ duration: 2, ease: 'easeOut' }}
-          className="absolute bottom-40 left-130"
+        <motion.div // 최초 이동
+          initial={{ x: '-150%' }}
+          animate={{ x: '5%' }}
+          transition={{ duration: 1.5, ease: 'easeOut' }}
+          className="absolute bottom-[25%] left-[32%]"
         >
-          <Image
-            src="/image/landing_human.png"
-            alt="인부 일러스트"
-            width={142}
-            height={149}
-            className="object-contain"
-          />
+          <motion.div // 달리기
+            animate={{ x: [0, -8, 0] }}
+            transition={{
+              duration: 0.7,
+              ease: 'easeOut',
+              repeat: Infinity,
+              repeatType: 'reverse',
+            }}
+          >
+            <Image
+              src="/image/landing_human.png"
+              alt="인부 일러스트"
+              width={142}
+              height={149}
+              className="object-contain"
+            />
+          </motion.div>
         </motion.div>
 
         {/* 흙먼지 모션 */}
-        <motion.div // x축 이동
-          initial={{ x: -300 }}
-          animate={{ x: 50 }}
-          transition={{ duration: 2, ease: 'easeOut' }}
-          className="absolute bottom-45 left-70"
+        <motion.div // 최초 이동
+          initial={{ x: '-100%' }}
+          animate={{ x: '5%' }}
+          transition={{ duration: 1.5, ease: 'easeOut' }}
+          className="absolute bottom-[25%] left-[17%]"
         >
           <motion.div // 일렁임
             initial={{ opacity: 0.5, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
+            animate={{ opacity: 1, scale: 1, x: [0, -8, 0] }}
             transition={{
               duration: 0.7,
               ease: 'easeOut',
