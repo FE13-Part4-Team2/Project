@@ -22,12 +22,12 @@ const LandingTopSection = () => {
         />
         {/* 기차 모션 */}
         <motion.div
-          animate={{ y: [0, -8, 0] }}
+          animate={{ y: [0, -9, 0] }}
           transition={{
             duration: 1.5,
             repeat: Infinity,
             repeatType: 'reverse',
-            delay: 1.5,
+            delay: 1.7,
           }}
           className="absolute"
         >
@@ -43,11 +43,11 @@ const LandingTopSection = () => {
         <motion.div // 달리기
           animate={{ x: [0, -8, 0] }}
           transition={{
-            duration: 0.7,
+            duration: 1,
             ease: 'easeOut',
             repeat: Infinity,
             repeatType: 'reverse',
-            delay: 1.5,
+            delay: 1.7,
           }}
           className="absolute bottom-[25%] left-[32%]"
         >
@@ -64,11 +64,11 @@ const LandingTopSection = () => {
           initial={{ opacity: 0.5, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1, x: [0, -8, 0] }}
           transition={{
-            duration: 0.7,
+            duration: 1,
             ease: 'easeOut',
             repeat: Infinity,
             repeatType: 'reverse',
-            delay: 1.5,
+            delay: 1.7,
           }}
           className="absolute bottom-[25%] left-[17%]"
         >

@@ -43,7 +43,7 @@ export default function LandingTitleText() {
         <h1
           className={clsx(
             'laptop:text-[64px] tablet:text-[48px] text-[32px] font-semibold',
-            'bg-gradient-to-r from-green-700 to-green-500 bg-clip-text text-transparent',
+            'bg-gradient-to-r from-green-700 to-[#CEF57E] bg-clip-text text-transparent',
             'relative z-10'
           )}
         >
