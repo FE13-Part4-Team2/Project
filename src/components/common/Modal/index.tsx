@@ -1,9 +1,11 @@
 'use client';
 
+import { useRef } from 'react';
 import { useModalStore } from '@/store/useModalStore';
-import clsx from 'clsx';
+import { useClosePopup } from '@/hooks/useClosePopup';
 import Button from '@/components/common/Button';
 import IconRenderer from '@/components/common/Icons/IconRenderer';
+import clsx from 'clsx';
 
 export default function Modal() {
   const {
@@ -12,6 +14,9 @@ export default function Modal() {
     isButtonDisabled,
     closeModal,
   } = useModalStore();
+
+  const modalRef = useRef<HTMLDivElement>(null);
+  useClosePopup(modalRef, closeModal);
 
   if (!title || !content) return null;
 
@@ -23,6 +28,7 @@ export default function Modal() {
   return (
     <div className="tablet:items-center fixed top-0 left-0 z-50 flex h-full w-full items-end justify-center bg-black/50">
       <div
+        ref={modalRef}
         className={clsx(
           'tablet:w-[384px] tablet:rounded-b-xl tablet:max-h-[80vh] relative flex max-h-[90vh] w-full flex-col rounded-t-3xl border-none bg-slate-800 pb-8',
           variant == 'taskForm' ? 'gap-8 px-6 pt-8' : 'gap-6 px-[52px] pt-12'
