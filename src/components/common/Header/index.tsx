@@ -25,7 +25,7 @@ const Header = () => {
             className="desktop:w-[158px] flex w-[102px] items-center justify-between gap-0.5"
           >
             <IconRenderer name="LogoIcon" className="hover: cursor-pointer" />
-            <IconRenderer name="CowrkersIcon" className="h-8 w-33" />
+            <IconRenderer name="CoworkersIcon" className="h-8 w-33" />
           </Link>
         </div>
       </header>
@@ -46,7 +46,7 @@ const Header = () => {
               className="desktop:w-[158px] flex w-[102px] items-center justify-between gap-0.5"
             >
               <IconRenderer name="LogoIcon" className="hover: cursor-pointer" />
-              <IconRenderer name="CowrkersIcon" className="h-8 w-33" />
+              <IconRenderer name="CoworkersIcon" className="h-8 w-33" />
             </Link>
 
             <nav className="tablet:flex hidden items-center">
