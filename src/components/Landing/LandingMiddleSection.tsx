@@ -19,14 +19,14 @@ const boxStyle = clsx(
   'rounded-[40px]'
 );
 
+const textStyle = clsx('laptop:text-2xl-medium text-2lg-medium');
+
 const imageSize = clsx(
   'relative',
   'tablet:h-[268.5px] tablet:w-[232px]',
   'laptop:h-[338px] laptop:w-[291px]',
   'h-[273px] w-[235px]'
 );
-
-const textStyle = clsx('laptop:text-2xl-medium text-2lg-medium');
 
 const LandingMiddleSection = () => {
   return (
@@ -51,7 +51,8 @@ const LandingMiddleSection = () => {
               />
               <h1 className={textStyle}>
                 그룹으로
-                <br />할 일을 관리해요
+                <br />
+                일정을 관리해요
               </h1>
             </div>
             {/* 이미지 컨테이너 */}
