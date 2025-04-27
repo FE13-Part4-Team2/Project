@@ -3,6 +3,7 @@
 import { useRef } from 'react';
 import { useModalStore } from '@/store/useModalStore';
 import { useClosePopup } from '@/hooks/useClosePopup';
+import { useLockBackgroundScroll } from '@/hooks/useLockBackgroundScroll';
 import Button from '@/components/common/Button';
 import IconRenderer from '@/components/common/Icons/IconRenderer';
 import clsx from 'clsx';
@@ -16,9 +17,12 @@ export default function Modal() {
   } = useModalStore();
 
   const modalRef = useRef<HTMLDivElement>(null);
-  useClosePopup(modalRef, closeModal);
+  const isModalOpen = Boolean(title || content);
 
-  if (!title || !content) return null;
+  useClosePopup(modalRef, closeModal);
+  useLockBackgroundScroll(isModalOpen);
+
+  if (!isModalOpen) return null;
 
   const handleRequest = () => {
     button?.onRequest();
