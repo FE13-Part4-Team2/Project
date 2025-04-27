@@ -53,23 +53,27 @@ export default function Modal() {
             variant == 'taskForm' ? 'gap-6' : 'gap-4'
           )}
         >
-          <div
-            className={clsx(
-              'flex flex-col items-center',
-              variant == 'taskForm' ? 'gap-4' : 'gap-2'
-            )}
-          >
-            <div className="text-lg-medium">{title}</div>
+          {(title || description) && (
             <div
               className={clsx(
-                'text-md-medium',
-                variant == 'danger' ? '' : 'text-slate-500'
+                'flex flex-col items-center',
+                variant == 'taskForm' ? 'gap-4' : 'gap-2'
               )}
             >
-              {description}
+              {title && <div className="text-lg-medium">{title}</div>}
+              {description && (
+                <div
+                  className={clsx(
+                    'text-md-medium',
+                    variant == 'danger' ? '' : 'text-slate-500'
+                  )}
+                >
+                  {description}
+                </div>
+              )}
             </div>
-          </div>
-          <div className="overflow-y-auto">{content}</div>
+          )}
+          {content && <div className="overflow-y-auto">{content}</div>}
         </div>
         <div className="flex gap-2">
           {button?.number == 2 && (
