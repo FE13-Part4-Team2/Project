@@ -9,7 +9,7 @@ export default function Modal() {
   const {
     options: { variant = 'default', title, description, button },
     content,
-    isValid,
+    isButtonDisabled,
     closeModal,
   } = useModalStore();
 
@@ -65,7 +65,7 @@ export default function Modal() {
           {button?.number == 2 && (
             <Button
               variant="primary"
-              styleType={variant == 'danger' ? 'danger' : 'outlined'}
+              styleType={variant == 'danger' ? 'neutral' : 'outlined'}
               className="flex-1"
               radius="sm"
               size="lg"
@@ -81,7 +81,7 @@ export default function Modal() {
             radius="sm"
             size="lg"
             onClick={handleRequest}
-            disabled={isValid}
+            disabled={isButtonDisabled}
           >
             {button?.text}
           </Button>

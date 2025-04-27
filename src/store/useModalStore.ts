@@ -14,9 +14,9 @@ interface ModalOptions {
 
 interface ModalState {
   options: ModalOptions;
-  content?: ReactNode | null;
-  isValid?: boolean;
-  setIsValid?: (isValid: boolean) => void;
+  content: ReactNode | null;
+  isButtonDisabled: boolean;
+  setIsButtonDisabled: (isValid: boolean) => void;
   openModal: (options: ModalOptions, content?: ReactNode) => void;
   closeModal: () => void;
 }
@@ -24,8 +24,9 @@ interface ModalState {
 export const useModalStore = create<ModalState>((set) => ({
   options: {},
   content: null,
-  isValid: false,
-  setIsValid: (isValid) => set({ isValid }),
+  isButtonDisabled: false,
+  setIsButtonDisabled: (isButtonDisabled) => set({ isButtonDisabled }),
   openModal: (options, content) => set({ options, content }),
-  closeModal: () => set({ options: {}, content: null, isValid: false }),
+  closeModal: () =>
+    set({ options: {}, content: null, isButtonDisabled: false }),
 }));

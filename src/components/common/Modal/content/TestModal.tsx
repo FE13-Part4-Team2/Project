@@ -1,22 +1,23 @@
+import { useModalStore } from '@/store/useModalStore';
+import { useEffect, useState } from 'react';
+
 export default function TestModal() {
+  const { setIsButtonDisabled } = useModalStore();
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  useEffect(() => {
+    setIsButtonDisabled(!isFormValid);
+  }, [isFormValid]);
+
   return (
-    <div className="w-full">
-      <div>ModalModal</div>
-      <div>ModalModal</div>
-      <div>ModalModal</div>
-      <div>ModalModal</div>
-      <div>ModalModal</div>
-      <div>ModalModal</div>
-      <div>ModalModal</div>
-      <div>ModalModal</div>
-      <div>ModalModal</div>
-      <div>ModalModal</div>
-      <div>ModalModal</div>
-      <div>ModalModal</div>
-      <div>ModalModal</div>
-      <div>ModalModal</div>
-      <div>ModalModal</div>
-      <div>ModalModal</div>
+    <div>
+      <button
+        onClick={() => {
+          setIsFormValid(!isFormValid);
+        }}
+      >
+        폼 유효성
+      </button>
     </div>
   );
 }
