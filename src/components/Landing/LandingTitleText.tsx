@@ -39,26 +39,37 @@ export default function LandingTitleText() {
       </motion.div>
 
       {/* 제목 행 */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 100 }}
-        transition={{
-          duration: 0.5,
-          delay: text.length * 0.04,
-          ease: easeInOut,
-        }}
-        className="flex flex-wrap items-center justify-center"
-      >
-        {' '}
+      <div className="relative inline-block overflow-hidden">
         <h1
           className={clsx(
             'laptop:text-[64px] tablet:text-[48px] text-[32px] font-semibold',
-            'bg-gradient-to-r from-green-700 to-green-500 bg-clip-text text-transparent'
+            'bg-gradient-to-r from-green-700 to-green-500 bg-clip-text text-transparent',
+            'relative z-10'
           )}
         >
           {title}
         </h1>
-      </motion.div>
+        {/* 빛 효과 레이어 */}
+        <motion.div
+          initial={{ backgroundPositionX: '0%', opacity: 0 }}
+          animate={{ backgroundPositionX: '100%', opacity: [0, 1, 0] }}
+          transition={{
+            duration: 1.5,
+            delay: text.length * 0.03,
+            ease: 'easeInOut',
+          }}
+          className={clsx(
+            'absolute inset-0',
+            'bg-gradient-to-r from-transparent via-white/60 to-transparent',
+            'bg-clip-text text-transparent',
+            'blur-sm',
+            'bg-[length:200%_100%]',
+            'laptop:text-[64px] tablet:text-[48px] text-[32px] font-semibold' // 텍스트 스타일 맞춰주기
+          )}
+        >
+          {title}
+        </motion.div>
+      </div>
     </div>
   );
 }
