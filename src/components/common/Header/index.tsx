@@ -53,7 +53,7 @@ export default function Header() {
   if (!isLogin) {
     return (
       <header className="h-[60px] w-full border border-slate-50/10 bg-[#1E293B] px-6 py-5">
-        <div className="mx-auto flex h-full w-[1200px] max-w-[1920px] items-center justify-between text-sm leading-6 text-white">
+        <div className="text-md-medium mx-auto flex h-full w-[1200px] max-w-[1920px] items-center justify-between leading-6 text-white">
           <Link
             href="/"
             className="desktop:w-[158px] flex w-[102px] items-center justify-between gap-0.5"
@@ -69,7 +69,7 @@ export default function Header() {
   return (
     <>
       <header className="h-[60px] w-full border border-slate-50/10 bg-[#1E293B] px-6 py-5">
-        <div className="mx-auto flex h-full max-w-[1200px] items-center justify-between text-sm leading-6 text-white">
+        <div className="text-lg-medium mx-auto flex h-full max-w-[1200px] items-center justify-between leading-6 text-white">
           <nav className="flex items-center justify-between">
             <IconRenderer
               name="GnbMenuIcon"
@@ -96,19 +96,23 @@ export default function Header() {
 
                   <button
                     type="button"
-                    className={`cursor-pointer hover:text-gray-700 ${
+                    className={`z-50 cursor-pointer hover:text-gray-700 ${
                       isTeamMenuOpen ? 'rotate-180' : ''
                     } transition-transform`}
                     onClick={() => setTeamMenuOpen((prev) => !prev)}
                   >
-                    <IconRenderer name="CheckIcon" />
+                    <IconRenderer
+                      name="CheckIcon"
+                      className="hover:text-gray-700"
+                    />
                   </button>
 
                   {isTeamMenuOpen && (
                     <div className="absolute top-[45px] left-[-140px] z-50 flex w-[218px] flex-col gap-4 rounded-xl bg-[#1E293B] p-4">
                       {groups.map((team) => (
-                        <button
+                        <Link
                           key={team.id}
+                          href={`/team/${team.id}`}
                           className="flex cursor-pointer items-center gap-x-3 rounded-md px-2 py-2 transition-all hover:bg-[#334155]"
                           onClick={() => {
                             setSelectedGroup(team);
@@ -120,24 +124,26 @@ export default function Header() {
                               src={team.image ?? '/image/default_team_img.png'}
                               alt={team.name}
                               fill
+                              // 임시조치 / 나중에 next.config에 호스트 추가
                               unoptimized
                               className="rounded-sm object-cover"
                             />
                           </div>
-                          <span className="flex-1 text-left text-sm text-white">
+                          <span className="flex-1 text-left text-white">
                             {team.name}
                           </span>
                           <IconRenderer
                             name="ThreeDotsIcon"
                             className="ml-auto h-4 w-4 cursor-pointer hover:cursor-pointer"
                           />
-                        </button>
+                        </Link>
                       ))}
 
                       <Link href="/add-team">
                         <button
                           type="button"
                           className="mt-2 h-12 w-[186px] cursor-pointer rounded-md border border-white py-1 transition-all hover:bg-white hover:text-[#1E293B]"
+                          onClick={() => setTeamMenuOpen(false)}
                         >
                           + 팀 추가하기
                         </button>
@@ -159,7 +165,7 @@ export default function Header() {
           <div className="relative">
             <button
               type="button"
-              className="group relative z-50 flex cursor-pointer items-center gap-3 hover:cursor-pointer"
+              className="group text-md-medium relative z-50 flex cursor-pointer items-center gap-3 hover:cursor-pointer hover:text-gray-700"
               onClick={() => setUserDropdownOpen((prev) => !prev)}
             >
               <IconRenderer
@@ -217,7 +223,6 @@ export default function Header() {
         </div>
       </header>
 
-      {/* 백드롭 */}
       {(isSideMenuOpen || isTeamMenuOpen || isUserDropdownOpen) && (
         <button
           type="button"
@@ -230,7 +235,6 @@ export default function Header() {
         />
       )}
 
-      {/* 사이드 메뉴 */}
       {isSideMenuOpen && (
         <div
           className={`fixed top-0 left-0 z-50 h-full w-[250px] border border-slate-50/10 bg-[#1E293B] p-6 transition-transform duration-300 ${
