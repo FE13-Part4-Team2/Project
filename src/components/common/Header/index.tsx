@@ -13,6 +13,7 @@ export default function Header() {
   const isLogin = useUserStore((s) => s.isLogin);
   const checkLogin = useUserStore((s) => s.checkLogin);
   const logout = useUserStore((s) => s.logout);
+  const user = useUserStore((s) => s.user);
 
   const [groups, setGroups] = useState<UserGroupResponse[]>([]);
   const [selectedGroup, setSelectedGroup] = useState<UserGroupResponse | null>(
@@ -132,10 +133,10 @@ export default function Header() {
                           <span className="flex-1 text-left text-white">
                             {team.name}
                           </span>
-                          <IconRenderer
+                          {/* <IconRenderer
                             name="ThreeDotsIcon"
                             className="ml-auto h-4 w-4 cursor-pointer hover:cursor-pointer"
-                          />
+                          /> */}
                         </Link>
                       ))}
 
@@ -173,7 +174,7 @@ export default function Header() {
                 size={16}
                 className="group-hover:text-gray-700"
               />
-              사용자
+              {user?.nickname ?? '사용자'}
             </button>
 
             {isUserDropdownOpen && (
