@@ -109,25 +109,27 @@ export default function Header() {
                       {groups.map((team) => (
                         <button
                           key={team.id}
-                          className="flex cursor-pointer items-center justify-between gap-2 rounded-md px-2 py-2 transition-all hover:bg-[#334155]"
+                          className="flex cursor-pointer items-center gap-x-3 rounded-md px-2 py-2 transition-all hover:bg-[#334155]"
                           onClick={() => {
                             setSelectedGroup(team);
                             setTeamMenuOpen(false);
                           }}
                         >
-                          <Image
-                            src={team.image ?? '/img/default-team.jpg'}
-                            alt={team.name}
-                            width={24}
-                            height={24}
-                            className="rounded-sm object-cover"
-                          />
-                          <span className="ml-2 flex-1 text-sm text-white">
+                          <div className="relative h-8 w-8">
+                            <Image
+                              src={team.image ?? '/image/default_team_img.png'}
+                              alt={team.name}
+                              fill
+                              unoptimized
+                              className="rounded-sm object-cover"
+                            />
+                          </div>
+                          <span className="flex-1 text-left text-sm text-white">
                             {team.name}
                           </span>
                           <IconRenderer
                             name="ThreeDotsIcon"
-                            className="h-4 w-4 cursor-pointer hover:cursor-pointer"
+                            className="ml-auto h-4 w-4 cursor-pointer hover:cursor-pointer"
                           />
                         </button>
                       ))}
