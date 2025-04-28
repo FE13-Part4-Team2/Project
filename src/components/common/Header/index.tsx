@@ -1,13 +1,23 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import IconRenderer from '@/components/common/Icons/IconRenderer';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useUserStore } from '@/store/useUserstore';
+import { getUserGroups } from '@/lib/apis/user';
+import { getCookie } from '@/utils/cookieUtill';
+import { UserGroupResponse } from '@/lib/apis/user/type';
 
-const Header = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
-  const [hasTeam, setHasTeam] = useState(false);
+export default function Header() {
+  const isLogin = useUserStore((s) => s.isLogin);
+  const checkLogin = useUserStore((s) => s.checkLogin);
+  const logout = useUserStore((s) => s.logout);
+
+  const [groups, setGroups] = useState<UserGroupResponse[]>([]);
+  const [selectedGroup, setSelectedGroup] = useState<UserGroupResponse | null>(
+    null
+  );
 
   const [isSideMenuOpen, setSideMenuOpen] = useState(false);
   const [isTeamMenuOpen, setTeamMenuOpen] = useState(false);
@@ -16,7 +26,31 @@ const Header = () => {
   const menuItemClass =
     'flex items-center justify-center h-[47px] w-full px-4 py-2 hover:bg-[#334155]';
 
-  if (!isLoggedIn) {
+  useEffect(() => {
+    checkLogin();
+  }, [checkLogin]);
+
+  useEffect(() => {
+    if (!isLogin) return;
+    (async () => {
+      try {
+        const token = getCookie('accessToken');
+        if (!token) throw new Error('No token');
+        const data = await getUserGroups(token);
+        setGroups(data ?? []);
+      } catch (e) {
+        console.error('그룹 조회 실패', e);
+      }
+    })();
+  }, [isLogin]);
+
+  useEffect(() => {
+    if (!selectedGroup && groups.length > 0) {
+      setSelectedGroup(groups[0]);
+    }
+  }, [groups, selectedGroup]);
+
+  if (!isLogin) {
     return (
       <header className="h-[60px] w-full border border-slate-50/10 bg-[#1E293B] px-6 py-5">
         <div className="mx-auto flex h-full w-[1200px] max-w-[1920px] items-center justify-between text-sm leading-6 text-white">
@@ -31,6 +65,7 @@ const Header = () => {
       </header>
     );
   }
+
   return (
     <>
       <header className="h-[60px] w-full border border-slate-50/10 bg-[#1E293B] px-6 py-5">
@@ -49,35 +84,40 @@ const Header = () => {
               <IconRenderer name="CoworkersIcon" className="h-8 w-33" />
             </Link>
 
-            <nav className="tablet:flex hidden items-center">
-              {hasTeam ? (
-                <nav className="relative ml-8 flex gap-3">
+            <div className="tablet:flex hidden items-center">
+              {groups.length > 0 && (
+                <div className="relative ml-8 flex gap-3">
                   <Link
-                    href="/team/{teamid}"
+                    href={`/team/${selectedGroup?.id}`}
                     className="text-md font-medium hover:text-gray-700"
                   >
-                    경영관리팀
+                    {selectedGroup?.name}
                   </Link>
-                  <IconRenderer
-                    name="CheckIcon"
-                    className={`z-41 cursor-pointer hover:text-gray-700 ${isTeamMenuOpen ? 'rotate-180 transform' : ''}`}
+
+                  <button
+                    type="button"
+                    className={`cursor-pointer hover:text-gray-700 ${
+                      isTeamMenuOpen ? 'rotate-180' : ''
+                    } transition-transform`}
                     onClick={() => setTeamMenuOpen((prev) => !prev)}
-                  />
+                  >
+                    <IconRenderer name="CheckIcon" />
+                  </button>
 
                   {isTeamMenuOpen && (
                     <div className="absolute top-[45px] left-[-140px] z-50 flex w-[218px] flex-col gap-4 rounded-xl bg-[#1E293B] p-4">
-                      {[
-                        { name: '경영관리 팀', image: '/img/team-1.jpg' },
-                        { name: '프로덕트 팀', image: '/img/team-2.jpg' },
-                        { name: '마케팅 팀', image: '/img/team-3.jpg' },
-                      ].map((team) => (
-                        <div
-                          key={team.name}
+                      {groups.map((team) => (
+                        <button
+                          key={team.id}
                           className="flex cursor-pointer items-center justify-between gap-2 rounded-md px-2 py-2 transition-all hover:bg-[#334155]"
+                          onClick={() => {
+                            setSelectedGroup(team);
+                            setTeamMenuOpen(false);
+                          }}
                         >
                           <Image
-                            src="/icon/close.svg"
-                            alt=""
+                            src={team.image ?? '/img/default-team.jpg'}
+                            alt={team.name}
                             width={24}
                             height={24}
                             className="rounded-sm object-cover"
@@ -87,21 +127,22 @@ const Header = () => {
                           </span>
                           <IconRenderer
                             name="ThreeDotsIcon"
-                            className="h-4 w-4 cursor-pointer"
+                            className="h-4 w-4 cursor-pointer hover:cursor-pointer"
                           />
-                        </div>
+                        </button>
                       ))}
 
                       <Link href="/add-team">
-                        <button className="mt-2 h-12 w-[186px] cursor-pointer rounded-md border border-white py-1 transition-all hover:bg-white hover:text-[#1E293B]">
+                        <button
+                          type="button"
+                          className="mt-2 h-12 w-[186px] cursor-pointer rounded-md border border-white py-1 transition-all hover:bg-white hover:text-[#1E293B]"
+                        >
                           + 팀 추가하기
                         </button>
                       </Link>
                     </div>
                   )}
-                </nav>
-              ) : (
-                ''
+                </div>
               )}
 
               <Link
@@ -110,13 +151,14 @@ const Header = () => {
               >
                 자유게시판
               </Link>
-            </nav>
+            </div>
           </nav>
 
           <div className="relative">
             <button
+              type="button"
+              className="group relative z-50 flex cursor-pointer items-center gap-3 hover:cursor-pointer"
               onClick={() => setUserDropdownOpen((prev) => !prev)}
-              className="group relative z-41 flex cursor-pointer items-center gap-3 hover:text-gray-700"
             >
               <IconRenderer
                 name="UserIcon"
@@ -128,37 +170,44 @@ const Header = () => {
 
             {isUserDropdownOpen && (
               <div className="absolute right-0 z-50 mt-2 w-[135px] flex-col items-center justify-center rounded-md border border-slate-50/10 bg-slate-800 text-center text-sm text-[14px] whitespace-nowrap text-white">
-                <Link
-                  href="/myhistory"
-                  className={`${menuItemClass} rounded-t-md`}
-                  onClick={() => setUserDropdownOpen(false)}
-                >
-                  마이 히스토리
+                <Link href="/myhistory">
+                  <button
+                    type="button"
+                    className={`${menuItemClass} rounded-t-md`}
+                    onClick={() => setUserDropdownOpen(false)}
+                  >
+                    마이 히스토리
+                  </button>
                 </Link>
-                <Link
-                  href="/mypage"
-                  className={menuItemClass}
-                  onClick={() => setUserDropdownOpen(false)}
-                >
-                  계정 설정
+                <Link href="/mypage">
+                  <button
+                    type="button"
+                    className={menuItemClass}
+                    onClick={() => setUserDropdownOpen(false)}
+                  >
+                    계정 설정
+                  </button>
                 </Link>
-                <Link
-                  href="/join-team"
-                  className={menuItemClass}
-                  onClick={() => setUserDropdownOpen(false)}
-                >
-                  팀 참여
+                <Link href="/join-team">
+                  <button
+                    type="button"
+                    className={menuItemClass}
+                    onClick={() => setUserDropdownOpen(false)}
+                  >
+                    팀 참여
+                  </button>
                 </Link>
-                <Link
-                  href="/login"
-                  className={`${menuItemClass} cursor-pointer rounded-b-md`}
-                  onClick={() => {
-                    setIsLoggedIn(false);
-                    setHasTeam(false);
-                    setUserDropdownOpen(false);
-                  }}
-                >
-                  로그아웃
+                <Link href="/login">
+                  <button
+                    type="button"
+                    className={`${menuItemClass} cursor-pointer rounded-b-md`}
+                    onClick={() => {
+                      logout();
+                      setUserDropdownOpen(false);
+                    }}
+                  >
+                    로그아웃
+                  </button>
                 </Link>
               </div>
             )}
@@ -166,8 +215,10 @@ const Header = () => {
         </div>
       </header>
 
+      {/* 백드롭 */}
       {(isSideMenuOpen || isTeamMenuOpen || isUserDropdownOpen) && (
         <button
+          type="button"
           className="fixed inset-0 z-40 cursor-default"
           onClick={() => {
             setSideMenuOpen(false);
@@ -177,6 +228,7 @@ const Header = () => {
         />
       )}
 
+      {/* 사이드 메뉴 */}
       {isSideMenuOpen && (
         <div
           className={`fixed top-0 left-0 z-50 h-full w-[250px] border border-slate-50/10 bg-[#1E293B] p-6 transition-transform duration-300 ${
@@ -185,55 +237,31 @@ const Header = () => {
         >
           <div className="mb-6 flex justify-end">
             <button
+              type="button"
+              className="cursor-pointer hover:cursor-pointer"
               onClick={() => setSideMenuOpen(false)}
-              className="cursor-pointer"
             >
               <IconRenderer name="XIcon" className="hover:text-green-100" />
             </button>
           </div>
 
           <ul className="flex flex-col gap-6 text-sm font-normal text-white">
-            <li>
-              <Link
-                href="/team/{teamid}"
-                onClick={() => setSideMenuOpen(false)}
-                className="hover:text-green-700"
-              >
-                경영관리팀{' '}
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/team/{teamid}"
-                onClick={() => setSideMenuOpen(false)}
-                className="hover:text-green-700"
-              >
-                프로덕트팀
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/team/{teamid}"
-                onClick={() => setSideMenuOpen(false)}
-                className="hover:text-green-700"
-              >
-                마케팅팀
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/team/{teamid}"
-                onClick={() => setSideMenuOpen(false)}
-                className="hover:text-green-700"
-              >
-                콘텐츠팀
-              </Link>
-            </li>
+            {groups.map((team) => (
+              <li key={team.id}>
+                <Link
+                  href={`/team/${team.id}`}
+                  className="hover:text-green-700"
+                  onClick={() => setSideMenuOpen(false)}
+                >
+                  {team.name}
+                </Link>
+              </li>
+            ))}
             <li>
               <Link
                 href="/boards"
-                onClick={() => setSideMenuOpen(false)}
                 className="hover:text-green-700"
+                onClick={() => setSideMenuOpen(false)}
               >
                 자유게시판
               </Link>
@@ -243,6 +271,4 @@ const Header = () => {
       )}
     </>
   );
-};
-
-export default Header;
+}
