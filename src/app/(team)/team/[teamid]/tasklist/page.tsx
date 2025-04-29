@@ -1,4 +1,3 @@
-import { cookies } from 'next/headers';
 import { getGroupById } from '@/lib/apis/group';
 import TaskLists from '@/app/(team)/team/[teamid]/tasklist/_components/Tasklists';
 import Button from '@/components/common/Button';
@@ -10,7 +9,6 @@ interface Props {
 }
 
 export default async function TaskListPage({ params }: Props) {
-  const token = cookies().get('accessToken')?.value ?? '';
   const groupId = Number(params.teamid);
 
   const groupData = await getGroupById({ groupId });
