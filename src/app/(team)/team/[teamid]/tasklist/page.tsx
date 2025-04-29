@@ -13,7 +13,7 @@ export default async function TaskListPage({ params }: Props) {
   const token = cookies().get('accessToken')?.value ?? '';
   const groupId = Number(params.teamid);
 
-  const groupData = await getGroupById({ groupId, token });
+  const groupData = await getGroupById({ groupId });
 
   return (
     <div className="laptop:py-10 tablet:p-6 text-2lg-bold tablet:text-xl-bold max-w-[1200px] px-4 py-6">
