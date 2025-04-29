@@ -1,13 +1,33 @@
-import LoginButton from './_components/LoginButton';
-import LogoutButton from './_components/LogoutButton';
-import ModalButton from '@/app/(team)/team/[teamid]/tasklist/_components/ModalButton';
+import { cookies } from 'next/headers';
+import { getGroupById } from '@/lib/apis/group';
+import TaskLists from '@/app/(team)/team/[teamid]/tasklist/_components/Tasklists';
+import Button from '@/components/common/Button';
 
-export default function TaskListPage() {
+interface Props {
+  params: {
+    teamid: string;
+  };
+}
+
+export default async function TaskListPage({ params }: Props) {
+  const token = cookies().get('accessToken')?.value ?? '';
+  const groupId = Number(params.teamid);
+
+  const groupData = await getGroupById({ groupId, token });
+
   return (
-    <div className="flex h-screen flex-col items-center justify-center gap-2">
-      <LoginButton />
-      <LogoutButton />
-      <ModalButton />
+    <div className="laptop:py-10 tablet:p-6 text-2lg-bold tablet:text-xl-bold max-w-[1200px] px-4 py-6">
+      <div>할 일</div>
+      <TaskLists groupData={groupData} />
+      <Button
+        variant="primary"
+        styleType="filled"
+        className="w-full"
+        radius="sm"
+        size="lg"
+      >
+        버튼
+      </Button>
     </div>
   );
 }

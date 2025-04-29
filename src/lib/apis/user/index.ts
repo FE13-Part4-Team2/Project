@@ -1,5 +1,5 @@
 import Cookies from 'js-cookie';
-import fetcher from '@/lib/fetcher';
+import serverFetcher from '@/lib/server/fetcher.server';
 import {
   UserBody,
   UserResponse,
@@ -13,7 +13,7 @@ import {
 
 // 회원 정보 조회 (GET /user)
 export async function getUser(token: string): Promise<UserResponse | null> {
-  return fetcher<undefined, UserResponse>({
+  return serverFetcher<undefined, UserResponse>({
     url: `/user`,
     method: 'GET',
     token,
@@ -31,7 +31,7 @@ export async function patchUser(
     ...(body.image ? { image: body.image } : {}),
   };
 
-  return fetcher<typeof payload, MessageResponse>({
+  return serverFetcher<typeof payload, MessageResponse>({
     url: `/user`,
     method: 'PATCH',
     token,
@@ -42,7 +42,7 @@ export async function patchUser(
 // 회원 탈퇴 (DELETE /user)
 export async function deleteUser(): Promise<null> {
   const token = Cookies.get('accessToken');
-  return fetcher<undefined, null>({
+  return serverFetcher<undefined, null>({
     url: `/user`,
     method: 'DELETE',
     token,
@@ -53,7 +53,7 @@ export async function deleteUser(): Promise<null> {
 export async function getUserGroups(
   token: string
 ): Promise<UserGroupResponse[] | null> {
-  return fetcher<undefined, UserGroupResponse[]>({
+  return serverFetcher<undefined, UserGroupResponse[]>({
     url: `/user/groups`,
     method: 'GET',
     token,
@@ -64,7 +64,7 @@ export async function getUserGroups(
 export async function getUserMemberships(
   token: string
 ): Promise<UserMembershipResponse[] | null> {
-  return fetcher<undefined, UserMembershipResponse[]>({
+  return serverFetcher<undefined, UserMembershipResponse[]>({
     url: `/user/memberships`,
     method: 'GET',
     token,
@@ -75,7 +75,7 @@ export async function getUserMemberships(
 export async function getUserHistory(
   token: string
 ): Promise<UserHistoryResponse | null> {
-  return fetcher<undefined, UserHistoryResponse>({
+  return serverFetcher<undefined, UserHistoryResponse>({
     url: `user/history`,
     method: 'GET',
     token,
@@ -87,7 +87,7 @@ export async function postResetPasswordToEmail(
   body: ResetPasswordToEmailBody
 ): Promise<MessageResponse | null> {
   const token = Cookies.get('accessToken');
-  return fetcher<ResetPasswordToEmailBody, MessageResponse>({
+  return serverFetcher<ResetPasswordToEmailBody, MessageResponse>({
     url: `/user/send-reset-password-email`,
     method: 'POST',
     token,
@@ -100,7 +100,7 @@ export async function patchResetPassword(
   body: ResetPasswordBody
 ): Promise<MessageResponse | null> {
   const token = Cookies.get('accessToken');
-  return fetcher<ResetPasswordBody, MessageResponse>({
+  return serverFetcher<ResetPasswordBody, MessageResponse>({
     url: `/user/reset-password`,
     method: 'PATCH',
     token,
@@ -113,7 +113,7 @@ export async function patchPassword(
   body: ResetPasswordBody
 ): Promise<MessageResponse | null> {
   const token = Cookies.get('accessToken');
-  return fetcher<ResetPasswordBody, MessageResponse>({
+  return serverFetcher<ResetPasswordBody, MessageResponse>({
     url: `/user/password`,
     method: 'PATCH',
     token,
