@@ -6,12 +6,15 @@ import TaskListMenu from '@/app/(team)/team/[teamid]/tasklist/_components/TaskLi
 import TaskListSection from '@/app/(team)/team/[teamid]/tasklist/_components/TaskListSection';
 import CreateTaskButton from '@/app/(team)/team/[teamid]/tasklist/_components/CreateTaskButton';
 
-interface Props {
+interface PageProps {
   params: { teamid: string };
   searchParams: { id: string; date: string };
 }
 
-export default async function TaskListPage({ params, searchParams }: Props) {
+export default async function TaskListPage({
+  params,
+  searchParams,
+}: PageProps) {
   const groupId = Number(params.teamid);
   const selectedId = Number(searchParams.id);
   const selectedDate =

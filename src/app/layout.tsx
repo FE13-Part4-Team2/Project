@@ -27,7 +27,6 @@ export default function RootLayout({
         <Toast />
         <Modal />
         <main>{children}</main>
-        <div id="side-page-root"></div>
       </body>
     </html>
   );
