@@ -27,11 +27,11 @@ export default function TaskListMenuItem({
   return (
     <button
       type="button"
+      onClick={handleClick}
       className={clsx(
         'pb-1 text-slate-500',
         id == selectedId && 'border-b text-white'
       )}
-      onClick={handleClick}
     >
       <div className="text-lg-medium">{name}</div>
     </button>

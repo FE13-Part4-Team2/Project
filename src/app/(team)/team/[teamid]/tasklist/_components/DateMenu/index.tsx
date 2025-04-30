@@ -1,11 +1,21 @@
-import CalendarButton from '@/app/(team)/team/[teamid]/tasklist/_components/DateMenu/CalendarButton';
-import NextDayButton from '@/app/(team)/team/[teamid]/tasklist/_components/DateMenu/NextDayButton';
+'use client';
+
+import { useSearchParams } from 'next/navigation';
+import { formatDateWithDay } from '@/utils/formatDate';
 import PrevDayButton from '@/app/(team)/team/[teamid]/tasklist/_components/DateMenu/PrevDayButton';
+import NextDayButton from '@/app/(team)/team/[teamid]/tasklist/_components/DateMenu/NextDayButton';
+import CalendarButton from '@/app/(team)/team/[teamid]/tasklist/_components/DateMenu/CalendarButton';
 
 export default function DateMenu() {
+  const searchParams = useSearchParams();
+  const date =
+    searchParams.get('date') || new Date().toISOString().slice(0, 10);
+
+  const formattedDate = formatDateWithDay(date);
+
   return (
     <div className="flex items-center gap-3">
-      <div className="text-lg-medium">5월 18일 (월)</div>
+      <div className="text-lg-medium">{formattedDate}</div>
       <div className="flex gap-1">
         <PrevDayButton />
         <NextDayButton />
