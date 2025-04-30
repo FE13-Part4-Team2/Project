@@ -53,9 +53,7 @@ const InputAuth = ({
 
     if (!inputType) return; // type guard
     const validator = validatorMap[inputType];
-    if (validator) {
-      setIsInvalid(!validator(inputValue));
-    }
+    setIsInvalid(!validator(inputValue));
   };
 
   return (
