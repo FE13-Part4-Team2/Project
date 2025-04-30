@@ -135,33 +135,46 @@ export default function Header() {
                   {isTeamMenuOpen && (
                     <div className="absolute top-[45px] left-[-140px] z-50 flex w-[218px] flex-col gap-4 rounded-xl bg-[#1E293B] p-4">
                       {groups.map((team) => (
-                        <Link
+                        <div
                           key={team.id}
-                          href={`/team/${team.id}`}
-                          className="flex cursor-pointer items-center gap-x-3 rounded-md px-2 py-2 transition-all hover:bg-[#334155]"
-                          onClick={() => {
-                            setSelectedGroup(team);
-                            setTeamMenuOpen(false);
-                          }}
+                          className="flex items-center gap-x-3 rounded-md px-2 py-2"
                         >
-                          <div className="relative h-8 w-8">
-                            <Image
-                              src={team.image ?? '/image/default_team_img.png'}
-                              alt={team.name}
-                              fill
-                              // 임시조치 / 나중에 next.config에 호스트 추가
-                              unoptimized
-                              className="rounded-sm object-cover"
+                          <Link
+                            href={`/team/${team.id}`}
+                            className="flex flex-1 items-center gap-x-3 rounded-md px-2 py-1 hover:bg-[#334155]"
+                            onClick={() => {
+                              setSelectedGroup(team);
+                              setTeamMenuOpen(false);
+                            }}
+                          >
+                            <div className="relative h-8 w-8">
+                              <Image
+                                src={
+                                  team.image ?? '/image/default_team_img.png'
+                                }
+                                alt={team.name}
+                                fill
+                                unoptimized
+                                className="rounded-sm object-cover"
+                              />
+                            </div>
+                            <span className="text-sm text-white">
+                              {team.name}
+                            </span>
+                          </Link>
+
+                          <Link
+                            href={`/team/${team.id}/edit`}
+                            onClick={() => setTeamMenuOpen(false)}
+                            className=""
+                          >
+                            <IconRenderer
+                              name="EditIcon"
+                              size={20}
+                              className="cursor-pointer hover:text-green-700"
                             />
-                          </div>
-                          <span className="flex-1 text-left text-white">
-                            {team.name}
-                          </span>
-                          <IconRenderer
-                            name="EditIcon"
-                            className="ml-auto h-4 w-4 cursor-pointer hover:cursor-pointer"
-                          />
-                        </Link>
+                          </Link>
+                        </div>
                       ))}
 
                       <Link href="/add-team">

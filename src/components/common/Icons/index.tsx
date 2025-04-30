@@ -141,7 +141,12 @@ const Icons = {
     <Done width={size} height={size} className={className} onClick={onClick} />
   ),
   EditIcon: ({ size = 24, className, onClick }: IconProps) => (
-    <Edit width={size} height={size} className={className} onClick={onClick} />
+    <Edit
+      width={size}
+      height={size}
+      className={`text-[#64748B] ${className}`}
+      onClick={onClick}
+    />
   ),
   GearIcon: ({ size = 24, className, onClick }: IconProps) => (
     <Gear width={size} height={size} className={className} onClick={onClick} />
