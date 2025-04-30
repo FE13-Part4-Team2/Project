@@ -1,15 +1,17 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import IconRenderer from '@/components/common/Icons/IconRenderer';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useUserStore } from '@/store/useUserstore';
-import { getUserGroups } from '@/lib/apis/user';
 import { getCookie } from '@/utils/cookieUtill';
 import { UserGroupResponse } from '@/lib/apis/user/type';
 
 export default function Header() {
+  const pathname = usePathname();
+
   const isLogin = useUserStore((s) => s.isLogin);
   const checkLogin = useUserStore((s) => s.checkLogin);
   const logout = useUserStore((s) => s.logout);
@@ -33,16 +35,34 @@ export default function Header() {
 
   useEffect(() => {
     if (!isLogin) return;
-    (async () => {
+
+    // 함수 분리
+    const fetchGroups = async () => {
       try {
         const token = getCookie('accessToken');
         if (!token) throw new Error('No token');
-        const data = await getUserGroups(token);
-        setGroups(data ?? []);
+
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/user/groups`,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
+            },
+            cache: 'no-store',
+          }
+        );
+        if (!res.ok) throw new Error('그룹 조회 실패');
+        const data: UserGroupResponse[] = await res.json();
+        setGroups(data);
       } catch (e) {
         console.error('그룹 조회 실패', e);
       }
-    })();
+    };
+
+    if (isLogin) {
+      fetchGroups();
+    }
   }, [isLogin]);
 
   useEffect(() => {
@@ -92,7 +112,9 @@ export default function Header() {
                     href={`/team/${selectedGroup?.id}`}
                     className="text-md font-medium hover:text-gray-700"
                   >
-                    {selectedGroup?.name}
+                    {pathname.startsWith('/team/')
+                      ? selectedGroup?.name
+                      : '팀 목록'}
                   </Link>
 
                   <button
@@ -133,10 +155,10 @@ export default function Header() {
                           <span className="flex-1 text-left text-white">
                             {team.name}
                           </span>
-                          {/* <IconRenderer
-                            name="ThreeDotsIcon"
+                          <IconRenderer
+                            name="EditIcon"
                             className="ml-auto h-4 w-4 cursor-pointer hover:cursor-pointer"
-                          /> */}
+                          />
                         </Link>
                       ))}
 
