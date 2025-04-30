@@ -1,10 +1,10 @@
-'use client';
-
 import TaskMenuButton from '@/app/(team)/team/[teamid]/tasklist/_components/TaskListSection/TaskCard/TaskMenuButton';
+import TitleButton from '@/app/(team)/team/[teamid]/tasklist/_components/TaskListSection/TaskCard/TitleButton';
 import IconRenderer from '@/components/common/Icons/IconRenderer';
 import { TaskResponse } from '@/lib/apis/task/type';
 import { formatDate } from '@/utils/formatDate';
 import clsx from 'clsx';
+import Link from 'next/link';
 
 export default function TaskCard({
   id,
@@ -26,21 +26,12 @@ export default function TaskCard({
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2">
-            {doneAt == null ? (
-              <IconRenderer name="CheckboxDefaultIcon" />
-            ) : (
+            {doneAt ? (
               <IconRenderer name="CheckboxActiveIcon" />
+            ) : (
+              <IconRenderer name="CheckboxDefaultIcon" />
             )}
-
-            <button
-              type="button"
-              className={clsx(
-                'text-md-regular tablet:max-w-[320px] max-w-[180px] truncate',
-                doneAt && 'line-through'
-              )}
-            >
-              {name}
-            </button>
+            <TitleButton name={name} id={id} doneAt={doneAt} />
           </div>
           <div className="flex items-center gap-0.5">
             <IconRenderer name="CommentIcon" size={16} />
