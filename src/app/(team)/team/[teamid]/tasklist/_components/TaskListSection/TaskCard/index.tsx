@@ -3,6 +3,7 @@
 import TaskMenuButton from '@/app/(team)/team/[teamid]/tasklist/_components/TaskListSection/TaskCard/TaskMenuButton';
 import IconRenderer from '@/components/common/Icons/IconRenderer';
 import { TaskResponse } from '@/lib/apis/task/type';
+import { formatDate } from '@/utils/formatDate';
 import clsx from 'clsx';
 
 export default function TaskCard({
@@ -13,6 +14,7 @@ export default function TaskCard({
   frequency,
   commentCount,
 }: TaskResponse) {
+  const formattedDate = formatDate(date);
   const frequencyText: Record<string, string> = {
     DAILY: '매일 반복',
     WEEKLY: '매주 반복',
@@ -50,7 +52,7 @@ export default function TaskCard({
       <div className="flex items-center gap-2.5">
         <div className="flex items-center gap-1.5">
           <IconRenderer name="CalendarIcon" size={16} />
-          <div className="text-xs-regular text-slate-500">{date}</div>
+          <div className="text-xs-regular text-slate-500">{formattedDate}</div>
         </div>
         {frequency !== 'ONCE' && (
           <>
