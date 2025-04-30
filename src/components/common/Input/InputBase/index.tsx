@@ -4,7 +4,6 @@ import React from 'react';
 import { inputBaseStyle } from '@/components/common/Input/InputBase/style';
 
 interface InputBaseProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  id?: string; // title과 함께 사용 시, label과 input 연결됨
   title?: string; // label 내용
   isInvalid?: boolean; // 유효성 검사 옵션
   // 아이콘 옵션
@@ -21,7 +20,7 @@ interface InputBaseProps extends React.InputHTMLAttributes<HTMLInputElement> {
 const InputBase = React.forwardRef<HTMLInputElement, InputBaseProps>(
   (
     {
-      id,
+      id, // title과 함께 사용 시, label과 input 연결됨
       title,
       leftIcon,
       rightIcon,
