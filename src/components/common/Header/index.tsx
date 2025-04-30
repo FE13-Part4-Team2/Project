@@ -87,6 +87,8 @@ export default function Header() {
     );
   }
 
+  const logoHref = selectedGroup ? `/team/${selectedGroup.id}` : '/no-team';
+
   return (
     <>
       <header className="h-[60px] w-full border border-slate-50/10 bg-[#1E293B] px-6 py-5">
@@ -98,7 +100,7 @@ export default function Header() {
               onClick={() => setSideMenuOpen(true)}
             />
             <Link
-              href="/"
+              href={logoHref}
               className="desktop:w-[158px] flex w-[102px] items-center justify-between gap-0.5"
             >
               <IconRenderer name="LogoIcon" className="hover: cursor-pointer" />
