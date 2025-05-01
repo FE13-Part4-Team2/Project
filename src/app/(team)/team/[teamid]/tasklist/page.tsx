@@ -34,11 +34,11 @@ export default async function TaskListPage({
       <h1 className="text-2lg-bold tablet:text-xl-bold">할 일</h1>
       <div className="tablet:gap-6 flex flex-col gap-4">
         <div className="flex items-center justify-between">
-          <DateMenu />
+          <DateMenu date={selectedDate} />
           <ManageButton />
         </div>
         <div className="flex flex-col gap-4">
-          <TaskListMenu items={taskListsData} />
+          <TaskListMenu items={taskListsData} selectedId={selectedId} />
           <TaskListSection items={tasksData} />
         </div>
       </div>

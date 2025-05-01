@@ -6,14 +6,15 @@ import clsx from 'clsx';
 export default function TaskListMenuItem({
   id,
   name,
+  selectedId,
 }: {
   id: number;
   name: string;
+  selectedId: number;
 }) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const selectedId = Number(searchParams.get('id'));
   const date =
     searchParams.get('date') || new Date().toISOString().slice(0, 10);
 

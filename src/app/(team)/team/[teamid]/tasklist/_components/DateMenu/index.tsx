@@ -1,16 +1,11 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
 import { formatDateWithDay } from '@/utils/formatDate';
 import PrevDayButton from '@/app/(team)/team/[teamid]/tasklist/_components/DateMenu/PrevDayButton';
 import NextDayButton from '@/app/(team)/team/[teamid]/tasklist/_components/DateMenu/NextDayButton';
 import CalendarButton from '@/app/(team)/team/[teamid]/tasklist/_components/DateMenu/CalendarButton';
 
-export default function DateMenu() {
-  const searchParams = useSearchParams();
-  const date =
-    searchParams.get('date') || new Date().toISOString().slice(0, 10);
-
+export default function DateMenu({ date }: { date: string }) {
   const formattedDate = formatDateWithDay(date);
 
   return (
