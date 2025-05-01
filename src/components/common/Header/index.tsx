@@ -1,59 +1,29 @@
 'use client';
 
 // 로그아웃 누르면 토스트
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Logo from './Logo';
 import TeamMenu from './TeamMenu';
 import UserMenu from './UserMenu';
 import SideMenu from './SideMenu';
 import { useUserStore } from '@/store/useUserstore';
-import { getCookie } from '@/utils/cookieUtill';
-import { UserMembershipResponse } from '@/lib/apis/user/type';
 import Link from 'next/link';
 import IconRenderer from '@/components/common/Icons/IconRenderer';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useAuth } from '@/hooks/useAuth';
+import { useMemberships } from '@/hooks/useMemberships';
 
 export default function Header() {
-  const isLogin = useUserStore((s) => s.isLogin);
-  const checkLogin = useUserStore((s) => s.checkLogin);
+  const isLogin = useAuth();
   const logout = useUserStore((s) => s.logout);
   const user = useUserStore((s) => s.user);
 
-  const [memberships, setMemberships] = useState<UserMembershipResponse[]>([]);
-  const [selectedGroup, setSelectedGroup] = useState<
-    UserMembershipResponse['group'] | null
-  >(null);
+  const { memberships, selectedGroup, setSelectedGroup } = useMemberships();
   const [isSideMenuOpen, setSideMenuOpen] = useState(false);
 
   const groups = memberships.map((m) => m.group);
-
-  useEffect(() => {
-    checkLogin();
-  }, [checkLogin]);
-
-  // 함수 분리 예정
-  useEffect(() => {
-    if (!isLogin) return;
-    (async () => {
-      const token = getCookie('accessToken');
-      if (!token) return;
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user`, {
-        headers: { Authorization: `Bearer ${token}` },
-        cache: 'no-store',
-      });
-      if (!res.ok) return;
-      const userData: { memberships: UserMembershipResponse[] } =
-        await res.json();
-      setMemberships(userData.memberships ?? []);
-    })();
-  }, [isLogin]);
-
-  useEffect(() => {
-    if (!selectedGroup && memberships.length > 0) {
-      setSelectedGroup(memberships[0].group);
-    }
-  }, [memberships, selectedGroup]);
+  const logoHref = selectedGroup ? `/team/${selectedGroup.id}` : '/no-team';
 
   const handleLogout = () => {
     logout();
@@ -75,8 +45,6 @@ export default function Header() {
       </header>
     );
   }
-
-  const logoHref = selectedGroup ? `/team/${selectedGroup.id}` : '/no-team';
 
   return (
     <>
