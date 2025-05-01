@@ -3,9 +3,7 @@ import Link from 'next/link';
 export default function NavigateToSignUp() {
   return (
     <div className="mt-6 flex justify-center gap-3">
-      <span className="leading=[19px] font-medium">
-        아직 계정이 없으신가요?
-      </span>
+      <span className="text-lg-medium">아직 계정이 없으신가요?</span>
       <Link href={'/signup'} className="font-medium text-emerald-500 underline">
         가입하기
       </Link>

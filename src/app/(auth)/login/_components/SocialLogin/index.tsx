@@ -14,7 +14,7 @@ export default function SocialLogin() {
 
       {/*social login*/}
       <div className="flex items-center justify-between">
-        <span className="leading-[19px] font-medium">간편 로그인하기</span>
+        <span className="text-lg-medium">간편 로그인하기</span>
         <button>
           <Icons.KakaoLoginIcon
             size={42}

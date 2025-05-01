@@ -21,7 +21,7 @@ export default function InputWithLabel({
 
   return (
     <div className="flex flex-col gap-3">
-      <label className="leading-[19px] font-medium" htmlFor={inputType}>
+      <label className="text-lg-medium" htmlFor={inputType}>
         {inputTypeMap[inputType]}
       </label>
       <input
