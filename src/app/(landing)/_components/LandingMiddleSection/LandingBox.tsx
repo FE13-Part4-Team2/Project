@@ -7,9 +7,9 @@ import {
   imageSize,
   getDirection,
 } from '@/app/(landing)/_components/style';
-import { MiddleBoxProps } from '@/app/(landing)/_components/type';
+import { LandingBoxProps } from '@/app/(landing)/_components/type';
 
-const MiddleBox = ({
+const LandingBox = ({
   imageSrc,
   imageAlt,
   imageOnTop,
@@ -21,7 +21,7 @@ const MiddleBox = ({
   mobileReverse = false,
   gradient = false,
   className,
-}: MiddleBoxProps) => {
+}: LandingBoxProps) => {
   const wrapperClass = gradient ? boxGradientStyle : '';
 
   return (
@@ -75,4 +75,4 @@ const MiddleBox = ({
   );
 };
 
-export default MiddleBox;
+export default LandingBox;

@@ -1,9 +1,11 @@
-import MiddleBox from '@/app/(landing)/_components/LandingMiddleSection/MiddleBox';
+import LandingBox from '@/app/(landing)/_components/LandingMiddleSection/LandingBox';
 
-const LandingMiddleSection = () => {
+const LandingMiddleSection = ({ className }: { className?: string }) => {
   return (
-    <div className="flex w-full flex-col items-center gap-20">
-      <MiddleBox
+    <section
+      className={`${className} flex w-full flex-col items-center gap-20`}
+    >
+      <LandingBox
         imageSrc="/image/landing_mockup_team.png"
         imageAlt="팀 페이지"
         iconSrc="/image/landing_icon_folder.png"
@@ -15,7 +17,7 @@ const LandingMiddleSection = () => {
       />
 
       {/* BOX 2 */}
-      <MiddleBox
+      <LandingBox
         imageSrc="/image/landing_mockup_invitation.png"
         imageAlt="멤버 초대"
         imageOnTop
@@ -28,7 +30,7 @@ const LandingMiddleSection = () => {
       />
 
       {/* BOX 3 */}
-      <MiddleBox
+      <LandingBox
         imageSrc="/image/landing_mockup_reply.png"
         imageAlt="댓글"
         imageOnTop
@@ -39,7 +41,7 @@ const LandingMiddleSection = () => {
         textLines={['할 일도 간편하게', '체크해요']}
         className="items-start bg-slate-950"
       />
-    </div>
+    </section>
   );
 };
 

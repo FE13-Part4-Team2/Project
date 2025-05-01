@@ -4,12 +4,12 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import LandingTitleText from '@/app/(landing)/_components/LandingTopSection/LandingTitleText';
 
-const LandingTopSection = () => {
+const LandingTopSection = ({ className }: { className?: string }) => {
   return (
-    <section className="flex h-screen w-full flex-col items-center text-center">
-      <div className="mt-20">
-        <LandingTitleText />
-      </div>
+    <section
+      className={`${className} flex h-screen w-full flex-col items-center text-center`}
+    >
+      <LandingTitleText />
       <div className="relative flex h-screen w-full flex-col items-center">
         {/* 빛 이미지 */}
         <Image

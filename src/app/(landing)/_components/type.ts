@@ -1,4 +1,4 @@
-export interface MiddleBoxProps {
+export interface LandingBoxProps {
   imageSrc: string;
   imageAlt: string;
   imageOnTop?: boolean;
