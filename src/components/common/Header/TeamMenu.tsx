@@ -5,19 +5,21 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import IconRenderer from '@/components/common/Icons/IconRenderer';
-import { UserGroupResponse } from '@/lib/apis/user/type';
+import { UserMembershipResponse } from '@/lib/apis/user/type';
+
+interface TeamMenuProps {
+  memberships: UserMembershipResponse[];
+  selectedGroup: UserMembershipResponse['group'] | null;
+  onSelect: (group: UserMembershipResponse['group']) => void;
+}
 
 export default function TeamMenu({
-  groups,
+  memberships,
   selectedGroup,
   onSelect,
-}: {
-  groups: UserGroupResponse[];
-  selectedGroup: UserGroupResponse | null;
-  onSelect: (team: UserGroupResponse) => void;
-}) {
+}: TeamMenuProps) {
   const pathname = usePathname();
-  const [isTeamMenuOpen, setTeamMenuOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const label = pathname.startsWith('/team/') ? selectedGroup?.name : '팀 목록';
 
@@ -33,49 +35,52 @@ export default function TeamMenu({
       <button
         type="button"
         className={`z-50 cursor-pointer hover:text-gray-700 ${
-          isTeamMenuOpen ? 'rotate-180' : ''
+          open ? 'rotate-180' : ''
         } transition-transform`}
-        onClick={() => setTeamMenuOpen((prev) => !prev)}
+        onClick={() => setOpen((o) => !o)}
       >
         <IconRenderer name="CheckIcon" className="hover:text-gray-700" />
       </button>
 
-      {isTeamMenuOpen && (
+      {open && (
         <div className="absolute top-[45px] left-[-140px] z-50 flex w-[218px] flex-col gap-4 rounded-xl bg-[#1E293B] p-4">
-          {groups.map((team) => (
+          {memberships.map(({ group, role }) => (
             <div
-              key={team.id}
+              key={group.id}
               className="flex items-center gap-x-3 rounded-md px-2 py-2"
             >
               <Link
-                href={`/team/${team.id}`}
-                className="flex flex-1 items-center gap-x-3 rounded-md px-2 py-2 hover:bg-[#334155]"
+                href={`/team/${group.id}`}
+                className="py flex flex-1 items-center gap-x-3 rounded-md p-1 transition-colors hover:bg-[#334155]"
                 onClick={() => {
-                  onSelect(team);
-                  setTeamMenuOpen(false);
+                  onSelect(group);
+                  setOpen(false);
                 }}
               >
                 <div className="relative h-8 w-8">
                   <Image
-                    src={team.image ?? '/image/default_team_img.png'}
-                    alt={team.name}
+                    src={group.image ?? '/image/default_team_img.png'}
+                    alt={group.name}
                     fill
                     unoptimized
                     className="rounded-sm object-cover"
                   />
                 </div>
-                <span className="text-sm text-white">{team.name}</span>
+                <span className="text-sm whitespace-nowrap">{group.name}</span>
               </Link>
-              <Link
-                href={`/team/${team.id}/edit`}
-                onClick={() => setTeamMenuOpen(false)}
-              >
-                <IconRenderer
-                  name="EditIcon"
-                  size={20}
-                  className="cursor-pointer hover:text-green-700"
-                />
-              </Link>
+
+              {role === 'ADMIN' && (
+                <Link
+                  href={`/team/${group.id}/edit`}
+                  onClick={() => setOpen(false)}
+                >
+                  <IconRenderer
+                    name="EditIcon"
+                    size={20}
+                    className="cursor-pointer hover:text-green-700"
+                  />
+                </Link>
+              )}
             </div>
           ))}
 
@@ -83,7 +88,7 @@ export default function TeamMenu({
             <button
               type="button"
               className="mt-2 h-12 w-[186px] cursor-pointer rounded-md border border-white py-1 transition-all hover:bg-white hover:text-[#1E293B]"
-              onClick={() => setTeamMenuOpen(false)}
+              onClick={() => setOpen(false)}
             >
               + 팀 추가하기
             </button>

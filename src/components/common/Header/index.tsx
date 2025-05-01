@@ -1,5 +1,7 @@
 'use client';
 
+// 수정 아이콘은 관리자일 경우만
+// 로그아웃 누르면 토스트
 import { useState, useEffect } from 'react';
 import Logo from './Logo';
 import TeamMenu from './TeamMenu';
@@ -7,9 +9,11 @@ import UserMenu from './UserMenu';
 import SideMenu from './SideMenu';
 import { useUserStore } from '@/store/useUserstore';
 import { getCookie } from '@/utils/cookieUtill';
-import { UserGroupResponse } from '@/lib/apis/user/type';
+import { UserMembershipResponse } from '@/lib/apis/user/type';
 import Link from 'next/link';
 import IconRenderer from '@/components/common/Icons/IconRenderer';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Header() {
   const isLogin = useUserStore((s) => s.isLogin);
@@ -17,48 +21,46 @@ export default function Header() {
   const logout = useUserStore((s) => s.logout);
   const user = useUserStore((s) => s.user);
 
-  const [groups, setGroups] = useState<UserGroupResponse[]>([]);
-  const [selectedGroup, setSelectedGroup] = useState<UserGroupResponse | null>(
-    null
-  );
+  const [memberships, setMemberships] = useState<UserMembershipResponse[]>([]);
+  const [selectedGroup, setSelectedGroup] = useState<
+    UserMembershipResponse['group'] | null
+  >(null);
   const [isSideMenuOpen, setSideMenuOpen] = useState(false);
+
+  // derive plain groups array from memberships
+  const groups = memberships.map((m) => m.group);
 
   useEffect(() => {
     checkLogin();
   }, [checkLogin]);
 
+  // 함수 분리 예정
   useEffect(() => {
     if (!isLogin) return;
-    const fetchGroups = async () => {
-      try {
-        const token = getCookie('accessToken');
-        if (!token) throw new Error('No token');
-
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/user/groups`,
-          {
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${token}`,
-            },
-            cache: 'no-store',
-          }
-        );
-        if (!res.ok) throw new Error('그룹 조회 실패');
-        const data: UserGroupResponse[] = await res.json();
-        setGroups(data);
-      } catch (e) {
-        console.error('그룹 조회 실패', e);
-      }
-    };
-    fetchGroups();
+    (async () => {
+      const token = getCookie('accessToken');
+      if (!token) return;
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user`, {
+        headers: { Authorization: `Bearer ${token}` },
+        cache: 'no-store',
+      });
+      if (!res.ok) return;
+      const userData: { memberships: UserMembershipResponse[] } =
+        await res.json();
+      setMemberships(userData.memberships ?? []);
+    })();
   }, [isLogin]);
 
   useEffect(() => {
-    if (!selectedGroup && groups.length > 0) {
-      setSelectedGroup(groups[0]);
+    if (!selectedGroup && memberships.length > 0) {
+      setSelectedGroup(memberships[0].group);
     }
-  }, [groups, selectedGroup]);
+  }, [memberships, selectedGroup]);
+
+  const handleLogout = () => {
+    logout();
+    toast.success('로그아웃되었습니다');
+  };
 
   if (!isLogin) {
     return (
@@ -91,9 +93,9 @@ export default function Header() {
             <Logo href={logoHref} />
 
             <div className="tablet:flex hidden items-center">
-              {groups.length > 0 && (
+              {memberships.length > 0 && selectedGroup && (
                 <TeamMenu
-                  groups={groups}
+                  memberships={memberships}
                   selectedGroup={selectedGroup}
                   onSelect={setSelectedGroup}
                 />
@@ -107,7 +109,7 @@ export default function Header() {
             </div>
           </nav>
 
-          <UserMenu nickname={user?.nickname} onLogout={logout} />
+          <UserMenu nickname={user?.nickname} onLogout={handleLogout} />
         </div>
       </header>
 
@@ -116,6 +118,8 @@ export default function Header() {
         onClose={() => setSideMenuOpen(false)}
         groups={groups}
       />
+
+      <ToastContainer position="top-right" autoClose={3000} />
     </>
   );
 }
