@@ -1,7 +1,7 @@
 'use client';
 
-import LandingTopSection from '@/components/Landing/LandingTopSection';
-import LandingMiddleSection from '@/components/Landing/LandingMiddleSection';
+import LandingTopSection from '@/app/(landing)/_components/LandingTopSection';
+import LandingMiddleSection from '@/app/(landing)/_components/LandingMiddleSection';
 
 export default function LandingPage() {
   return (
