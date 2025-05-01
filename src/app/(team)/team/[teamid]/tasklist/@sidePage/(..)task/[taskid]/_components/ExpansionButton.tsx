@@ -1,18 +1,15 @@
 'use client';
 
 import IconRenderer from '@/components/common/Icons/IconRenderer';
-import { useRouter } from 'next/navigation';
 
-export default function CloseButton() {
-  const router = useRouter();
-
+export default function ExpansionButton() {
   return (
     <button
       type="button"
-      onClick={() => router.back()}
+      onClick={() => window.location.reload()}
       className="flex size-7 items-center justify-center rounded-full transition-colors duration-100 hover:bg-slate-700"
     >
-      <IconRenderer name="XIcon" />
+      <IconRenderer name="ExpansionIcon" size={20} />
     </button>
   );
 }
