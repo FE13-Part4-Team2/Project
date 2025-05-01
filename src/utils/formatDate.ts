@@ -5,7 +5,7 @@ export function formatDateWithDay(dateString: string): string {
   const day = String(date.getDate()).padStart(2, '0');
   const dayNames = ['월', '화', '수', '목', '금', '토', '일'];
   const dayOfWeek = dayNames[date.getDay()];
-  return `${month}월 ${day}일 (${dayOfWeek})`;
+  return `${year}년 ${month}월 ${day}일 (${dayOfWeek})`;
 }
 
 export function formatDate(dateString: string): string {
