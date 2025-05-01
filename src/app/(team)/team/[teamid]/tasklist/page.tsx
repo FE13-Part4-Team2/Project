@@ -21,6 +21,7 @@ export default async function TaskListPage({
 
   const groupData = await getGroupById({ groupId });
   const taskListsData = groupData?.taskLists ?? [];
+  const membersData = groupData?.members ?? [];
   const selectedTaskListData = await getTaskListById({
     groupId,
     taskListId: selectedId,
@@ -37,7 +38,7 @@ export default async function TaskListPage({
       <div className="tablet:gap-6 flex flex-col gap-4">
         <div className="flex items-center justify-between">
           <DateMenu date={selectedDate} />
-          <ManageButton />
+          <ManageButton membersData={membersData} />
         </div>
         {isTaskListEmpty && (
           <div className="text-md-medium absolute top-1/2 right-1/2 translate-x-1/2 translate-y-1/2 text-center text-slate-500">

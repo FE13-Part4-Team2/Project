@@ -14,7 +14,7 @@ export default function LoginButton() {
 
       if (!data) return;
 
-      const { accessToken, refreshToken } = data;
+      const { accessToken, refreshToken, user } = data;
 
       Cookies.set('accessToken', accessToken, {
         path: '/',
@@ -27,6 +27,8 @@ export default function LoginButton() {
         secure: true,
         sameSite: 'Strict',
       });
+
+      localStorage.setItem('userId', user.id.toString());
 
       toast.success('로그인 성공');
     } catch (error) {
