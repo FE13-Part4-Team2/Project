@@ -3,8 +3,6 @@ import TitleButton from '@/app/(team)/team/[teamid]/tasklist/_components/TaskLis
 import IconRenderer from '@/components/common/Icons/IconRenderer';
 import { TaskResponse } from '@/lib/apis/task/type';
 import { formatDate } from '@/utils/formatDate';
-import clsx from 'clsx';
-import Link from 'next/link';
 
 export default function TaskCard({
   id,

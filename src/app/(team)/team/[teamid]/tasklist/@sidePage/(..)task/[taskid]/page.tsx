@@ -1,4 +1,5 @@
 import TaskDetailPage from '@/app/(team)/team/[teamid]/task/[taskid]/page';
+import CloseButton from '@/app/(team)/team/[teamid]/tasklist/@sidePage/(..)task/[taskid]/_components/CloseButton';
 
 interface PageProps {
   params: { teamid: string; taskid: string };
@@ -6,7 +7,8 @@ interface PageProps {
 
 export default function Page(props: PageProps) {
   return (
-    <div>
+    <div className="relative">
+      <CloseButton />
       <TaskDetailPage {...props} />
     </div>
   );
