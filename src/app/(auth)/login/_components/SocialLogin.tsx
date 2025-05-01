@@ -1,4 +1,6 @@
-import Image from 'next/image';
+'use client';
+
+import Icons from '@/components/common/Icons';
 
 export default function SocialLogin() {
   return (
@@ -14,11 +16,11 @@ export default function SocialLogin() {
       <div className="flex items-center justify-between">
         <span className="leading-[19px] font-medium">간편 로그인하기</span>
         <button>
-          <Image
-            src="/icon/kakao_icon.svg"
-            alt="kakao"
-            width={42}
-            height={42}
+          <Icons.KakaoLoginIcon
+            size={42}
+            onClick={() => {
+              'kakao Login';
+            }}
           />
         </button>
       </div>

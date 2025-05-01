@@ -1,15 +1,14 @@
 'use client';
 
-type InputWithErrorProps = {
-  inputType: 'name' | 'email' | 'password' | 'passwordConfirm';
-} & React.InputHTMLAttributes<HTMLInputElement>;
+import InputWithLabelProps from '@/app/(auth)/login/type/type';
 
 export default function InputWithLabel({
   inputType,
   ...props
-}: InputWithErrorProps) {
+}: InputWithLabelProps) {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     // validation, error message rendering
+    console.log(e.target.value);
   };
 
   // map inputType to korean label

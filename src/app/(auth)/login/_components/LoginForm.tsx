@@ -1,5 +1,6 @@
 'use client';
 
+import ForgotPasswordButton from '@/app/(auth)/login/_components/ForgotPasswordButton';
 import InputWithLabel from '@/app/(auth)/login/_components/InputWithLabel';
 import Button from '@/components/common/Button';
 
@@ -21,14 +22,7 @@ export default function LoginForm() {
         <InputWithLabel inputType="password" autoComplete="current-password" />
       </div>
 
-      <div className="mt-3 mb-10 flex justify-end">
-        <button
-          className="leading-normal font-medium text-emerald-500 underline"
-          onClick={handleOpenModal}
-        >
-          비밀번호를 잊으셨나요?
-        </button>
-      </div>
+      <ForgotPasswordButton onClick={handleOpenModal} />
 
       <Button
         size="lg"
