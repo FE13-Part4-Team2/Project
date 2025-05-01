@@ -1,6 +1,6 @@
 'use client';
 
-import InputWithLabelProps from '@/app/(auth)/login/type/type';
+import InputWithLabelProps from '@/app/(auth)/login/type';
 
 export default function InputWithLabel({
   inputType,

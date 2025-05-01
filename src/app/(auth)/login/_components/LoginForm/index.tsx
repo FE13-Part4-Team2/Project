@@ -1,7 +1,7 @@
 'use client';
 
-import ForgotPasswordButton from '@/app/(auth)/login/_components/ForgotPasswordButton';
-import InputWithLabel from '@/app/(auth)/login/_components/InputWithLabel';
+import ForgotPasswordButton from '@/app/(auth)/login/_components/LoginForm/ForgotPasswordButton';
+import InputWithLabel from '@/app/(auth)/login/_components/LoginForm/InputWithLabel';
 import Button from '@/components/common/Button';
 
 export default function LoginForm() {
