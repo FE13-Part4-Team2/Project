@@ -1,8 +1,9 @@
 'use client';
 
-import { useRef } from 'react';
 import { useRouter } from 'next/navigation';
+import { useRef } from 'react';
 import { useClosePopup } from '@/hooks/useClosePopup';
+import { useLockBackgroundScroll } from '@/hooks/useLockBackgroundScroll';
 import TaskDetailPage from '@/app/(team)/team/[teamid]/task/[taskid]/page';
 import CloseButton from '@/app/(team)/team/[teamid]/tasklist/@sidePage/(..)task/[taskid]/_components/CloseButton';
 import ExpansionButton from '@/app/(team)/team/[teamid]/tasklist/@sidePage/(..)task/[taskid]/_components/ExpansionButton';
@@ -12,10 +13,13 @@ interface PageProps {
 }
 
 export default function Page(props: PageProps) {
-  const sidePageRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
+  const sidePageRef = useRef<HTMLDivElement>(null);
+  const isSidePageOpen = Boolean(props.params.taskid);
+
   useClosePopup(sidePageRef, () => router.back());
+  useLockBackgroundScroll(isSidePageOpen);
 
   return (
     <div className="fixed inset-0 flex h-full w-full bg-black/50">
