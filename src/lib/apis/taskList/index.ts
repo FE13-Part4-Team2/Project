@@ -1,5 +1,5 @@
-import Cookies from 'js-cookie';
-import fetcher from '@/lib/fetcher';
+import serverFetcher from '@/lib/server/fetcher.server';
+import clientFetcher from '@/lib/client/fetcher.client';
 import {
   TaskListBody,
   TaskListOrderBody,
@@ -11,17 +11,14 @@ export async function getTaskListById({
   groupId,
   taskListId,
   date,
-  token,
 }: {
   groupId: number;
   taskListId: number;
   date: string;
-  token: string;
 }): Promise<TaskListResponse | null> {
-  return fetcher<undefined, TaskListResponse>({
+  return serverFetcher<undefined, TaskListResponse>({
     url: `/groups/${groupId}/task-lists/${taskListId}?date=${date}`,
     method: 'GET',
-    token,
   });
 }
 
@@ -35,11 +32,9 @@ export async function patchTaskListById({
   taskListId: number;
   body: TaskListBody;
 }): Promise<TaskListResponse | null> {
-  const token = Cookies.get('accessToken');
-  return fetcher<TaskListBody, TaskListResponse>({
+  return clientFetcher<TaskListBody, TaskListResponse>({
     url: `/groups/${groupId}/task-lists/${taskListId}`,
     method: 'PATCH',
-    token,
     body,
   });
 }
@@ -52,11 +47,9 @@ export async function deleteTaskListById({
   groupId: number;
   taskListId: number;
 }): Promise<null> {
-  const token = Cookies.get('accessToken');
-  return fetcher<undefined, null>({
+  return clientFetcher<undefined, null>({
     url: `/groups/${groupId}/task-lists/${taskListId}`,
     method: 'DELETE',
-    token,
   });
 }
 
@@ -68,11 +61,9 @@ export async function postTaskList({
   groupId: number;
   body: TaskListBody;
 }): Promise<TaskListResponse | null> {
-  const token = Cookies.get('accessToken');
-  return fetcher<TaskListBody, TaskListResponse>({
+  return clientFetcher<TaskListBody, TaskListResponse>({
     url: `/groups/${groupId}/task-lists`,
     method: 'POST',
-    token,
     body,
   });
 }
@@ -87,11 +78,9 @@ export async function patchTaskListOrder({
   taskListId: number;
   body: TaskListOrderBody;
 }): Promise<null> {
-  const token = Cookies.get('accessToken');
-  return fetcher<TaskListOrderBody, null>({
+  return clientFetcher<TaskListOrderBody, null>({
     url: `/groups/${groupId}/task-lists/${taskListId}/order`,
     method: 'PATCH',
-    token,
     body,
   });
 }

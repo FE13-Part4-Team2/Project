@@ -1,6 +1,4 @@
-// Auth 페이지에서 사용하는 input component
-// 입력값 검증, 에러 메시지 및 비밀번호 보기 토글
-
+// 회원가입, 로그인 사용 인풋
 'use client';
 import React, { useState } from 'react';
 import InputBase from '@/components/common/Input/InputBase';
@@ -12,70 +10,72 @@ import {
 } from '@/utils/inputValidation';
 import IconRenderer from '@/components/common/Icons/IconRenderer';
 
-// 타입 프로퍼티 순서
-// 1. 필수 > 옵션 순서
-// 2. 입력값 (value) 와 핸들러 (onInputChange) 는 가까이 두기
-// 3. 타입 확장은 맨 위 (extends)
 interface InputAuthProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  id?: string;
+  title?: string;
   value: string;
-  onInputChange: (value: string) => void;
-  label?: string;
-  inputType?: 'name' | 'email' | 'password' | 'passwordMatch';
-  originalPassword?: string;
   invalidMessage?: string;
+  pattern?: 'name' | 'email' | 'password' | 'passwordMatch';
+  onValueChange: (value: string) => void;
+  originalPassword?: string;
 }
 
 const InputAuth = ({
+  id,
+  title,
   value,
-  onInputChange,
-  label,
-  inputType,
-  originalPassword,
+  pattern,
   invalidMessage,
+  onValueChange,
+  originalPassword,
   ...props
 }: InputAuthProps) => {
   const [isInvalid, setIsInvalid] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  // inputType 에 따라 입력값 유효성 검사 함수 실행
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value; // 이벤트가 발생한 인풋값
-    onInputChange(inputValue); // 부모 컴포넌트가 핸들링 로직을 담당
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value;
+    onValueChange(val);
 
-    // 입력값 유효성 검사 : map 에 inputType 과 검증 함수들을 매핑
-    const validatorMap = {
-      name: validateName,
-      email: validateEmail,
-      password: validatePassword,
-      passwordMatch: (inputValue: string) =>
-        validatePasswordMatch(originalPassword ?? '', inputValue),
-    } as const;
+    if (pattern === 'name') {
+      setIsInvalid(!validateName(val));
+    }
 
-    if (!inputType) return; // type guard
-    const validator = validatorMap[inputType];
-    setIsInvalid(!validator(inputValue));
+    if (pattern === 'email') {
+      setIsInvalid(!validateEmail(val));
+    }
+
+    if (pattern === 'password') {
+      setIsInvalid(!validatePassword(val));
+    }
+
+    if (pattern === 'passwordMatch') {
+      setIsInvalid(!validatePasswordMatch(originalPassword ?? '', val));
+    }
   };
 
   return (
     <div>
       <InputBase
         {...props}
-        label={label}
+        id={id}
+        title={title}
         value={value}
-        onChange={handleInputChange}
+        onChange={handleChange}
         isInvalid={isInvalid}
+        titleClassName="mb-[8px]"
         containerClassName="relative h-[48px] bg-slate-800"
         inputClassName="placeholder:text-slate-500"
         // 비밀번호만 암호화
         type={
-          inputType === 'password' || inputType === 'passwordMatch'
+          pattern === 'password' || pattern === 'passwordMatch'
             ? showPassword
               ? 'text'
               : 'password'
             : (props.type ?? 'text')
         }
         rightIcon={
-          inputType === 'password' || inputType === 'passwordMatch' ? (
+          pattern === 'password' || pattern === 'passwordMatch' ? (
             <button
               onClick={() => setShowPassword(!showPassword)}
               type="button"
