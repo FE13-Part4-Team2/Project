@@ -35,12 +35,12 @@ export default function Modal() {
         ref={modalRef}
         className={clsx(
           'tablet:w-[384px] tablet:rounded-b-xl tablet:max-h-[80vh] relative flex max-h-[90vh] w-full flex-col rounded-t-3xl border-none bg-slate-800 pb-8',
-          variant == 'default' && 'gap-6 px-[52px] pt-12',
-          variant == 'danger' && 'gap-6 px-[52px] pt-8',
-          variant == 'taskForm' && 'gap-8 px-6 pt-8'
+          variant === 'default' && 'gap-6 px-[52px] pt-12',
+          variant === 'danger' && 'gap-6 px-[52px] pt-8',
+          variant === 'taskForm' && 'gap-8 px-6 pt-8'
         )}
       >
-        {button?.number == 1 && (
+        {button?.number === 1 && (
           <button
             type="button"
             onClick={closeModal}
@@ -50,18 +50,18 @@ export default function Modal() {
           </button>
         )}
         <div className="flex flex-col items-center gap-4">
-          {variant == 'danger' && <IconRenderer name="AlertIcon" />}
+          {variant === 'danger' && <IconRenderer name="AlertIcon" />}
           <div
             className={clsx(
               'flex w-full flex-col overflow-hidden',
-              variant == 'taskForm' ? 'gap-6' : 'gap-4'
+              variant === 'taskForm' ? 'gap-6' : 'gap-4'
             )}
           >
             {(title || description) && (
               <div
                 className={clsx(
                   'flex flex-col items-center',
-                  variant == 'taskForm' ? 'gap-4' : 'gap-2'
+                  variant === 'taskForm' ? 'gap-4' : 'gap-2'
                 )}
               >
                 {title && <div className="text-lg-medium">{title}</div>}
@@ -69,7 +69,7 @@ export default function Modal() {
                   <div
                     className={clsx(
                       'text-md-medium text-center whitespace-pre-line',
-                      variant == 'danger' ? '' : 'text-slate-500'
+                      variant === 'danger' ? '' : 'text-slate-500'
                     )}
                   >
                     {description}
@@ -81,10 +81,10 @@ export default function Modal() {
           </div>
         </div>
         <div className="flex gap-2">
-          {button?.number == 2 && (
+          {button?.number === 2 && (
             <Button
               variant="primary"
-              styleType={variant == 'danger' ? 'neutral' : 'outlined'}
+              styleType={variant === 'danger' ? 'neutral' : 'outlined'}
               className="flex-1"
               radius="sm"
               size="lg"
@@ -95,7 +95,7 @@ export default function Modal() {
           )}
           <Button
             variant="primary"
-            styleType={variant == 'danger' ? 'danger' : 'filled'}
+            styleType={variant === 'danger' ? 'danger' : 'filled'}
             className="flex-1"
             radius="sm"
             size="lg"

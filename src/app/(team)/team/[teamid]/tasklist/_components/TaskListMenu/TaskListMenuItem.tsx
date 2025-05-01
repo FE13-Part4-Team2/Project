@@ -30,7 +30,7 @@ export default function TaskListMenuItem({
       onClick={handleClick}
       className={clsx(
         'pb-1 text-slate-500',
-        id == selectedId && 'border-b text-white'
+        id === selectedId && 'border-b text-white'
       )}
     >
       <div className="text-lg-medium">{name}</div>

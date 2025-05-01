@@ -36,6 +36,7 @@ import VisibilityOff from '@/assets/icons/visibility_off.svg';
 import VisibilityOn from '@/assets/icons/visibility_on.svg';
 import X from '@/assets/icons/x.svg';
 import Expansion from '@/assets/icons/expansion.svg';
+import KakaoLogin from '@/assets/icons/kakao_login.svg';
 
 interface IconProps {
   size?: number;
@@ -88,7 +89,7 @@ const Icons = {
     <CheckGreen
       width={size}
       height={size}
-      className={`text-[#10B981] ${className}`}
+      className={`text-green-700 ${className}`}
       onClick={onClick}
     />
   ),
@@ -106,7 +107,7 @@ const Icons = {
     <Check
       width={size}
       height={size}
-      className={`text-[#F8FAFC] ${className}`}
+      className={`text-slate-50 ${className}`}
       onClick={onClick}
     />
   ),
@@ -163,7 +164,7 @@ const Icons = {
     <GnbMenu
       width={size}
       height={size}
-      className={`text-[#64748B] ${className}`}
+      className={`text-slate-500 ${className}`}
       onClick={onClick}
     />
   ),
@@ -251,7 +252,7 @@ const Icons = {
     <ThreeDots
       width={size}
       height={size}
-      className={`text-[#64748B] ${className}`}
+      className={`text-slate-500 ${className}`}
       onClick={onClick}
     />
   ),
@@ -273,7 +274,7 @@ const Icons = {
     <User
       width={size}
       height={size}
-      className={`text-[#F8FAFC] ${className}`}
+      className={`text-slate-50 ${className}`}
       onClick={onClick}
     />
   ),
@@ -300,7 +301,7 @@ const Icons = {
     <X
       width={size}
       height={size}
-      className={`text-[#64748B] ${className}`}
+      className={`text-slate-500 ${className}`}
       onClick={onClick}
     />
   ),
@@ -309,9 +310,13 @@ const Icons = {
     <Expansion
       width={size}
       height={size}
-      className={`text-[#64748B] ${className}`}
+      className={`text-slate-500 ${className}`}
       onClick={onClick}
     />
+  ),
+
+  KakaoLoginIcon: ({ size = 42, onClick }: IconProps) => (
+    <KakaoLogin width={size} height={size} onClick={onClick} />
   ),
 };
 
