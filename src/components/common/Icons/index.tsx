@@ -35,7 +35,6 @@ import User from '@/assets/icons/user.svg';
 import VisibilityOff from '@/assets/icons/visibility_off.svg';
 import VisibilityOn from '@/assets/icons/visibility_on.svg';
 import X from '@/assets/icons/x.svg';
-import Expansion from '@/assets/icons/expansion.svg';
 
 interface IconProps {
   size?: number;
@@ -303,6 +302,9 @@ const Icons = {
       className={`text-[#64748B] ${className}`}
       onClick={onClick}
     />
+  ),
+  KakaoLoginIcon: ({ size = 42, onClick }: IconProps) => (
+    <KakaoLogin width={size} height={size} onClick={onClick} />
   ),
 
   ExpansionIcon: ({ size = 24, className, onClick }: IconProps) => (
