@@ -1,6 +1,5 @@
 'use client';
 
-// 수정 아이콘은 관리자일 경우만
 // 로그아웃 누르면 토스트
 import { useState, useEffect } from 'react';
 import Logo from './Logo';
@@ -27,7 +26,6 @@ export default function Header() {
   >(null);
   const [isSideMenuOpen, setSideMenuOpen] = useState(false);
 
-  // derive plain groups array from memberships
   const groups = memberships.map((m) => m.group);
 
   useEffect(() => {
