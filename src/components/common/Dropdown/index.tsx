@@ -1,8 +1,8 @@
 'use client';
 
-import { ReactNode, useState } from 'react';
+import { ReactNode, useState, useRef } from 'react';
 import React from 'react';
-import useClickOutside from '@/hooks/useClickOutside';
+import { useClosePopup } from '@/hooks/useClosePopup';
 import DropDownItem from '@/components/common/Dropdown/DropDownItem';
 import DropDownMenu from '@/components/common/Dropdown/DropDownMenu';
 import DropDownTrigger from '@/components/common/Dropdown/DropDownTrigger';
@@ -33,7 +33,8 @@ const DropDown = ({ children, handleClose, onSelect }: DropDownProps) => {
     close();
   };
 
-  const dropDownRef = useClickOutside(() => {
+  const dropDownRef = useRef<HTMLDivElement>(null);
+  useClosePopup(dropDownRef, () => {
     close();
     if (handleClose) handleClose();
   });
@@ -47,7 +48,6 @@ const DropDown = ({ children, handleClose, onSelect }: DropDownProps) => {
             onClick: () => handleItemClick(childValue),
           });
         }
-
         return React.cloneElement(child, {});
       }
       return React.cloneElement(child, {
