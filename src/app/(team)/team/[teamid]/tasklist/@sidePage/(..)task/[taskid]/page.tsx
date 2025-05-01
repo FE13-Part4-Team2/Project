@@ -8,12 +8,16 @@ interface PageProps {
 
 export default function Page(props: PageProps) {
   return (
-    <div className="relative">
-      <div className="tablet:top-10 tablet:left-10 absolute top-6 left-6 flex gap-4">
-        <CloseButton />
-        <ExpansionButton />
+    <div className="fixed inset-0 flex h-full w-full bg-black/50">
+      <div className="tablet:px-10 tablet:w-3/5 tablet:min-w-[435px] absolute top-0 right-0 z-10 flex max-h-screen min-h-screen min-w-screen flex-col gap-3 border-l border-slate-50/10 bg-slate-800 px-6">
+        <div className="tablet:pt-10 flex gap-4 pt-6">
+          <CloseButton />
+          <ExpansionButton />
+        </div>
+        <div className="tablet:pb-10 flex-1 overflow-y-auto pb-6">
+          <TaskDetailPage {...props} />
+        </div>
       </div>
-      <TaskDetailPage {...props} />
     </div>
   );
 }

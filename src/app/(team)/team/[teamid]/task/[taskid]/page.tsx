@@ -11,13 +11,11 @@ export default function TaskDetailPage({ params }: PageProps) {
   const taskId = Number(params.taskid);
 
   return (
-    <div>
-      <div className="flex h-screen flex-col items-center justify-center gap-2">
-        <div>{`${groupId}/${taskId}`}</div>
-        <LoginButton />
-        <LogoutButton />
-        <ModalButton />
-      </div>
+    <div className="flex flex-col items-center justify-center gap-2">
+      <div>{`${groupId} / ${taskId}`}</div>
+      <LoginButton />
+      <LogoutButton />
+      <ModalButton />
     </div>
   );
 }
