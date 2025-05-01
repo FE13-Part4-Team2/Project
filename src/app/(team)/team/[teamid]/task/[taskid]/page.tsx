@@ -1,6 +1,5 @@
 import LoginButton from '@/app/(team)/team/[teamid]/task/[taskid]/_components/LoginButton';
 import LogoutButton from '@/app/(team)/team/[teamid]/task/[taskid]/_components/LogoutButton';
-import ModalButton from '@/app/(team)/team/[teamid]/task/[taskid]/_components/ModalButton';
 
 interface PageProps {
   params: { teamid: string; taskid: string };
@@ -15,7 +14,6 @@ export default function TaskDetailPage({ params }: PageProps) {
       <div>{`${groupId} / ${taskId}`}</div>
       <LoginButton />
       <LogoutButton />
-      <ModalButton />
     </div>
   );
 }
