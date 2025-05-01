@@ -53,7 +53,7 @@ export default function Modal() {
           {variant == 'danger' && <IconRenderer name="AlertIcon" />}
           <div
             className={clsx(
-              'flex flex-col overflow-hidden',
+              'flex w-full flex-col overflow-hidden',
               variant == 'taskForm' ? 'gap-6' : 'gap-4'
             )}
           >
@@ -68,7 +68,7 @@ export default function Modal() {
                 {description && (
                   <div
                     className={clsx(
-                      'text-md-medium',
+                      'text-md-medium text-center whitespace-pre-line',
                       variant == 'danger' ? '' : 'text-slate-500'
                     )}
                   >
