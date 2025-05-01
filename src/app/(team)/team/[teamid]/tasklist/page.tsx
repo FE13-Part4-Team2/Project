@@ -1,3 +1,4 @@
+import { cookies } from 'next/headers';
 import { getGroupById } from '@/lib/apis/group';
 import { getTaskListById } from '@/lib/apis/taskList';
 import DateMenu from '@/app/(team)/team/[teamid]/tasklist/_components/DateMenu';
@@ -15,6 +16,8 @@ export default async function TaskListPage({
   params,
   searchParams,
 }: PageProps) {
+  const userId = cookies().get('userId')?.value;
+
   const groupId = Number(params.teamid);
   const selectedId = Number(searchParams.id);
   const selectedDate = searchParams.date;
@@ -38,7 +41,7 @@ export default async function TaskListPage({
       <div className="tablet:gap-6 flex flex-col gap-4">
         <div className="flex items-center justify-between">
           <DateMenu date={selectedDate} />
-          <ManageButton membersData={membersData} />
+          <ManageButton membersData={membersData} userId={Number(userId)} />
         </div>
         {isTaskListEmpty && (
           <div className="text-md-medium absolute top-1/2 right-1/2 translate-x-1/2 translate-y-1/2 text-center text-slate-500">

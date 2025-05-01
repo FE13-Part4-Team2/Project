@@ -5,13 +5,13 @@ import IconRenderer from '@/components/common/Icons/IconRenderer';
 
 export default function ManageButton({
   membersData,
+  userId,
 }: {
   membersData: GroupMemberResponse[];
+  userId: number;
 }) {
-  const userId = localStorage.getItem('userId');
-
   const userData = membersData.find((member) => {
-    return member.userId === Number(userId);
+    return member.userId === userId;
   });
 
   const isAdmin = Boolean(userData?.role === 'ADMIN');

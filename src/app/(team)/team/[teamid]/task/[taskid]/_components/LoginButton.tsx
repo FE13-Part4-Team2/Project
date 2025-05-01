@@ -28,7 +28,11 @@ export default function LoginButton() {
         sameSite: 'Strict',
       });
 
-      localStorage.setItem('userId', user.id.toString());
+      Cookies.set('userId', user.id.toString(), {
+        path: '/',
+        secure: true,
+        sameSite: 'Strict',
+      });
 
       toast.success('로그인 성공');
     } catch (error) {
