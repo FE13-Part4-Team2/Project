@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import clsx from 'clsx';
 
-const Smoke = () => {
+const Smoke = ({ className }: { className?: string }) => {
   return (
     <motion.div // 일렁임
       initial={{ opacity: 0.5, scale: 0.95 }}
@@ -15,6 +15,7 @@ const Smoke = () => {
         delay: 1.7,
       }}
       className={clsx(
+        className,
         'tablet:block hidden',
         'absolute bottom-[15%] left-[19%]',
         'laptop:w-[255px] laptop:h-[110px]',

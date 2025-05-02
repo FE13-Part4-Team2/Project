@@ -1,5 +1,4 @@
 'use client';
-
 import clsx from 'clsx';
 import LandingTopBg from '@/app/(landing)/_components/LandingTopSection/LandingTopBg';
 import LandingTitleText from '@/app/(landing)/_components/LandingTopSection/LandingTitleText';
@@ -14,6 +13,7 @@ const LandingTopSection = ({ className }: { className?: string }) => {
       className={`${className} relative flex h-screen w-full flex-col items-center text-center`}
     >
       <LandingTopBg />
+
       {/* 아이템 컨테이너 */}
       <div
         className={clsx(
@@ -23,15 +23,35 @@ const LandingTopSection = ({ className }: { className?: string }) => {
           'h-[640px]'
         )}
       >
-        <LandingTitleText className="mt-30" />
+        <LandingTitleText className="tablet:mt-22 laptop:mt-30 mt-12" />
         {/* 기차 모션 */}
-        <Train className="mt-15 pl-15" />
+        <Train
+          className={clsx(
+            'laptop:mt-30',
+            'tablet:pl-0 tablet:mt-40',
+            'mt-20 pl-20'
+          )}
+        />
         {/* 인부 모션 */}
-        <Worker />
+        <Worker
+          className={clsx(
+            'z-5',
+            'laptop:bottom-[13%] laptop:left-[36%]',
+            'tablet:bottom-[20%] tablet:left-[27%]',
+            'bottom-[27%] left-[14%]'
+          )}
+        />
         {/* 흙먼지 모션 */}
-        <Smoke />
+        <Smoke
+          className={clsx(
+            'tablet:block hidden',
+            'laptop:bottom-[15%] laptop:left-[19%]',
+            'tablet:left-0 tablet:bottom-[21%]'
+          )}
+        />
+        {/* 지금 시작하기 버튼 */}
+        <StartButton className="mt-20" />
       </div>
-      <StartButton />
     </section>
   );
 };

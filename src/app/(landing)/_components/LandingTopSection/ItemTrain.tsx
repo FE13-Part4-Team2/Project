@@ -4,7 +4,9 @@ import clsx from 'clsx';
 
 const Train = ({ className }: { className?: string }) => {
   return (
-    <div className={`${className} tablet:-space-x-4 flex items-end -space-x-3`}>
+    <div
+      className={`${className} laptop:-space-x-4.5 tablet:-space-x-3 flex items-end -space-x-2`}
+    >
       {/* 기차1 */}
       <motion.div
         animate={{ rotate: [0, -5, 0] }}
@@ -15,7 +17,7 @@ const Train = ({ className }: { className?: string }) => {
           delay: 1.7,
         }}
         className={clsx(
-          'relative z-3',
+          'tablet:mb-6 relative z-3 mb-4',
           'laptop:w-[209px] laptop:h-[246px]',
           'tablet:w-[130px] tablet:h-[155px]',
           'h-[155px] w-[126px]'
@@ -39,7 +41,7 @@ const Train = ({ className }: { className?: string }) => {
           delay: 1.7,
         }}
         className={clsx(
-          'relative z-2',
+          'relative z-2 mb-2',
           'laptop:w-[284px] laptop:h-[216px]',
           'tablet:w-[180px] tablet:h-[150px]',
           'h-[145px] w-[175px]'
