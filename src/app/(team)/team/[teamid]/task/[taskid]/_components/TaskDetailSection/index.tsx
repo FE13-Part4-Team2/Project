@@ -1,5 +1,5 @@
 import { TaskResponse } from '@/lib/apis/task/type';
-import TaskMenuButton from '@/app/(team)/team/[teamid]/task/[taskid]/_components/TaskDetailSection/TaskMenuButton';
+import TaskMenuButton from '@/components/common/task/TaskMenuButton';
 import WriterInfo from '@/components/common/user/WriterInfo';
 import DateInfo from '@/app/(team)/team/[teamid]/task/[taskid]/_components/TaskDetailSection/DateInfo';
 import FrequencyInfo from '@/app/(team)/team/[teamid]/task/[taskid]/_components/TaskDetailSection/FrequencyInfo';
@@ -18,7 +18,7 @@ export default function TaskDetailSection({
       <div className="tablet:gap-4 flex flex-col gap-3">
         <div className="flex items-center justify-between">
           <h1 className="text-2lg-bold tablet:text-xl-bold">{name}</h1>
-          <TaskMenuButton />
+          <TaskMenuButton size="md" />
         </div>
         <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-4">
