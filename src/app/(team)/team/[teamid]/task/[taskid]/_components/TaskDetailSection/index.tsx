@@ -24,7 +24,7 @@ export default function TaskDetailSection({
           <div className="flex flex-col gap-4">
             {writer && <WriterInfo {...writer} />}
             <div className="flex items-center gap-2.5">
-              <DateInfo date={date} />
+              <DateInfo date={date} withTime={true} />
               <FrequencyInfo frequency={frequency} />
             </div>
           </div>
