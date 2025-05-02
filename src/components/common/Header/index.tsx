@@ -1,7 +1,5 @@
 'use client';
 
-// 모바일 사이드메뉴에 edit 아이콘
-// 로그아웃 누르면 토스트
 import { useState } from 'react';
 import Logo from './Logo';
 import TeamMenu from './TeamMenu';
@@ -10,7 +8,7 @@ import SideMenu from './SideMenu';
 import { useUserStore } from '@/store/useUserstore';
 import Link from 'next/link';
 import IconRenderer from '@/components/common/Icons/IconRenderer';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAuth } from '@/hooks/useAuth';
 import { useMemberships } from '@/hooks/useMemberships';
@@ -84,8 +82,6 @@ export default function Header() {
         onClose={() => setSideMenuOpen(false)}
         memberships={memberships}
       />
-
-      <ToastContainer position="top-right" autoClose={3000} />
     </>
   );
 }
