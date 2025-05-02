@@ -8,7 +8,7 @@ import IconRenderer from '@/components/common/Icons/IconRenderer';
 interface DropDownTriggerProps {
   children?: ReactNode;
   placeholder?: string;
-  onClick: () => void;
+  onClick?: () => void;
   isOpen?: boolean;
   showIcon?: boolean;
   className?: string;
@@ -24,7 +24,7 @@ const DropDownTrigger = ({
 }: DropDownTriggerProps) => {
   const triggerStyles = twMerge(
     clsx(
-      'flex items-center justify-between rounded-xl text-slate-50 whitespace-nowrap',
+      'flex items-center justify-between rounded-xl text-slate-50 whitespace-nowrap mb-1.5',
       {
         'text-xs-regular px-4 py-2 tablet:text-md-regular tablet:px-5 tablet:py-3':
           showIcon,
@@ -36,9 +36,6 @@ const DropDownTrigger = ({
 
   return (
     <button className={triggerStyles} onClick={onClick}>
-      {/* <span>
-        {children || (placeholder && showIcon) ? children || placeholder : null}
-      </span> */}
       <span>{children ?? (showIcon ? placeholder : null)}</span>
       {showIcon && (
         <IconRenderer

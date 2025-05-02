@@ -60,7 +60,7 @@ const DropDown = ({ children, handleClose, onSelect }: DropDownProps) => {
   });
 
   return (
-    <div ref={dropDownRef} className="relative">
+    <div ref={dropDownRef} className="relative inline-block">
       {childrenWithProps}
     </div>
   );
