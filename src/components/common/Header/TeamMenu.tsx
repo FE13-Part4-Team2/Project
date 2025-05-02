@@ -23,6 +23,8 @@ export default function TeamMenu({
 
   const label = pathname.startsWith('/team/') ? selectedGroup?.name : '팀 목록';
 
+  const close = () => setOpen(false);
+
   return (
     <div className="relative ml-8 flex gap-3">
       <Link
@@ -43,57 +45,67 @@ export default function TeamMenu({
       </button>
 
       {open && (
-        <div className="absolute top-[45px] left-[-140px] z-50 flex w-[218px] flex-col gap-4 rounded-xl bg-[#1E293B] p-4">
-          {memberships.map(({ group, role }) => (
-            <div
-              key={group.id}
-              className="flex items-center gap-x-3 rounded-md px-2 py-2"
-            >
-              <Link
-                href={`/team/${group.id}`}
-                className="py flex flex-1 items-center gap-x-3 rounded-md p-1 transition-colors hover:bg-[#334155]"
-                onClick={() => {
-                  onSelect(group);
-                  setOpen(false);
-                }}
+        <>
+          <button
+            type="button"
+            className="fixed inset-0 z-40 cursor-default"
+            onClick={close}
+          />
+
+          <div className="absolute top-[45px] left-[-140px] z-50 flex w-[218px] flex-col gap-4 rounded-xl bg-[#1E293B] p-4">
+            {memberships.map(({ group, role }) => (
+              <div
+                key={group.id}
+                className="flex items-center gap-x-3 rounded-md px-2 py-2"
               >
-                <div className="relative h-8 w-8">
-                  <Image
-                    src={group.image ?? '/image/default_team_img.png'}
-                    alt={group.name}
-                    fill
-                    unoptimized
-                    className="rounded-sm object-cover"
-                  />
-                </div>
-                <span className="text-sm whitespace-nowrap">{group.name}</span>
-              </Link>
-
-              {role === 'ADMIN' && (
                 <Link
-                  href={`/team/${group.id}/edit`}
-                  onClick={() => setOpen(false)}
+                  href={`/team/${group.id}`}
+                  className="py flex flex-1 items-center gap-x-3 rounded-md p-1 transition-colors hover:bg-[#334155]"
+                  onClick={() => {
+                    onSelect(group);
+                    setOpen(false);
+                  }}
                 >
-                  <IconRenderer
-                    name="EditIcon"
-                    size={20}
-                    className="cursor-pointer hover:text-green-700"
-                  />
+                  <div className="relative h-8 w-8">
+                    <Image
+                      src={group.image ?? '/image/default_team_img.png'}
+                      alt={group.name}
+                      fill
+                      unoptimized
+                      className="rounded-sm object-cover"
+                    />
+                  </div>
+                  <span className="text-sm whitespace-nowrap">
+                    {group.name}
+                  </span>
                 </Link>
-              )}
-            </div>
-          ))}
 
-          <Link href="/add-team">
-            <button
-              type="button"
-              className="mt-2 h-12 w-[186px] cursor-pointer rounded-md border border-white py-1 transition-all hover:bg-white hover:text-[#1E293B]"
-              onClick={() => setOpen(false)}
-            >
-              + 팀 추가하기
-            </button>
-          </Link>
-        </div>
+                {role === 'ADMIN' && (
+                  <Link
+                    href={`/team/${group.id}/edit`}
+                    onClick={() => setOpen(false)}
+                  >
+                    <IconRenderer
+                      name="EditIcon"
+                      size={20}
+                      className="cursor-pointer hover:text-green-700"
+                    />
+                  </Link>
+                )}
+              </div>
+            ))}
+
+            <Link href="/add-team">
+              <button
+                type="button"
+                className="mt-2 h-12 w-[186px] cursor-pointer rounded-md border border-white py-1 transition-all hover:bg-white hover:text-[#1E293B]"
+                onClick={close}
+              >
+                + 팀 추가하기
+              </button>
+            </Link>
+          </div>
+        </>
       )}
     </div>
   );
