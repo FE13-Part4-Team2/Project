@@ -1,8 +1,8 @@
+import { TaskResponse } from '@/lib/apis/task/type';
+import TaskMenuButton from '@/app/(team)/team/[teamid]/task/[taskid]/_components/TaskDetailSection/TaskMenuButton';
+import WriterInfo from '@/components/common/user/WriterInfo';
 import DateInfo from '@/app/(team)/team/[teamid]/task/[taskid]/_components/TaskDetailSection/DateInfo';
 import FrequencyInfo from '@/app/(team)/team/[teamid]/task/[taskid]/_components/TaskDetailSection/FrequencyInfo';
-import TaskMenuButton from '@/app/(team)/team/[teamid]/task/[taskid]/_components/TaskDetailSection/TaskMenuButton';
-import UserInfo from '@/app/(team)/team/[teamid]/task/[taskid]/_components/TaskDetailSection/UserInfo';
-import { TaskResponse } from '@/lib/apis/task/type';
 
 export default function TaskDetailSection({
   id,
@@ -22,7 +22,7 @@ export default function TaskDetailSection({
         </div>
         <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-4">
-            <UserInfo />
+            {writer && <WriterInfo {...writer} />}
             <div className="flex gap-2.5">
               <DateInfo />
               <FrequencyInfo />
