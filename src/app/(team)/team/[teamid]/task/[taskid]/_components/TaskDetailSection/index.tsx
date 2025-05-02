@@ -1,8 +1,8 @@
 import { TaskResponse } from '@/lib/apis/task/type';
-import TaskMenuButton from '@/components/common/task/TaskMenuButton';
-import WriterInfo from '@/components/common/user/WriterInfo';
-import DateInfo from '@/components/common/task/DateInfo';
-import FrequencyInfo from '@/components/common/task/FrequencyInfo';
+import TaskMenuButton from '@/components/task/TaskMenuButton';
+import WriterInfo from '@/components/user/WriterInfo';
+import DateInfo from '@/components/task/DateInfo';
+import FrequencyInfo from '@/components/task/FrequencyInfo';
 
 export default function TaskDetailSection({
   id,

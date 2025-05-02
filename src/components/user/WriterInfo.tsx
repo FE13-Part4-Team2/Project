@@ -1,5 +1,5 @@
 import { UserResponse } from '@/lib/apis/user/type';
-import UserIcon from '@/components/common/user/UserIcon';
+import UserIcon from '@/components/user/UserIcon';
 
 export default function WriterInfo({ nickname, image }: UserResponse) {
   return (

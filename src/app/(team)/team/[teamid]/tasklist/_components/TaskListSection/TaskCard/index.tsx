@@ -1,9 +1,9 @@
 import { TaskResponse } from '@/lib/apis/task/type';
 import TitleButton from '@/app/(team)/team/[teamid]/tasklist/_components/TaskListSection/TaskCard/TitleButton';
 import IconRenderer from '@/components/common/Icons/IconRenderer';
-import TaskMenuButton from '@/components/common/task/TaskMenuButton';
-import DateInfo from '@/components/common/task/DateInfo';
-import FrequencyInfo from '@/components/common/task/FrequencyInfo';
+import TaskMenuButton from '@/components/task/TaskMenuButton';
+import DateInfo from '@/components/task/DateInfo';
+import FrequencyInfo from '@/components/task/FrequencyInfo';
 
 export default function TaskCard({
   id,
