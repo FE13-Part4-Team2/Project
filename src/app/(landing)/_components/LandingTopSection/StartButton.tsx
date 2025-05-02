@@ -1,11 +1,8 @@
 'use client';
 
 import clsx from 'clsx';
-import { useRouter } from 'next/router';
 
 const StartButton = ({ className }: { className?: string }) => {
-  const router = useRouter();
-
   return (
     <button
       className={clsx(

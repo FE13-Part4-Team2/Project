@@ -35,7 +35,7 @@ const LandingTopBg = () => {
         height={500}
         className={clsx(
           'absolute',
-          'laptop:bottom-[19%] tablet:bottom-[26%] bottom-[33%]',
+          'laptop:bottom-[15%] tablet:bottom-[27%] bottom-[33%]',
           'object-contain',
           'mix-blend-hard-light backdrop-blur-[12px]'
         )}

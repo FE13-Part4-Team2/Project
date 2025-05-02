@@ -7,7 +7,7 @@ import LandingBottomSection from '@/app/(landing)/_components/LandingBottomSecti
 export default function LandingPage() {
   return (
     <div className="flex h-screen w-full flex-col">
-      <LandingTopSection className="mt-20" />
+      <LandingTopSection />
       <LandingMiddleSection className="my-20" />
       <LandingBottomSection className="mb-20" />
     </div>
