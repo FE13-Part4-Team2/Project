@@ -8,8 +8,10 @@ export default function LoginButton() {
   const handleLogin = async () => {
     try {
       const data = await signIn({
-        email: 'test1111@email.com',
-        password: 'test1111*',
+        body: {
+          email: 'test1111@email.com',
+          password: 'test1111*',
+        },
       });
 
       if (!data) return;

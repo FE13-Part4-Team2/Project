@@ -26,7 +26,6 @@ export default async function TaskListPage({
   const taskListsData = groupData?.taskLists ?? [];
   const membersData = groupData?.members ?? [];
   const selectedTaskListData = await getTaskListById({
-    groupId,
     taskListId: selectedId,
     date: selectedDate,
   });
