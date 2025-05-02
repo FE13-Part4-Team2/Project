@@ -9,12 +9,11 @@ interface PageProps {
 export default async function TaskDetailPage({ params }: PageProps) {
   const taskId = Number(params.taskid);
 
-  const TaskData = await getTaskById({ taskId });
+  const taskData = await getTaskById({ taskId });
 
   return (
-    <div className="m-auto flex max-w-[1200px] flex-col">
-      <div>{TaskData?.id}</div>
-      <TaskDetailSection />
+    <div className="m-auto flex max-w-[1200px] flex-col gap-4">
+      {taskData && <TaskDetailSection {...taskData} />}
       <TaskCommentSection />
     </div>
   );
