@@ -5,14 +5,13 @@ export default function UserIcon({ image }: { image: string | null }) {
   return (
     <>
       {image ? (
-        <div className="relative size-8">
-          <Image
-            src={image}
-            fill
-            className="rounded-full border-1 border-slate-50/10"
-            alt="user"
-          />
-        </div>
+        <Image
+          src={image}
+          width={32}
+          height={32}
+          className="rounded-full border-1 border-slate-50/10"
+          alt="user"
+        />
       ) : (
         <div className="flex size-8 items-center justify-center rounded-full border-1 border-slate-50/10 bg-slate-700">
           <IconRenderer name="MemberIcon" />
