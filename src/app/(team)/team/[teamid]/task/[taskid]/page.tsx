@@ -12,7 +12,7 @@ export default async function TaskDetailPage({ params }: PageProps) {
   const taskData = await getTaskById({ taskId });
 
   return (
-    <div className="m-auto flex max-w-[1200px] flex-col gap-4">
+    <div className="m-auto flex max-w-[1000px] flex-col gap-4">
       {taskData && <TaskDetailSection {...taskData} />}
       <TaskCommentSection />
     </div>
