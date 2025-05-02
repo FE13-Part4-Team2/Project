@@ -1,5 +1,6 @@
 'use client';
 
+// 모바일 사이드메뉴에 edit 아이콘
 // 로그아웃 누르면 토스트
 import { useState } from 'react';
 import Logo from './Logo';
