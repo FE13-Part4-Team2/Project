@@ -23,7 +23,6 @@ export default function Header() {
   const { memberships, selectedGroup, setSelectedGroup } = useMemberships();
   const [isSideMenuOpen, setSideMenuOpen] = useState(false);
 
-  const groups = memberships.map((m) => m.group);
   const logoHref = selectedGroup ? `/team/${selectedGroup.id}` : '/no-team';
 
   const handleLogout = () => {
@@ -83,7 +82,7 @@ export default function Header() {
       <SideMenu
         isSideMenuOpen={isSideMenuOpen}
         onClose={() => setSideMenuOpen(false)}
-        groups={groups}
+        memberships={memberships}
       />
 
       <ToastContainer position="top-right" autoClose={3000} />
