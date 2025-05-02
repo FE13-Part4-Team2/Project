@@ -1,14 +1,21 @@
+import { getTaskById } from '@/lib/apis/task';
+import TaskCommentSection from '@/app/(team)/team/[teamid]/task/[taskid]/_components/TaskCommentSection';
+import TaskDetailSection from '@/app/(team)/team/[teamid]/task/[taskid]/_components/TaskDetailSection';
+
 interface PageProps {
-  params: { teamid: string; taskid: string };
+  params: { taskid: string };
 }
 
-export default function TaskDetailPage({ params }: PageProps) {
-  const groupId = Number(params.teamid);
+export default async function TaskDetailPage({ params }: PageProps) {
   const taskId = Number(params.taskid);
 
+  const TaskData = await getTaskById({ taskId });
+
   return (
-    <div className="flex flex-col items-center justify-center gap-2">
-      <div>{`${groupId} / ${taskId}`}</div>
+    <div className="m-auto flex max-w-[1200px] flex-col">
+      <div>{TaskData?.id}</div>
+      <TaskDetailSection />
+      <TaskCommentSection />
     </div>
   );
 }
