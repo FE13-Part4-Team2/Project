@@ -17,7 +17,7 @@ export function useIsTablet() {
   return width >= BREAKPOINTS.TABLET && width < BREAKPOINTS.LAPTOP;
 }
 
-export function useIsLAPTOP() {
+export function useIsLaptop() {
   const { width } = useGetViewport();
   return width >= BREAKPOINTS.LAPTOP;
 }

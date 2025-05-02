@@ -6,13 +6,15 @@ import FrequencyInfo from '@/components/task/FrequencyInfo';
 
 export default function TaskDetailSection({
   id,
-  date,
+  recurring,
   doneAt,
   name,
   description,
   frequency,
   writer,
 }: TaskResponse) {
+  const date = recurring?.startDate;
+
   return (
     <div className="tablet:min-h-[312px] min-h-[242px]">
       <div className="tablet:gap-4 flex flex-col gap-3">
@@ -24,7 +26,7 @@ export default function TaskDetailSection({
           <div className="flex flex-col gap-4">
             {writer && <WriterInfo {...writer} />}
             <div className="flex items-center gap-2.5">
-              <DateInfo date={date} withTime={true} />
+              {date && <DateInfo date={date} withTime={true} />}
               <FrequencyInfo frequency={frequency} />
             </div>
           </div>
