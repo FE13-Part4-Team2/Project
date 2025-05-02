@@ -30,15 +30,13 @@ export const imageSize = clsx(
 
 export const textStyle = clsx('laptop:text-2xl-medium text-2lg-medium');
 
-export const getDirection = (
-  tabletReverse: boolean,
-  mobileReverse: boolean
+export const getFlexDirection = (
+  tabletReverse?: boolean,
+  mobileReverse?: boolean
 ) => {
-  if (tabletReverse && mobileReverse)
-    return 'flex-col-reverse tablet:flex-row-reverse';
-  if (tabletReverse && !mobileReverse)
-    return 'flex-col tablet:flex-row-reverse';
-  if (!tabletReverse && mobileReverse)
-    return 'flex-col-reverse tablet:flex-row';
-  return 'flex-col tablet:flex-row';
+  return clsx(
+    'tablet:flex-row flex-col',
+    tabletReverse && 'tablet:flex-row-reverse',
+    mobileReverse && 'flex-col-reverse'
+  );
 };

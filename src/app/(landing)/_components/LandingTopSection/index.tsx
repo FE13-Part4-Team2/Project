@@ -2,23 +2,27 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import clsx from 'clsx';
+import LandingTopBg from '@/app/(landing)/_components/LandingTopSection/LandingTopBg';
 import LandingTitleText from '@/app/(landing)/_components/LandingTopSection/LandingTitleText';
+import StartButton from '@/app/(landing)/_components/LandingTopSection/startButton';
 
 const LandingTopSection = ({ className }: { className?: string }) => {
   return (
     <section
-      className={`${className} flex h-screen w-full flex-col items-center text-center`}
+      className={`${className} relative flex h-screen w-full flex-col items-center text-center`}
     >
-      <LandingTitleText />
-      <div className="relative flex h-screen w-full flex-col items-center">
-        {/* 빛 이미지 */}
-        <Image
-          src="/image/landing_test2.png"
-          alt="빛 일러스트"
-          width={1920}
-          height={500}
-          className="object-contain mix-blend-hard-light backdrop-blur-[12px]"
-        />
+      <LandingTopBg />
+      {/* 아이템 컨테이너 */}
+      <div
+        className={clsx(
+          'relative flex flex-col items-center overflow-hidden',
+          'laptop:h-[1080px] w-full',
+          'tablet:h-[940px]',
+          'h-[640px]'
+        )}
+      >
+        <LandingTitleText className="mt-19" />
         {/* 기차 모션 */}
         <motion.div
           animate={{ y: [0, -9, 0] }}
@@ -28,13 +32,17 @@ const LandingTopSection = ({ className }: { className?: string }) => {
             repeatType: 'reverse',
             delay: 1.7,
           }}
-          className="absolute"
+          className={clsx(
+            'absolute bottom-[20%]',
+            'laptop:w-[906px] laptop:h-[400px]',
+            'tablet:w-[590px] tablet:h-[252px]',
+            'h-[243px] w-[569px]'
+          )}
         >
           <Image
             src="/image/landing_test.png"
             alt="기차 일러스트"
-            width={906}
-            height={400}
+            fill
             className="object-contain"
           />
         </motion.div>
@@ -48,13 +56,17 @@ const LandingTopSection = ({ className }: { className?: string }) => {
             repeatType: 'reverse',
             delay: 1.7,
           }}
-          className="absolute bottom-[25%] left-[32%]"
+          className={clsx(
+            'absolute bottom-[15%] left-[34%]',
+            'laptop:w-[142px] laptop:h-[149px]',
+            'tablet:w-[93px] tablet:h-[98px]',
+            'h-[94px] w-[90px]'
+          )}
         >
           <Image
             src="/image/landing_human.png"
             alt="인부 일러스트"
-            width={142}
-            height={149}
+            fill
             className="object-contain"
           />
         </motion.div>
@@ -69,17 +81,22 @@ const LandingTopSection = ({ className }: { className?: string }) => {
             repeatType: 'reverse',
             delay: 1.7,
           }}
-          className="absolute bottom-[25%] left-[17%]"
+          className={clsx(
+            'tablet:block hidden',
+            'absolute bottom-[15%] left-[19%]',
+            'laptop:w-[255px] laptop:h-[110px]',
+            'tablet:w-[166px] tablet:h-[71px]'
+          )}
         >
           <Image
             src="/image/landing_smoke.png"
             alt="흙먼지 연기"
-            width={255}
-            height={110}
+            fill
             className="object-contain"
           />
         </motion.div>
       </div>
+      <StartButton className="z-20" />
     </section>
   );
 };

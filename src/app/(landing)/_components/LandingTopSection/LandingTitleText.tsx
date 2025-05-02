@@ -5,9 +5,13 @@ import IconRenderer from '@/components/common/Icons/IconRenderer';
 const text = '함께 만들어가는 투두 리스트';
 const title = 'Coworkers';
 
-export default function LandingTitleText() {
+export default function LandingTitleText({
+  className,
+}: {
+  className?: string;
+}) {
   return (
-    <div className="flex flex-col">
+    <div className={`${className} flex flex-col`}>
       {/* 설명 행 */}
       <motion.div
         variants={container}

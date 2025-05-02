@@ -5,7 +5,7 @@ import {
   boxStyle,
   textStyle,
   imageSize,
-  getDirection,
+  getFlexDirection,
 } from '@/app/(landing)/_components/style';
 import { LandingBoxProps } from '@/app/(landing)/_components/type';
 
@@ -23,6 +23,7 @@ const LandingBox = ({
   className,
 }: LandingBoxProps) => {
   const wrapperClass = gradient ? boxGradientStyle : '';
+  const direction = getFlexDirection(tabletReverse, mobileReverse);
 
   return (
     <div className={wrapperClass}>
@@ -31,7 +32,7 @@ const LandingBox = ({
         <div
           className={clsx(
             'flex',
-            getDirection(tabletReverse, mobileReverse), // 정렬 순서
+            direction, // 정렬 순서
             'tablet:gap-25 laptop:gap-50 gap-10'
           )}
         >
