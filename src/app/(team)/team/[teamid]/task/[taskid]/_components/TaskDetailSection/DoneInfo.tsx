@@ -11,7 +11,7 @@ export default function DoneInfo({ doneAt }: { doneAt: string | null }) {
           <IconRenderer
             name="CheckGreenIcon"
             size={16}
-            className="text-green-500"
+            className="!text-green-500"
           />
           <div className="text-xs-medium text-green-500">{doneDate} 완료</div>
         </div>
