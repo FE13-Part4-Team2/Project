@@ -1,8 +1,10 @@
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { patchTaskById } from '@/lib/apis/task';
 
 export function useToggleTaskDone(taskId: number, initialDone: boolean) {
   const [isDone, setIsDone] = useState(initialDone);
+  const router = useRouter();
 
   const updateTaskToDone = async () => {
     try {
@@ -10,6 +12,8 @@ export function useToggleTaskDone(taskId: number, initialDone: boolean) {
       setIsDone(true);
     } catch (error) {
       console.error('Failed to update the task status :', error);
+    } finally {
+      router.refresh();
     }
   };
 
@@ -19,6 +23,8 @@ export function useToggleTaskDone(taskId: number, initialDone: boolean) {
       setIsDone(false);
     } catch (error) {
       console.error('Failed to update the task status :', error);
+    } finally {
+      router.refresh();
     }
   };
 
