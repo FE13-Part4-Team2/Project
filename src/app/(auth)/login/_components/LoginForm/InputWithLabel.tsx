@@ -1,14 +1,30 @@
 'use client';
 
 import InputWithLabelProps from '@/app/(auth)/login/type';
+import { useState } from 'react';
 
 export default function InputWithLabel({
   inputType,
   ...props
 }: InputWithLabelProps) {
+  const [isInputEmpty, setIsInputEmpty] = useState<boolean>(false);
+
+  // 입력필드가 비어있는지 검사하는 함수
+  const handleBlurChange = (e: React.FocusEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value.trim();
+    if (!inputValue) {
+      setIsInputEmpty(true);
+    } else {
+      setIsInputEmpty(false);
+    }
+  };
+
+  // 입력필드 유효성 검사
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // validation, error message rendering
-    console.log(e.target.value);
+    const inputValue = e.target.value.trim();
+    if (inputValue) {
+      setIsInputEmpty(false);
+    }
   };
 
   // map inputType to korean label
@@ -32,8 +48,16 @@ export default function InputWithLabel({
         placeholder={`${inputTypeMap[inputType]}을 입력해주세요`}
         className={`w-full rounded-xl bg-slate-800 p-4`}
         onChange={handleInputChange}
+        onBlur={handleBlurChange}
         {...props}
       />
+      {isInputEmpty && (
+        <div className="text-danger">
+          {inputTypeMap[inputType] === '비밀번호'
+            ? `${inputTypeMap[inputType]}를 입력해주세요.`
+            : `${inputTypeMap[inputType]}을 입력해주세요.`}
+        </div>
+      )}
     </div>
   );
 }

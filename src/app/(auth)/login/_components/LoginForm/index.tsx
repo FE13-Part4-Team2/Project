@@ -3,6 +3,7 @@
 import ForgotPasswordButton from '@/app/(auth)/login/_components/LoginForm/ForgotPasswordButton';
 import InputWithLabel from '@/app/(auth)/login/_components/LoginForm/InputWithLabel';
 import Button from '@/components/common/Button';
+import { useState } from 'react';
 
 export default function LoginForm() {
   const handleOpenModal = () => {
@@ -30,6 +31,7 @@ export default function LoginForm() {
         styleType="filled"
         radius="sm"
         className="w-[460px]"
+        disabled={true}
       >
         로그인
       </Button>
