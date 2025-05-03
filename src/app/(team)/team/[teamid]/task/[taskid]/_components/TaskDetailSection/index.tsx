@@ -1,5 +1,5 @@
 import { TaskResponse } from '@/lib/apis/task/type';
-import TaskMenuButton from '@/components/task/TaskMenuButton';
+import TaskMenu from '@/components/task/TaskMenu';
 import DoneInfo from '@/app/(team)/team/[teamid]/task/[taskid]/_components/TaskDetailSection/DoneInfo';
 import WriterInfo from '@/components/user/WriterInfo';
 import DateInfo from '@/components/task/DateInfo';
@@ -33,7 +33,7 @@ export default function TaskDetailSection({
           >
             {name}
           </h1>
-          <TaskMenuButton size="md" />
+          <TaskMenu size="md" />
         </div>
         <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-4">
