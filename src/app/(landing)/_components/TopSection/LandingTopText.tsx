@@ -5,11 +5,7 @@ import IconRenderer from '@/components/common/Icons/IconRenderer';
 const text = '함께 만들어가는 투두 리스트';
 const title = 'Coworkers';
 
-export default function LandingTitleText({
-  className,
-}: {
-  className?: string;
-}) {
+export default function LandingTopText({ className }: { className?: string }) {
   return (
     <div className={`${className} flex flex-col`}>
       {/* 설명 행 */}

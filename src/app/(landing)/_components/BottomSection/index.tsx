@@ -1,19 +1,13 @@
 import LandingBottomBg from '@/app/(landing)/_components/BottomSection/LandingBottomBg';
+import { LandingBottomText } from '@/app/(landing)/_components/BottomSection/LandingBottomText';
 
 const LandingBottomSection = ({ className }: { className?: string }) => {
   return (
     <section
-      className={`${className} flex h-screen w-full flex-col items-center text-center`}
+      className={`${className} relative flex h-screen w-full flex-col items-center text-center`}
     >
       <LandingBottomBg className="relative flex" />
-      <div className="absolute">
-        <h1 className="tablet:text-[40px] text-[24px] font-semibold">
-          지금 바로 시작해 보세요
-        </h1>
-        <p className="tablet:text-[24px] text-[16px] font-medium">
-          팀원 모두와 같은 방향, 같은 속도로 나아가는 가장 쉬운 방법
-        </p>
-      </div>
+      <LandingBottomText className="absolute mt-55" />
     </section>
   );
 };

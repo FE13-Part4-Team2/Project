@@ -18,7 +18,8 @@ const Train = ({ className }: { className?: string }) => {
           delay: 1.7,
         }}
         className={clsx(
-          'laptop:mb-10 tablet:mb-5 z-3 mb-5.5',
+          'z-3',
+          'laptop:mb-10 tablet:mb-5 mb-5.5',
           'laptop:w-[209px] laptop:h-[246px]',
           'tablet:w-[145px] tablet:h-[175px]',
           'h-[165px] w-[135px]'
@@ -42,7 +43,8 @@ const Train = ({ className }: { className?: string }) => {
           delay: 1.7,
         }}
         className={clsx(
-          'laptop:mb-6 tablet:mb-1.5 z-2 mb-2',
+          'z-2',
+          'laptop:mb-6 tablet:mb-1.5 mb-2',
           'laptop:w-[284px] laptop:h-[216px]',
           'tablet:w-[195px] tablet:h-[165px]',
           'h-[155px] w-[185px]'

@@ -2,7 +2,7 @@
 import clsx from 'clsx';
 import DummyHeader from '@/app/(landing)/_components/TopSection/DummyHeader';
 import LandingTopBg from '@/app/(landing)/_components/TopSection/LandingTopBg';
-import LandingTitleText from '@/app/(landing)/_components/TopSection/LandingTitleText';
+import LandingTopText from '@/app/(landing)/_components/TopSection/LandingTopText';
 import Worker from '@/app/(landing)/_components/TopSection/ItemWorker';
 import Smoke from '@/app/(landing)/_components/TopSection/ItemSmoke';
 import Train from '@/app/(landing)/_components/TopSection/ItemTrain';
@@ -17,7 +17,7 @@ const LandingTopSection = ({ className }: { className?: string }) => {
       </div>
 
       <LandingTopBg className="relative z-1 flex" />
-      <LandingTitleText className="laptop:mt-33 tablet:mt-37 absolute z-10 mt-27" />
+      <LandingTopText className="laptop:mt-33 tablet:mt-37 absolute z-10 mt-27" />
 
       {/* 아이템 컨테이너 */}
       <div
@@ -32,7 +32,8 @@ const LandingTopSection = ({ className }: { className?: string }) => {
         {/* 기차 모션 */}
         <Train
           className={clsx(
-            'laptop:bottom-[26%] tablet:bottom-[8%] absolute bottom-[8%]',
+            'absolute',
+            'laptop:bottom-[26%] tablet:bottom-[8%] bottom-[8%]',
             'tablet:pl-0 pl-23'
           )}
         />
@@ -48,7 +49,8 @@ const LandingTopSection = ({ className }: { className?: string }) => {
         {/* 흙먼지 모션 */}
         <Smoke
           className={clsx(
-            'tablet:block z-5 hidden',
+            'z-5',
+            'tablet:block hidden',
             'laptop:bottom-[23%] laptop:left-[19%]',
             'tablet:left-0 tablet:bottom-[5%]'
           )}

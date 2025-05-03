@@ -13,7 +13,7 @@ export default function LandingPage() {
       <div>
         <StartButton />
       </div>
-      <LandingMiddleSection className="my-45" />
+      <LandingMiddleSection className="mt-40" />
       <LandingBottomSection className="mb-20" />
     </div>
   );
