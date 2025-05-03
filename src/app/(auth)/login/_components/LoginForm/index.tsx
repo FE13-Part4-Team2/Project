@@ -3,7 +3,6 @@
 import ForgotPasswordButton from '@/app/(auth)/login/_components/LoginForm/ForgotPasswordButton';
 import InputWithLabel from '@/app/(auth)/login/_components/LoginForm/InputWithLabel';
 import Button from '@/components/common/Button';
-import { useState } from 'react';
 
 export default function LoginForm() {
   const handleOpenModal = () => {
