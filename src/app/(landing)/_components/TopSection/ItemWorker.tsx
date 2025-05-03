@@ -22,7 +22,7 @@ const Worker = ({ className }: { className?: string }) => {
       )}
     >
       <Image
-        src="/image/landing_human.png"
+        src="/image/landing_worker.svg"
         alt="인부 일러스트"
         fill
         className="object-contain"

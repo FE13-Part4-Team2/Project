@@ -1,4 +1,4 @@
-import LandingBox from '@/app/(landing)/_components/LandingMiddleSection/LandingBox';
+import LandingBox from '@/app/(landing)/_components/MiddleSection/LandingBox';
 
 const LandingMiddleSection = ({ className }: { className?: string }) => {
   return (

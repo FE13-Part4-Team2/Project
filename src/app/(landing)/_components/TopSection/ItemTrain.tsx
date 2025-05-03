@@ -5,7 +5,7 @@ import clsx from 'clsx';
 const Train = ({ className }: { className?: string }) => {
   return (
     <div
-      className={`${className} laptop:-space-x-4.5 tablet:-space-x-3 flex items-end -space-x-2`}
+      className={`${className} laptop:-space-x-4.5 flex items-end -space-x-3`}
     >
       {/* 기차1 */}
       <motion.div
@@ -19,8 +19,8 @@ const Train = ({ className }: { className?: string }) => {
         className={clsx(
           'tablet:mb-6 relative z-3 mb-4',
           'laptop:w-[209px] laptop:h-[246px]',
-          'tablet:w-[130px] tablet:h-[155px]',
-          'h-[155px] w-[126px]'
+          'tablet:w-[145px] tablet:h-[175px]',
+          'h-[165px] w-[135px]'
         )}
       >
         <Image
@@ -43,8 +43,8 @@ const Train = ({ className }: { className?: string }) => {
         className={clsx(
           'relative z-2 mb-2',
           'laptop:w-[284px] laptop:h-[216px]',
-          'tablet:w-[180px] tablet:h-[150px]',
-          'h-[145px] w-[175px]'
+          'tablet:w-[195px] tablet:h-[165px]',
+          'h-[155px] w-[185px]'
         )}
       >
         <Image
@@ -67,8 +67,8 @@ const Train = ({ className }: { className?: string }) => {
         className={clsx(
           'relative z-1',
           'laptop:w-[382px] laptop:h-[362px]',
-          'tablet:w-[250px] tablet:h-[237px]',
-          'h-[228px] w-[240px]'
+          'tablet:w-[280px] tablet:h-[265px]',
+          'h-[255px] w-[270px]'
         )}
       >
         <Image

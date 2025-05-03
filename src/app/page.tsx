@@ -1,14 +1,19 @@
 'use client';
 
-import LandingTopSection from '@/app/(landing)/_components/LandingTopSection';
-import LandingMiddleSection from '@/app/(landing)/_components/LandingMiddleSection';
-import LandingBottomSection from '@/app/(landing)/_components/LandingBottomSection';
+import LandingTopSection from '@/app/(landing)/_components/TopSection';
+import LandingMiddleSection from '@/app/(landing)/_components/MiddleSection';
+import LandingBottomSection from '@/app/(landing)/_components/BottomSection';
+import StartButton from '@/app/(landing)/_components/StartButton';
 
 export default function LandingPage() {
   return (
-    <div className="flex h-screen w-full flex-col">
+    <div className="flex h-screen w-full flex-col items-center">
       <LandingTopSection />
-      <LandingMiddleSection className="my-20" />
+      {/* 지금 시작하기 버튼 */}
+      <div>
+        <StartButton />
+      </div>
+      <LandingMiddleSection className="my-45" />
       <LandingBottomSection className="mb-20" />
     </div>
   );

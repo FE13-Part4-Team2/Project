@@ -16,14 +16,13 @@ const Smoke = ({ className }: { className?: string }) => {
       }}
       className={clsx(
         className,
-        'tablet:block hidden',
-        'absolute bottom-[15%] left-[19%]',
+        'absolute',
         'laptop:w-[255px] laptop:h-[110px]',
         'tablet:w-[166px] tablet:h-[71px]'
       )}
     >
       <Image
-        src="/image/landing_smoke.png"
+        src="/image/landing_smoke.svg"
         alt="흙먼지 연기"
         fill
         className="object-contain"

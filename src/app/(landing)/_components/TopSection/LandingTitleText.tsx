@@ -48,7 +48,7 @@ export default function LandingTitleText({
           className={clsx(
             'laptop:text-[64px] tablet:text-[48px] text-[32px] font-semibold',
             'bg-gradient-to-r from-green-700 to-[#CEF57E] bg-clip-text text-transparent',
-            'relative z-10'
+            'relative'
           )}
         >
           {title}
