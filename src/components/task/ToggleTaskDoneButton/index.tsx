@@ -1,26 +1,23 @@
 'use client';
 
 import IconRenderer from '@/components/common/Icons/IconRenderer';
-import { useState } from 'react';
 import Button from '@/components/common/Button';
 import clsx from 'clsx';
+import { useToggleTaskDone } from '@/components/task/ToggleTaskDoneButton/hooks/useToggleTaskDone';
 
 export default function ToggleTaskDoneButton({
   variant = 'checkbox',
+  taskId,
   doneAt,
 }: {
   variant?: 'checkbox' | 'button';
+  taskId: number;
   doneAt: string | null;
 }) {
-  const [isDone, setIsDone] = useState(Boolean(doneAt));
-
-  const updateTaskToDone = () => {
-    setIsDone(true);
-  };
-
-  const updateTaskToUndone = () => {
-    setIsDone(false);
-  };
+  const { isDone, updateTaskToDone, updateTaskToUndone } = useToggleTaskDone(
+    taskId,
+    Boolean(doneAt)
+  );
 
   return (
     <>

@@ -1,3 +1,5 @@
+'use server';
+
 import { cookies } from 'next/headers';
 import getNewAccessTokenInServer from '@/lib/server/token.server';
 
