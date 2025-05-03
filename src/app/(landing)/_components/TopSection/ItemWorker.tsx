@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import clsx from 'clsx';
+import { LANDING_IMAGE_URL } from '@/app/(landing)/_components/landingImageUrl';
 
 const Worker = ({ className }: { className?: string }) => {
   return (
@@ -22,7 +23,7 @@ const Worker = ({ className }: { className?: string }) => {
       )}
     >
       <Image
-        src="/image/landing_worker.svg"
+        src={`${LANDING_IMAGE_URL}worker.svg`}
         alt="인부 일러스트"
         fill
         className="object-contain"

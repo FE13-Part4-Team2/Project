@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import clsx from 'clsx';
+import { LANDING_IMAGE_URL } from '@/app/(landing)/_components/landingImageUrl';
 
 const Train = ({ className }: { className?: string }) => {
   return (
@@ -24,7 +25,7 @@ const Train = ({ className }: { className?: string }) => {
         )}
       >
         <Image
-          src="/image/train_1.svg"
+          src={`${LANDING_IMAGE_URL}train_1.svg`}
           alt="기차 일러스트"
           fill
           className="object-contain"
@@ -48,7 +49,7 @@ const Train = ({ className }: { className?: string }) => {
         )}
       >
         <Image
-          src="/image/train_2.svg"
+          src={`${LANDING_IMAGE_URL}train_2.svg`}
           alt="기차 일러스트"
           fill
           className="object-contain"
@@ -72,7 +73,7 @@ const Train = ({ className }: { className?: string }) => {
         )}
       >
         <Image
-          src="/image/train_3.svg"
+          src={`${LANDING_IMAGE_URL}train_3.svg`}
           alt="기차 일러스트"
           fill
           className="object-contain"

@@ -1,6 +1,8 @@
 'use client';
 import Image from 'next/image';
 import clsx from 'clsx';
+import { LANDING_IMAGE_URL } from '@/app/(landing)/_components/landingImageUrl';
+import DummyHeader from '@/app/(landing)/_components/TopSection/DummyHeader';
 import LandingTopBg from '@/app/(landing)/_components/TopSection/LandingTopBg';
 import LandingTitleText from '@/app/(landing)/_components/TopSection/LandingTitleText';
 import Worker from '@/app/(landing)/_components/TopSection/ItemWorker';
@@ -12,35 +14,40 @@ const LandingTopSection = ({ className }: { className?: string }) => {
     <section
       className={`${className} relative flex h-screen w-full flex-col items-center text-center`}
     >
+      <div className="w-full">
+        <DummyHeader />
+      </div>
+
       <LandingTopBg />
+      <LandingTitleText className="laptop:mt-18.5 tablet:mt-22 z-10 mt-12" />
 
       {/* 아이템 컨테이너 */}
       <div
         className={clsx(
-          'relative flex flex-col items-center overflow-hidden',
+          'relative flex flex-col items-center justify-center overflow-hidden',
           'laptop:h-[1080px] w-full',
           'tablet:h-[750px]',
           'h-[550px]'
         )}
       >
-        <LandingTitleText className="tablet:mt-22 laptop:mt-30 z-10 mt-12" />
         {/* 빛 이미지 */}
         <Image
-          src="/image/landing_light.png"
+          src={`${LANDING_IMAGE_URL}landing_light.png`}
           alt="빛 일러스트"
           width={1920}
-          height={485}
+          height={1080}
           className={clsx(
             'absolute items-center justify-center',
-            'laptop:bottom-[15%] tablet:bottom-[27%] bottom-[33%]',
-            'object-none',
-            'mix-blend-hard-light backdrop-blur-[12px]'
+            'laptop:mt-0',
+            'tablet:mt-20',
+            'mt-10',
+            'object-none'
           )}
         />
         {/* 기차 모션 */}
         <Train
           className={clsx(
-            'laptop:mt-20',
+            'laptop:mt-0',
             'tablet:pl-0 tablet:mt-37',
             'mt-20 pl-22'
           )}

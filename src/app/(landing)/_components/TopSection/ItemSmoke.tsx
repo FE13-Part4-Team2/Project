@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import clsx from 'clsx';
+import { LANDING_IMAGE_URL } from '@/app/(landing)/_components/landingImageUrl';
 
 const Smoke = ({ className }: { className?: string }) => {
   return (
@@ -22,7 +23,7 @@ const Smoke = ({ className }: { className?: string }) => {
       )}
     >
       <Image
-        src="/image/landing_smoke.svg"
+        src={`${LANDING_IMAGE_URL}smoke.svg`}
         alt="흙먼지 연기"
         fill
         className="object-contain"
