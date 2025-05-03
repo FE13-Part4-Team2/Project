@@ -18,7 +18,7 @@ const Worker = ({ className }: { className?: string }) => {
         className,
         'absolute',
         'laptop:w-[142px] laptop:h-[149px]',
-        'tablet:w-[93px] tablet:h-[98px]',
+        'tablet:w-[100px] tablet:h-[105px]',
         'h-[94px] w-[90px]'
       )}
     >
