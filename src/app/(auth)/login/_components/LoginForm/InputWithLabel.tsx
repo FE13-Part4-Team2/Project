@@ -1,6 +1,7 @@
 'use client';
 
 import InputWithLabelProps from '@/app/(auth)/login/type';
+import { validateEmail } from '@/utils/inputValidation';
 import { useState } from 'react';
 
 export default function InputWithLabel({
@@ -8,6 +9,7 @@ export default function InputWithLabel({
   ...props
 }: InputWithLabelProps) {
   const [isInputEmpty, setIsInputEmpty] = useState<boolean>(false);
+  const [isInputValid, setIsInputValid] = useState<boolean>(true);
 
   // 입력필드가 비어있는지 검사하는 함수
   const handleBlurChange = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -24,6 +26,10 @@ export default function InputWithLabel({
     const inputValue = e.target.value.trim();
     if (inputValue) {
       setIsInputEmpty(false);
+    }
+
+    if (inputType === 'email') {
+      setIsInputValid(validateEmail(inputValue));
     }
   };
 
@@ -57,6 +63,9 @@ export default function InputWithLabel({
             ? `${inputTypeMap[inputType]}를 입력해주세요.`
             : `${inputTypeMap[inputType]}을 입력해주세요.`}
         </div>
+      )}
+      {!isInputValid && (
+        <div className="text-danger">이메일 형식으로 작성해주세요.</div>
       )}
     </div>
   );
