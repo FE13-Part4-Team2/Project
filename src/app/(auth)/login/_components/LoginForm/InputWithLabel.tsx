@@ -11,7 +11,7 @@ export default function InputWithLabel({
 }: InputWithLabelProps) {
   const [isInputEmpty, setIsInputEmpty] = useState<boolean>(false);
   const [isInputValid, setIsInputValid] = useState<boolean>(true);
-  const [isEyeToggleOpen, setIsEyeToggleOpen] = useState<boolean>(false);
+  const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
 
   // 입력필드가 비어있는지 검사하는 함수
   const handleBlurChange = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -35,8 +35,8 @@ export default function InputWithLabel({
     }
   };
 
-  const handleEyeToggleOpen = () => {
-    setIsEyeToggleOpen((prev) => !prev);
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible((prev) => !prev);
   };
 
   // map inputType to korean label
@@ -58,7 +58,7 @@ export default function InputWithLabel({
         <input
           type={
             inputType === 'password'
-              ? isEyeToggleOpen
+              ? isPasswordVisible
                 ? 'text'
                 : 'password'
               : inputType
@@ -76,16 +76,16 @@ export default function InputWithLabel({
         {/*비밀번호 보임 표시*/}
         {inputType === 'password' && (
           <div className="absolute top-1/2 right-4 -translate-y-1/2">
-            {isEyeToggleOpen ? (
+            {isPasswordVisible ? (
               <Icons.VisibilityOnIcon
                 size={24}
-                onClick={handleEyeToggleOpen}
+                onClick={togglePasswordVisibility}
                 className="cursor-pointer"
               />
             ) : (
               <Icons.VisibilityOffIcon
                 size={24}
-                onClick={handleEyeToggleOpen}
+                onClick={togglePasswordVisibility}
                 className="cursor-pointer"
               />
             )}
