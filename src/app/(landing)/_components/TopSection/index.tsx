@@ -22,6 +22,7 @@ const LandingTopSection = ({ className }: { className?: string }) => {
       {/* 아이템 컨테이너 */}
       <div
         className={clsx(
+          'absolute',
           'flex flex-col items-center justify-center overflow-hidden',
           'laptop:h-[1080px] w-full',
           'tablet:h-[750px]',
@@ -31,27 +32,25 @@ const LandingTopSection = ({ className }: { className?: string }) => {
         {/* 기차 모션 */}
         <Train
           className={clsx(
-            'absolute',
-            'laptop:bottom-[17%] tablet:bottom-[19%] bottom-[37%]',
-            'tablet:pl-0',
-            'mt-20'
+            'laptop:bottom-[26%] tablet:bottom-[8%] absolute bottom-[8%]',
+            'tablet:pl-0 pl-23'
           )}
         />
         {/* 인부 모션 */}
         <Worker
           className={clsx(
             'z-5',
-            'laptop:bottom-[11%] laptop:left-[35.5%]',
-            'tablet:bottom-[15%] tablet:left-[24%]',
-            'bottom-[27%] left-[15%]'
+            'laptop:bottom-[22%] laptop:left-[35%]',
+            'tablet:bottom-[3.5%] tablet:left-[24%]',
+            'bottom-[4%] left-[15%]'
           )}
         />
         {/* 흙먼지 모션 */}
         <Smoke
           className={clsx(
             'tablet:block z-5 hidden',
-            'laptop:bottom-[12%] laptop:left-[19%]',
-            'tablet:left-0 tablet:bottom-[16%]'
+            'laptop:bottom-[23%] laptop:left-[19%]',
+            'tablet:left-0 tablet:bottom-[5%]'
           )}
         />
       </div>

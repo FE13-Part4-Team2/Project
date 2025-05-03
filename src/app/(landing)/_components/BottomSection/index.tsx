@@ -1,7 +1,12 @@
+import LandingBottomBg from '@/app/(landing)/_components/BottomSection/LandingBottomBg';
+
 const LandingBottomSection = ({ className }: { className?: string }) => {
   return (
-    <section className="flex w-full flex-col items-center text-center">
-      <div className={`${className}`}>
+    <section
+      className={`${className} flex h-screen w-full flex-col items-center text-center`}
+    >
+      <LandingBottomBg className="relative flex" />
+      <div className="absolute">
         <h1 className="tablet:text-[40px] text-[24px] font-semibold">
           지금 바로 시작해 보세요
         </h1>
