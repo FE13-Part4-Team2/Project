@@ -2,36 +2,47 @@
 
 import InputWithLabelProps from '@/app/(auth)/login/type';
 import Icons from '@/components/common/Icons';
-import { validateEmail } from '@/utils/inputValidation';
+import { validateEmail, validatePassword } from '@/utils/inputValidation';
 import { useState } from 'react';
 
 export default function InputWithLabel({
   inputType,
+  onValidChange,
+  onEmptyChange,
+  onValueChange,
   ...props
 }: InputWithLabelProps) {
   const [isInputEmpty, setIsInputEmpty] = useState<boolean>(false);
   const [isInputValid, setIsInputValid] = useState<boolean>(true);
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
 
-  // 입력필드가 비어있는지 검사하는 함수
-  const handleBlurChange = (e: React.FocusEvent<HTMLInputElement>) => {
+  // check if input is empty after blur
+  const handleInputBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     const inputValue = e.target.value.trim();
     if (!inputValue) {
       setIsInputEmpty(true);
+      onEmptyChange?.(true);
     } else {
       setIsInputEmpty(false);
+      onEmptyChange?.(false);
     }
   };
 
-  // 입력필드 유효성 검사
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value.trim();
+
+    // handle falsy input
     if (inputValue) {
       setIsInputEmpty(false);
     }
 
     if (inputType === 'email') {
-      setIsInputValid(validateEmail(inputValue));
+      const isValid = validateEmail(inputValue);
+      setIsInputValid(isValid);
+      onValidChange?.(isValid);
+      if (isValid) {
+        onValueChange(inputValue);
+      }
     }
   };
 
@@ -69,11 +80,11 @@ export default function InputWithLabel({
           placeholder={`${inputTypeMap[inputType]}을 입력해주세요.`}
           className={`w-full rounded-xl bg-slate-800 p-4`}
           onChange={handleInputChange}
-          onBlur={handleBlurChange}
+          onBlur={handleInputBlur}
           {...props}
         />
 
-        {/*비밀번호 보임 표시*/}
+        {/*비밀번호 눈모양 토글*/}
         {inputType === 'password' && (
           <div className="absolute top-1/2 right-4 -translate-y-1/2">
             {isPasswordVisible ? (
@@ -95,13 +106,13 @@ export default function InputWithLabel({
 
       {isInputEmpty && (
         <div className="text-danger">
-          {inputTypeMap[inputType] === '비밀번호'
+          {inputType === 'password'
             ? `${inputTypeMap[inputType]}를 입력해주세요.`
             : `${inputTypeMap[inputType]}을 입력해주세요.`}
         </div>
       )}
       {!isInputValid && (
-        <div className="text-danger">이메일 형식으로 작성해주세요.</div>
+        <div className="text-danger">올바른 형식으로 작성해주세요.</div>
       )}
     </div>
   );
