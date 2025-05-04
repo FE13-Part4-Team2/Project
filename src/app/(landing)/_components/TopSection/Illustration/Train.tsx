@@ -6,7 +6,7 @@ import { LANDING_IMAGE_URL } from '@/app/(landing)/_components/landingImageUrl';
 const Train = ({ className }: { className?: string }) => {
   return (
     <div
-      className={`${className} laptop:w-full laptop:-space-x-5 flex items-end justify-center -space-x-4 overflow-hidden`}
+      className={`${className} laptop:w-full laptop:-space-x-5 flex items-end justify-center -space-x-4`}
     >
       {/* 기차1 */}
       <motion.div

@@ -1,5 +1,6 @@
 import LandingBottomBg from '@/app/(landing)/_components/BottomSection/LandingBottomBg';
 import { LandingBottomText } from '@/app/(landing)/_components/BottomSection/LandingBottomText';
+import Workers from '@/app/(landing)/_components/BottomSection/Workers';
 
 const LandingBottomSection = ({ className }: { className?: string }) => {
   return (
@@ -8,6 +9,7 @@ const LandingBottomSection = ({ className }: { className?: string }) => {
     >
       <LandingBottomBg className="relative flex" />
       <LandingBottomText className="absolute mt-55" />
+      <Workers className="absolute flex justify-center" />
     </section>
   );
 };

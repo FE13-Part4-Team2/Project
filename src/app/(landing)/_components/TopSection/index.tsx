@@ -3,9 +3,9 @@ import clsx from 'clsx';
 import DummyHeader from '@/app/(landing)/_components/TopSection/DummyHeader';
 import LandingTopBg from '@/app/(landing)/_components/TopSection/LandingTopBg';
 import LandingTopText from '@/app/(landing)/_components/TopSection/LandingTopText';
-import Worker from '@/app/(landing)/_components/TopSection/ItemWorker';
-import Smoke from '@/app/(landing)/_components/TopSection/ItemSmoke';
-import Train from '@/app/(landing)/_components/TopSection/ItemTrain';
+import Worker from '@/app/(landing)/_components/TopSection/Illustration/Worker';
+import Smoke from '@/app/(landing)/_components/TopSection/Illustration/Smoke';
+import Train from '@/app/(landing)/_components/TopSection/Illustration/Train';
 
 const LandingTopSection = ({ className }: { className?: string }) => {
   return (
