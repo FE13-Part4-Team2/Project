@@ -32,7 +32,10 @@ export default function InputWithLabel({
     const inputValue = e.target.value.trim();
 
     // handle falsy input
-    if (inputValue) {
+    if ((inputValue ?? '') === '') {
+      setIsInputEmpty(true);
+      return;
+    } else {
       setIsInputEmpty(false);
     }
 
