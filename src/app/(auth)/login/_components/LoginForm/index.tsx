@@ -4,7 +4,7 @@ import ForgotPasswordButton from '@/app/(auth)/login/_components/LoginForm/Forgo
 import InputWithLabel from '@/app/(auth)/login/_components/LoginForm/InputWithLabel';
 import Button from '@/components/common/Button';
 import { signIn } from '@/lib/apis/auth';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export default function LoginForm() {
   const [isEmailValid, setIsEmailValid] = useState<boolean>(false);
@@ -16,16 +16,17 @@ export default function LoginForm() {
     // open password-find modal
   };
 
-  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  // form submit
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // form submit
-    if (isEmailValid && isPasswordValid) {
-      console.log('유효해');
-      try {
-        signIn({ email, password });
-      } catch (error) {
-        console.error(error);
-      }
+
+    if (!isEmailValid || !isPasswordValid) return;
+
+    try {
+      const response = await signIn({ email, password });
+      console.log(response);
+    } catch (error) {
+      console.error(error);
     }
   };
 
