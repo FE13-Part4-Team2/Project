@@ -11,13 +11,13 @@ const Workers = ({ className }: { className?: string }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setIsFirstFrame((prev) => !prev);
-    }, 350); // 250ms 간격으로 프레임 변경 (4fps)
+    }, 350); // 350ms 간격으로 프레임 변경
 
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className={`${className} flex w-full overflow-hidden`}>
+    <div className={`${className} flex w-full justify-center`}>
       {/* 인부1 */}
       <motion.div
         initial={{ left: 0 }}

@@ -33,8 +33,7 @@ const LandingTopSection = ({ className }: { className?: string }) => {
         <Train
           className={clsx(
             'absolute overflow-hidden',
-            'laptop:bottom-[26%] tablet:bottom-[8%] bottom-[8%]',
-            'tablet:pl-0'
+            'laptop:bottom-[26%] tablet:bottom-[8%] bottom-[8%]'
           )}
         />
         {/* 인부 모션 */}
