@@ -29,16 +29,19 @@ const Workers = ({ className }: { className?: string }) => {
           repeat: Infinity,
         }}
       >
-        <Image
+        <img
           src={
             isFirstFrame
               ? `${LANDING_IMAGE_URL}workers1.svg`
               : `${LANDING_IMAGE_URL}workers2_01.svg`
           }
           alt="걷는 인부"
-          width={152}
-          height={225}
-          className="object-contain"
+          className={clsx(
+            'laptop:w-[152px] laptop:h-[225px]',
+            'tablet:w-[120px] tablet:h-[178px]',
+            'h-[93px] w-[62.5px]',
+            'object-contain'
+          )}
         />
       </motion.div>
 
@@ -52,16 +55,19 @@ const Workers = ({ className }: { className?: string }) => {
           repeat: Infinity,
         }}
       >
-        <Image
+        <img
           src={
             isFirstFrame
               ? `${LANDING_IMAGE_URL}workers2.svg`
               : `${LANDING_IMAGE_URL}workers3_01.svg`
           }
           alt="걷는 인부"
-          width={152}
-          height={225}
-          className="object-contain"
+          className={clsx(
+            'laptop:w-[152px] laptop:h-[225px]',
+            'tablet:w-[120px] tablet:h-[178px]',
+            'h-[93px] w-[62.5px]',
+            'object-contain'
+          )}
         />
       </motion.div>
 
@@ -75,16 +81,19 @@ const Workers = ({ className }: { className?: string }) => {
           repeat: Infinity,
         }}
       >
-        <Image
+        <img
           src={
             isFirstFrame
               ? `${LANDING_IMAGE_URL}workers3.svg`
               : `${LANDING_IMAGE_URL}workers1_01.svg`
           }
           alt="걷는 인부"
-          width={152}
-          height={225}
-          className="object-contain"
+          className={clsx(
+            'laptop:w-[152px] laptop:h-[225px]',
+            'tablet:w-[120px] tablet:h-[178px]',
+            'h-[93px] w-[62.5px]',
+            'object-contain'
+          )}
         />
       </motion.div>
     </div>
