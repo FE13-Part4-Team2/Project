@@ -13,7 +13,7 @@ const LandingBottomBg = ({ className }: { className?: string }) => {
         className="laptop:block hidden object-none"
       />
       <Image
-        src={`${LANDING_IMAGE_URL}landing_bottom_bg_m_01.png`}
+        src={`${LANDING_IMAGE_URL}landing_bottom_bg_m.png`}
         alt="TABLET 격자 패턴 이미지"
         width={744}
         height={940}

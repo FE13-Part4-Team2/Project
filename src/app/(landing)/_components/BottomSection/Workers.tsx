@@ -21,7 +21,7 @@ const Workers = ({ className }: { className?: string }) => {
       {/* 인부1 */}
       <motion.div
         initial={{ left: 0 }}
-        animate={{ x: 150 }}
+        animate={{ x: 150, y: [0, 5, 0] }}
         transition={{
           duration: 1.5,
           ease: 'easeOut',
@@ -47,7 +47,7 @@ const Workers = ({ className }: { className?: string }) => {
       {/* 인부2 */}
       <motion.div
         initial={{ x: 0 }}
-        animate={{ x: 150 }}
+        animate={{ x: 150, y: [0, -5, 0] }}
         transition={{
           duration: 1.5,
           ease: 'easeOut',
@@ -73,7 +73,7 @@ const Workers = ({ className }: { className?: string }) => {
       {/* 인부3 */}
       <motion.div
         initial={{ x: 0 }}
-        animate={{ x: 150 }}
+        animate={{ x: 150, y: [0, 5, 0] }}
         transition={{
           duration: 1.5,
           ease: 'easeOut',
