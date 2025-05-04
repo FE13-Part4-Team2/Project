@@ -39,6 +39,7 @@ export default function InputWithLabel({
       setIsInputEmpty(false);
     }
 
+    // email
     if (inputType === 'email') {
       const isValid = validateEmail(inputValue);
       setIsInputValid(isValid);
@@ -46,6 +47,13 @@ export default function InputWithLabel({
       if (isValid) {
         onValueChange(inputValue);
       }
+    }
+
+    // password
+    if (inputType === 'password') {
+      const isValid = validatePassword(inputValue);
+      setIsInputValid(isValid);
+      onValueChange(inputValue);
     }
   };
 
