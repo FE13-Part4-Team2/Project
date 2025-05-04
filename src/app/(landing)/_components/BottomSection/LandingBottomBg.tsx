@@ -12,6 +12,20 @@ const LandingBottomBg = ({ className }: { className?: string }) => {
         height={1080}
         className="laptop:block hidden object-none"
       />
+      <Image
+        src={`${LANDING_IMAGE_URL}landing_bottom_bg_m_01.png`}
+        alt="TABLET 격자 패턴 이미지"
+        width={744}
+        height={940}
+        className="tablet:block laptop:hidden hidden object-none"
+      />
+      <Image
+        src={`${LANDING_IMAGE_URL}landing_bottom_bg_s.png`}
+        alt="MOBILE 격자 패턴 이미지"
+        width={375}
+        height={640}
+        className="tablet:hidden block object-none"
+      />
     </div>
   );
 };
