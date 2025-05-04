@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 
 export default function LoginForm() {
   const [isEmailValid, setIsEmailValid] = useState<boolean>(false);
-  const [isPasswordEmpty, setIsPasswordEmpty] = useState(true);
+  const [isPasswordValid, setIsPasswordValid] = useState<boolean>(false);
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
@@ -19,7 +19,7 @@ export default function LoginForm() {
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // form submit
-    if (isEmailValid && !isPasswordEmpty) {
+    if (isEmailValid && isPasswordValid) {
       console.log('유효해');
       try {
         signIn({ email, password });
@@ -28,12 +28,6 @@ export default function LoginForm() {
       }
     }
   };
-
-  // test
-  useEffect(() => {
-    console.log('이메일 유효', isEmailValid);
-    console.log('비밀번호 비어있음', isPasswordEmpty);
-  }, [isEmailValid, isPasswordEmpty]);
 
   return (
     <form onSubmit={handleFormSubmit}>
@@ -49,7 +43,7 @@ export default function LoginForm() {
         <InputWithLabel
           inputType="password"
           autoComplete="current-password"
-          onEmptyChange={setIsPasswordEmpty}
+          onValidChange={setIsPasswordValid}
           onValueChange={setPassword}
         />
       </div>
@@ -62,7 +56,7 @@ export default function LoginForm() {
         styleType="filled"
         radius="sm"
         className="w-[460px]"
-        disabled={!isEmailValid || isPasswordEmpty}
+        disabled={!(isEmailValid && isPasswordValid)}
       >
         로그인
       </Button>

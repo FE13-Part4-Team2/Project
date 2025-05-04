@@ -8,7 +8,6 @@ import { useEffect, useState } from 'react';
 export default function InputWithLabel({
   inputType,
   onValidChange,
-  onEmptyChange,
   onValueChange,
   ...props
 }: InputWithLabelProps) {
@@ -37,10 +36,10 @@ export default function InputWithLabel({
     const inputValue = e.target.value.trim();
     if (!inputValue) {
       setIsInputEmpty(true);
-      onEmptyChange?.(true);
+      // onEmptyChange?.(true);
     } else {
       setIsInputEmpty(false);
-      onEmptyChange?.(false);
+      // onEmptyChange?.(false);
     }
   };
 
@@ -60,6 +59,7 @@ export default function InputWithLabel({
       const isValid = validateEmail(inputValue);
       setIsInputValid(isValid);
       onValidChange?.(isValid);
+      // send email input to upper component
       if (isValid) {
         onValueChange(inputValue);
       }
@@ -69,7 +69,11 @@ export default function InputWithLabel({
     if (inputType === 'password') {
       const isValid = validatePassword(inputValue);
       setIsInputValid(isValid);
-      onValueChange(inputValue);
+      onValidChange?.(isValid);
+      // send password input to upper component
+      if (isValid) {
+        onValueChange(inputValue);
+      }
     }
   };
 
