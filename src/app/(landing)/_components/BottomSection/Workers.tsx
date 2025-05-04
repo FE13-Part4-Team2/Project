@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import { LANDING_IMAGE_URL } from '@/app/(landing)/_components/landingImageUrl';

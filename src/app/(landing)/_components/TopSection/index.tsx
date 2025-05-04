@@ -32,9 +32,9 @@ const LandingTopSection = ({ className }: { className?: string }) => {
         {/* 기차 모션 */}
         <Train
           className={clsx(
-            'absolute',
+            'absolute overflow-hidden',
             'laptop:bottom-[26%] tablet:bottom-[8%] bottom-[8%]',
-            'tablet:pl-0 pl-23'
+            'tablet:pl-0'
           )}
         />
         {/* 인부 모션 */}

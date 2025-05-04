@@ -16,7 +16,7 @@ const Train = ({ className }: { className?: string }) => {
           repeatType: 'reverse',
           delay: 1.7,
         }}
-        className="laptop:mb-10 tablet:mb-5 z-3 mb-5.5"
+        className="laptop:mb-10 tablet:mb-5 z-3 mb-5.5 overflow-hidden"
       >
         <img
           src={`${LANDING_IMAGE_URL}train_1.svg`}
@@ -24,7 +24,8 @@ const Train = ({ className }: { className?: string }) => {
           className={clsx(
             'laptop:w-[209px] laptop:h-[246px]',
             'tablet:w-[145px] tablet:h-[175px]',
-            'h-[165px] w-[135px]'
+            'h-[165px] w-[135px]',
+            'object-contain'
           )}
         />
       </motion.div>
@@ -38,7 +39,7 @@ const Train = ({ className }: { className?: string }) => {
           repeatType: 'reverse',
           delay: 1.7,
         }}
-        className="laptop:mb-6 tablet:mb-1.5 z-2 mb-2"
+        className="laptop:mb-6 tablet:mb-1.5 z-2 mb-2 overflow-hidden"
       >
         <img
           src={`${LANDING_IMAGE_URL}train_2.svg`}
@@ -61,7 +62,7 @@ const Train = ({ className }: { className?: string }) => {
           repeatType: 'reverse',
           delay: 1.7,
         }}
-        className="z-1"
+        className="z-1 overflow-hidden"
       >
         <img
           src={`${LANDING_IMAGE_URL}train_3.svg`}
