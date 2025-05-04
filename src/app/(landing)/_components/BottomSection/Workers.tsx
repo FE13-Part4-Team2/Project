@@ -18,12 +18,13 @@ const Workers = ({ className }: { className?: string }) => {
   }, []);
 
   return (
-    <div className={`${className} h-full w-full overflow-hidden`}>
+    <div className={`${className} flex w-full overflow-hidden`}>
+      {/* 인부1 */}
       <motion.div
-        initial={{ x: 0 }}
-        animate={{ x: 100 }}
+        initial={{ left: 0 }}
+        animate={{ x: 150 }}
         transition={{
-          duration: 1,
+          duration: 1.5,
           ease: 'easeOut',
           repeat: Infinity,
         }}
@@ -31,8 +32,54 @@ const Workers = ({ className }: { className?: string }) => {
         <Image
           src={
             isFirstFrame
-              ? `${LANDING_IMAGE_URL}wokers1.svg`
-              : `${LANDING_IMAGE_URL}wokers1_01.svg`
+              ? `${LANDING_IMAGE_URL}workers1.svg`
+              : `${LANDING_IMAGE_URL}workers2_01.svg`
+          }
+          alt="걷는 인부"
+          width={152}
+          height={225}
+          className="object-contain"
+        />
+      </motion.div>
+
+      {/* 인부2 */}
+      <motion.div
+        initial={{ x: 0 }}
+        animate={{ x: 150 }}
+        transition={{
+          duration: 1.5,
+          ease: 'easeOut',
+          repeat: Infinity,
+        }}
+      >
+        <Image
+          src={
+            isFirstFrame
+              ? `${LANDING_IMAGE_URL}workers2.svg`
+              : `${LANDING_IMAGE_URL}workers3_01.svg`
+          }
+          alt="걷는 인부"
+          width={152}
+          height={225}
+          className="object-contain"
+        />
+      </motion.div>
+
+      {/* 인부3 */}
+      <motion.div
+        initial={{ x: 0 }}
+        animate={{ x: 150 }}
+        transition={{
+          duration: 1.5,
+          ease: 'easeOut',
+          repeat: Infinity,
+        }}
+      >
+        <Image
+          src={
+            isFirstFrame
+              ? `${LANDING_IMAGE_URL}workers3.svg`
+              : `${LANDING_IMAGE_URL}workers1_01.svg`
           }
           alt="걷는 인부"
           width={152}

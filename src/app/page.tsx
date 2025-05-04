@@ -14,7 +14,7 @@ export default function LandingPage() {
         <StartButton />
       </div>
       <LandingMiddleSection className="mt-40" />
-      <LandingBottomSection className="mb-20" />
+      <LandingBottomSection />
     </div>
   );
 }

@@ -9,7 +9,7 @@ const LandingBottomSection = ({ className }: { className?: string }) => {
     >
       <LandingBottomBg className="relative flex" />
       <LandingBottomText className="absolute mt-55" />
-      <Workers className="absolute flex justify-center" />
+      <Workers className="absolute mt-140 mr-120 flex justify-center" />
     </section>
   );
 };
