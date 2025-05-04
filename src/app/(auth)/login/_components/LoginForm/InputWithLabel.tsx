@@ -15,6 +15,20 @@ export default function InputWithLabel({
   const [isInputEmpty, setIsInputEmpty] = useState<boolean>(false);
   const [isInputValid, setIsInputValid] = useState<boolean>(true);
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>('');
+
+  // error message when input is not valid
+  switch (inputType) {
+    case 'email':
+      setErrorMessage('올바른 형식의 이메일을 입력해주세요.');
+      break;
+
+    case 'password':
+      setErrorMessage(
+        '비밀번호는 영문, 숫자, 특수문자를 포함한 8자 이상이어야 합니다.'
+      );
+      break;
+  }
 
   // check if input is empty after blur
   const handleInputBlur = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -122,9 +136,7 @@ export default function InputWithLabel({
             : `${inputTypeMap[inputType]}을 입력해주세요.`}
         </div>
       )}
-      {!isInputValid && (
-        <div className="text-danger">올바른 형식으로 작성해주세요.</div>
-      )}
+      {!isInputValid && <div className="text-danger">{errorMessage}</div>}
     </div>
   );
 }
