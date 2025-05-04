@@ -3,7 +3,7 @@
 import InputWithLabelProps from '@/app/(auth)/login/type';
 import Icons from '@/components/common/Icons';
 import { validateEmail, validatePassword } from '@/utils/inputValidation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function InputWithLabel({
   inputType,
@@ -18,17 +18,19 @@ export default function InputWithLabel({
   const [errorMessage, setErrorMessage] = useState<string>('');
 
   // error message when input is not valid
-  switch (inputType) {
-    case 'email':
-      setErrorMessage('올바른 형식의 이메일을 입력해주세요.');
-      break;
+  useEffect(() => {
+    switch (inputType) {
+      case 'email':
+        setErrorMessage('올바른 형식의 이메일을 입력해주세요.');
+        break;
 
-    case 'password':
-      setErrorMessage(
-        '비밀번호는 영문, 숫자, 특수문자를 포함한 8자 이상이어야 합니다.'
-      );
-      break;
-  }
+      case 'password':
+        setErrorMessage(
+          '비밀번호는 영문, 숫자, 특수문자를 포함한 8자 이상이어야 합니다.'
+        );
+        break;
+    }
+  }, [inputType]);
 
   // check if input is empty after blur
   const handleInputBlur = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -136,6 +138,7 @@ export default function InputWithLabel({
             : `${inputTypeMap[inputType]}을 입력해주세요.`}
         </div>
       )}
+
       {!isInputValid && <div className="text-danger">{errorMessage}</div>}
     </div>
   );
