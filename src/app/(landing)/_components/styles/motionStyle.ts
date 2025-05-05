@@ -1,6 +1,6 @@
 import type { HTMLMotionProps } from 'framer-motion';
 
-const DELAY_TIME = 0.9;
+const DELAY_TIME = 0.8;
 
 // 📌 공용 motion //
 export const fadeInUp = {
@@ -77,8 +77,15 @@ export const workersMotion = {
   initial: { left: 0 },
   animate: { x: 150, y: [0, 5, 0] },
   transition: {
-    duration: 1.5,
-    ease: 'easeOut',
-    repeat: Infinity,
+    x: {
+      duration: 1.5,
+      ease: 'easeOut',
+      repeat: Infinity,
+    },
+    y: {
+      duration: 0.7,
+      ease: 'easeInOut',
+      repeat: Infinity,
+    },
   },
 };
