@@ -2,7 +2,7 @@
 
 import clsx from 'clsx';
 
-// middle section style
+// LandingBox style
 export const boxGradientStyle = clsx(
   'relative p-[1px]',
   'laptop:h-[421px] laptop:w-[998px]',
@@ -10,7 +10,7 @@ export const boxGradientStyle = clsx(
   'h-[469px] w-[345px]',
   'bg-gradient-to-r from-green-700 to-[#CEF57E]',
   'rounded-[40px]',
-  'shadow-custom backdrop-blur-[12px]'
+  'shadow-[0_0_12px_2px_rgba(255,255,255,0.25)]'
 );
 
 export const boxStyle = clsx(

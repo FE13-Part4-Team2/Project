@@ -12,9 +12,6 @@ const config: Config = {
         background: 'var(--background)',
         foreground: 'var(--foreground)',
       },
-      shadow: {
-        custom: '0 0 2px 2px rgba(255, 255, 255, 0.25)',
-      },
     },
   },
   plugins: [],
