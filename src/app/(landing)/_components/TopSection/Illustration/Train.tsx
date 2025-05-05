@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import clsx from 'clsx';
 import { LANDING_IMAGE_URL } from '@/app/(landing)/_components/landingImageUrl';
+import { DELAY_TIME } from '@/app/(landing)/_components/TopSection/Illustration/delayTime';
 
 const Train = ({ className }: { className?: string }) => {
   return (
@@ -15,7 +16,7 @@ const Train = ({ className }: { className?: string }) => {
             duration: 1.5,
             repeat: Infinity,
             repeatType: 'reverse',
-            delay: 1.7,
+            delay: DELAY_TIME,
           }}
           className="laptop:mb-10 tablet:mb-5 z-3 mb-5.5"
         >
@@ -38,7 +39,7 @@ const Train = ({ className }: { className?: string }) => {
             duration: 1.5,
             repeat: Infinity,
             repeatType: 'reverse',
-            delay: 1.7,
+            delay: DELAY_TIME,
           }}
           className="laptop:mb-6 tablet:mb-1.5 z-2 mb-2"
         >
@@ -61,7 +62,7 @@ const Train = ({ className }: { className?: string }) => {
             duration: 1.5,
             repeat: Infinity,
             repeatType: 'reverse',
-            delay: 1.7,
+            delay: DELAY_TIME,
           }}
           className="z-1"
         >

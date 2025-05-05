@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import LandingBottomBg from '@/app/(landing)/_components/BottomSection/LandingBottomBg';
 import { LandingBottomText } from '@/app/(landing)/_components/BottomSection/LandingBottomText';
-import Workers from '@/app/(landing)/_components/BottomSection/Workers';
+import Workers from '@/app/(landing)/_components/BottomSection/Illustration/Workers';
 
 const LandingBottomSection = ({ className }: { className?: string }) => {
   return (

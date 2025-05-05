@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import clsx from 'clsx';
 import { LANDING_IMAGE_URL } from '@/app/(landing)/_components/landingImageUrl';
+import { DELAY_TIME } from '@/app/(landing)/_components/TopSection/Illustration/delayTime';
 
 const Smoke = ({ className }: { className?: string }) => {
   return (
@@ -13,7 +14,7 @@ const Smoke = ({ className }: { className?: string }) => {
         ease: 'easeOut',
         repeat: Infinity,
         repeatType: 'reverse',
-        delay: 1.7,
+        delay: DELAY_TIME,
       }}
       className={clsx(
         className,

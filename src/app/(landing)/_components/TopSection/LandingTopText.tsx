@@ -6,6 +6,18 @@ const text = '함께 만들어가는 투두 리스트';
 const title = 'Coworkers';
 
 export default function LandingTopText({ className }: { className?: string }) {
+  const container = {
+    ani: {
+      transition: {
+        staggerChildren: 0.02, // 글자 등장 간격
+      },
+    },
+  };
+
+  const child = {
+    ani: { y: [0, -20, 0] },
+  };
+
   return (
     <div className={`${className} flex flex-col`}>
       {/* 설명 행 */}
@@ -55,7 +67,7 @@ export default function LandingTopText({ className }: { className?: string }) {
           animate={{ backgroundPositionX: '100%', opacity: [0, 1, 0] }}
           transition={{
             duration: 1.5,
-            delay: text.length * 0.03,
+            delay: text.length * 0.02,
             ease: 'easeInOut',
           }}
           className={clsx(
@@ -73,15 +85,3 @@ export default function LandingTopText({ className }: { className?: string }) {
     </div>
   );
 }
-
-const container = {
-  ani: {
-    transition: {
-      staggerChildren: 0.03, // 글자 등장 간격
-    },
-  },
-};
-
-const child = {
-  ani: { y: [0, -20, 0] },
-};
