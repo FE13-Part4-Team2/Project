@@ -37,10 +37,8 @@ export default function InputWithLabel({
     const inputValue = e.target.value.trim();
     if (!inputValue) {
       setIsInputEmpty(true);
-      // onEmptyChange?.(true);
     } else {
       setIsInputEmpty(false);
-      // onEmptyChange?.(false);
     }
   };
 
@@ -110,7 +108,7 @@ export default function InputWithLabel({
           name={inputType}
           required
           placeholder={`${inputTypeMap[inputType]}을 입력해주세요.`}
-          className={`w-full rounded-xl bg-slate-800 p-4`}
+          className="w-full rounded-xl border border-slate-50/10 bg-slate-800 p-4"
           onChange={handleInputChange}
           onBlur={handleInputBlur}
           {...props}
