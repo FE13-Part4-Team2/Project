@@ -5,6 +5,8 @@ import {
   OAuthBody,
   AuthBody,
   AuthResponse,
+  AuthSuccessResponse,
+  AuthErrorResponse,
 } from '@/lib/apis/auth/type';
 
 // 회원가입
@@ -17,8 +19,10 @@ export async function signUp(body: AuthBody): Promise<AuthResponse | null> {
 }
 
 // 로그인
-export async function signIn(body: AuthBody): Promise<AuthResponse | null> {
-  return clientFetcher<AuthBody, AuthResponse>({
+export async function signIn(
+  body: AuthBody
+): Promise<AuthSuccessResponse | AuthErrorResponse | null> {
+  return clientFetcher<AuthBody, AuthSuccessResponse | AuthErrorResponse>({
     url: '/auth/signIn',
     method: 'POST',
     body,
