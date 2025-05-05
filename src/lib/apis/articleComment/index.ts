@@ -3,7 +3,6 @@ import {
   ArticleCommentBody,
   ArticleCommentListResponse,
   ArticleCommentResponse,
-  MessageResponse,
 } from '@/lib/apis/articleComment/type';
 
 // 게시글 댓글 작성 (POST /articles/:articleId/comments)
@@ -58,10 +57,12 @@ export async function patchCommentByArticleId({
 }
 
 // 게시글 댓글 삭제 (DELETE /comments/:commentId)
-export async function deleteCommentByArticleId(
-  commentId: number
-): Promise<MessageResponse | null> {
-  return clientFetcher<undefined, MessageResponse>({
+export async function deleteCommentByArticleId({
+  commentId,
+}: {
+  commentId: number;
+}): Promise<ArticleCommentResponse | null> {
+  return clientFetcher<undefined, ArticleCommentResponse>({
     url: `/comments/${commentId}`,
     method: 'DELETE',
   });
