@@ -29,8 +29,29 @@ export interface AuthBody {
   passwordConfirmation?: string;
 }
 
+export interface OauthResponse {
+  user: UserResponse;
+  accessToken: string;
+  refreshToken: string;
+}
+
 export interface AuthResponse {
   user: UserResponse;
   accessToken: string;
   refreshToken: string;
+}
+
+export interface AuthSuccessResponse {
+  user: UserResponse;
+  accessToken: string;
+  refreshToken: string;
+}
+
+export interface AuthErrorResponse {
+  message: string;
+  details: {
+    password: {
+      message: string;
+    };
+  };
 }
