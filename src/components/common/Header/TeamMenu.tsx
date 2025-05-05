@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { UserMembershipResponse } from '@/lib/apis/user/type';
 import IconRenderer from '@/components/common/Icons/IconRenderer';
+import Button from '@/components/common/Button';
 
 interface TeamMenuProps {
   memberships: UserMembershipResponse[];
@@ -96,13 +97,17 @@ export default function TeamMenu({
             ))}
 
             <Link href="/add-team">
-              <button
-                type="button"
-                className="mt-2 h-12 w-[186px] cursor-pointer rounded-md border border-white py-1 transition-all hover:bg-white hover:text-slate-800"
+              <Button
+                variant="floating"
+                styleType="transparent"
+                radius="sm"
+                size="lg"
+                className="!w-full"
+                startIcon="plus"
                 onClick={close}
               >
-                + 팀 추가하기
-              </button>
+                팀 추가하기
+              </Button>
             </Link>
           </div>
         </>
