@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { fadeInUp } from '@/app/(landing)/_components/MiddleSection/style';
+import { fadeInUp } from '@/app/(landing)/_components/styles/motionStyle';
 import DummyHeader from '@/app/(landing)/_components/DummyHeader';
 import LandingTopSection from '@/app/(landing)/_components/TopSection';
 import LandingMiddleSection from '@/app/(landing)/_components/MiddleSection';

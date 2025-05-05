@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { fadeInUp } from '@/app/(landing)/_components/MiddleSection/style';
+import { fadeInUp } from '@/app/(landing)/_components/styles/motionStyle';
 
 export const LandingBottomText = ({ className }: { className?: string }) => {
   return (

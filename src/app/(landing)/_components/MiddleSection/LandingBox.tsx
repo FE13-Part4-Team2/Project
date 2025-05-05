@@ -6,7 +6,7 @@ import {
   textStyle,
   imageSize,
   getFlexDirection,
-} from '@/app/(landing)/_components/MiddleSection/style';
+} from '@/app/(landing)/_components/styles/boxStyle';
 import { LandingBoxProps } from '@/app/(landing)/_components/type';
 
 const LandingBox = ({
