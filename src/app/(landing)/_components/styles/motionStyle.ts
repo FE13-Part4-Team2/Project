@@ -1,6 +1,6 @@
 import type { HTMLMotionProps } from 'framer-motion';
 
-const DELAY_TIME = 1.2;
+const DELAY_TIME = 0.9;
 
 // 📌 공용 motion //
 export const fadeInUp = {

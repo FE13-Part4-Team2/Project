@@ -1,21 +1,32 @@
-import { motion } from 'framer-motion';
+import { easeInOut, motion } from 'framer-motion';
 import clsx from 'clsx';
 import IconRenderer from '@/components/common/Icons/IconRenderer';
 
 const text = '함께 만들어가는 투두 리스트';
 const title = 'Coworkers';
 
+const descriptiontitleTextStyle =
+  'laptop:text-[48px] tablet:text-[40px] text-[24px] font-semibold';
+const titleTextStyle =
+  'laptop:text-[64px] tablet:text-[48px] text-[32px] font-semibold';
+
 export default function LandingTopText({ className }: { className?: string }) {
   const container = {
     ani: {
       transition: {
-        staggerChildren: 0.02, // 글자 등장 간격
+        staggerChildren: 0.04, // 글자 등장 간격
       },
     },
   };
 
   const child = {
-    ani: { y: [0, -20, 0] },
+    ani: {
+      y: [0, -20, 0],
+      transition: {
+        duration: 0.3,
+        ease: 'easeOut',
+      },
+    },
   };
 
   return (
@@ -32,9 +43,7 @@ export default function LandingTopText({ className }: { className?: string }) {
             <span key={index} className="tablet:w-3 w-1.5" />
           ) : (
             <motion.span key={index} variants={child}>
-              <h1 className="laptop:text-[48px] tablet:text-[40px] text-[24px] font-semibold">
-                {char}
-              </h1>
+              <h1 className={`${descriptiontitleTextStyle}`}>{char}</h1>
             </motion.span>
           )
         )}
@@ -54,7 +63,7 @@ export default function LandingTopText({ className }: { className?: string }) {
       <div className="relative inline-block overflow-hidden">
         <h1
           className={clsx(
-            'laptop:text-[64px] tablet:text-[48px] text-[32px] font-semibold',
+            titleTextStyle,
             'bg-gradient-to-r from-green-700 to-[#CEF57E] bg-clip-text text-transparent',
             'relative'
           )}
@@ -63,20 +72,20 @@ export default function LandingTopText({ className }: { className?: string }) {
         </h1>
         {/* 빛 효과 레이어 */}
         <motion.div
-          initial={{ backgroundPositionX: '0%', opacity: 0 }}
-          animate={{ backgroundPositionX: '100%', opacity: [0, 1, 0] }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: [0, 1, 0] }}
           transition={{
-            duration: 1.5,
+            duration: 1.2,
             delay: text.length * 0.02,
             ease: 'easeInOut',
           }}
           className={clsx(
             'absolute inset-0',
-            'bg-gradient-to-r from-transparent via-white/60 to-transparent',
+            'bg-gradient-to-r from-transparent via-white/90 to-transparent',
             'bg-clip-text text-transparent',
             'blur-sm',
-            'bg-[length:200%_100%]',
-            'laptop:text-[64px] tablet:text-[48px] text-[32px] font-semibold' // 텍스트 스타일 맞춰주기
+            'bg-[length:100%_100%]',
+            titleTextStyle
           )}
         >
           {title}
