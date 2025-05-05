@@ -2,9 +2,11 @@
 import clsx from 'clsx';
 import LandingTopBg from '@/app/(landing)/_components/TopSection/LandingTopBg';
 import LandingTopText from '@/app/(landing)/_components/TopSection/LandingTopText';
-import Worker from '@/app/(landing)/_components/TopSection/Illustration/Worker';
-import Smoke from '@/app/(landing)/_components/TopSection/Illustration/Smoke';
-import Train from '@/app/(landing)/_components/TopSection/Illustration/Train';
+import {
+  Train,
+  Runner,
+  Smoke,
+} from '@/app/(landing)/_components/TopSection/Illustration/illustration';
 
 const LandingTopSection = ({ className }: { className?: string }) => {
   return (
@@ -21,7 +23,7 @@ const LandingTopSection = ({ className }: { className?: string }) => {
           'overflow-hidden'
         )}
       >
-        <LandingTopBg className="relative z-1 flex" />
+        <LandingTopBg className="relative" />
         <LandingTopText className="laptop:mt-33 tablet:mt-22.5 absolute z-10 mt-12" />
 
         {/* 아이템 컨테이너 */}
@@ -29,7 +31,7 @@ const LandingTopSection = ({ className }: { className?: string }) => {
           className={clsx(
             'absolute',
             'flex flex-col',
-            'laptop:h-[1080px] w-full',
+            'laptop:h-[940px] w-full', // 배경 이미지 사이즈
             'tablet:h-[750px]',
             'h-[550px]'
           )}
@@ -38,17 +40,17 @@ const LandingTopSection = ({ className }: { className?: string }) => {
           <Train
             className={clsx(
               'absolute',
-              'laptop:bottom-[32%] tablet:bottom-[16%] bottom-[19.5%]',
+              'laptop:bottom-[22%] tablet:bottom-[16%] bottom-[19.5%]',
               'tablet:pl-0 pl-22'
             )}
           />
-          {/* 인부 모션 */}
-          <Worker
+          {/* 달리는 인부 모션 */}
+          <Runner
             className={clsx(
               'z-5',
-              'laptop:bottom-[28%] laptop:left-[35%]',
-              'tablet:bottom-[11%]',
-              'bottom-[0%]'
+              'laptop:bottom-[18%] laptop:left-[35%]',
+              'tablet:bottom-[11.5%] tablet:left-[40%]',
+              'bottom-[14.5%] left-[43%]'
             )}
           />
           {/* 흙먼지 모션 */}
@@ -56,8 +58,8 @@ const LandingTopSection = ({ className }: { className?: string }) => {
             className={clsx(
               'z-5',
               'tablet:block hidden',
-              'laptop:bottom-[29%] laptop:left-[19%]',
-              'tablet:left-0 tablet:bottom-[12%]'
+              'laptop:bottom-[20%] laptop:left-[19%]',
+              'tablet:left-[30%] tablet:bottom-[12%]'
             )}
           />
         </div>

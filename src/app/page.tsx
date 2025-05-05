@@ -2,8 +2,9 @@
 
 import DummyHeader from '@/app/(landing)/_components/DummyHeader';
 import LandingTopSection from '@/app/(landing)/_components/TopSection';
-// import LandingMiddleSection from '@/app/(landing)/_components/MiddleSection';
-// import LandingBottomSection from '@/app/(landing)/_components/BottomSection';
+import LandingMiddleSection from '@/app/(landing)/_components/MiddleSection';
+import LandingBottomSection from '@/app/(landing)/_components/BottomSection';
+import StartButton from '@/app/(landing)/_components/StartButton';
 
 export default function LandingPage() {
   return (
@@ -12,6 +13,11 @@ export default function LandingPage() {
         <DummyHeader />
       </div>
       <LandingTopSection />
+      <div className="flex items-center justify-center">
+        <StartButton className="tablet:mt-10 laptop:mt-0" />
+      </div>
+      <LandingMiddleSection className="laptop::mt-45 tablet:mt-30 mt-12" />
+      <LandingBottomSection />
     </div>
   );
 }
