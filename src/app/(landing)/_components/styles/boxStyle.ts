@@ -1,7 +1,7 @@
 'use client';
 import clsx from 'clsx';
 
-// LandingBox style
+// LandingBox.tsx style
 export const boxGradientStyle = clsx(
   'relative p-[1px]',
   'laptop:h-[421px] laptop:w-[998px]',

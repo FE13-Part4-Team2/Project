@@ -10,20 +10,20 @@ const LandingBottomSection = ({ className }: { className?: string }) => {
     >
       {/* 배경 크기 고정용 컨테이너 */}
       <div className="relative flex max-w-none min-w-[1920px] justify-center overflow-hidden">
-        <LandingBottomBg className="relative" />
+        <LandingBottomBg />
+
+        <LandingBottomText className="laptop:mt-55 tablet:mt-45 absolute mt-25" />
+
+        {/* 걷는 인부들 모션 */}
+        <Workers
+          className={clsx(
+            'absolute',
+            'laptop:bottom-[26%] laptop:left-[25%]',
+            'tablet:bottom-[29%] tablet:left-[30%]',
+            'bottom-[30%] left-[36%]'
+          )}
+        />
       </div>
-
-      <LandingBottomText className="laptop:mt-55 tablet:mt-45 absolute mt-25" />
-
-      {/* 걷는 인부들 모션 */}
-      <Workers
-        className={clsx(
-          'absolute',
-          'laptop:bottom-[26%] laptop:left-[25%]',
-          'tablet:bottom-[29%] tablet:left-0',
-          'bottom-[30%] left-0'
-        )}
-      />
     </section>
   );
 };
