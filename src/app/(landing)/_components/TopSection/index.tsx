@@ -14,17 +14,9 @@ const LandingTopSection = ({ className }: { className?: string }) => {
       className={`${className} flex w-full flex-col items-center text-center`}
     >
       {/* 배경 크기 고정용 컨테이너 */}
-      <div
-        className={clsx(
-          'relative',
-          'flex justify-center',
-          'min-w-[1920px]',
-          'max-w-none',
-          'overflow-hidden'
-        )}
-      >
+      <div className="relative flex max-w-none min-w-[1920px] justify-center overflow-hidden">
         <LandingTopBg className="relative" />
-        <LandingTopText className="laptop:mt-33 tablet:mt-22.5 absolute z-10 mt-12" />
+        <LandingTopText className="laptop:mt-19 tablet:mt-22.5 absolute z-10 mt-12" />
 
         {/* 아이템 컨테이너 */}
         <div

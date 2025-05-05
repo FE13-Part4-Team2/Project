@@ -17,7 +17,7 @@ const Workers = ({ className }: { className?: string }) => {
   }, []);
 
   return (
-    <div className={`${className} flex w-full justify-center`}>
+    <div className={`${className} flex w-full`}>
       {/* 인부1 */}
       <motion.div {...workersMotion}>
         <img
