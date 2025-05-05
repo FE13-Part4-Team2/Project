@@ -5,6 +5,7 @@ import InputWithLabel from '@/app/(auth)/login/_components/LoginForm/InputWithLa
 import Button from '@/components/common/Button';
 import { signIn } from '@/lib/apis/auth';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 export default function LoginForm() {
   const [isEmailValid, setIsEmailValid] = useState<boolean>(false);
@@ -23,10 +24,13 @@ export default function LoginForm() {
     if (!isEmailValid || !isPasswordValid) return;
 
     try {
-      const response = await signIn({ email, password });
-      console.log(response);
+      const res = await signIn({ email, password });
+      console.log(res);
+      toast.success('로그인 성공'); // test
     } catch (error) {
-      console.error(error);
+      // handle login fail
+      // handle network error
+      console.error('Network Error:', error);
     }
   };
 
