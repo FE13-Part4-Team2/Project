@@ -6,7 +6,7 @@ import {
   Train,
   Runner,
   Smoke,
-} from '@/app/(landing)/_components/TopSection/Illustration/illustration';
+} from '@/app/(landing)/_components/TopSection/Illustration';
 
 const LandingTopSection = ({ className }: { className?: string }) => {
   return (
