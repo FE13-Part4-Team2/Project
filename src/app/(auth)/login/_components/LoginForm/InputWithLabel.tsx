@@ -136,7 +136,8 @@ export default function InputWithLabel({
         )}
       </div>
 
-      {isInputEmpty && (
+      {isInputEmpty && !isInputValid && (
+        // 비어있고, 유효하지도 않음
         <div className="text-danger">
           {inputType === 'password'
             ? `${inputTypeMap[inputType]}를 입력해주세요.`
@@ -144,7 +145,10 @@ export default function InputWithLabel({
         </div>
       )}
 
-      {!isInputValid && <div className="text-danger">{errorMessage}</div>}
+      {!isInputEmpty && !isInputValid && (
+        // 비어있지는 않지만, 유효하지 않음
+        <div className="text-danger">{errorMessage}</div>
+      )}
 
       {submitErrorMessage && (
         <div className="text-danger">{submitErrorMessage}</div>
