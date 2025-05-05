@@ -5,10 +5,10 @@ import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
 import Link from 'next/link';
 import { signIn } from '@/lib/apis/auth';
-import type { AuthBody, AuthResponse } from '@/lib/apis/auth/type';
+import type { AuthResponse } from '@/lib/apis/auth/type';
 import { useUserStore } from '@/store/useUserstore';
 
-export default function NotFound() {
+export default function LoginPage() {
   const router = useRouter();
   const saveUser = useUserStore((s) => s.saveUser);
 
@@ -24,11 +24,12 @@ export default function NotFound() {
 
     try {
       const res: AuthResponse | null = await signIn({
-        email,
-        password,
-      } as AuthBody);
-      if (res?.accessToken && res.user) {
-        Cookies.set('accessToken', res.accessToken, { path: '/' });
+        body: { email, password },
+      });
+
+      if (res?.accessToken && res.refreshToken && res.user) {
+        Cookies.set('accessToken', res.accessToken, { path: '/team' });
+        Cookies.set('refreshToken', res.refreshToken, { path: '/team' });
         saveUser(res.user);
         router.push('/');
       } else {

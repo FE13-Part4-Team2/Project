@@ -1,17 +1,17 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
+import { toast } from 'react-toastify';
+import { useUserStore } from '@/store/useUserstore';
+import { useAuth } from '@/hooks/useAuth';
+import { useMemberships } from '@/hooks/useMemberships';
 import Logo from './Logo';
 import TeamMenu from './TeamMenu';
 import UserMenu from './UserMenu';
 import SideMenu from './SideMenu';
-import { useUserStore } from '@/store/useUserstore';
-import Link from 'next/link';
 import IconRenderer from '@/components/common/Icons/IconRenderer';
-import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useAuth } from '@/hooks/useAuth';
-import { useMemberships } from '@/hooks/useMemberships';
 
 export default function Header() {
   const isLogin = useAuth();
@@ -25,12 +25,12 @@ export default function Header() {
 
   const handleLogout = () => {
     logout();
-    toast.success('로그아웃되었습니다');
+    toast.success('로그아웃 되었습니다');
   };
 
   if (!isLogin) {
     return (
-      <header className="h-[60px] w-full border border-slate-50/10 bg-[#1E293B] px-6 py-5">
+      <header className="h-[60px] w-full border border-slate-50/10 bg-slate-800 px-6 py-5">
         <div className="text-md-medium mx-auto flex h-full w-[1200px] max-w-[1920px] items-center justify-between leading-6 text-white">
           <Link
             href="/"
@@ -46,7 +46,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="h-[60px] w-full border border-slate-50/10 bg-[#1E293B] px-6 py-5">
+      <header className="h-[60px] w-full border border-slate-50/10 bg-slate-800 px-6 py-5">
         <div className="text-lg-medium mx-auto flex h-full max-w-[1200px] items-center justify-between leading-6 text-white">
           <nav className="flex items-center justify-between">
             <IconRenderer

@@ -4,8 +4,8 @@ import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import IconRenderer from '@/components/common/Icons/IconRenderer';
 import { UserMembershipResponse } from '@/lib/apis/user/type';
+import IconRenderer from '@/components/common/Icons/IconRenderer';
 
 interface TeamMenuProps {
   memberships: UserMembershipResponse[];
@@ -52,7 +52,7 @@ export default function TeamMenu({
             onClick={close}
           />
 
-          <div className="absolute top-[45px] left-[-140px] z-50 flex w-[218px] flex-col gap-4 rounded-xl bg-[#1E293B] p-4">
+          <div className="absolute top-[45px] left-[-140px] z-50 flex w-[218px] flex-col gap-4 rounded-xl bg-slate-800 p-4">
             {memberships.map(({ group, role }) => (
               <div
                 key={group.id}
@@ -60,7 +60,7 @@ export default function TeamMenu({
               >
                 <Link
                   href={`/team/${group.id}`}
-                  className="py flex flex-1 items-center gap-x-3 rounded-md p-1 transition-colors hover:bg-[#334155]"
+                  className="py flex flex-1 items-center gap-x-3 rounded-md p-1 transition-colors hover:bg-slate-700"
                   onClick={() => {
                     onSelect(group);
                     setOpen(false);
@@ -98,7 +98,7 @@ export default function TeamMenu({
             <Link href="/add-team">
               <button
                 type="button"
-                className="mt-2 h-12 w-[186px] cursor-pointer rounded-md border border-white py-1 transition-all hover:bg-white hover:text-[#1E293B]"
+                className="mt-2 h-12 w-[186px] cursor-pointer rounded-md border border-white py-1 transition-all hover:bg-white hover:text-slate-800"
                 onClick={close}
               >
                 + 팀 추가하기

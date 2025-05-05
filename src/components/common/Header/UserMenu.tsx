@@ -13,7 +13,7 @@ export default function UserMenu({
 }) {
   const [open, setOpen] = useState(false);
   const menuItemClass =
-    'flex items-center justify-center h-[47px] w-full px-4 py-2 hover:bg-[#334155]';
+    'flex items-center justify-center h-[47px] w-full px-4 py-2 hover:bg-slate-700';
 
   const close = () => setOpen(false);
 
