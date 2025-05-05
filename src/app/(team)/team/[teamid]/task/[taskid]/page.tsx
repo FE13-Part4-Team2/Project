@@ -18,9 +18,9 @@ export default async function TaskDetailPage({ params }: PageProps) {
       <TaskCommentSection />
       {taskData && (
         <ToggleTaskDoneButton
-          doneAt={taskData?.doneAt}
           variant="button"
           taskId={taskId}
+          doneAt={taskData?.doneAt}
         />
       )}
     </div>

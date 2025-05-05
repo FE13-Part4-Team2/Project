@@ -19,7 +19,7 @@ export default function TaskCard({
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2">
-            <ToggleTaskDoneButton doneAt={doneAt} taskId={id} />
+            <ToggleTaskDoneButton taskId={id} doneAt={doneAt} />
             <TitleButton name={name} id={id} doneAt={doneAt} />
           </div>
           <div className="flex items-center gap-0.5">
