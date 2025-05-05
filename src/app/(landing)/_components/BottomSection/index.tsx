@@ -6,7 +6,7 @@ import Workers from '@/app/(landing)/_components/BottomSection/Workers';
 const LandingBottomSection = ({ className }: { className?: string }) => {
   return (
     <section
-      className={`${className} relative flex h-screen w-full flex-col items-center text-center`}
+      className={`${className} relative flex w-full flex-col items-center text-center`}
     >
       <LandingBottomBg className="relative flex" />
       <LandingBottomText className="laptop:mt-55 tablet:mt-45 absolute mt-25" />

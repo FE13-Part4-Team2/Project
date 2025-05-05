@@ -31,7 +31,7 @@ const LandingBox = ({
         {/* 전체 아이템 컨테이너 */}
         <div
           className={clsx(
-            'flex',
+            'flex overflow-hidden',
             direction, // 정렬 순서
             'tablet:gap-25 laptop:gap-50 gap-10'
           )}
