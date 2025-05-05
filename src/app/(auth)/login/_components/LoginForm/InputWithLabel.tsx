@@ -9,6 +9,7 @@ export default function InputWithLabel({
   inputType,
   onValidChange,
   onValueChange,
+  submitErrorMessage,
   ...props
 }: InputWithLabelProps) {
   const [isInputEmpty, setIsInputEmpty] = useState<boolean>(false);
@@ -144,6 +145,10 @@ export default function InputWithLabel({
       )}
 
       {!isInputValid && <div className="text-danger">{errorMessage}</div>}
+
+      {submitErrorMessage && (
+        <div className="text-danger">{submitErrorMessage}</div>
+      )}
     </div>
   );
 }
