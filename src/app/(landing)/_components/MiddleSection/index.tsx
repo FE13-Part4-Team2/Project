@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { fadeInUp } from '@/app/(landing)/_components/styles/motionStyle';
+import { LANDING_IMAGE_URL } from '@/app/(landing)/_components/landingImageUrl';
 import LandingBox from '@/app/(landing)/_components/MiddleSection/LandingBox';
 
 const LandingMiddleSection = ({ className }: { className?: string }) => {
@@ -10,7 +11,7 @@ const LandingMiddleSection = ({ className }: { className?: string }) => {
       {/* BOX 1 */}
       <motion.div {...fadeInUp}>
         <LandingBox
-          imageSrc="/image/landing_mockup_team.png"
+          imageSrc={`${LANDING_IMAGE_URL}landing_mockup_team.png`}
           imageAlt="팀 페이지"
           iconSrc="/image/landing_icon_folder.png"
           iconAlt="폴더"
@@ -24,7 +25,7 @@ const LandingMiddleSection = ({ className }: { className?: string }) => {
       {/* BOX 2 */}
       <motion.div {...fadeInUp}>
         <LandingBox
-          imageSrc="/image/landing_mockup_invitation.png"
+          imageSrc={`${LANDING_IMAGE_URL}landing_mockup_invitation.png`}
           imageAlt="멤버 초대"
           imageOnTop
           iconSrc="/image/landing_icon_message.png"
@@ -39,7 +40,7 @@ const LandingMiddleSection = ({ className }: { className?: string }) => {
       {/* BOX 3 */}
       <motion.div {...fadeInUp}>
         <LandingBox
-          imageSrc="/image/landing_mockup_reply.png"
+          imageSrc={`${LANDING_IMAGE_URL}landing_mockup_reply.png`}
           imageAlt="댓글"
           imageOnTop
           tabletReverse
