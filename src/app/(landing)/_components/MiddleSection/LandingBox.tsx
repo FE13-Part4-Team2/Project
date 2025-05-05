@@ -22,25 +22,24 @@ const LandingBox = ({
   gradient = false,
   className,
 }: LandingBoxProps) => {
-  const wrapperClass = gradient ? boxGradientStyle : '';
-  const direction = getFlexDirection(tabletReverse, mobileReverse);
+  const wrapperClass = gradient ? boxGradientStyle : ''; // 그라데이션 외곽선용
+  const direction = getFlexDirection(tabletReverse, mobileReverse); // 아이템 정렬 순서 지정
 
   return (
     <div className={wrapperClass}>
       <div className={clsx(boxStyle, className)}>
-        {/* 전체 아이템 컨테이너 */}
+        {/* 아이템 컨테이너 */}
         <div
           className={clsx(
             'flex overflow-hidden',
-            direction, // 정렬 순서
+            direction,
             'tablet:gap-25 laptop:gap-50 gap-10'
           )}
         >
           {/* 아이콘 & 텍스트 */}
           <div
             className={clsx(
-              'flex flex-col gap-[16px]',
-              'justify-center',
+              'flex flex-col justify-center gap-[16px]',
               textLeft ? 'items-start text-left' : 'items-end text-right'
             )}
           >
@@ -56,7 +55,6 @@ const LandingBox = ({
               {textLines[1]}
             </h1>
           </div>
-
           {/* 이미지 */}
           <div
             className={clsx('flex', imageOnTop ? 'items-start' : 'items-end')}

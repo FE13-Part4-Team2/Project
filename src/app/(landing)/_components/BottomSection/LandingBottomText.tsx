@@ -1,6 +1,12 @@
+import { motion } from 'framer-motion';
+import { fadeInUp } from '@/app/(landing)/_components/MiddleSection/style';
+
 export const LandingBottomText = ({ className }: { className?: string }) => {
   return (
-    <div className={`${className} tablet:gap-[24px] flex flex-col gap-[16px]`}>
+    <motion.div
+      {...fadeInUp}
+      className={`${className} tablet:gap-[24px] flex flex-col gap-[16px]`}
+    >
       <h1 className="tablet:text-[40px] text-[24px] font-semibold">
         지금 바로 시작해 보세요
       </h1>
@@ -9,6 +15,6 @@ export const LandingBottomText = ({ className }: { className?: string }) => {
         <br className="tablet:hidden" />
         같은 속도로 나아가는 가장 쉬운 방법
       </p>
-    </div>
+    </motion.div>
   );
 };
