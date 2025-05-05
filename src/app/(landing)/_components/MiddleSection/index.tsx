@@ -12,9 +12,9 @@ const LandingMiddleSection = ({ className }: { className?: string }) => {
       <motion.div {...fadeInUp}>
         <LandingBox
           imageSrc={`${LANDING_IMAGE_URL}landing_mockup_team.png`}
-          imageAlt="팀 페이지"
-          iconSrc="/image/landing_icon_folder.png"
-          iconAlt="폴더"
+          imageAlt="팀 페이지 이미지"
+          iconSrc={`${LANDING_IMAGE_URL}landing_icon_folder.png`}
+          iconAlt="폴더 아이콘"
           textLines={['그룹으로', '일정을 관리해요']}
           tabletReverse
           gradient
@@ -26,10 +26,10 @@ const LandingMiddleSection = ({ className }: { className?: string }) => {
       <motion.div {...fadeInUp}>
         <LandingBox
           imageSrc={`${LANDING_IMAGE_URL}landing_mockup_invitation.png`}
-          imageAlt="멤버 초대"
+          imageAlt="멤버 초대 이미지"
           imageOnTop
-          iconSrc="/image/landing_icon_message.png"
-          iconAlt="메시지"
+          iconSrc={`${LANDING_IMAGE_URL}landing_icon_message.png`}
+          iconAlt="메시지 아이콘"
           textLines={['간단하게 멤버들을', '초대해요']}
           textLeft={false}
           mobileReverse
@@ -41,12 +41,12 @@ const LandingMiddleSection = ({ className }: { className?: string }) => {
       <motion.div {...fadeInUp}>
         <LandingBox
           imageSrc={`${LANDING_IMAGE_URL}landing_mockup_reply.png`}
-          imageAlt="댓글"
+          imageAlt="댓글 이미지"
           imageOnTop
           tabletReverse
           mobileReverse
-          iconSrc="/image/landing_icon_check.png"
-          iconAlt="체크"
+          iconSrc={`${LANDING_IMAGE_URL}landing_icon_check.png`}
+          iconAlt="체크 아이콘"
           textLines={['할 일도 간편하게', '체크해요']}
           className="items-start bg-slate-950"
         />
