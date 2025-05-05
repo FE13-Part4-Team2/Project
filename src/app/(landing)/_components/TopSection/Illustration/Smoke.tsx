@@ -12,7 +12,7 @@ const Smoke = ({ className }: { className?: string }) => {
     >
       <Image
         src={`${LANDING_IMAGE_URL}smoke.svg`}
-        alt="흙먼지 연기"
+        alt="흙먼지 흙먼지"
         fill
         className="object-contain"
       />

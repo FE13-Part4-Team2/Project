@@ -1,6 +1,7 @@
 'use client';
 import clsx from 'clsx';
 import LandingTopBg from '@/app/(landing)/_components/TopSection/LandingTopBg';
+import LandingTopLight from '@/app/(landing)/_components/TopSection/Illustration/Light';
 import LandingTopText from '@/app/(landing)/_components/TopSection/LandingTopText';
 import {
   Train,
@@ -15,7 +16,8 @@ const LandingTopSection = ({ className }: { className?: string }) => {
     >
       {/* 배경 크기 고정용 컨테이너 */}
       <div className="relative flex max-w-none min-w-[1920px] justify-center overflow-hidden">
-        <LandingTopBg className="relative" />
+        <LandingTopBg className="relative z-1" />
+        <LandingTopLight />
         <LandingTopText className="laptop:mt-19 tablet:mt-22.5 absolute z-10 mt-12" />
 
         {/* 아이템 컨테이너 */}

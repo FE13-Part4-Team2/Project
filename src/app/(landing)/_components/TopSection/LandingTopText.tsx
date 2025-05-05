@@ -14,7 +14,7 @@ export default function LandingTopText({ className }: { className?: string }) {
   const container = {
     ani: {
       transition: {
-        staggerChildren: 0.04, // 글자 등장 간격
+        staggerChildren: 0.05, // 글자 등장 간격
       },
     },
   };

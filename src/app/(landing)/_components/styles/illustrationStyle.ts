@@ -31,7 +31,7 @@ export const train3Style = clsx(
   'shrink-0 object-contain'
 );
 
-// Smoke.tsx 연기
+// Smoke.tsx 흙먼지
 export const smokeStyle = clsx(
   'absolute',
   'laptop:w-[255px] laptop:h-[110px]',

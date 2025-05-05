@@ -39,7 +39,7 @@ export const trainReverseMotion: Pick<
   },
 };
 
-// Smoke.tsx 연기 일렁임
+// Smoke.tsx 흙먼지 일렁임
 export const smokeMotion: Pick<
   HTMLMotionProps<'div'>,
   'initial' | 'animate' | 'transition'

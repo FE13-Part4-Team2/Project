@@ -14,6 +14,8 @@ const LandingBottomSection = ({ className }: { className?: string }) => {
       </div>
 
       <LandingBottomText className="laptop:mt-55 tablet:mt-45 absolute mt-25" />
+
+      {/* 걷는 인부들 모션 */}
       <Workers
         className={clsx(
           'absolute',
