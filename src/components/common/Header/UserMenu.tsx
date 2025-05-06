@@ -60,7 +60,7 @@ export default function UserMenu({
                 팀 참여
               </button>
             </Link>
-            <Link href="/login">
+            <Link href="/">
               <button
                 type="button"
                 className={`${menuItemClass} cursor-pointer rounded-b-md`}
