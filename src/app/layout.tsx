@@ -4,7 +4,7 @@ import { Metadata } from 'next';
 import Header from '@/components/common/header';
 import Toast from '@/components/common/Toast';
 import Modal from '@/components/common/Modal';
-import Providers from '@/components/common/Providers';
+import Providers from '@/app/Providers';
 
 const pretendard = localFont({
   src: './fonts/PretendardVariable.woff2',
