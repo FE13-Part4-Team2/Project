@@ -156,7 +156,7 @@ const Icons = {
     <Edit
       width={size}
       height={size}
-      className={`text-[#64748B] ${className}`}
+      className={`text-slate-500 ${className}`}
       onClick={onClick}
     />
   ),
