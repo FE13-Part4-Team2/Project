@@ -1,6 +1,4 @@
 'use client';
-import { motion } from 'framer-motion';
-import { fadeInUp } from '@/app/(landing)/_components/styles/motionStyle';
 import DummyHeader from '@/app/(landing)/_components/DummyHeader';
 import LandingTopSection from '@/app/(landing)/_components/TopSection';
 import LandingMiddleSection from '@/app/(landing)/_components/MiddleSection';
@@ -13,15 +11,9 @@ export default function LandingPage() {
       <div className="flex flex-1 overflow-hidden">
         <DummyHeader />
       </div>
-
       <LandingTopSection />
-
-      <motion.div {...fadeInUp} className="flex justify-center">
-        <StartButton className="tablet:mt-10 laptop:mt-0" />
-      </motion.div>
-
+      <StartButton className="tablet:mt-10 laptop:mt-0" />
       <LandingMiddleSection className="laptop::mt-45 tablet:mt-30 mt-12" />
-
       <LandingBottomSection />
     </div>
   );
