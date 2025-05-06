@@ -27,8 +27,14 @@ export default function LoginForm() {
 
     if (!isEmailValid || !isPasswordValid) return;
 
+    //
     try {
-      const res = await signIn({ email, password });
+      const res = await signIn({
+        body: {
+          email,
+          password,
+        },
+      });
       console.log(res);
       toast.success('로그인 성공'); // test
     } catch (error) {
