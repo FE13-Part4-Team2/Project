@@ -53,48 +53,50 @@ export default function TeamMenu({
             onClick={close}
           />
 
-          <div className="absolute top-[45px] left-[-140px] z-50 flex w-[218px] flex-col gap-4 rounded-xl bg-slate-800 p-4">
-            {memberships.map(({ group, role }) => (
-              <div
-                key={group.id}
-                className="flex items-center gap-x-3 rounded-md px-2 py-2"
-              >
-                <Link
-                  href={`/team/${group.id}`}
-                  className="py flex flex-1 items-center gap-x-3 rounded-md p-1 transition-colors hover:bg-slate-700"
-                  onClick={() => {
-                    onSelect(group);
-                    setOpen(false);
-                  }}
+          <div className="absolute top-[45px] left-[-140px] z-50 flex w-[240px] flex-col gap-4 rounded-xl border border-slate-50/10 bg-slate-800 p-4">
+            <div className="team-menu-scroll flex max-h-[350px] flex-col gap-4 overflow-y-auto">
+              {memberships.map(({ group, role }) => (
+                <div
+                  key={group.id}
+                  className="flex items-center gap-x-3 rounded-md px-2 py-2"
                 >
-                  <div className="relative h-8 w-8">
-                    <Image
-                      src={group.image ?? '/image/default_team_img.png'}
-                      alt={group.name}
-                      fill
-                      unoptimized
-                      className="rounded-sm object-cover"
-                    />
-                  </div>
-                  <span className="text-sm whitespace-nowrap">
-                    {group.name}
-                  </span>
-                </Link>
-
-                {role === 'ADMIN' && (
                   <Link
-                    href={`/team/${group.id}/edit`}
-                    onClick={() => setOpen(false)}
+                    href={`/team/${group.id}`}
+                    className="py flex flex-1 items-center gap-x-3 rounded-md p-1 transition-colors hover:bg-slate-700"
+                    onClick={() => {
+                      onSelect(group);
+                      setOpen(false);
+                    }}
                   >
-                    <IconRenderer
-                      name="EditIcon"
-                      size={20}
-                      className="cursor-pointer hover:text-green-700"
-                    />
+                    <div className="relative h-8 w-8">
+                      <Image
+                        src={group.image ?? '/image/default_team_img.png'}
+                        alt={group.name}
+                        fill
+                        unoptimized
+                        className="rounded-sm object-cover"
+                      />
+                    </div>
+                    <span className="text-sm whitespace-nowrap">
+                      {group.name}
+                    </span>
                   </Link>
-                )}
-              </div>
-            ))}
+
+                  {role === 'ADMIN' && (
+                    <Link
+                      href={`/team/${group.id}/edit`}
+                      onClick={() => setOpen(false)}
+                    >
+                      <IconRenderer
+                        name="EditIcon"
+                        size={20}
+                        className="cursor-pointer hover:text-green-700"
+                      />
+                    </Link>
+                  )}
+                </div>
+              ))}
+            </div>
 
             <Link href="/add-team">
               <Button
