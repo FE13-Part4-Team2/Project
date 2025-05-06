@@ -1,7 +1,7 @@
 import '@/app/styles/globals.css';
 import localFont from 'next/font/local';
 import { Metadata } from 'next';
-import Header from '@/components/common/header';
+import Header from '@/components/common/Header';
 import Toast from '@/components/common/Toast';
 import Modal from '@/components/common/Modal';
 import Providers from '@/app/Providers';
