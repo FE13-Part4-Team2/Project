@@ -11,7 +11,7 @@ const Workers = ({ className }: { className?: string }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setIsFirstFrame((prev) => !prev);
-    }, 350); // 프레임 변경 간격
+    }, 500); // 프레임 변경 간격
 
     return () => clearInterval(interval);
   }, []);
