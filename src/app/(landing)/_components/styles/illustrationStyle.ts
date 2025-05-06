@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 
 // 📌 Top Section //
+
 // Train.tsx wrapper
 export const trainWrapper = clsx(
   'relative flex items-end justify-center',

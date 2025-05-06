@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { LANDING_IMAGE_URL } from '@/app/(landing)/_components/landingImageUrl';
 
-const LandingTopLight = () => {
+const Light = () => {
   return (
     /* 빛 일러스트 */
     <div className="absolute">
@@ -30,4 +30,4 @@ const LandingTopLight = () => {
   );
 };
 
-export default LandingTopLight;
+export default Light;
