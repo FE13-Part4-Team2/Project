@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { toast } from 'react-toastify';
-import { useUserStore } from '@/store/useUserstore';
+import { useUserStore } from '@/store/useUserStore';
 import { useAuth } from '@/hooks/useAuth';
 import { useMemberships } from '@/hooks/useMemberships';
 import Logo from './Logo';

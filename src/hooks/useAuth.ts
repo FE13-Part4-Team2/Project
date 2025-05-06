@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useUserStore } from '@/store/useUserstore';
+import { useUserStore } from '@/store/useUserStore';
 
 export function useAuth() {
   const isLogin = useUserStore((s) => s.isLogin);
