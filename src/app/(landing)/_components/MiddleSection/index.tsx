@@ -6,7 +6,7 @@ import LandingBox from '@/app/(landing)/_components/MiddleSection/LandingBox';
 const LandingMiddleSection = ({ className }: { className?: string }) => {
   return (
     <section
-      className={`${className} flex w-full flex-col items-center gap-20`}
+      className={`${className} laptop:gap-20 flex w-full flex-col items-center gap-[24px]`}
     >
       {/* BOX 1 */}
       <motion.div {...fadeInUp}>

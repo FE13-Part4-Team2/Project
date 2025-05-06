@@ -27,7 +27,7 @@ const LandingBox = ({
 
   return (
     <div className={wrapperClass}>
-      <div className={clsx(boxStyle, className)}>
+      <div className={`${boxStyle} ${className}`}>
         {/* 아이템 컨테이너 */}
         <div
           className={clsx(

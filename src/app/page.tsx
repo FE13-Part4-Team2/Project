@@ -1,5 +1,4 @@
 'use client';
-
 import { motion } from 'framer-motion';
 import { fadeInUp } from '@/app/(landing)/_components/styles/motionStyle';
 import DummyHeader from '@/app/(landing)/_components/DummyHeader';

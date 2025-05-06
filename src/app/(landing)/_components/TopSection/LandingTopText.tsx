@@ -1,54 +1,55 @@
+// 상단 섹션 text 및 애니메이션
 import { motion } from 'framer-motion';
 import clsx from 'clsx';
 import IconRenderer from '@/components/common/Icons/IconRenderer';
 
-const text = '함께 만들어가는 투두 리스트';
+const description = '함께 만들어가는 투두 리스트';
 const title = 'Coworkers';
 
-const descriptiontitleTextStyle =
+const descriptionStyle =
   'laptop:text-[48px] tablet:text-[40px] text-[24px] font-semibold';
-const titleTextStyle =
+const titleStyle =
   'laptop:text-[64px] tablet:text-[48px] text-[32px] font-semibold';
 
+const motionContainer = {
+  ani: {
+    transition: {
+      staggerChildren: 0.05, // 1행 텍스트 모션 전체 실행 시간
+    },
+  },
+};
+
+const motionChild = {
+  ani: {
+    y: [0, -20, 0],
+    transition: {
+      duration: 0.3, // 1행 텍스트 모션 글자별 실행 시간
+      ease: 'easeOut',
+    },
+  },
+};
+
 export default function LandingTopText({ className }: { className?: string }) {
-  const container = {
-    ani: {
-      transition: {
-        staggerChildren: 0.05, // 글자 등장 간격
-      },
-    },
-  };
-
-  const child = {
-    ani: {
-      y: [0, -20, 0],
-      transition: {
-        duration: 0.3,
-        ease: 'easeOut',
-      },
-    },
-  };
-
   return (
     <div className={`${className} flex flex-col`}>
-      {/* 설명 행 */}
+      {/* ✏️1행_설명 */}
       <motion.div
-        variants={container}
+        variants={motionContainer}
         animate="ani"
         className="flex flex-wrap items-center justify-center"
       >
-        {/* 글자 */}
-        {text.split('').map((char, index) =>
+        {/* 문장을 글자로 분리, 각 글자에 index 부여 */}
+        {description.split('').map((char, index) =>
           char === ' ' ? (
-            <span key={index} className="tablet:w-3 w-1.5" />
+            <span key={index} className="tablet:w-3 w-1.5" /> // 공백 제거 방지
           ) : (
-            <motion.span key={index} variants={child}>
-              <h1 className={`${descriptiontitleTextStyle}`}>{char}</h1>
+            <motion.span key={index} variants={motionChild}>
+              <h1 className={`${descriptionStyle}`}>{char}</h1>
             </motion.span>
           )
         )}
         {/* 아이콘 */}
-        <motion.span variants={child}>
+        <motion.span variants={motionChild}>
           <IconRenderer
             name="RepairIcon"
             className={clsx(
@@ -59,11 +60,11 @@ export default function LandingTopText({ className }: { className?: string }) {
         </motion.span>
       </motion.div>
 
-      {/* 제목 행 */}
+      {/* ✏️2행_제목 */}
       <div className="relative inline-block overflow-hidden">
         <h1
           className={clsx(
-            titleTextStyle,
+            titleStyle,
             'bg-gradient-to-r from-green-700 to-[#CEF57E] bg-clip-text text-transparent',
             'relative'
           )}
@@ -76,16 +77,16 @@ export default function LandingTopText({ className }: { className?: string }) {
           animate={{ opacity: [0, 1, 0] }}
           transition={{
             duration: 1.2,
-            delay: text.length * 0.02,
+            delay: description.length * 0.02,
             ease: 'easeInOut',
           }}
           className={clsx(
+            titleStyle,
             'absolute inset-0',
             'bg-gradient-to-r from-transparent via-white/90 to-transparent',
             'bg-clip-text text-transparent',
             'blur-sm',
-            'bg-[length:100%_100%]',
-            titleTextStyle
+            'bg-[length:100%_100%]'
           )}
         >
           {title}

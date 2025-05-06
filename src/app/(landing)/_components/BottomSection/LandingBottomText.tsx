@@ -1,3 +1,4 @@
+// 하단 섹션 text 및 애니메이션
 import { motion } from 'framer-motion';
 import { fadeInUp } from '@/app/(landing)/_components/styles/motionStyle';
 
