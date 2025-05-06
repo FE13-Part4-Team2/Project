@@ -24,19 +24,19 @@ export default function SideMenu({
           />
 
           <div
-            className={`fixed top-0 left-0 z-50 h-full w-[250px] border border-slate-50/10 bg-slate-800 p-6 transition-transform duration-300 ${isSideMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
+            className={`fixed top-0 left-0 z-50 h-[812px] w-[250px] border border-slate-50/10 bg-slate-800 p-6 transition-transform duration-300 ${isSideMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
           >
-            <div className="mb-8 flex justify-end">
+            <div className="mb-8 flex shrink-0 justify-end">
               <button
                 type="button"
-                className="cursor-pointer hover:cursor-pointer"
+                className="cursor-pointer"
                 onClick={onClose}
               >
                 <IconRenderer name="XIcon" className="hover:text-green-100" />
               </button>
             </div>
 
-            <ul className="flex flex-col gap-6 text-sm font-normal">
+            <ul className="header-scroll flex h-[700px] flex-col gap-6 overflow-y-auto overscroll-contain text-sm font-normal">
               {memberships.map(({ group, role }) => (
                 <li
                   key={group.id}
@@ -59,7 +59,7 @@ export default function SideMenu({
                       <IconRenderer
                         name="EditIcon"
                         size={20}
-                        className="hover:text-green-700"
+                        className="mr-5 hover:text-green-700"
                       />
                     </Link>
                   )}

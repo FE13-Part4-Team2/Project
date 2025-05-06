@@ -54,7 +54,7 @@ export default function TeamMenu({
           />
 
           <div className="absolute top-[45px] left-[-140px] z-50 flex w-[240px] flex-col gap-4 rounded-xl border border-slate-50/10 bg-slate-800 p-4">
-            <div className="team-menu-scroll flex max-h-[350px] flex-col gap-4 overflow-y-auto">
+            <div className="header-scroll flex max-h-[350px] flex-col gap-4 overflow-y-auto">
               {memberships.map(({ group, role }) => (
                 <div
                   key={group.id}
