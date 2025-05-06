@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { getCookie, deleteCookie } from '@/utils/cookieUtill';
+import { getCookie, deleteCookie } from '@/utils/cookieUtil';
 import type { UserResponse } from '@/lib/apis/user/type';
 
 interface UserState {

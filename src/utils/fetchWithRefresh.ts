@@ -1,5 +1,5 @@
 import Cookies from 'js-cookie';
-import { getCookie } from '@/utils/cookieUtill';
+import { getCookie } from '@/utils/cookieUtil';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL!;
 
