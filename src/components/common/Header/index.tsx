@@ -26,12 +26,12 @@ export default function Header() {
     ? ROUTES.TEAM(selectedGroup.id)
     : ROUTES.TEAM_NO;
 
-  const { data: user } = useQuery<UserResponse, Error>({
+  const { data: currentUser } = useQuery<UserResponse, Error>({
     queryKey: ['currentUser'],
     queryFn: async () => {
-      const u = await getUser({});
-      if (!u) throw new Error('유저 정보를 가져오지 못했습니다');
-      return u;
+      const fetchedUser = await getUser({});
+      if (!fetchedUser) throw new Error('유저 정보를 가져오지 못했습니다');
+      return fetchedUser;
     },
     enabled: isLogin && Boolean(selectedGroup),
   });
@@ -88,7 +88,7 @@ export default function Header() {
             </div>
           </nav>
 
-          <UserMenu nickname={user?.nickname} onLogout={handleLogout} />
+          <UserMenu nickname={currentUser?.nickname} onLogout={handleLogout} />
         </div>
       </header>
 
