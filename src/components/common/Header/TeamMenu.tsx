@@ -85,6 +85,7 @@ export default function TeamMenu({
                         src={group.image ?? '/image/default_team_img.png'}
                         alt={group.name}
                         fill
+                        // 임시조치 - 나중에 도메인 추가 예정
                         unoptimized
                         className="rounded-sm object-cover"
                       />
