@@ -44,7 +44,7 @@ export default function Header() {
 
   if (!isLogin) {
     return (
-      <header className="h-[60px] w-full border border-slate-50/10 bg-slate-800 px-6 py-5">
+      <header className="h-[60px] w-full border-b border-slate-50/10 bg-slate-800 px-6 py-5">
         <div className="text-md-medium mx-auto flex h-full w-[1200px] max-w-[1920px] items-center justify-between leading-6 text-white">
           <Link
             href={ROUTES.HOME}
@@ -60,7 +60,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="h-[60px] w-full border border-slate-50/10 bg-slate-800 px-6 py-5">
+      <header className="h-[60px] w-full border-b border-slate-50/10 bg-slate-800 px-6 py-5">
         <div className="text-lg-medium mx-auto flex h-full max-w-[1200px] items-center justify-between leading-6 text-white">
           <nav className="flex items-center justify-between">
             <IconRenderer
