@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { CommentResponse } from '@/lib/apis/comment/type';
 import Button from '@/components/common/Button';
+import { patchTaskComment } from '@/lib/apis/comment';
 
 export default function EditableTaskCommentCard({
+  id,
   content,
   exitCommentEditMode,
 }: CommentResponse & {
@@ -12,6 +14,19 @@ export default function EditableTaskCommentCard({
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setEditedComment(e.target.value);
+  };
+
+  const handleEditComment = async () => {
+    try {
+      await patchTaskComment({
+        commentId: id,
+        body: { content: editedComment },
+        tag: ['task-comment'],
+      });
+      exitCommentEditMode();
+    } catch (error) {
+      console.log('Failed to update the comment on the task :', error);
+    }
   };
 
   const isEditValid = editedComment.trim() !== '' && editedComment !== content;
@@ -39,6 +54,7 @@ export default function EditableTaskCommentCard({
           className="w-[74px]"
           radius="sm"
           size="sm"
+          onClick={handleEditComment}
           disabled={!isEditValid}
         >
           <div className="text-md-semibold">수정하기</div>

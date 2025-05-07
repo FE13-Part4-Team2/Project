@@ -36,14 +36,17 @@ export async function postTaskComment({
 export async function patchTaskComment({
   commentId,
   body,
+  tag,
 }: {
   commentId: number;
   body: CommentBody;
+  tag?: string[];
 }): Promise<CommentResponse | null> {
-  return clientFetcher<CommentBody, CommentResponse>({
+  return serverFetcher<CommentBody, CommentResponse>({
     url: `/tasks/{taskId}/comments/${commentId}`,
     method: 'PATCH',
     body,
+    tag,
   });
 }
 
