@@ -29,7 +29,9 @@ export default function TeamMenu({
   useEffect(() => {
     if (teamId == null || isNaN(teamId)) return;
     if (selectedGroup?.id === teamId) return;
-    const found = memberships.find((x) => x.group.id === teamId);
+    const found = memberships.find(
+      (membership) => membership.group.id === teamId
+    );
     if (found) {
       onSelect(found.group);
     }
