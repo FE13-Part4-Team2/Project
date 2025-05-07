@@ -50,11 +50,14 @@ export async function patchTaskComment({
 // 특정 댓글 삭제 (DELETE /tasks/:taskId/comments/:commentId)
 export async function deleteTaskComment({
   commentId,
+  tag,
 }: {
   commentId: number;
+  tag?: string[];
 }): Promise<null> {
-  return clientFetcher<undefined, null>({
+  return serverFetcher<undefined, null>({
     url: `/tasks/{taskId}/comments/${commentId}`,
     method: 'DELETE',
+    tag,
   });
 }
