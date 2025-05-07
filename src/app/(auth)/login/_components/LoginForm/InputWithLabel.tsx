@@ -5,10 +5,12 @@ import { useState } from 'react';
 
 interface InputWithLabelProps {
   inputType: 'email' | 'password' | 'name' | 'passwordConfirm';
+  errorMessage: string;
 }
 
 export default function InputWithLabel({
   inputType,
+  errorMessage,
   ...props
 }: InputWithLabelProps) {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -65,6 +67,7 @@ export default function InputWithLabel({
           </div>
         )}
       </div>
+      {errorMessage && <span className="border-danger">{errorMessage}</span>}
     </div>
   );
 }
