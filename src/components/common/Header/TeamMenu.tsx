@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { usePathname } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { UserMembershipResponse } from '@/lib/apis/user/type';
@@ -20,21 +20,22 @@ export default function TeamMenu({
   selectedGroup,
   onSelect,
 }: TeamMenuProps) {
-  const pathname = usePathname();
+  const params = useParams();
+  const teamIdParam = params.teamid;
+  const teamId = teamIdParam ? Number(teamIdParam) : undefined;
+
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const m = pathname.match(/^\/team\/(\d+)/);
-    if (!m) return;
-    const teamId = Number(m[1]);
+    if (teamId == null || isNaN(teamId)) return;
     if (selectedGroup?.id === teamId) return;
     const found = memberships.find((x) => x.group.id === teamId);
     if (found) {
       onSelect(found.group);
     }
-  }, [pathname, memberships, selectedGroup, onSelect]);
+  }, [teamId, memberships, selectedGroup, onSelect]);
 
-  const label = pathname.startsWith('/team/') ? selectedGroup?.name : '팀 목록';
+  const label = teamId != null ? selectedGroup?.name : '팀 목록';
   const close = () => setOpen(false);
 
   const baseLink = selectedGroup
