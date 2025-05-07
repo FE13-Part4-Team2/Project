@@ -36,7 +36,6 @@ export default function Header() {
     Cookies.remove('accessToken', { path: '/' });
     Cookies.remove('refreshToken', { path: '/' });
     toast.success('로그아웃 되었습니다');
-    window.location.href = ROUTES.HOME;
   };
 
   if (!isLogin) {
