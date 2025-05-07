@@ -14,7 +14,7 @@ export async function getTaskListById({
 }: {
   taskListId: number;
   date: string;
-  tag?: string;
+  tag?: string[];
 }): Promise<TaskListResponse | null> {
   return serverFetcher<undefined, TaskListResponse>({
     url: `/groups/{groupId}/task-lists/${taskListId}?date=${date}`,

@@ -19,7 +19,7 @@ export default async function serverFetcher<B, R>({
   url: string;
   method: 'GET' | 'POST' | 'PATCH' | 'DELETE';
   body?: B;
-  tag?: string;
+  tag?: string[];
 }): Promise<R | null> {
   const request = async (token?: string): Promise<Response> => {
     const headers: HeadersInit = {
@@ -32,7 +32,7 @@ export default async function serverFetcher<B, R>({
       method,
       headers,
       body: body ? JSON.stringify(body) : undefined,
-      ...(tag && method === 'GET' && { next: { tags: [tag] } }),
+      ...(tag && method === 'GET' && { next: { tags: tag } }),
     });
   };
 
@@ -55,7 +55,7 @@ export default async function serverFetcher<B, R>({
   }
 
   if (tag && method !== 'GET') {
-    revalidateTag(tag);
+    revalidateTag(tag[0]);
   }
 
   return res.status === 204 ? null : res.json();

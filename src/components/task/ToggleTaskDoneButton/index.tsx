@@ -16,7 +16,7 @@ export default function ToggleTaskDoneButton({
 }) {
   const updateTaskToDone = async () => {
     try {
-      await patchTaskById({ taskId, body: { done: true }, tag: 'task' });
+      await patchTaskById({ taskId, body: { done: true }, tag: ['task'] });
     } catch (error) {
       console.error('Failed to update the task status :', error);
     }
@@ -24,7 +24,7 @@ export default function ToggleTaskDoneButton({
 
   const updateTaskToUndone = async () => {
     try {
-      await patchTaskById({ taskId, body: { done: false }, tag: 'task' });
+      await patchTaskById({ taskId, body: { done: false }, tag: ['task'] });
     } catch (error) {
       console.error('Failed to update the task status :', error);
     }

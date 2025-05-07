@@ -31,7 +31,7 @@ export async function getTaskById({
   tag,
 }: {
   taskId: number;
-  tag?: string;
+  tag?: string[];
 }): Promise<TaskResponse | null> {
   return serverFetcher<undefined, TaskResponse>({
     url: `/groups/{groupId}/task-lists/{taskListId}/tasks/${taskId}`,
@@ -48,7 +48,7 @@ export async function patchTaskById({
 }: {
   taskId: number;
   body: TaskBody;
-  tag?: string;
+  tag?: string[];
 }): Promise<TaskResponse | null> {
   return serverFetcher<TaskBody, TaskResponse>({
     url: `/groups/{groupId}/task-lists/{taskListId}/tasks/${taskId}`,
