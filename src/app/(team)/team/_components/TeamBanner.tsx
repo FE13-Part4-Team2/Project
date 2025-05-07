@@ -1,10 +1,25 @@
+'use client';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { ROUTES } from '@/constants/routes';
 import Image from 'next/image';
 import clsx from 'clsx';
 import IconRenderer from '@/components/common/Icons/IconRenderer';
+import DropDown from '@/components/common/Dropdown';
 
 const title = '경영관리팀';
 
 const TeamBanner = () => {
+  const router = useRouter();
+
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const openMenu = () => {
+    setIsMenuOpen(true);
+  };
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
   return (
     <div
       className={clsx(
@@ -24,7 +39,21 @@ const TeamBanner = () => {
         className="tablet:left-[75%] absolute left-1/2 -translate-x-1/2"
       />
       {title}
-      <IconRenderer name="GearIcon" />
+      <IconRenderer
+        onClick={openMenu}
+        name="GearIcon"
+        className="cursor-pointer"
+      />
+      <DropDown handleClose={closeMenu}>
+        <DropDown.Menu>
+          <DropDown.Item onClick={() => router.push('/')}>
+            수정하기
+          </DropDown.Item>
+          <DropDown.Item onClick={() => router.push('/')}>
+            삭제하기
+          </DropDown.Item>
+        </DropDown.Menu>
+      </DropDown>
     </div>
   );
 };
