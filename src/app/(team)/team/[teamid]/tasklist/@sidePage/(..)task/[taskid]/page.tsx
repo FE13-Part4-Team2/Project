@@ -18,7 +18,7 @@ export default function Page(props: PageProps) {
           <CloseButton />
           <ExpansionButton />
         </div>
-        <div className="tablet:pb-10 flex-1 overflow-y-auto pb-6">
+        <div className="tablet:pb-10 scrollbar-hide flex-1 overflow-y-auto pb-6">
           <TaskDetailPage {...props} />
         </div>
       </div>

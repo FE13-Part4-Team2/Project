@@ -55,13 +55,13 @@ export default function TaskListMenu({
     );
   };
   // 추후에 할 일 삭제 API 연결 예정
-  const handleDeleteListTask = () => console.log('삭제하기');
+  const handleDeleteTaskList = () => console.log('삭제하기');
 
   return (
     <>
       {isAdmin && (
         <DropDown>
-          <DropDown.Trigger className="p-0">
+          <DropDown.Trigger>
             <TaskListMenuButton size={size} />
           </DropDown.Trigger>
           <DropDown.Menu align="right">
@@ -71,7 +71,7 @@ export default function TaskListMenu({
             <DropDown.Item onClick={openEditTaskListModal}>
               수정하기
             </DropDown.Item>
-            <DropDown.Item onClick={handleDeleteListTask}>
+            <DropDown.Item onClick={handleDeleteTaskList}>
               삭제하기
             </DropDown.Item>
           </DropDown.Menu>
