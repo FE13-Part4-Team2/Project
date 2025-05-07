@@ -8,17 +8,19 @@ export default function EditableTaskCommentCard({
 }: CommentResponse & {
   exitCommentEditMode: () => void;
 }) {
-  const [inputValue, setInputValue] = useState(content);
+  const [editedComment, setEditedComment] = useState(content);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setInputValue(e.target.value);
+    setEditedComment(e.target.value);
   };
+
+  const isEditValid = editedComment.trim() !== '' && editedComment !== content;
 
   return (
     <div className="flex flex-col gap-4 border-b-2 border-slate-50/10 pb-4">
       <div>
         <textarea
-          value={inputValue}
+          value={editedComment}
           onChange={handleChange}
           className="text-md-regular w-full resize-none"
         />
@@ -37,6 +39,7 @@ export default function EditableTaskCommentCard({
           className="w-[74px]"
           radius="sm"
           size="sm"
+          disabled={!isEditValid}
         >
           <div className="text-md-semibold">수정하기</div>
         </Button>

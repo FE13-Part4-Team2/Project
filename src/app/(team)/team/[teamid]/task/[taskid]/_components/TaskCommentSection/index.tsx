@@ -11,24 +11,24 @@ export default function TaskCommentSection({
 }: {
   items: CommentResponse[];
 }) {
-  const [isEditMode, setIsEditMode] = useState(false);
+  const [editingCommentId, setEditingCommentId] = useState<number | null>(null);
 
   return (
     <div className="flex flex-col gap-6">
       <TaskCommentInput />
       <div className="flex flex-col gap-4">
         {items.map((item) =>
-          !isEditMode ? (
-            <TaskCommentCard
-              key={item.id}
-              {...item}
-              enterCommentEditMode={() => setIsEditMode(true)}
-            />
-          ) : (
+          editingCommentId === item.id ? (
             <EditableTaskCommentCard
               key={item.id}
               {...item}
-              exitCommentEditMode={() => setIsEditMode(false)}
+              exitCommentEditMode={() => setEditingCommentId(null)}
+            />
+          ) : (
+            <TaskCommentCard
+              key={item.id}
+              {...item}
+              enterCommentEditMode={() => setEditingCommentId(item.id)}
             />
           )
         )}
