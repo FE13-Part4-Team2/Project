@@ -1,15 +1,16 @@
 'use client';
 
-import { useEffect } from 'react';
-import { useUserStore } from '@/store/useUserStore';
+import { useEffect, useState } from 'react';
+import Cookies from 'js-cookie';
+import { usePathname } from 'next/navigation';
 
-export function useAuth() {
-  const isLogin = useUserStore((s) => s.isLogin);
-  const checkLogin = useUserStore((s) => s.checkLogin);
+export function useAuth(): boolean {
+  const pathname = usePathname();
+  const [isLogin, setIsLogin] = useState<boolean>(false);
 
   useEffect(() => {
-    checkLogin();
-  }, [checkLogin]);
+    setIsLogin(!!Cookies.get('accessToken'));
+  }, [pathname]);
 
   return isLogin;
 }

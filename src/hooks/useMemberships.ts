@@ -1,34 +1,25 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { useAuth } from '@/hooks/useAuth';
-import type { UserMembershipResponse } from '@/lib/apis/user/type';
-import { fetchWithRefresh } from '@/utils/fetchWithRefresh';
+import fetcher from '@/lib/client/fetcher.client';
+import { UserMembershipResponse } from '@/lib/apis/user/type';
 
-async function fetchMemberships(): Promise<UserMembershipResponse[]> {
-  const res = await fetchWithRefresh(
-    `${process.env.NEXT_PUBLIC_API_URL}/user`,
-    { cache: 'no-store' }
-  );
-  if (!res.ok) throw new Error('멤버십 조회 실패');
-  const data: { memberships: UserMembershipResponse[] } = await res.json();
-  return data.memberships ?? [];
-}
-
-export function useMemberships() {
-  const isLogin = useAuth();
-
-  const {
-    data: memberships = [],
-    refetch,
-    isLoading,
-    isError,
-  } = useQuery<UserMembershipResponse[]>({
+export function useMemberships(isLogin: boolean) {
+  const { data: memberships = [] } = useQuery<
+    UserMembershipResponse[],
+    Error,
+    UserMembershipResponse[]
+  >({
     queryKey: ['memberships'],
-    queryFn: fetchMemberships,
+    queryFn: async () => {
+      const res = await fetcher<undefined, UserMembershipResponse[]>({
+        url: '/user/memberships',
+        method: 'GET',
+      });
+      return res ?? [];
+    },
     enabled: isLogin,
-    staleTime: 1000 * 60 * 5,
   });
 
   const [selectedGroup, setSelectedGroup] = useState<
@@ -36,23 +27,16 @@ export function useMemberships() {
   >(null);
 
   useEffect(() => {
-    if (!selectedGroup && memberships.length > 0) {
-      setSelectedGroup(memberships[0].group);
+    if (memberships.length > 0) {
+      setSelectedGroup((prev) =>
+        prev && memberships.some((m) => m.group.id === prev.id)
+          ? prev
+          : memberships[0].group
+      );
+    } else {
+      setSelectedGroup(null);
     }
-  }, [memberships, selectedGroup]);
+  }, [memberships]);
 
-  useEffect(() => {
-    if (isLogin) {
-      refetch();
-    }
-  }, [isLogin, refetch]);
-
-  return {
-    memberships,
-    selectedGroup,
-    setSelectedGroup,
-    refetch,
-    isLoading,
-    isError,
-  };
+  return { memberships, selectedGroup, setSelectedGroup } as const;
 }

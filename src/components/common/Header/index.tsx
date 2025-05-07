@@ -3,29 +3,37 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { toast } from 'react-toastify';
-import { useUserStore } from '@/store/useUserStore';
-import { useAuth } from '@/hooks/useAuth';
-import { useMemberships } from '@/hooks/useMemberships';
+import Cookies from 'js-cookie';
+import { useQuery } from '@tanstack/react-query';
+import IconRenderer from '@/components/common/Icons/IconRenderer';
 import Logo from './Logo';
 import TeamMenu from './TeamMenu';
 import UserMenu from './UserMenu';
 import SideMenu from './SideMenu';
-import IconRenderer from '@/components/common/Icons/IconRenderer';
-import 'react-toastify/dist/ReactToastify.css';
+import { useAuth } from '@/hooks/useAuth';
+import { useMemberships } from '@/hooks/useMemberships';
+import { getUser } from '@/lib/apis/user';
+import { UserResponse } from '@/lib/apis/user/type';
 
 export default function Header() {
   const isLogin = useAuth();
-  const logout = useUserStore((s) => s.logout);
-  const user = useUserStore((s) => s.user);
-
-  const { memberships, selectedGroup, setSelectedGroup } = useMemberships();
+  const { memberships, selectedGroup, setSelectedGroup } =
+    useMemberships(isLogin);
   const [isSideMenuOpen, setSideMenuOpen] = useState(false);
 
   const logoHref = selectedGroup ? `/team/${selectedGroup.id}` : '/no-team';
 
+  const { data: user } = useQuery<UserResponse | null, Error>({
+    queryKey: ['currentUser'],
+    queryFn: getUser,
+    enabled: isLogin && Boolean(selectedGroup),
+  });
+
   const handleLogout = () => {
-    logout();
+    Cookies.remove('accessToken', { path: '/' });
+    Cookies.remove('refreshToken', { path: '/' });
     toast.success('로그아웃 되었습니다');
+    window.location.href = '/';
   };
 
   if (!isLogin) {
