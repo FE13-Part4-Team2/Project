@@ -26,9 +26,13 @@ export default function Header() {
     ? ROUTES.TEAM(selectedGroup.id)
     : ROUTES.TEAM_NO;
 
-  const { data: user } = useQuery<UserResponse | null, Error>({
+  const { data: user } = useQuery<UserResponse, Error>({
     queryKey: ['currentUser'],
-    queryFn: getUser,
+    queryFn: async () => {
+      const u = await getUser({});
+      if (!u) throw new Error('유저 정보를 가져오지 못했습니다');
+      return u;
+    },
     enabled: isLogin && Boolean(selectedGroup),
   });
 
