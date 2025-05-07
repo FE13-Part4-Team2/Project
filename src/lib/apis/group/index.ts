@@ -16,7 +16,7 @@ export async function getGroupById({
   tag,
 }: {
   groupId: number;
-  tag?: string;
+  tag?: string[];
 }): Promise<GroupResponse | null> {
   return serverFetcher<undefined, GroupResponse>({
     url: `/groups/${groupId}`,
@@ -78,7 +78,7 @@ export async function getGroupMemberById({
 }: {
   groupId: number;
   memberId: number;
-  tag?: string;
+  tag?: string[];
 }): Promise<GroupMemberResponse | null> {
   return serverFetcher<undefined, GroupMemberResponse>({
     url: `/groups/${groupId}/member/${memberId}`,
@@ -107,7 +107,7 @@ export async function getGroupInvitation({
   tag,
 }: {
   groupId: number;
-  tag?: string;
+  tag?: string[];
 }): Promise<string | null> {
   return serverFetcher<undefined, string>({
     url: `/groups/${groupId}/invitation`,
@@ -152,7 +152,7 @@ export async function getGroupTasks({
 }: {
   groupId: number;
   date: string;
-  tag?: string;
+  tag?: string[];
 }): Promise<TaskResponse[] | null> {
   return serverFetcher<undefined, TaskResponse[]>({
     url: `/groups/${groupId}/tasks?date=${date}`,

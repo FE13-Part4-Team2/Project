@@ -15,7 +15,7 @@ import {
 export async function getUser({
   tag,
 }: {
-  tag?: string;
+  tag?: string[];
 }): Promise<UserResponse | null> {
   return serverFetcher<undefined, UserResponse>({
     url: `/user`,
@@ -54,7 +54,7 @@ export async function deleteUser(): Promise<null> {
 export async function getUserGroups({
   tag,
 }: {
-  tag?: string;
+  tag?: string[];
 }): Promise<UserGroupResponse[] | null> {
   return serverFetcher<undefined, UserGroupResponse[]>({
     url: `/user/groups`,
@@ -67,7 +67,7 @@ export async function getUserGroups({
 export async function getUserMemberships({
   tag,
 }: {
-  tag?: string;
+  tag?: string[];
 }): Promise<UserMembershipResponse[] | null> {
   return serverFetcher<undefined, UserMembershipResponse[]>({
     url: `/user/memberships`,
@@ -80,7 +80,7 @@ export async function getUserMemberships({
 export async function getUserHistory({
   tag,
 }: {
-  tag?: string;
+  tag?: string[];
 }): Promise<UserHistoryResponse | null> {
   return serverFetcher<undefined, UserHistoryResponse>({
     url: `user/history`,

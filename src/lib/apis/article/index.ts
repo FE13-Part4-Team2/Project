@@ -54,7 +54,7 @@ export async function getArticleById({
   tag,
 }: {
   articleId: number;
-  tag?: string;
+  tag?: string[];
 }): Promise<ArticleResponse | null> {
   return serverFetcher<undefined, ArticleResponse>({
     url: `/articles/${articleId}`,

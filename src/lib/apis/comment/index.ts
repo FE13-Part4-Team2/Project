@@ -8,7 +8,7 @@ export async function getCommentsByTaskId({
   tag,
 }: {
   taskId: number;
-  tag?: string;
+  tag?: string[];
 }): Promise<CommentResponse[] | null> {
   return serverFetcher<undefined, CommentResponse[]>({
     url: `/tasks/${taskId}/comments`,
