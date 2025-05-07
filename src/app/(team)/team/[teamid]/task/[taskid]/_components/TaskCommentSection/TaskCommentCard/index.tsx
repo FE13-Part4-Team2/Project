@@ -18,6 +18,7 @@ export default function TaskCommentCard({
         <CommentMenu
           enterCommentEditMode={enterCommentEditMode}
           commentId={id}
+          writerId={user.id}
         />
       </div>
       <div className="text-md-regular pr-4">{content}</div>
