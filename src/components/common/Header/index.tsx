@@ -39,6 +39,7 @@ export default function Header() {
   const handleLogout = () => {
     Cookies.remove('accessToken', { path: '/' });
     Cookies.remove('refreshToken', { path: '/' });
+    Cookies.remove('userId', { path: '/' });
     toast.success('로그아웃 되었습니다');
   };
 
