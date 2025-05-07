@@ -76,17 +76,16 @@ export default function LandingTopText({ className }: { className?: string }) {
           initial={{ opacity: 0 }}
           animate={{ opacity: [0, 1, 0] }}
           transition={{
-            duration: 1.2,
-            delay: description.length * 0.06,
+            duration: 1,
+            delay: description.length * 0.05,
             ease: 'easeInOut',
           }}
           className={clsx(
             titleStyle,
             'absolute inset-0',
-            'bg-gradient-to-r from-transparent via-white/90 to-transparent',
+            'bg-gradient-to-r from-transparent via-white to-transparent',
             'bg-clip-text text-transparent',
-            'blur-sm',
-            'bg-[length:100%_100%]'
+            'blur-sm'
           )}
         >
           {title}

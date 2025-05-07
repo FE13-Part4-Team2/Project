@@ -80,7 +80,6 @@ export const workersMotion = {
     x: {
       duration: 2,
       ease: 'easeOut',
-      repeat: 1,
     },
     y: {
       duration: 0.7,
