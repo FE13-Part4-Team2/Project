@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { CommentResponse } from '@/lib/apis/comment/type';
-import Button from '@/components/common/Button';
 import { patchTaskComment } from '@/lib/apis/comment';
+import Button from '@/components/common/Button';
+import AutoResizeTextarea from '@/app/(team)/team/[teamid]/task/[taskid]/_components/TaskCommentSection/AutoResizeTextarea';
 
 export default function EditableTaskCommentCard({
   id,
@@ -11,10 +12,6 @@ export default function EditableTaskCommentCard({
   exitCommentEditMode: () => void;
 }) {
   const [editedComment, setEditedComment] = useState(content);
-
-  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setEditedComment(e.target.value);
-  };
 
   const handleEditComment = async () => {
     try {
@@ -34,10 +31,11 @@ export default function EditableTaskCommentCard({
   return (
     <div className="flex flex-col gap-4 border-b-2 border-slate-50/10 pb-4">
       <div>
-        <textarea
+        <AutoResizeTextarea
           value={editedComment}
-          onChange={handleChange}
-          className="text-md-regular w-full resize-none"
+          onChange={(e) => {
+            setEditedComment(e.target.value);
+          }}
         />
       </div>
       <div className="flex items-center justify-end gap-2">
