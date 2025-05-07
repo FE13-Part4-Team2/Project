@@ -72,7 +72,7 @@ export default function LandingTopText({ className }: { className?: string }) {
           {title}
         </h1>
         {/* 빛 효과 레이어 */}
-        <motion.div
+        <motion.h1
           initial={{ opacity: 0 }}
           animate={{ opacity: [0, 1, 0] }}
           transition={{
@@ -89,7 +89,7 @@ export default function LandingTopText({ className }: { className?: string }) {
           )}
         >
           {title}
-        </motion.div>
+        </motion.h1>
       </div>
     </div>
   );
