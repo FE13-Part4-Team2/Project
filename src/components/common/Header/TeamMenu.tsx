@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -23,8 +23,18 @@ export default function TeamMenu({
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
-  const label = pathname.startsWith('/team/') ? selectedGroup?.name : '팀 목록';
+  useEffect(() => {
+    const m = pathname.match(/^\/team\/(\d+)/);
+    if (!m) return;
+    const teamId = Number(m[1]);
+    if (selectedGroup?.id === teamId) return;
+    const found = memberships.find((x) => x.group.id === teamId);
+    if (found) {
+      onSelect(found.group);
+    }
+  }, [pathname, memberships, selectedGroup, onSelect]);
 
+  const label = pathname.startsWith('/team/') ? selectedGroup?.name : '팀 목록';
   const close = () => setOpen(false);
 
   const baseLink = selectedGroup
