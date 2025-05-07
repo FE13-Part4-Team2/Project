@@ -48,7 +48,7 @@ export default function Header() {
         <div className="text-md-medium mx-auto flex h-full w-[1200px] max-w-[1920px] items-center justify-between leading-6 text-white">
           <Link
             href={ROUTES.HOME}
-            className="desktop:w-[158px] flex w-[102px] items-center justify-between gap-0.5"
+            className="laptop:w-[158px] flex w-[102px] items-center justify-between gap-0.5"
           >
             <IconRenderer name="LogoIcon" className="hover: cursor-pointer" />
             <IconRenderer name="CoworkersIcon" className="h-8 w-33" />
