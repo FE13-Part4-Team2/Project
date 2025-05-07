@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import IconRenderer from '@/components/common/Icons/IconRenderer';
+import { ROUTES } from '@/constants/routes';
 
 export default function UserMenu({
   nickname,
@@ -41,7 +42,7 @@ export default function UserMenu({
           />
 
           <div className="absolute right-0 z-50 mt-2 w-[135px] flex-col items-center justify-center rounded-md border border-slate-50/10 bg-slate-800 text-center text-sm text-[14px] whitespace-nowrap text-white">
-            <Link href="/myhistory">
+            <Link href={ROUTES.MYHISTORY}>
               <button
                 type="button"
                 className={`${menuItemClass} rounded-t-md`}
@@ -50,17 +51,17 @@ export default function UserMenu({
                 마이 히스토리
               </button>
             </Link>
-            <Link href="/mypage">
+            <Link href={ROUTES.MYPAGE}>
               <button type="button" className={menuItemClass} onClick={close}>
                 계정 설정
               </button>
             </Link>
-            <Link href="/join-team">
+            <Link href={ROUTES.TEAM_JOIN}>
               <button type="button" className={menuItemClass} onClick={close}>
                 팀 참여
               </button>
             </Link>
-            <Link href="/">
+            <Link href={ROUTES.HOME}>
               <button
                 type="button"
                 className={`${menuItemClass} cursor-pointer rounded-b-md`}

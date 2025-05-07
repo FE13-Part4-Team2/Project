@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import type { UserMembershipResponse } from '@/lib/apis/user/type';
 import IconRenderer from '@/components/common/Icons/IconRenderer';
+import { ROUTES } from '@/constants/routes';
 
 export default function SideMenu({
   isSideMenuOpen,
@@ -43,7 +44,7 @@ export default function SideMenu({
                   className="flex items-center justify-between"
                 >
                   <Link
-                    href={`/team/${group.id}`}
+                    href={ROUTES.TEAM(group.id)}
                     className="hover:text-green-700"
                     onClick={onClose}
                   >
@@ -52,7 +53,7 @@ export default function SideMenu({
 
                   {role === 'ADMIN' && (
                     <Link
-                      href={`/team/${group.id}/edit`}
+                      href={ROUTES.TEAM_EDIT(group.id)}
                       onClick={onClose}
                       className="ml-2"
                     >
@@ -68,7 +69,7 @@ export default function SideMenu({
 
               <li>
                 <Link
-                  href="/boards"
+                  href={ROUTES.BOARDS}
                   className="hover:text-green-700"
                   onClick={onClose}
                 >

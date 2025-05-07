@@ -14,6 +14,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { useMemberships } from '@/hooks/useMemberships';
 import { getUser } from '@/lib/apis/user';
 import { UserResponse } from '@/lib/apis/user/type';
+import { ROUTES } from '@/constants/routes';
 
 export default function Header() {
   const isLogin = useAuth();
@@ -21,7 +22,9 @@ export default function Header() {
     useMemberships(isLogin);
   const [isSideMenuOpen, setSideMenuOpen] = useState(false);
 
-  const logoHref = selectedGroup ? `/team/${selectedGroup.id}` : '/no-team';
+  const logoHref = selectedGroup
+    ? ROUTES.TEAM(selectedGroup.id)
+    : ROUTES.TEAM_NO;
 
   const { data: user } = useQuery<UserResponse | null, Error>({
     queryKey: ['currentUser'],
@@ -33,7 +36,7 @@ export default function Header() {
     Cookies.remove('accessToken', { path: '/' });
     Cookies.remove('refreshToken', { path: '/' });
     toast.success('로그아웃 되었습니다');
-    window.location.href = '/';
+    window.location.href = ROUTES.HOME;
   };
 
   if (!isLogin) {
@@ -41,7 +44,7 @@ export default function Header() {
       <header className="h-[60px] w-full border border-slate-50/10 bg-slate-800 px-6 py-5">
         <div className="text-md-medium mx-auto flex h-full w-[1200px] max-w-[1920px] items-center justify-between leading-6 text-white">
           <Link
-            href="/"
+            href={ROUTES.HOME}
             className="desktop:w-[158px] flex w-[102px] items-center justify-between gap-0.5"
           >
             <IconRenderer name="LogoIcon" className="hover: cursor-pointer" />
@@ -73,7 +76,7 @@ export default function Header() {
                 />
               )}
               <Link
-                href="/boards"
+                href={ROUTES.BOARDS}
                 className="text-md ml-8 font-medium hover:text-gray-700"
               >
                 자유게시판

@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { UserMembershipResponse } from '@/lib/apis/user/type';
 import IconRenderer from '@/components/common/Icons/IconRenderer';
 import Button from '@/components/common/Button';
+import { ROUTES } from '@/constants/routes';
 
 interface TeamMenuProps {
   memberships: UserMembershipResponse[];
@@ -26,12 +27,13 @@ export default function TeamMenu({
 
   const close = () => setOpen(false);
 
+  const baseLink = selectedGroup
+    ? ROUTES.TEAM(selectedGroup.id)
+    : ROUTES.TEAM_NO;
+
   return (
     <div className="relative ml-8 flex gap-3">
-      <Link
-        href={`/team/${selectedGroup?.id}`}
-        className="text-md font-medium hover:text-gray-700"
-      >
+      <Link href={baseLink} className="text-md font-medium hover:text-gray-700">
         {label}
       </Link>
 
@@ -61,7 +63,7 @@ export default function TeamMenu({
                   className="flex items-center gap-x-3 rounded-md px-2 py-2"
                 >
                   <Link
-                    href={`/team/${group.id}`}
+                    href={ROUTES.TEAM(group.id)}
                     className="py flex flex-1 items-center gap-x-3 rounded-md p-1 transition-colors hover:bg-slate-700"
                     onClick={() => {
                       onSelect(group);
@@ -84,7 +86,7 @@ export default function TeamMenu({
 
                   {role === 'ADMIN' && (
                     <Link
-                      href={`/team/${group.id}/edit`}
+                      href={ROUTES.TEAM_EDIT(group.id)}
                       onClick={() => setOpen(false)}
                     >
                       <IconRenderer
@@ -98,7 +100,7 @@ export default function TeamMenu({
               ))}
             </div>
 
-            <Link href="/add-team">
+            <Link href={ROUTES.TEAM_ADD}>
               <Button
                 variant="floating"
                 styleType="transparent"
