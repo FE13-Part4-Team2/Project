@@ -64,7 +64,11 @@ export default function Modal() {
                   variant === 'taskForm' ? 'gap-4' : 'gap-2'
                 )}
               >
-                {title && <div className="text-lg-medium">{title}</div>}
+                {title && (
+                  <div className="text-lg-medium text-center whitespace-pre-line">
+                    {title}
+                  </div>
+                )}
                 {description && (
                   <div
                     className={clsx(

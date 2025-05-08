@@ -43,12 +43,15 @@ export async function patchTaskListById({
 // 할 일 목록 삭제 (DELETE /groups/:groupId/task-lists/:id)
 export async function deleteTaskListById({
   taskListId,
+  tag,
 }: {
   taskListId: number;
+  tag?: string[];
 }): Promise<null> {
-  return clientFetcher<undefined, null>({
+  return serverFetcher<undefined, null>({
     url: `/groups/{groupId}/task-lists/${taskListId}`,
     method: 'DELETE',
+    tag,
   });
 }
 

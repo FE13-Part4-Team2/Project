@@ -1,23 +1,32 @@
 'use client';
 
-import { GroupMemberResponse } from '@/lib/apis/group/type';
+import { useRouter } from 'next/navigation';
 import { useModalStore } from '@/store/useModalStore';
+import { GroupMemberResponse } from '@/lib/apis/group/type';
 import DropDown from '@/components/common/Dropdown';
 import TaskListMenuButton from '@/components/tasklist/TaskListMenu/TaskListMenuButton';
 import CreateTaskListModal from '@/components/common/Modal/content/CreateTaskListModal';
 import EditTaskListModal from '@/components/common/Modal/content/EditTaskListModal';
+import { handleDeleteTaskList } from '@/components/tasklist/TaskListMenu/actions/taskListActions';
 
 interface TaskListMenuProps {
   membersData: GroupMemberResponse[];
   userId: number;
+  groupId: number;
+  taskListId: number;
+  taskListName: string;
   size: 'sm' | 'md';
 }
 
 export default function TaskListMenu({
   membersData,
   userId,
+  groupId,
+  taskListId,
+  taskListName,
   size,
 }: TaskListMenuProps) {
+  const router = useRouter();
   const { openModal } = useModalStore();
 
   const userData = membersData.find((member) => {
@@ -54,8 +63,24 @@ export default function TaskListMenu({
       <EditTaskListModal />
     );
   };
-  // 추후에 할 일 삭제 API 연결 예정
-  const handleDeleteTaskList = () => console.log('삭제하기');
+
+  const openDeleteTaskListModal = () => {
+    openModal({
+      variant: 'danger',
+      title: `'${taskListName}'\n할 일 목록을 정말 삭제하시겠어요?`,
+      description: '삭제 후에는 되돌릴 수 없습니다.',
+      button: {
+        number: 2,
+        text: '삭제하기',
+        onRequest: () => {
+          handleDeleteTaskList(taskListId);
+          if (size === 'md') {
+            router.push(`/team/${groupId}`);
+          }
+        },
+      },
+    });
+  };
 
   return (
     isAdmin && (
@@ -70,7 +95,9 @@ export default function TaskListMenu({
           <DropDown.Item onClick={openEditTaskListModal}>
             수정하기
           </DropDown.Item>
-          <DropDown.Item onClick={handleDeleteTaskList}>삭제하기</DropDown.Item>
+          <DropDown.Item onClick={openDeleteTaskListModal}>
+            삭제하기
+          </DropDown.Item>
         </DropDown.Menu>
       </DropDown>
     )
