@@ -36,7 +36,7 @@ const InputTextarea = ({
           'w-full resize-none overflow-hidden focus:outline-none', // base style
 
           variant === 'box' &&
-            'rounded-[12px] border border-slate-50/10 bg-slate-800 focus:border-green-800',
+            'rounded-[12px] border border-slate-50/10 bg-slate-800',
 
           variant === 'reply' && 'border-t border-b border-slate-50/10',
           className
