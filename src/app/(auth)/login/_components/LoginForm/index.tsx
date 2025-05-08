@@ -8,14 +8,28 @@ import { useState } from 'react';
 import { z } from 'zod';
 
 export default function LoginForm() {
+  const [formValues, setFormValues] = useState<{
+    email: string;
+    password: string;
+  }>({
+    email: '',
+    password: '',
+  });
+
   const [formErrors, setFormErrors] = useState({
     email: '',
     password: '',
   });
+
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // form submit logic here
   };
+
+  const handleInputChange =
+    (key: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      setFormValues((prev) => ({ ...prev, [key]: e.target.value }));
+    };
 
   // auth schema
   const auth = z.object({
@@ -36,7 +50,7 @@ export default function LoginForm() {
   });
 
   // handling validation with Zod
-  const result = auth.safeParse({ email, password });
+  const result = auth.safeParse({ formValues });
 
   // 스키마의 필드에서 에러 메시지를 꺼내서 상태에 저장하고, UI 에 전달.
   if (!result.success) {
@@ -55,10 +69,15 @@ export default function LoginForm() {
       <h1 className="text-4xl-medium mb-20 text-center">로그인</h1>
 
       <div className="flex flex-col gap-6">
-        <InputWithLabel inputType="email" errorMessage={formErrors.email} />
+        <InputWithLabel
+          inputType="email"
+          errorMessage={formErrors.email}
+          onInputChange={handleInputChange}
+        />
         <InputWithLabel
           inputType="password"
           errorMessage={formErrors.password}
+          onInputChange={handleInputChange}
         />
       </div>
 

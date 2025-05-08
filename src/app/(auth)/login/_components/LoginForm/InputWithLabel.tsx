@@ -6,11 +6,15 @@ import { useState } from 'react';
 interface InputWithLabelProps {
   inputType: 'email' | 'password' | 'name' | 'passwordConfirm';
   errorMessage: string;
+  onInputChange: (
+    key: string
+  ) => (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function InputWithLabel({
   inputType,
-  errorMessage,
+  errorMessage = ''
+  onInputChange,
   ...props
 }: InputWithLabelProps) {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -46,6 +50,7 @@ export default function InputWithLabel({
           required
           placeholder={`${inputTypeMap[inputType]}을 입력해주세요.`}
           className="w-full rounded-xl border border-slate-50/10 bg-slate-800 p-4"
+          onChange={onInputChange(inputTypeMap[inputType])}
           {...props}
         />
 
