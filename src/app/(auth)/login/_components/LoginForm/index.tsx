@@ -7,9 +7,6 @@ import { validateEmail, validatePassword } from '@/utils/inputValidation';
 import React, { useEffect, useState } from 'react';
 import { z } from 'zod';
 
-// type
-type formFieldType = 'email' | 'password';
-
 // schema
 const inputEmptySchema = z.object({
   email: z.string().nonempty({ message: '이메일은 필수 입력입니다.' }),
@@ -34,34 +31,23 @@ export default function LoginForm() {
     password: '',
   });
 
-  const [formErrors, setFormErrors] = useState({
+  const [formErrors, setFormErrors] = useState<{
+    email: string;
+    password: string;
+  }>({
     email: '',
     password: '',
   });
 
+  // update error message when the input is empty
   const handleInputBlur =
-    (key: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
-      setFormValues((prev) => ({ ...prev, [key]: e.target.value }));
+    (key: 'email' | 'password') => (e: React.ChangeEvent<HTMLInputElement>) => {
+      const newFormValues = { ...formValues, [key]: e.target.value };
+      setFormValues(newFormValues);
 
-      const result = inputEmptySchema.safeParse(formValues);
-
-      if (!result.success) {
-        const fieldErrors = result.error.flatten().fieldErrors;
-        setFormErrors({
-          email: fieldErrors.email?.[0] || '',
-          password: fieldErrors.password?.[0] || '',
-        });
-        return;
-      }
-    };
-
-  const handleInputChange =
-    (key: formFieldType) => (e: React.ChangeEvent<HTMLInputElement>) => {
-      setFormValues((prev) => ({ ...prev, [key]: e.target.value }));
-      const result = inputValidSchema.safeParse(formValues);
+      const result = inputEmptySchema.safeParse(newFormValues);
 
       if (!result.success) {
-        // zod 유효성 검사 이후 만들어진 객체
         const fieldErrors = result.error.flatten().fieldErrors;
 
         // key 에 해당하는 에러 메시지만 업데이트
@@ -69,7 +55,36 @@ export default function LoginForm() {
           ...prev,
           [key]: fieldErrors[key],
         }));
+      } else {
+        setFormErrors((prev) => ({
+          ...prev,
+          [key]: '',
+        }));
       }
+    };
+
+  // update error message when the input is not valid
+  // update formValues
+  const handleInputChange =
+    (key: 'email' | 'password') => (e: React.ChangeEvent<HTMLInputElement>) => {
+      const newFormValues = { ...formValues, [key]: e.target.value };
+      const result = inputValidSchema.safeParse(newFormValues);
+
+      if (!result.success) {
+        const fieldErrors = result.error.flatten().fieldErrors;
+
+        // key 에 해당하는 에러 메시지만 업데이트
+        setFormErrors((prev) => ({
+          ...prev,
+          [key]: fieldErrors[key],
+        }));
+      } else {
+        setFormErrors((prev) => ({
+          ...prev,
+          [key]: '',
+        }));
+      }
+      setFormValues(newFormValues);
     };
 
   useEffect(() => {

@@ -1,18 +1,8 @@
 'use client';
 
+import { InputWithLabelProps } from '@/app/(auth)/login/type';
 import Icons from '@/components/common/Icons';
 import { useState } from 'react';
-
-interface InputWithLabelProps {
-  inputType: 'email' | 'password' | 'name' | 'passwordConfirm';
-  errorMessage: string;
-  onInputBlur: (
-    key: string
-  ) => (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onInputChange: (
-    key: string
-  ) => (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
 
 export default function InputWithLabel({
   inputType,
@@ -24,10 +14,8 @@ export default function InputWithLabel({
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const inputTypeMap: Record<InputWithLabelProps['inputType'], string> = {
-    name: '이름',
     email: '이메일',
     password: '비밀번호',
-    passwordConfirm: '비밀번호 확인',
   };
 
   const togglePasswordVisibility = () => {
@@ -54,8 +42,8 @@ export default function InputWithLabel({
           required
           placeholder={`${inputTypeMap[inputType]}을 입력해주세요.`}
           className="w-full rounded-xl border border-slate-50/10 bg-slate-800 p-4"
-          onBlur={onInputBlur(inputType)}
-          onChange={onInputChange(inputType)}
+          onBlur={onInputBlur?.(inputType)}
+          onChange={onInputChange?.(inputType)}
           {...props}
         />
 
