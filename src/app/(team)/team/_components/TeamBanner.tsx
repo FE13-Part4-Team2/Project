@@ -9,6 +9,7 @@ import { useGroup } from '@/hooks/useGroup';
 import {
   teamBannerWrapperStyle,
   teamBannerTitleStyle,
+  teamBannerTitleGradientStyle,
 } from '@/app/(team)/team/_components/styles';
 
 const TeamBanner = ({ groupId }: { groupId: number }) => {
@@ -29,6 +30,7 @@ const TeamBanner = ({ groupId }: { groupId: number }) => {
 
         <div className={`${teamBannerTitleStyle}`}>
           {group ? group.name : error ? '팀 정보 로드 실패' : <Skeleton />}
+          <div className={`${teamBannerTitleGradientStyle}`} />
         </div>
 
         <DropDown handleClose={() => {}}>
