@@ -45,7 +45,13 @@ const InputTextarea = ({
       {variant === 'reply' && (
         <button
           onClick={onClick}
-          className="absolute top-3 right-0 flex size-6 items-center justify-center rounded-full bg-green-700"
+          className={clsx(
+            'absolute top-3 right-0',
+            'flex items-center justify-center',
+            'size-6 rounded-full bg-green-700',
+            'transition-colors duration-100 hover:bg-green-800 focus:bg-green-900 active:bg-green-900',
+            'disabled:cursor-default disabled:bg-slate-400'
+          )}
         >
           <IconRenderer name="ArrowTopIcon" size={16} />
         </button>
