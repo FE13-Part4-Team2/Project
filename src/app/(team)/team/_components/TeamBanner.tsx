@@ -3,9 +3,13 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import IconRenderer from '@/components/common/Icons/IconRenderer';
 import DropDown from '@/components/common/Dropdown';
+import Skeleton from '@/components/common/Loading/Skeleton';
 import { ROUTES } from '@/constants/routes';
 import { useGroup } from '@/hooks/useGroup';
-import { teamBannerWrapperStyle } from '@/app/(team)/team/_components/styles';
+import {
+  teamBannerWrapperStyle,
+  teamBannerTitleStyle,
+} from '@/app/(team)/team/_components/styles';
 
 const TeamBanner = ({ groupId }: { groupId: number }) => {
   const router = useRouter();
@@ -22,7 +26,10 @@ const TeamBanner = ({ groupId }: { groupId: number }) => {
           priority
           className="tablet:left-[75%] absolute left-1/2 -translate-x-1/2"
         />
-        {group ? group.name : error ? '팀 정보 로드 실패' : '로딩 중...'}
+
+        <div className={`${teamBannerTitleStyle}`}>
+          {group ? group.name : error ? '팀 정보 로드 실패' : <Skeleton />}
+        </div>
 
         <DropDown handleClose={() => {}}>
           <DropDown.Trigger className="mb-0">
