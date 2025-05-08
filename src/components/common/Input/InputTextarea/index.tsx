@@ -3,7 +3,7 @@ import React, { useRef } from 'react';
 import clsx from 'clsx';
 import IconRenderer from '@/components/common/Icons/IconRenderer';
 
-interface InputBoxProps
+interface InputTextareaProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   variant?: 'base' | 'box' | 'reply'; // 할 일 댓글 수정 | 자유게시판 | 할 일 댓글 작성
   className?: string;
@@ -15,7 +15,7 @@ const InputTextarea = ({
   className = '',
   onClick,
   ...props
-}: InputBoxProps) => {
+}: InputTextareaProps) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const handleInput = () => {
@@ -33,7 +33,7 @@ const InputTextarea = ({
         ref={textareaRef}
         onInput={handleInput}
         className={clsx(
-          'w-full resize-none overflow-hidden focus:outline-none',
+          'w-full resize-none overflow-hidden focus:outline-none', // base style
 
           variant === 'box' &&
             'rounded-[12px] border border-slate-50/10 bg-slate-800 focus:border-green-800',
