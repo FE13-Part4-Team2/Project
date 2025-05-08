@@ -1,6 +1,8 @@
 'use client';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import clsx from 'clsx';
 import IconRenderer from '@/components/common/Icons/IconRenderer';
 import DropDown from '@/components/common/Dropdown';
 import Skeleton from '@/components/common/Loading/Skeleton';
@@ -15,6 +17,12 @@ import {
 const TeamBanner = ({ groupId }: { groupId: number }) => {
   const router = useRouter();
   const { group, error } = useGroup(groupId);
+  const [isScrollMove, setIsScrollMove] = useState(false); // 팀 이름 내부 스크롤 감지용
+
+  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    const { scrollLeft } = e.currentTarget;
+    setIsScrollMove(scrollLeft >= 10);
+  };
 
   return (
     <>
@@ -28,9 +36,15 @@ const TeamBanner = ({ groupId }: { groupId: number }) => {
           className="tablet:left-[75%] absolute left-1/2 -translate-x-1/2"
         />
 
-        <div className={`${teamBannerTitleStyle}`}>
+        <div onScroll={handleScroll} className={`${teamBannerTitleStyle}`}>
           {group ? group.name : error ? '팀 정보 로드 실패' : <Skeleton />}
-          <div className={`${teamBannerTitleGradientStyle}`} />
+          <div
+            className={clsx(
+              'tablet:hidden block', // 모바일용: 긴 이름 끝에 그라데이션 적용(스크롤 기능 알림 목적)
+              teamBannerTitleGradientStyle,
+              isScrollMove && 'opacity-0' // 스크롤 10px 이동 시 그라데이션 제거
+            )}
+          />
         </div>
 
         <DropDown handleClose={() => {}}>
