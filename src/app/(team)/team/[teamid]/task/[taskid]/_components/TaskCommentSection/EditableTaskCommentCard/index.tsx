@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CommentResponse } from '@/lib/apis/comment/type';
 import { patchTaskComment } from '@/lib/apis/comment';
 import Button from '@/components/common/Button';
@@ -12,6 +12,7 @@ export default function EditableTaskCommentCard({
   exitCommentEditMode: () => void;
 }) {
   const [editedComment, setEditedComment] = useState(content);
+  const [isEditValid, setIsEditValid] = useState(false);
 
   const handleEditComment = async () => {
     try {
@@ -26,7 +27,13 @@ export default function EditableTaskCommentCard({
     }
   };
 
-  const isEditValid = editedComment.trim() !== '' && editedComment !== content;
+  useEffect(() => {
+    if (editedComment.trim() !== '' && editedComment !== content) {
+      setIsEditValid(true);
+    } else {
+      setIsEditValid(false);
+    }
+  }, [editedComment]);
 
   return (
     <div className="flex flex-col gap-4 border-b-2 border-slate-50/10 pb-4">

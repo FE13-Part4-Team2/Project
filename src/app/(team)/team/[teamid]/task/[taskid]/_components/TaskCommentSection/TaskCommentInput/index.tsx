@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { postTaskComment } from '@/lib/apis/comment';
 import AutoResizeTextarea from '@/app/(team)/team/[teamid]/task/[taskid]/_components/TaskCommentSection/AutoResizeTextarea';
@@ -6,6 +6,7 @@ import IconRenderer from '@/components/common/Icons/IconRenderer';
 
 export default function TaskCommentInput() {
   const [comment, setComment] = useState('');
+  const [isSubmitValid, setIsSubmitValid] = useState(false);
   const params = useParams();
 
   const taskId = Number(params.taskid);
@@ -23,7 +24,13 @@ export default function TaskCommentInput() {
     }
   };
 
-  const isSubmitValid = comment.trim() !== '';
+  useEffect(() => {
+    if (comment.trim() !== '') {
+      setIsSubmitValid(true);
+    } else {
+      setIsSubmitValid(false);
+    }
+  }, [comment]);
 
   return (
     <div className="border-y-2 border-slate-50/10 pt-6 pb-4">
