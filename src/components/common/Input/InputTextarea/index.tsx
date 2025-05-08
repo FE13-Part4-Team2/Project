@@ -38,14 +38,14 @@ const InputTextarea = ({
           variant === 'box' &&
             'rounded-[12px] border border-slate-50/10 bg-slate-800',
 
-          variant === 'reply' && 'border-t border-b border-slate-50/10',
+          variant === 'reply' && 'border-t border-b border-slate-50/10 py-3',
           className
         )}
       />
       {variant === 'reply' && (
         <button
           onClick={onClick}
-          className="absolute top-3 right-3 flex size-6 items-center justify-center rounded-full bg-green-700"
+          className="absolute top-3 right-0 flex size-6 items-center justify-center rounded-full bg-green-700"
         >
           <IconRenderer name="ArrowTopIcon" size={16} />
         </button>
