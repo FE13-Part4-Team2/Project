@@ -4,7 +4,7 @@ import ForgotPasswordButton from '@/app/(auth)/login/_components/LoginForm/Forgo
 import InputWithLabel from '@/app/(auth)/login/_components/LoginForm/InputWithLabel';
 import Button from '@/components/common/Button';
 import { validateEmail, validatePassword } from '@/utils/inputValidation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { z } from 'zod';
 
 export default function LoginForm() {
@@ -52,17 +52,19 @@ export default function LoginForm() {
   // handling validation with Zod
   const result = auth.safeParse({ formValues });
 
-  // 스키마의 필드에서 에러 메시지를 꺼내서 상태에 저장하고, UI 에 전달.
-  if (!result.success) {
-    // 실패 정보가 담긴 zodError 객체를 flatten( ) 으로 보기좋게 정리, 필드별 에러 메시지만 꺼냄
-    const fieldErrors = result.error.flatten().fieldErrors;
-    // 필드별 첫번째 에러 메시지를 꺼내서, 상태로 저장
-    setFormErrors({
-      email: fieldErrors.email?.[0] || '',
-      password: fieldErrors.password?.[0] || '',
-    });
-    return;
-  }
+  useEffect(() => {
+    // 스키마의 필드에서 에러 메시지를 꺼내서 formErrors 상태 업데이트
+    if (!result.success) {
+      // 실패 정보가 담긴 zodError 객체를 flatten( ) 으로 보기좋게 정리, 필드별 에러 메시지만 꺼냄
+      const fieldErrors = result.error.flatten().fieldErrors;
+      // 필드별 첫번째 에러 메시지를 꺼내서, 상태로 저장
+      setFormErrors({
+        email: fieldErrors.email?.[0] || '',
+        password: fieldErrors.password?.[0] || '',
+      });
+      return;
+    }
+  }, [result.error, result.success]);
 
   return (
     <form onSubmit={handleFormSubmit}>

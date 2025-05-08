@@ -13,7 +13,7 @@ interface InputWithLabelProps {
 
 export default function InputWithLabel({
   inputType,
-  errorMessage = ''
+  errorMessage = '',
   onInputChange,
   ...props
 }: InputWithLabelProps) {
