@@ -27,7 +27,7 @@ export default function AutoResizeTextarea({
       value={value}
       onChange={onChange}
       placeholder={placeholder}
-      className={`text-md-regular box-border w-full resize-none overflow-hidden`}
+      className={`text-md-regular box-border w-full resize-none overflow-hidden placeholder-slate-500`}
       rows={1}
     />
   );
