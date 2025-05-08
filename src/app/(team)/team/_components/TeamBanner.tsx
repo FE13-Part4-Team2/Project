@@ -10,6 +10,7 @@ import { ROUTES } from '@/constants/routes';
 import { useGroup } from '@/hooks/useGroup';
 import {
   teamBannerWrapperStyle,
+  teamBannerImgStyle,
   teamBannerTitleStyle,
   teamBannerTitleGradientStyle,
 } from '@/app/(team)/team/_components/styles';
@@ -33,11 +34,17 @@ const TeamBanner = ({ groupId }: { groupId: number }) => {
           width={181}
           height={64}
           priority
-          className="tablet:left-[75%] absolute left-1/2 -translate-x-1/2"
+          className={`${teamBannerImgStyle}`}
         />
 
         <div onScroll={handleScroll} className={`${teamBannerTitleStyle}`}>
-          {group ? group.name : error ? '팀 정보 로드 실패' : <Skeleton />}
+          {group ? (
+            group.name
+          ) : error ? (
+            '팀 정보 로드 실패'
+          ) : (
+            <Skeleton width="240px" />
+          )}
           <div
             className={clsx(
               'tablet:hidden block', // 모바일용: 긴 이름 끝에 그라데이션 적용(스크롤 기능 알림 목적)
