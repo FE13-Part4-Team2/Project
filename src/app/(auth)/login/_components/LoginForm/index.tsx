@@ -4,8 +4,11 @@ import ForgotPasswordButton from '@/app/(auth)/login/_components/LoginForm/Forgo
 import InputWithLabel from '@/app/(auth)/login/_components/LoginForm/InputWithLabel';
 import Button from '@/components/common/Button';
 import { validateEmail, validatePassword } from '@/utils/inputValidation';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { z } from 'zod';
+
+// type
+type formFieldType = 'email' | 'password';
 
 // schema
 const inputEmptySchema = z.object({
@@ -53,19 +56,25 @@ export default function LoginForm() {
     };
 
   const handleInputChange =
-    (key: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    (key: formFieldType) => (e: React.ChangeEvent<HTMLInputElement>) => {
       setFormValues((prev) => ({ ...prev, [key]: e.target.value }));
       const result = inputValidSchema.safeParse(formValues);
 
       if (!result.success) {
+        // zod 유효성 검사 이후 만들어진 객체
         const fieldErrors = result.error.flatten().fieldErrors;
-        setFormErrors({
-          email: fieldErrors.email?.[0] || '',
-          password: fieldErrors.password?.[0] || '',
-        });
-        return;
+
+        // key 에 해당하는 에러 메시지만 업데이트
+        setFormErrors((prev) => ({
+          ...prev,
+          [key]: fieldErrors[key],
+        }));
       }
     };
+
+  useEffect(() => {
+    console.log('formErrors', formErrors);
+  }, [formErrors]);
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

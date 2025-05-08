@@ -54,8 +54,8 @@ export default function InputWithLabel({
           required
           placeholder={`${inputTypeMap[inputType]}을 입력해주세요.`}
           className="w-full rounded-xl border border-slate-50/10 bg-slate-800 p-4"
-          onBlur={onInputBlur(inputTypeMap[inputType])}
-          onChange={onInputChange(inputTypeMap[inputType])}
+          onBlur={onInputBlur(inputType)}
+          onChange={onInputChange(inputType)}
           {...props}
         />
 
