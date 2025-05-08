@@ -6,6 +6,9 @@ import { useState } from 'react';
 interface InputWithLabelProps {
   inputType: 'email' | 'password' | 'name' | 'passwordConfirm';
   errorMessage: string;
+  onInputBlur: (
+    key: string
+  ) => (e: React.ChangeEvent<HTMLInputElement>) => void;
   onInputChange: (
     key: string
   ) => (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -14,6 +17,7 @@ interface InputWithLabelProps {
 export default function InputWithLabel({
   inputType,
   errorMessage = '',
+  onInputBlur,
   onInputChange,
   ...props
 }: InputWithLabelProps) {
@@ -50,6 +54,7 @@ export default function InputWithLabel({
           required
           placeholder={`${inputTypeMap[inputType]}을 입력해주세요.`}
           className="w-full rounded-xl border border-slate-50/10 bg-slate-800 p-4"
+          onBlur={onInputBlur(inputTypeMap[inputType])}
           onChange={onInputChange(inputTypeMap[inputType])}
           {...props}
         />
@@ -72,7 +77,7 @@ export default function InputWithLabel({
           </div>
         )}
       </div>
-      {errorMessage && <span className="border-danger">{errorMessage}</span>}
+      {errorMessage && <span className="text-danger">{errorMessage}</span>}
     </div>
   );
 }
