@@ -7,7 +7,10 @@ import DropDown from '@/components/common/Dropdown';
 import TaskListMenuButton from '@/components/tasklist/TaskListMenu/TaskListMenuButton';
 import CreateTaskListModal from '@/components/common/Modal/content/CreateTaskListModal';
 import EditTaskListModal from '@/components/common/Modal/content/EditTaskListModal';
-import { handleDeleteTaskList } from '@/components/tasklist/TaskListMenu/actions/taskListActions';
+import {
+  handleCreateTaskList,
+  handleDeleteTaskList,
+} from '@/components/tasklist/TaskListMenu/actions/taskListActions';
 
 interface TaskListMenuProps {
   membersData: GroupMemberResponse[];
@@ -42,7 +45,7 @@ export default function TaskListMenu({
         button: {
           number: 1,
           text: '만들기',
-          onRequest: () => {},
+          onRequest: (body) => handleCreateTaskList(groupId, body),
         },
       },
       <CreateTaskListModal />

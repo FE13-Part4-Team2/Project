@@ -1,4 +1,37 @@
-import { deleteTaskListById } from '@/lib/apis/taskList';
+import { TaskListBody } from '@/lib/apis/taskList/type';
+import {
+  postTaskList,
+  patchTaskListById,
+  deleteTaskListById,
+} from '@/lib/apis/taskList';
+
+export const handleCreateTaskList = async (
+  groupId: number,
+  body: TaskListBody
+) => {
+  try {
+    await postTaskList({
+      groupId,
+      body,
+      tag: ['tasklist'],
+    });
+  } catch (error) {
+    console.log('Failed to create the task list :', error);
+  }
+};
+
+// export const handleEditTaskList = async (taskListId: number) => {
+//   try {
+//     await patchTaskListById({
+//       groupId,
+//       taskListId,
+//       body,
+//       tag: ['tasklist'],
+//     });
+//   } catch (error) {
+//     console.log('Failed to edit the task list :', error);
+//   }
+// };
 
 export const handleDeleteTaskList = async (taskListId: number) => {
   try {

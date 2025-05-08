@@ -12,6 +12,7 @@ export default function Modal() {
   const {
     options: { variant = 'default', title, description, button },
     content,
+    requestBody,
     isButtonDisabled,
     closeModal,
   } = useModalStore();
@@ -25,7 +26,7 @@ export default function Modal() {
   if (!isModalOpen) return null;
 
   const handleRequest = () => {
-    button?.onRequest();
+    button?.onRequest?.(requestBody);
     closeModal();
   };
 

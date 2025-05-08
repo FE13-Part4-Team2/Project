@@ -28,15 +28,18 @@ export async function patchTaskListById({
   groupId,
   taskListId,
   body,
+  tag,
 }: {
   groupId: number;
   taskListId: number;
   body: TaskListBody;
+  tag?: string[];
 }): Promise<TaskListResponse | null> {
-  return clientFetcher<TaskListBody, TaskListResponse>({
+  return serverFetcher<TaskListBody, TaskListResponse>({
     url: `/groups/${groupId}/task-lists/${taskListId}`,
     method: 'PATCH',
     body,
+    tag,
   });
 }
 
@@ -59,14 +62,17 @@ export async function deleteTaskListById({
 export async function postTaskList({
   groupId,
   body,
+  tag,
 }: {
   groupId: number;
   body: TaskListBody;
+  tag?: string[];
 }): Promise<TaskListResponse | null> {
-  return clientFetcher<TaskListBody, TaskListResponse>({
+  return serverFetcher<TaskListBody, TaskListResponse>({
     url: `/groups/${groupId}/task-lists`,
     method: 'POST',
     body,
+    tag,
   });
 }
 
