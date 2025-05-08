@@ -10,6 +10,7 @@ import EditTaskListModal from '@/components/common/Modal/content/EditTaskListMod
 import {
   handleCreateTaskList,
   handleDeleteTaskList,
+  handleEditTaskList,
 } from '@/components/tasklist/TaskListMenu/actions/taskListActions';
 
 interface TaskListMenuProps {
@@ -60,10 +61,10 @@ export default function TaskListMenu({
         button: {
           number: 1,
           text: '수정하기',
-          onRequest: () => {},
+          onRequest: (body) => handleEditTaskList(groupId, taskListId, body),
         },
       },
-      <EditTaskListModal />
+      <EditTaskListModal taskListName={taskListName} />
     );
   };
 

@@ -20,18 +20,22 @@ export const handleCreateTaskList = async (
   }
 };
 
-// export const handleEditTaskList = async (taskListId: number) => {
-//   try {
-//     await patchTaskListById({
-//       groupId,
-//       taskListId,
-//       body,
-//       tag: ['tasklist'],
-//     });
-//   } catch (error) {
-//     console.log('Failed to edit the task list :', error);
-//   }
-// };
+export const handleEditTaskList = async (
+  groupId: number,
+  taskListId: number,
+  body: TaskListBody
+) => {
+  try {
+    await patchTaskListById({
+      groupId,
+      taskListId,
+      body,
+      tag: ['tasklist'],
+    });
+  } catch (error) {
+    console.log('Failed to edit the task list :', error);
+  }
+};
 
 export const handleDeleteTaskList = async (taskListId: number) => {
   try {
