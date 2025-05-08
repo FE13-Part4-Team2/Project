@@ -7,6 +7,24 @@ import { validateEmail, validatePassword } from '@/utils/inputValidation';
 import { useEffect, useState } from 'react';
 import { z } from 'zod';
 
+// auth schema : define schema outside the component
+const auth = z.object({
+  email: z
+    .string()
+    .nonempty({ message: '이메일은 필수 입력입니다.' })
+    .refine(validateEmail, {
+      message: '올바른 이메일 형식이 아닙니다.',
+    }),
+
+  password: z
+    .string()
+    .nonempty({ message: '비밀번호는 필수 입력입니다.' })
+    .refine(validatePassword, {
+      message:
+        '비밀번호는 영문, 숫자, 특수문자를 포함한 8자 이상이어야 합니다.',
+    }),
+});
+
 export default function LoginForm() {
   const [formValues, setFormValues] = useState<{
     email: string;
@@ -21,50 +39,31 @@ export default function LoginForm() {
     password: '',
   });
 
-  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // form submit logic here
-  };
-
-  const handleInputChange =
-    (key: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
-      setFormValues((prev) => ({ ...prev, [key]: e.target.value }));
-    };
-
-  // auth schema
-  const auth = z.object({
-    email: z
-      .string()
-      .nonempty({ message: '이메일은 필수 입력입니다.' })
-      .refine(validateEmail, {
-        message: '올바른 이메일 형식이 아닙니다.',
-      }),
-
-    password: z
-      .string()
-      .nonempty({ message: '비밀번호는 필수 입력입니다.' })
-      .refine(validatePassword, {
-        message:
-          '비밀번호는 영문, 숫자, 특수문자를 포함한 8자 이상이어야 합니다.',
-      }),
-  });
-
-  // handling validation with Zod
-  const result = auth.safeParse({ formValues });
-
   useEffect(() => {
-    // 스키마의 필드에서 에러 메시지를 꺼내서 formErrors 상태 업데이트
+    // handling validation with Zod
+    // returns new object
+    const result = auth.safeParse({ formValues });
+
     if (!result.success) {
-      // 실패 정보가 담긴 zodError 객체를 flatten( ) 으로 보기좋게 정리, 필드별 에러 메시지만 꺼냄
       const fieldErrors = result.error.flatten().fieldErrors;
-      // 필드별 첫번째 에러 메시지를 꺼내서, 상태로 저장
       setFormErrors({
         email: fieldErrors.email?.[0] || '',
         password: fieldErrors.password?.[0] || '',
       });
       return;
     }
-  }, [result.error, result.success]);
+  }, [formValues]);
+
+  // update form values
+  const handleInputChange =
+    (key: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      setFormValues((prev) => ({ ...prev, [key]: e.target.value }));
+    };
+
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // form submit logic here
+  };
 
   return (
     <form onSubmit={handleFormSubmit}>
