@@ -58,25 +58,21 @@ export default function TaskListMenu({
   const handleDeleteTaskList = () => console.log('삭제하기');
 
   return (
-    <>
-      {isAdmin && (
-        <DropDown>
-          <DropDown.Trigger>
-            <TaskListMenuButton size={size} />
-          </DropDown.Trigger>
-          <DropDown.Menu align="right">
-            <DropDown.Item onClick={openCreateTaskListModal}>
-              생성하기
-            </DropDown.Item>
-            <DropDown.Item onClick={openEditTaskListModal}>
-              수정하기
-            </DropDown.Item>
-            <DropDown.Item onClick={handleDeleteTaskList}>
-              삭제하기
-            </DropDown.Item>
-          </DropDown.Menu>
-        </DropDown>
-      )}
-    </>
+    isAdmin && (
+      <DropDown>
+        <DropDown.Trigger>
+          <TaskListMenuButton size={size} />
+        </DropDown.Trigger>
+        <DropDown.Menu align="right">
+          <DropDown.Item onClick={openCreateTaskListModal}>
+            생성하기
+          </DropDown.Item>
+          <DropDown.Item onClick={openEditTaskListModal}>
+            수정하기
+          </DropDown.Item>
+          <DropDown.Item onClick={handleDeleteTaskList}>삭제하기</DropDown.Item>
+        </DropDown.Menu>
+      </DropDown>
+    )
   );
 }
