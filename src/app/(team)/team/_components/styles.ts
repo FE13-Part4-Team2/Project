@@ -7,6 +7,9 @@ export const teamBannerWrapperStyle = clsx(
   'text-xl-bold'
 );
 
+export const teamBannerImgStyle =
+  'tablet:left-[75%] absolute left-1/2 -translate-x-1/2';
+
 export const teamBannerTitleStyle = clsx(
   'relative flex-1 overflow-x-auto whitespace-nowrap scrollbar-hide',
   'laptop:max-w-[800px] tablet:max-w-[460px] max-w-[250px]'
