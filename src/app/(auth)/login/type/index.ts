@@ -8,6 +8,5 @@ export interface InputWithLabelProps {
     key: InputType
   ) => (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
-// type
+
 export type InputType = 'email' | 'password';
-export type FormFieldTypeType = 'email' | 'password';
