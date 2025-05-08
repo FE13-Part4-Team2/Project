@@ -7,8 +7,8 @@ import IconRenderer from '@/components/common/Icons/IconRenderer';
 export default function TaskCommentInput() {
   const [comment, setComment] = useState('');
   const [isSubmitValid, setIsSubmitValid] = useState(false);
-  const params = useParams();
 
+  const params = useParams();
   const taskId = Number(params.taskid);
 
   const handleSubmitComment = async () => {
