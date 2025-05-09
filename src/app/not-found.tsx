@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import Button from '@/components/common/Button';
 
 export default function NotFound() {
   return (
@@ -24,11 +25,16 @@ export default function NotFound() {
           이동되었을 수 있습니다.
         </p>
 
-        <Link
-          href="/"
-          className="text-md-medium laptop:text-lg-medium w-[186px] rounded-[12px] bg-green-700 py-4 text-white transition hover:bg-green-800"
-        >
-          홈으로 이동
+        <Link href="/" className="w-[186px]">
+          <Button
+            variant="primary"
+            styleType="filled"
+            size="lg"
+            radius="sm"
+            className="!text-md-medium laptop:!text-lg-medium w-full"
+          >
+            홈으로 이동
+          </Button>
         </Link>
       </div>
     </>
