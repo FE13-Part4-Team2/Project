@@ -33,10 +33,6 @@ const TeamBanner = ({
     setIsScrollMove(scrollLeft >= 10);
   };
 
-  console.log('group 데이터:', group);
-  console.log('members 데이터:', group?.members);
-  console.log('userId:', userId);
-
   return (
     <>
       <div className={`${teamBannerWrapperStyle}`}>
