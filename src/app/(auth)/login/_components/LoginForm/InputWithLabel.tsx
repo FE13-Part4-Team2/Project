@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 export default function InputWithLabel({
   inputType,
-  errorMessage = '',
+  errorMessage = [],
   onInputBlur,
   onInputChange,
   ...props
@@ -43,7 +43,7 @@ export default function InputWithLabel({
           placeholder={`${inputTypeMap[inputType]}을 입력해주세요.`}
           className={clsx(
             'w-full rounded-xl border bg-slate-800 p-4 outline-hidden',
-            errorMessage !== ''
+            errorMessage.length !== 0
               ? 'border-danger'
               : 'border-slate-50/10 focus:border-green-800'
           )}

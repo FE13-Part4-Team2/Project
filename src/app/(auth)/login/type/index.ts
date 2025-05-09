@@ -1,6 +1,6 @@
 export interface InputWithLabelProps {
   inputType: InputType;
-  errorMessage: string;
+  errorMessage: string[] | undefined;
   onInputBlur: (
     key: InputType
   ) => (e: React.ChangeEvent<HTMLInputElement>) => void;

@@ -35,23 +35,22 @@ export default function LoginForm() {
   });
 
   const [formErrors, setFormErrors] = useState<{
-    email: string;
-    password: string;
+    email: string[] | undefined;
+    password: string[] | undefined;
   }>({
-    email: '',
-    password: '',
+    email: [],
+    password: [],
   });
 
-  // useMemo : 의존성 배열 값이 변경될 때만 계산, 그 값을 변수에 저장
-  const isFormValid = useMemo(() => {
-    const isFormValuesFilled = Object.values(formValues).every((v) => v !== '');
-    const isFormErrorsEmpty = Object.values(formErrors).every((v) => v === '');
-    const isValid = isFormValuesFilled && isFormErrorsEmpty;
+  const isFormValid = () => {
+    return (
+      formValues.email !== '' &&
+      formValues.password !== '' &&
+      (formErrors.email?.length ?? 0) === 0 &&
+      (formErrors.password?.length ?? 0) === 0
+    );
+  };
 
-    return isValid;
-  }, [formValues, formErrors]);
-
-  // update error message when the input is empty
   const handleInputBlur =
     (key: 'email' | 'password') => (e: React.ChangeEvent<HTMLInputElement>) => {
       const newFormValues = { ...formValues, [key]: e.target.value };
@@ -62,7 +61,6 @@ export default function LoginForm() {
       if (!result.success) {
         const fieldErrors = result.error.flatten().fieldErrors;
 
-        // key 에 해당하는 에러 메시지만 업데이트
         setFormErrors((prev) => ({
           ...prev,
           [key]: fieldErrors[key],
@@ -75,7 +73,6 @@ export default function LoginForm() {
       }
     };
 
-  // 입력필드 유효성 검사 후 에러 메시지 렌더링, 입력값 업데이트
   const handleInputChange =
     (key: 'email' | 'password') => (e: React.ChangeEvent<HTMLInputElement>) => {
       const newFormValues = { ...formValues, [key]: e.target.value };
@@ -84,7 +81,6 @@ export default function LoginForm() {
       if (!result.success) {
         const fieldErrors = result.error.flatten().fieldErrors;
 
-        // key 에 해당하는 에러 메시지만 업데이트
         setFormErrors((prev) => ({
           ...prev,
           [key]: fieldErrors[key],
@@ -101,7 +97,7 @@ export default function LoginForm() {
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!isFormValid) return;
+    if (!isFormValid()) return;
 
     try {
       const data = await signIn({
@@ -146,7 +142,7 @@ export default function LoginForm() {
         styleType="filled"
         radius="sm"
         className="w-[460px]"
-        disabled={!isFormValid}
+        disabled={!isFormValid()}
       >
         로그인
       </Button>
