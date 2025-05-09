@@ -14,7 +14,7 @@ import {
   teamBannerTitleStyle,
   teamBannerTitleGradientStyle,
 } from '@/app/(team)/team/_components/styles';
-import { useIsAdmin } from '@/store/useIsAdmin';
+import { useIsAdmin } from '@/hooks/useIsAdmin';
 
 const TeamBanner = ({
   groupId,
