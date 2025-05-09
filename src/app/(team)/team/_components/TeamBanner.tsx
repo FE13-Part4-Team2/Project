@@ -1,20 +1,21 @@
 'use client';
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import clsx from 'clsx';
 import IconRenderer from '@/components/common/Icons/IconRenderer';
 import DropDown from '@/components/common/Dropdown';
 import Skeleton from '@/components/common/Loading/Skeleton';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { ROUTES } from '@/constants/routes';
 import { useGroup } from '@/hooks/useGroup';
+import { useIsAdmin } from '@/hooks/useIsAdmin';
 import {
   teamBannerWrapperStyle,
   teamBannerImgStyle,
   teamBannerTitleStyle,
   teamBannerTitleGradientStyle,
 } from '@/app/(team)/team/_components/styles';
-import { useIsAdmin } from '@/hooks/useIsAdmin';
+import { groupError } from '@/constants/errorMessage';
 
 const TeamBanner = ({
   groupId,
@@ -46,13 +47,7 @@ const TeamBanner = ({
         />
 
         <div onScroll={handleScroll} className={`${teamBannerTitleStyle}`}>
-          {group ? (
-            group.name
-          ) : error ? (
-            '팀 정보 로드 실패'
-          ) : (
-            <Skeleton width="240px" />
-          )}
+          {group ? group.name : error ? groupError : <Skeleton width="240px" />}
           <div
             className={clsx(
               'tablet:hidden block', // 모바일용: 긴 이름 끝에 그라데이션 적용(스크롤 기능 알림 목적)
