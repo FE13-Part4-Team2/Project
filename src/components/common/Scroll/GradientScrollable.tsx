@@ -7,6 +7,7 @@ interface GradientScrollableProps {
 }
 
 const overflowTextGradientStyle = clsx(
+  'tablet:hidden block',
   'pointer-events-none',
   'absolute right-0 top-0',
   'h-full w-6 bg-gradient-to-l from-[#272e3f] to-transparent'
@@ -35,11 +36,7 @@ const GradientScrollable = ({
         {children}
       </div>
       <div
-        className={clsx(
-          'tablet:hidden block',
-          overflowTextGradientStyle,
-          isScrollMove && 'opacity-0'
-        )}
+        className={clsx(overflowTextGradientStyle, isScrollMove && 'opacity-0')}
       />
     </div>
   );
