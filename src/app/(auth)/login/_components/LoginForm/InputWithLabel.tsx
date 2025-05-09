@@ -2,6 +2,7 @@
 
 import { InputWithLabelProps } from '@/app/(auth)/login/type';
 import Icons from '@/components/common/Icons';
+import clsx from 'clsx';
 import { useState } from 'react';
 
 export default function InputWithLabel({
@@ -21,7 +22,6 @@ export default function InputWithLabel({
   const togglePasswordVisibility = () => {
     setIsPasswordVisible((prev) => !prev);
   };
-
   return (
     <div className="flex flex-col gap-3">
       <label className="text-lg-medium" htmlFor={inputType}>
@@ -41,7 +41,12 @@ export default function InputWithLabel({
           name={inputType}
           required
           placeholder={`${inputTypeMap[inputType]}을 입력해주세요.`}
-          className="w-full rounded-xl border border-slate-50/10 bg-slate-800 p-4"
+          className={clsx(
+            'w-full rounded-xl border bg-slate-800 p-4 outline-hidden',
+            errorMessage !== ''
+              ? 'border-danger'
+              : 'border-slate-50/10 focus:border-green-800'
+          )}
           onBlur={onInputBlur?.(inputType)}
           onChange={onInputChange?.(inputType)}
           {...props}

@@ -6,6 +6,7 @@ import Button from '@/components/common/Button';
 import { signIn } from '@/lib/apis/auth';
 import { validateEmail, validatePassword } from '@/utils/inputValidation';
 import { useMemo, useState } from 'react';
+import { toast } from 'react-toastify';
 
 import { z } from 'zod';
 
@@ -74,8 +75,7 @@ export default function LoginForm() {
       }
     };
 
-  // update error message when the input is not valid
-  // update formValues
+  // 입력필드 유효성 검사 후 에러 메시지 렌더링, 입력값 업데이트
   const handleInputChange =
     (key: 'email' | 'password') => (e: React.ChangeEvent<HTMLInputElement>) => {
       const newFormValues = { ...formValues, [key]: e.target.value };
@@ -111,8 +111,11 @@ export default function LoginForm() {
         },
       });
       console.log(data);
+      toast.success('로그인 성공');
     } catch (error) {
+      // 여기서 로그인 실패 메시지 처리 (clientFetcher 에서 throw error)
       console.error('error', error);
+      toast.error('로그인 실패');
     }
   };
 
@@ -143,7 +146,7 @@ export default function LoginForm() {
         styleType="filled"
         radius="sm"
         className="w-[460px]"
-        disabled={true} // 나중에 유효성 체크 후 해제
+        disabled={!isFormValid}
       >
         로그인
       </Button>
