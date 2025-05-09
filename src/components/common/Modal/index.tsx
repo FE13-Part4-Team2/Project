@@ -12,6 +12,7 @@ export default function Modal() {
   const {
     options: { variant = 'default', title, description, button },
     content,
+    requestBody,
     isButtonDisabled,
     closeModal,
   } = useModalStore();
@@ -25,12 +26,12 @@ export default function Modal() {
   if (!isModalOpen) return null;
 
   const handleRequest = () => {
-    button?.onRequest();
+    button?.onRequest?.(requestBody);
     closeModal();
   };
 
   return (
-    <div className="tablet:items-center fixed inset-0 z-50 flex h-full w-full items-end justify-center bg-black/50">
+    <div className="tablet:items-center fixed inset-0 z-80 flex h-full w-full items-end justify-center bg-black/50">
       <div
         ref={modalRef}
         className={clsx(
@@ -64,7 +65,11 @@ export default function Modal() {
                   variant === 'taskForm' ? 'gap-4' : 'gap-2'
                 )}
               >
-                {title && <div className="text-lg-medium">{title}</div>}
+                {title && (
+                  <div className="text-lg-medium text-center whitespace-pre-line">
+                    {title}
+                  </div>
+                )}
                 {description && (
                   <div
                     className={clsx(
