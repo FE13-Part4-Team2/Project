@@ -14,16 +14,28 @@ import {
   teamBannerTitleStyle,
   teamBannerTitleGradientStyle,
 } from '@/app/(team)/team/_components/styles';
+import { useIsAdmin } from '@/store/useIsAdmin';
 
-const TeamBanner = ({ groupId }: { groupId: number }) => {
+const TeamBanner = ({
+  groupId,
+  userId,
+}: {
+  groupId: number;
+  userId: number;
+}) => {
   const router = useRouter();
   const { group, error } = useGroup(groupId);
+  const isAdmin = useIsAdmin({ membersData: group?.members, userId: userId });
   const [isScrollMove, setIsScrollMove] = useState(false); // 팀 이름 내부 스크롤 감지용
 
   const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
     const { scrollLeft } = e.currentTarget;
     setIsScrollMove(scrollLeft >= 10);
   };
+
+  console.log('group 데이터:', group);
+  console.log('members 데이터:', group?.members);
+  console.log('userId:', userId);
 
   return (
     <>
@@ -54,25 +66,27 @@ const TeamBanner = ({ groupId }: { groupId: number }) => {
           />
         </div>
 
-        <DropDown handleClose={() => {}}>
-          <DropDown.Trigger className="mb-0">
-            <IconRenderer name="GearIcon" className="cursor-pointer" />
-          </DropDown.Trigger>
-          <DropDown.Menu className="h-[80px] w-[120px]">
-            <DropDown.Item
-              onClick={() => router.push(ROUTES.TEAM_EDIT(groupId))}
-              className="text-md-regular h-[39px] w-full"
-            >
-              수정하기
-            </DropDown.Item>
-            <DropDown.Item
-              onClick={() => router.push(ROUTES.TEAM_EDIT(groupId))}
-              className="text-md-regular h-[39px] w-full"
-            >
-              삭제하기
-            </DropDown.Item>
-          </DropDown.Menu>
-        </DropDown>
+        {isAdmin && (
+          <DropDown handleClose={() => {}}>
+            <DropDown.Trigger className="mb-0">
+              <IconRenderer name="GearIcon" className="cursor-pointer" />
+            </DropDown.Trigger>
+            <DropDown.Menu className="h-[80px] w-[120px]">
+              <DropDown.Item
+                onClick={() => router.push(ROUTES.TEAM_EDIT(groupId))}
+                className="text-md-regular h-[39px] w-full"
+              >
+                수정하기
+              </DropDown.Item>
+              <DropDown.Item
+                onClick={() => router.push(ROUTES.TEAM_EDIT(groupId))}
+                className="text-md-regular h-[39px] w-full"
+              >
+                삭제하기
+              </DropDown.Item>
+            </DropDown.Menu>
+          </DropDown>
+        )}
       </div>
     </>
   );
