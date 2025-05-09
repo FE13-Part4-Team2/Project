@@ -1,5 +1,5 @@
 'use client';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import clsx from 'clsx';
 import IconRenderer from '@/components/common/Icons/IconRenderer';
 
@@ -8,32 +8,33 @@ interface InputTextareaProps
   variant?: 'base' | 'box' | 'reply'; // 할 일 댓글 수정 | 자유게시판 | 할 일 댓글 작성
   className?: string;
   onClick?: () => void;
-  isSubmitDisabled: boolean;
+  isSubmitDisabled?: boolean;
 }
 
 const InputTextarea = ({
   variant,
+  value,
   className = '',
   onClick,
   isSubmitDisabled = false,
   ...props
 }: InputTextareaProps) => {
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
-  const handleInput = () => {
+  useEffect(() => {
     const el = textareaRef.current;
     if (el) {
       el.style.height = 'auto';
       el.style.height = `${el.scrollHeight}px`;
     }
-  };
+  }, [value]);
 
   return (
     <div className="relative w-full">
       <textarea
         {...props}
+        value={value}
         ref={textareaRef}
-        onInput={handleInput}
         className={clsx(
           'w-full resize-none overflow-hidden focus:outline-none', // base style
 
