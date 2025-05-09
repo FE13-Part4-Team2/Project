@@ -5,7 +5,7 @@ import InputWithLabel from '@/app/(auth)/login/_components/LoginForm/InputWithLa
 import Button from '@/components/common/Button';
 import { signIn } from '@/lib/apis/auth';
 import { validateEmail, validatePassword } from '@/utils/inputValidation';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { toast } from 'react-toastify';
 
 import { z } from 'zod';
@@ -109,9 +109,22 @@ export default function LoginForm() {
       console.log(data);
       toast.success('로그인 성공');
     } catch (error) {
-      // 여기서 로그인 실패 메시지 처리 (clientFetcher 에서 throw error)
-      console.error('error', error);
-      toast.error('로그인 실패');
+      if (error instanceof Error) {
+        const errorMessage = error.message;
+
+        // 로그인 실패
+        if (errorMessage.includes('이메일')) {
+          setFormErrors((prev) => ({
+            ...prev,
+            email: [errorMessage], // 존재하지 않는 이메일입니다.
+          }));
+        } else if (errorMessage.includes('비밀번호')) {
+          setFormErrors((prev) => ({
+            ...prev,
+            password: [errorMessage], // 비밀번호가 일치하지 않습니다.
+          }));
+        }
+      }
     }
   };
 
