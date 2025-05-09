@@ -7,8 +7,10 @@ import { signIn } from '@/lib/apis/auth';
 import { validateEmail, validatePassword } from '@/utils/inputValidation';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
+import Cookies from 'js-cookie';
 
 import { z } from 'zod';
+import { useRouter } from 'next/navigation';
 
 // schema
 const inputEmptySchema = z.object({
@@ -41,6 +43,8 @@ export default function LoginForm() {
     email: [],
     password: [],
   });
+
+  const router = useRouter();
 
   const isFormValid = () => {
     return (
@@ -106,8 +110,31 @@ export default function LoginForm() {
           password: formValues.password,
         },
       });
-      console.log(data);
+
+      if (!data) return;
+
+      const { accessToken, refreshToken, user } = data;
+
+      Cookies.set('accessToken', accessToken, {
+        path: '/',
+        secure: true,
+        sameSite: 'Strict',
+      });
+
+      Cookies.set('refreshToken', refreshToken, {
+        path: '/',
+        secure: true,
+        sameSite: 'Strict',
+      });
+
+      Cookies.set('userId', user.id.toString(), {
+        path: '/',
+        secure: true,
+        sameSite: 'Strict',
+      });
+
       toast.success('로그인 성공');
+      router.push('/no-team');
     } catch (error) {
       if (error instanceof Error) {
         const errorMessage = error.message;
