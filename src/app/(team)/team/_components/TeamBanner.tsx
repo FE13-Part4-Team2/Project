@@ -34,6 +34,11 @@ const TeamBanner = ({
     setIsScrollMove(scrollLeft >= 10);
   };
 
+  let content;
+  if (group) content = group.name;
+  else if (error) content = groupError;
+  else content = <Skeleton width="240px" />;
+
   return (
     <>
       <div className={`${teamBannerWrapperStyle}`}>
@@ -47,7 +52,7 @@ const TeamBanner = ({
         />
 
         <div onScroll={handleScroll} className={`${teamBannerTitleStyle}`}>
-          {group ? group.name : error ? groupError : <Skeleton width="240px" />}
+          {content}
           <div
             className={clsx(
               'tablet:hidden block', // 모바일용: 긴 이름 끝에 그라데이션 적용(스크롤 기능 알림 목적)
