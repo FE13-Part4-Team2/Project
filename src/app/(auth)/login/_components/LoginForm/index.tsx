@@ -113,6 +113,7 @@ export default function LoginForm() {
 
       if (!data) return;
 
+      // 로그인 성공
       const { accessToken, refreshToken, user } = data;
 
       Cookies.set('accessToken', accessToken, {
@@ -133,7 +134,7 @@ export default function LoginForm() {
         sameSite: 'Strict',
       });
 
-      toast.success('로그인 성공');
+      toast.success('로그인 되었습니다.');
       router.push('/no-team');
     } catch (error) {
       if (error instanceof Error) {

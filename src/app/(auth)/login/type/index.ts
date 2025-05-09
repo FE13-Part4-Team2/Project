@@ -1,4 +1,5 @@
-export interface InputWithLabelProps {
+export interface InputWithLabelProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   inputType: InputType;
   errorMessage: string[] | undefined;
   onInputBlur: (
