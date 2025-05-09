@@ -17,7 +17,7 @@ export const teamBannerImgStyle =
 export const teamBannerTitleStyle = clsx(
   'text-xl-bold',
   'relative flex-1',
-  'laptop:max-w-[800px] tablet:max-w-[460px] max-w-[250px]'
+  'laptop:max-w-[800px] tablet:max-w-[460px] max-w-[235px]'
 );
 
 // 📌TaskListBar.tsx style
@@ -32,7 +32,7 @@ export const taskListBarWrapperStyle = clsx(
 export const taskListBarTitleStyle = clsx(
   'text-md-medium',
   'relative flex-1',
-  'laptop:max-w-[800px] tablet:max-w-[460px] max-w-[220px]'
+  'laptop:max-w-[800px] tablet:max-w-[460px] max-w-[225px]'
 );
 
 export const ProcessBadgeWrapperStyle = clsx(
