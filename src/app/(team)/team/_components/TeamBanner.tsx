@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import IconRenderer from '@/components/common/Icons/IconRenderer';
 import DropDown from '@/components/common/Dropdown';
+import GradientScrollable from '@/components/common/Scroll/GradientScrollable';
 import { useRouter } from 'next/navigation';
 import { useIsAdmin } from '@/hooks/useIsAdmin';
 import { GroupResponse } from '@/lib/apis/group/type';
@@ -11,7 +12,6 @@ import {
   teamBannerImgStyle,
   teamBannerTitleStyle,
 } from '@/app/(team)/team/_components/styles';
-import GradientScrollable from '@/components/common/Scroll/GradientScrollable';
 
 const TeamBanner = ({
   group,

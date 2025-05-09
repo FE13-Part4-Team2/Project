@@ -20,11 +20,6 @@ export const teamBannerTitleStyle = clsx(
   'laptop:max-w-[800px] tablet:max-w-[460px] max-w-[250px]'
 );
 
-export const overflowTextGradientStyle = clsx(
-  'pointer-events-none absolute right-0 top-0',
-  'h-full w-6 bg-gradient-to-l from-[#272e3f] to-transparent'
-);
-
 // 📌TaskListBar.tsx style
 export const taskListBarWrapperStyle = clsx(
   'flex items-center justify-between px-4',
