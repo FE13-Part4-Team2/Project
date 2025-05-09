@@ -17,9 +17,6 @@ export default function TaskDetailSection({
 }: TaskResponse) {
   const date = recurring?.startDate;
 
-  // 아직 사용하지 않은 값들 임시로 콘솔에 출력
-  console.log(id, doneAt);
-
   return (
     <div className="tablet:min-h-[312px] min-h-[242px]">
       <div className="tablet:gap-4 flex flex-col gap-3">
@@ -33,7 +30,7 @@ export default function TaskDetailSection({
           >
             {name}
           </h1>
-          <TaskMenu size="md" />
+          <TaskMenu taskId={id} taskName={name} size="md" />
         </div>
         <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-4">
