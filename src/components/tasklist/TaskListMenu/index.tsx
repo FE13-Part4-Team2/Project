@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useModalStore } from '@/store/useModalStore';
 import { GroupMemberResponse } from '@/lib/apis/group/type';
+import { TaskListBody } from '@/lib/apis/taskList/type';
 import DropDown from '@/components/common/Dropdown';
 import TaskListMenuButton from '@/components/tasklist/TaskListMenu/TaskListMenuButton';
 import CreateTaskListModal from '@/components/common/Modal/content/CreateTaskListModal';
@@ -46,7 +47,8 @@ export default function TaskListMenu({
         button: {
           number: 1,
           text: '만들기',
-          onRequest: (body) => handleCreateTaskList(groupId, body),
+          onRequest: (body) =>
+            handleCreateTaskList(groupId, body as TaskListBody),
         },
       },
       <CreateTaskListModal />
@@ -61,7 +63,8 @@ export default function TaskListMenu({
         button: {
           number: 1,
           text: '수정하기',
-          onRequest: (body) => handleEditTaskList(groupId, taskListId, body),
+          onRequest: (body) =>
+            handleEditTaskList(groupId, taskListId, body as TaskListBody),
         },
       },
       <EditTaskListModal taskListName={taskListName} />

@@ -8,15 +8,15 @@ interface ModalOptions {
   button?: {
     number: 1 | 2;
     text: string;
-    onRequest: (body?: any) => void;
+    onRequest: (body?: unknown) => void;
   };
 }
 
 interface ModalState {
   options: ModalOptions;
   content: ReactNode | null;
-  requestBody: any;
-  setRequestBody: (body: any) => void;
+  requestBody: unknown;
+  setRequestBody: (body: unknown) => void;
   isButtonDisabled: boolean;
   setIsButtonDisabled: (isValid: boolean) => void;
   openModal: (options: ModalOptions, content?: ReactNode) => void;
