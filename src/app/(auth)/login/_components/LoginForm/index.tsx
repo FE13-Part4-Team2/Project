@@ -3,8 +3,10 @@
 import ForgotPasswordButton from '@/app/(auth)/login/_components/LoginForm/ForgotPasswordButton';
 import InputWithLabel from '@/app/(auth)/login/_components/LoginForm/InputWithLabel';
 import Button from '@/components/common/Button';
+import { signIn } from '@/lib/apis/auth';
 import { validateEmail, validatePassword } from '@/utils/inputValidation';
-import React, { useEffect, useState } from 'react';
+import { useMemo, useState } from 'react';
+
 import { z } from 'zod';
 
 // schema
@@ -38,6 +40,15 @@ export default function LoginForm() {
     email: '',
     password: '',
   });
+
+  // useMemo : 의존성 배열 값이 변경될 때만 계산, 그 값을 변수에 저장
+  const isFormValid = useMemo(() => {
+    const isFormValuesFilled = Object.values(formValues).every((v) => v !== '');
+    const isFormErrorsEmpty = Object.values(formErrors).every((v) => v === '');
+    const isValid = isFormValuesFilled && isFormErrorsEmpty;
+
+    return isValid;
+  }, [formValues, formErrors]);
 
   // update error message when the input is empty
   const handleInputBlur =
@@ -87,13 +98,22 @@ export default function LoginForm() {
       setFormValues(newFormValues);
     };
 
-  useEffect(() => {
-    console.log('formErrors', formErrors);
-  }, [formErrors]);
-
-  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // form submit logic
+
+    if (!isFormValid) return;
+
+    try {
+      const data = await signIn({
+        body: {
+          email: formValues.email,
+          password: formValues.password,
+        },
+      });
+      console.log(data);
+    } catch (error) {
+      console.error('error', error);
+    }
   };
 
   return (
