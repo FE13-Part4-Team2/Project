@@ -2,6 +2,7 @@ import { cookies } from 'next/headers';
 import { getGroupById } from '@/lib/apis/group';
 import { notFound } from 'next/navigation';
 import TeamBanner from '@/app/(team)/team/_components/TeamBanner';
+import TaskListBar from '@/app/(team)/team/_components/TaskListBar';
 
 export default async function TeamPage({
   params,
@@ -19,6 +20,7 @@ export default async function TeamPage({
   return (
     <div className="flex h-screen w-full flex-col items-center gap-6 p-6">
       <TeamBanner group={groupData} userId={Number(userId)} />
+      <TaskListBar />
     </div>
   );
 }
