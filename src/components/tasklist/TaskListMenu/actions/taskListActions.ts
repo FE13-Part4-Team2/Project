@@ -16,7 +16,7 @@ export const handleCreateTaskList = async (
       tag: ['tasklist'],
     });
   } catch (error) {
-    console.log('Failed to create the task list :', error);
+    console.error('Failed to create the task list :', error);
   }
 };
 
@@ -33,7 +33,7 @@ export const handleEditTaskList = async (
       tag: ['tasklist'],
     });
   } catch (error) {
-    console.log('Failed to edit the task list :', error);
+    console.error('Failed to edit the task list :', error);
   }
 };
 
@@ -44,6 +44,6 @@ export const handleDeleteTaskList = async (taskListId: number) => {
       tag: ['tasklist'],
     });
   } catch (error) {
-    console.log('Failed to delete the task list :', error);
+    console.error('Failed to delete the task list :', error);
   }
 };
