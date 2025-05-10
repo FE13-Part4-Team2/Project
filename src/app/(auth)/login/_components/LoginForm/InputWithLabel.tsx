@@ -44,7 +44,7 @@ export default function InputWithLabel({
           autoComplete="true"
           className={clsx(
             'w-full rounded-xl border bg-slate-800 p-4 outline-hidden',
-            errorMessage.length !== 0
+            errorMessage.length > 0
               ? 'border-danger'
               : 'border-slate-50/10 focus:border-green-800'
           )}
