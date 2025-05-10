@@ -1,6 +1,6 @@
 'use client';
 import Image from 'next/image';
-import GroupMenu from '@/app/(team)/team/_components/TeamBanner/GroupMenu';
+import TeamMenu from '@/app/(team)/team/_components/TeamBanner/TeamMenu';
 import GradientScrollable from '@/components/common/Scroll/GradientScrollable';
 import { useIsAdmin } from '@/hooks/useIsAdmin';
 import { GroupResponse } from '@/lib/apis/group/type';
@@ -34,7 +34,7 @@ const TeamBanner = ({
         <GradientScrollable>{group.name}</GradientScrollable>
       </div>
 
-      {isAdmin && <GroupMenu group={group} />}
+      {isAdmin && <TeamMenu group={group} />}
     </div>
   );
 };

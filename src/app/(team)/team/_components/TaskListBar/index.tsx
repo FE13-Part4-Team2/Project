@@ -1,5 +1,5 @@
 'use client';
-import ProcessTag from '@/app/(team)/team/_components/TaskListBar/ProcessBadge';
+import ProcessBadge from '@/app/(team)/team/_components/TaskListBar/ProcessBadge';
 import GradientScrollable from '@/components/common/Scroll/GradientScrollable';
 import {
   taskListBarWrapperStyle,
@@ -15,7 +15,7 @@ const TaskListBar = () => {
             목록 이름 30자 제한이라서 500에러 발생하는 듯하다
           </p>
         </GradientScrollable>
-        <ProcessTag />
+        <ProcessBadge />
       </div>
     </div>
   );
