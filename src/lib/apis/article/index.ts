@@ -4,7 +4,6 @@ import {
   ArticleBody,
   ArticleListResponse,
   ArticleResponse,
-  MessageResponse,
 } from '@/lib/apis/article/type';
 
 // 게시글 생성 (POST /articles)
@@ -52,12 +51,15 @@ export async function getArticles({
 // 게시글 상세 조회 (GET /articles/:articleId)
 export async function getArticleById({
   articleId,
+  tag,
 }: {
   articleId: number;
+  tag?: string[];
 }): Promise<ArticleResponse | null> {
   return serverFetcher<undefined, ArticleResponse>({
     url: `/articles/${articleId}`,
     method: 'GET',
+    tag,
   });
 }
 
@@ -87,8 +89,8 @@ export async function deleteArticle({
   articleId,
 }: {
   articleId: number;
-}): Promise<MessageResponse | null> {
-  return clientFetcher<undefined, MessageResponse>({
+}): Promise<ArticleResponse | null> {
+  return clientFetcher<undefined, ArticleResponse>({
     url: `/articles/${articleId}`,
     method: 'DELETE',
   });

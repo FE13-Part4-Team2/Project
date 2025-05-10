@@ -1,8 +1,10 @@
 import { TaskResponse } from '@/lib/apis/task/type';
-import TaskMenuButton from '@/components/task/TaskMenuButton';
+import TaskMenu from '@/components/task/TaskMenu';
+import DoneInfo from '@/app/(team)/team/[teamid]/task/[taskid]/_components/TaskDetailSection/DoneInfo';
 import WriterInfo from '@/components/user/WriterInfo';
 import DateInfo from '@/components/task/DateInfo';
 import FrequencyInfo from '@/components/task/FrequencyInfo';
+import clsx from 'clsx';
 
 export default function TaskDetailSection({
   id,
@@ -15,15 +17,20 @@ export default function TaskDetailSection({
 }: TaskResponse) {
   const date = recurring?.startDate;
 
-  // 아직 사용하지 않은 값들 임시로 콘솔에 출력
-  console.log(id, doneAt);
-
   return (
     <div className="tablet:min-h-[312px] min-h-[242px]">
       <div className="tablet:gap-4 flex flex-col gap-3">
+        <DoneInfo doneAt={doneAt} />
         <div className="flex items-center justify-between">
-          <h1 className="text-2lg-bold tablet:text-xl-bold">{name}</h1>
-          <TaskMenuButton size="md" />
+          <h1
+            className={clsx(
+              'text-2lg-bold tablet:text-xl-bold',
+              doneAt && 'line-through'
+            )}
+          >
+            {name}
+          </h1>
+          <TaskMenu taskId={id} taskName={name} size="md" />
         </div>
         <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-4">

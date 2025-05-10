@@ -1,9 +1,10 @@
 import { TaskResponse } from '@/lib/apis/task/type';
 import TitleButton from '@/app/(team)/team/[teamid]/tasklist/_components/TaskListSection/TaskCard/TitleButton';
 import IconRenderer from '@/components/common/Icons/IconRenderer';
-import TaskMenuButton from '@/components/task/TaskMenuButton';
+import TaskMenu from '@/components/task/TaskMenu';
 import DateInfo from '@/components/task/DateInfo';
 import FrequencyInfo from '@/components/task/FrequencyInfo';
+import ToggleTaskDoneButton from '@/components/task/ToggleTaskDoneButton';
 
 export default function TaskCard({
   id,
@@ -18,11 +19,7 @@ export default function TaskCard({
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2">
-            {doneAt ? (
-              <IconRenderer name="CheckboxActiveIcon" />
-            ) : (
-              <IconRenderer name="CheckboxDefaultIcon" />
-            )}
+            <ToggleTaskDoneButton taskId={id} doneAt={doneAt} />
             <TitleButton name={name} id={id} doneAt={doneAt} />
           </div>
           <div className="flex items-center gap-0.5">
@@ -30,7 +27,7 @@ export default function TaskCard({
             <div className="text-xs-regular text-slate-500">{commentCount}</div>
           </div>
         </div>
-        <TaskMenuButton size="sm" />
+        <TaskMenu taskId={id} taskName={name} size="sm" />
       </div>
       <div className="flex items-center gap-2.5">
         <DateInfo date={date} />

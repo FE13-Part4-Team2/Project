@@ -1,16 +1,25 @@
+'use server';
+
 import { cookies } from 'next/headers';
 import getNewAccessTokenInServer from '@/lib/server/token.server';
+import { revalidateTag } from 'next/cache';
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+
+interface ErrorResponse {
+  message: string;
+}
 
 export default async function serverFetcher<B, R>({
   url,
   method,
   body = undefined,
+  tag = undefined,
 }: {
   url: string;
   method: 'GET' | 'POST' | 'PATCH' | 'DELETE';
   body?: B;
+  tag?: string[];
 }): Promise<R | null> {
   const request = async (token?: string): Promise<Response> => {
     const headers: HeadersInit = {
@@ -23,6 +32,7 @@ export default async function serverFetcher<B, R>({
       method,
       headers,
       body: body ? JSON.stringify(body) : undefined,
+      ...(tag && method === 'GET' && { next: { tags: tag } }),
     });
   };
 
@@ -35,8 +45,17 @@ export default async function serverFetcher<B, R>({
     res = await request(newToken);
   }
 
+  if (res.status === 400) {
+    const errorBody: ErrorResponse = await res.json();
+    throw new Error(errorBody.message);
+  }
+
   if (!res.ok) {
     throw new Error(`Error ${res.status}: ${res.statusText}`);
+  }
+
+  if (tag && method !== 'GET') {
+    revalidateTag(tag[0]);
   }
 
   return res.status === 204 ? null : res.json();
