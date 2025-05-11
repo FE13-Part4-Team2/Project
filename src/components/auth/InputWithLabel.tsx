@@ -1,6 +1,6 @@
 'use client';
 
-import InputWithLabelProps from '@/app/(auth)/login/type';
+import InputWithLabelProps from '@/components/auth/type';
 import Icons from '@/components/common/Icons';
 import { validateEmail, validatePassword } from '@/utils/inputValidation';
 import { useEffect, useState } from 'react';
