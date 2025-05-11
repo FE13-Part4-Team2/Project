@@ -59,17 +59,25 @@ export default function SignupForm() {
   const [formValues, setFormValues] = useState<{
     email: string;
     password: string;
+    userName: string;
+    passwordConfirm: string;
   }>({
     email: '',
     password: '',
+    userName: '',
+    passwordConfirm: '',
   });
 
   const [formErrors, setFormErrors] = useState<{
     email: string[] | undefined;
     password: string[] | undefined;
+    userName: string[] | undefined;
+    passwordConfirm: string[] | undefined;
   }>({
     email: [],
     password: [],
+    userName: [],
+    passwordConfirm: [],
   });
 
   const router = useRouter();
@@ -191,7 +199,7 @@ export default function SignupForm() {
       <div className="mb-10 flex flex-col gap-6">
         <InputWithLabel
           inputType="userName"
-          errorMessage={formErrors.email}
+          errorMessage={formErrors.userName}
           onInputBlur={handleInputBlur}
           onInputChange={handleInputChange}
         />
@@ -209,7 +217,7 @@ export default function SignupForm() {
         />
         <InputWithLabel
           inputType="passwordConfirm"
-          errorMessage={formErrors.password}
+          errorMessage={formErrors.passwordConfirm}
           onInputBlur={handleInputBlur}
           onInputChange={handleInputChange}
         />
