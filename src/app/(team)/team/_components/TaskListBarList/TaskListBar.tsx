@@ -1,5 +1,5 @@
 'use client';
-import ProcessBadge from '@/app/(team)/team/_components/TaskListBar/ProcessBadge';
+import ProcessBadge from '@/app/(team)/team/_components/TaskListBarList/ProcessBadge';
 import GradientScrollable from '@/components/common/Scroll/GradientScrollable';
 import {
   taskListBarWrapperStyle,
