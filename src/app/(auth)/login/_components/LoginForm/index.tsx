@@ -10,7 +10,7 @@ import {
   validatePassword,
   validatePasswordConfirm,
 } from '@/utils/inputValidation';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { toast } from 'react-toastify';
 import Cookies from 'js-cookie';
 
@@ -76,14 +76,14 @@ export default function LoginForm() {
 
   const router = useRouter();
 
-  const isFormValid = () => {
+  const isFormValid = useMemo(() => {
     return (
       formValues.email !== '' &&
       formValues.password !== '' &&
       (formErrors.email?.length ?? 0) === 0 &&
       (formErrors.password?.length ?? 0) === 0
     );
-  };
+  }, [formValues, formErrors]);
 
   const handleInputBlur =
     (key: InputType) => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -131,7 +131,7 @@ export default function LoginForm() {
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!isFormValid()) return;
+    if (!isFormValid) return;
 
     try {
       const data = await signIn({
@@ -213,7 +213,7 @@ export default function LoginForm() {
         styleType="filled"
         radius="sm"
         className="w-[460px]"
-        disabled={!isFormValid()}
+        disabled={!isFormValid}
       >
         로그인
       </Button>

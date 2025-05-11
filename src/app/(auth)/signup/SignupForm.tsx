@@ -8,7 +8,7 @@ import {
   validatePassword,
   validatePasswordConfirm,
 } from '@/utils/inputValidation';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { toast } from 'react-toastify';
 import Cookies from 'js-cookie';
 import { z } from 'zod';
@@ -82,7 +82,7 @@ export default function SignupForm() {
 
   const router = useRouter();
 
-  const isFormValid = () => {
+  const isFormValid = useMemo(() => {
     return (
       formValues.email !== '' &&
       formValues.password !== '' &&
@@ -93,7 +93,7 @@ export default function SignupForm() {
       (formErrors.userName?.length ?? 0) === 0 &&
       (formErrors.passwordConfirm?.length ?? 0) === 0
     );
-  };
+  }, [formValues, formErrors]);
 
   const handleInputBlur =
     (key: InputType) => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -141,7 +141,7 @@ export default function SignupForm() {
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!isFormValid()) return;
+    if (!isFormValid) return;
 
     try {
       const data = await signUp({
@@ -183,7 +183,7 @@ export default function SignupForm() {
       if (error instanceof Error) {
         const errorMessage = error.message;
 
-        // 로그인 실패
+        // 회원가입 실패
         if (errorMessage.includes('이메일')) {
           setFormErrors((prev) => ({
             ...prev,
@@ -200,7 +200,7 @@ export default function SignupForm() {
 
         console.error(error);
 
-        // 그 외
+        // 그 외 오류
         toast.error('알 수 없는 오류가 발생했습니다.');
       }
     }
@@ -258,7 +258,7 @@ export default function SignupForm() {
           styleType="filled"
           radius="sm"
           className="w-[460px] basis-2/3"
-          disabled={!isFormValid()}
+          disabled={!isFormValid}
         >
           회원가입
         </Button>
