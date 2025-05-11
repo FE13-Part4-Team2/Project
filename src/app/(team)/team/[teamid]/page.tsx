@@ -16,20 +16,27 @@ export default async function TeamPage({
   const groupId = Number(params.teamid);
 
   const groupData = await getGroupById({ groupId });
+  const taskListsData = groupData?.taskLists ?? [];
+  const matchedTaskList = taskListsData.find(
+    (list) => list.id === Number(searchParams.taskListId)
+  );
+
   const taskListData = await getTaskListById({
     taskListId: Number(searchParams.taskListId),
     date: searchParams.date,
-    tag: ['task'],
   });
 
-  if (!groupData || !taskListData) {
+  console.log('taskListId:', searchParams.taskListId);
+  console.log('date:', searchParams.date);
+
+  if (!groupData || !matchedTaskList) {
     notFound();
   }
 
   return (
     <div className="flex w-full flex-col items-center gap-6 p-6">
       <TeamBanner group={groupData} userId={Number(userId)} />
-      <TaskListBar taskList={taskListData} />
+      <TaskListBar taskList={matchedTaskList} />
     </div>
   );
 }
