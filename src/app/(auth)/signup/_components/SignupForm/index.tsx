@@ -2,6 +2,7 @@
 
 import InputWithLabel from '@/components/auth/InputWithLabel';
 import Button from '@/components/common/Button';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 export default function SignupForm() {
@@ -13,6 +14,7 @@ export default function SignupForm() {
     email: '',
     password: '',
   });
+  const router = useRouter();
 
   // form submit
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -69,7 +71,7 @@ export default function SignupForm() {
           radius="sm"
           className="mb-4 w-[460px] basis-1/3"
           onClick={() => {
-            console.log('뒤로 가기');
+            router.back();
           }}
           disabled={false}
         >
