@@ -86,8 +86,12 @@ export default function SignupForm() {
     return (
       formValues.email !== '' &&
       formValues.password !== '' &&
+      formValues.userName !== '' &&
+      formValues.passwordConfirm !== '' &&
       (formErrors.email?.length ?? 0) === 0 &&
-      (formErrors.password?.length ?? 0) === 0
+      (formErrors.password?.length ?? 0) === 0 &&
+      (formErrors.userName?.length ?? 0) === 0 &&
+      (formErrors.passwordConfirm?.length ?? 0) === 0
     );
   };
 
