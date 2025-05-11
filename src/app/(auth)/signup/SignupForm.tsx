@@ -13,7 +13,7 @@ import { toast } from 'react-toastify';
 import Cookies from 'js-cookie';
 import { z } from 'zod';
 import { useRouter } from 'next/navigation';
-import { signIn } from '@/lib/apis/auth';
+import { signUp } from '@/lib/apis/auth';
 import { InputType } from '@/components/auth/type';
 
 // schema
@@ -144,16 +144,19 @@ export default function SignupForm() {
     if (!isFormValid()) return;
 
     try {
-      const data = await signIn({
+      const data = await signUp({
         body: {
           email: formValues.email,
           password: formValues.password,
+          nickname: formValues.userName,
+          passwordConfirmation: formValues.passwordConfirm,
         },
       });
 
       if (!data) return;
+      console.log(data);
 
-      // 로그인 성공
+      // 회원가입 성공
       const { accessToken, refreshToken, user } = data;
 
       Cookies.set('accessToken', accessToken, {
@@ -174,7 +177,7 @@ export default function SignupForm() {
         sameSite: 'Strict',
       });
 
-      toast.success('로그인 되었습니다.');
+      toast.success('회원가입 되었습니다.');
       router.push('/no-team');
     } catch (error) {
       if (error instanceof Error) {
@@ -184,14 +187,21 @@ export default function SignupForm() {
         if (errorMessage.includes('이메일')) {
           setFormErrors((prev) => ({
             ...prev,
-            email: [errorMessage], // 존재하지 않는 이메일입니다.
+            email: [errorMessage], // 이미 사용중인 이메일입니다.
           }));
-        } else if (errorMessage.includes('비밀번호')) {
+          return;
+        } else if (errorMessage.includes('닉네임')) {
           setFormErrors((prev) => ({
             ...prev,
-            password: [errorMessage], // 비밀번호가 일치하지 않습니다.
+            userName: [errorMessage], // 이미 사용중인 닉네임입니다.
           }));
+          return;
         }
+
+        console.error(error);
+
+        // 그 외
+        toast.error('알 수 없는 오류가 발생했습니다.');
       }
     }
   };
