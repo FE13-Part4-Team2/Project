@@ -1,7 +1,7 @@
 'use client';
 
 import ForgotPasswordButton from '@/app/(auth)/login/_components/LoginForm/ForgotPasswordButton';
-import InputWithLabel from '@/app/(auth)/login/_components/LoginForm/InputWithLabel';
+import InputWithLabel from '@/components/auth/InputWithLabel';
 import Button from '@/components/common/Button';
 import { signIn } from '@/lib/apis/auth';
 import { useState } from 'react';
@@ -27,7 +27,6 @@ export default function LoginForm() {
 
     if (!isEmailValid || !isPasswordValid) return;
 
-    //
     try {
       const res = await signIn({
         body: {
