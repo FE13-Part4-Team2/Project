@@ -18,7 +18,7 @@ export function validatePassword(value: string, minLength = 8) {
   );
 }
 
-export function validatePasswordMatch(data: {
+export function validatePasswordConfirm(data: {
   password: string;
   passwordConfirm: string;
 }) {
