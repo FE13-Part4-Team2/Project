@@ -115,7 +115,7 @@ export default function InputWithLabel({
         />
 
         {/*비밀번호 눈모양 토글*/}
-        {inputType === 'password' && (
+        {(inputType === 'password' || inputType === 'passwordConfirm') && (
           <div className="absolute top-1/2 right-4 -translate-y-1/2">
             {isPasswordVisible ? (
               <Icons.VisibilityOnIcon
