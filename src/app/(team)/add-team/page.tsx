@@ -8,6 +8,7 @@ import Button from '@/components/common/Button';
 import IconRenderer from '@/components/common/Icons/IconRenderer';
 import { postGroup } from '@/lib/apis/group';
 import { UserGroupResponse } from '@/lib/apis/user/type';
+import { ROUTES } from '@/constants/routes';
 
 export default function AddTeamPage() {
   const router = useRouter();
@@ -46,7 +47,7 @@ export default function AddTeamPage() {
     try {
       const newGroup = await postGroup({ body: { name: teamName } });
       if (newGroup?.id) {
-        router.push(`/team/${newGroup.id}`);
+        router.push(ROUTES.TEAM(newGroup.id));
       }
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : '팀 생성 실패';
@@ -113,7 +114,7 @@ export default function AddTeamPage() {
             radius="sm"
             className="text-lg-semibold w-full"
             onClick={handleCreate}
-            disabled={teamName.length === 0}
+            disabled={!teamName.trim()}
           >
             생성하기
           </Button>
