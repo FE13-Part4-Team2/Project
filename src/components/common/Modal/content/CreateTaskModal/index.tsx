@@ -14,9 +14,8 @@ export default function CreateTaskModal() {
       />
       <div className="flex flex-col gap-4">
         <div className="text-lg-medium">시작 날짜 및 시간</div>
-        <div className="flex gap-2">
-          <CustomDatePicker />
-        </div>
+        <div className="flex gap-2"></div>
+        <CustomDatePicker />
       </div>
       <InputTextarea
         variant="box"
