@@ -14,12 +14,14 @@ const TaskListBar = ({ name, index }: { name: string; index: number }) => {
   return (
     <div className="flex w-full flex-col items-center justify-center">
       <div className={`${taskListBarWrapperStyle}`}>
-        <div className="flex items-center justify-center gap-3">
+        <div
+          className={`${taskListBarTitleStyle} relative flex w-full items-center justify-start gap-3`}
+        >
           <div
-            className={`${colorChipStyle}`}
+            className={`${colorChipStyle} shrink-0`}
             style={{ backgroundColor: color }}
           />
-          <GradientScrollable>
+          <GradientScrollable color="#1e293b">
             <p className={`${taskListBarTitleStyle}`}>{name}</p>
           </GradientScrollable>
         </div>

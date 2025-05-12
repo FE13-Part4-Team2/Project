@@ -3,7 +3,7 @@ import TaskListBarList from '@/app/(team)/team/_components/TaskListBarList';
 import { cookies } from 'next/headers';
 import { getGroupById } from '@/lib/apis/group';
 import { notFound } from 'next/navigation';
-import { teamPageWrapperStyle } from '@/app/(team)/team/_components/styles';
+import { teamItemWrapperStyle } from '@/app/(team)/team/_components/styles';
 
 export default async function TeamPage({
   params,
@@ -26,7 +26,9 @@ export default async function TeamPage({
     <div className="flex w-full flex-col items-center gap-4 p-6">
       <TeamBanner group={groupData} userId={Number(userId)} />
 
-      <div className={`flex w-full justify-between ${teamPageWrapperStyle}`}>
+      <div
+        className={`${teamItemWrapperStyle} flex w-full justify-between truncate`}
+      >
         <div className="flex items-center gap-2">
           <h1 className="lg-medium">할 일 목록</h1>
           <span className="text-lg-regular text-slate-500">
@@ -39,11 +41,15 @@ export default async function TeamPage({
       </div>
       <TaskListBarList items={taskListsData} />
 
-      <div className={`flex w-full justify-between ${teamPageWrapperStyle}`}>
-        리포트
+      <div
+        className={`${teamItemWrapperStyle} flex w-full justify-between truncate`}
+      >
+        <h1 className="lg-medium">리포트</h1>
       </div>
 
-      <div className={`flex w-full justify-between ${teamPageWrapperStyle}`}>
+      <div
+        className={`${teamItemWrapperStyle} flex w-full justify-between truncate`}
+      >
         <div className="flex items-center gap-2">
           <h1 className="lg-medium">멤버</h1>
           <span className="text-lg-regular text-slate-500">
