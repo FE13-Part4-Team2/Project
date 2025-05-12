@@ -23,11 +23,11 @@ export default async function TeamPage({
   }
 
   return (
-    <div className="flex w-full flex-col items-center gap-4 p-6">
+    <div className="flex w-full flex-col items-center p-6">
       <TeamBanner group={groupData} userId={Number(userId)} />
 
       <div
-        className={`${teamItemWrapperStyle} flex w-full justify-between truncate`}
+        className={`${teamItemWrapperStyle} mt-6 mb-3 flex w-full justify-between truncate`}
       >
         <div className="flex items-center gap-2">
           <h1 className="lg-medium">할 일 목록</h1>
@@ -42,7 +42,7 @@ export default async function TeamPage({
       <TaskListBarList items={taskListsData} />
 
       <div
-        className={`${teamItemWrapperStyle} flex w-full justify-between truncate`}
+        className={`${teamItemWrapperStyle} my-8 flex w-full justify-between truncate`}
       >
         <h1 className="lg-medium">리포트</h1>
       </div>

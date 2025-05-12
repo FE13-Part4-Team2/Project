@@ -52,8 +52,7 @@ export const processBadgeWrapperStyle = clsx(
 
 // TaskListBarList.tsx style
 export const listContainerStyle = clsx(
-  'flex flex-col gap-4',
+  'flex flex-col',
   'max-w-[343px] tablet:max-w-[696px] laptop:max-w-[1200px]',
-  'max-h-[208px]',
   'w-full'
 );
