@@ -2,6 +2,8 @@ import TaskListBar from '@/app/(team)/team/_components/TaskListBarList/TaskListB
 import { TaskListResponse } from '@/lib/apis/taskList/type';
 import { listContainerStyle } from '@/app/(team)/team/_components/styles';
 
+const maxListLength = '4';
+
 const TaskListBarList = ({ items }: { items: TaskListResponse[] }) => {
   return (
     <div className={`${listContainerStyle}`}>

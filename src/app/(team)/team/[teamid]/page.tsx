@@ -1,8 +1,9 @@
+import TeamBanner from '@/app/(team)/team/_components/TeamBanner';
+import TaskListBarList from '@/app/(team)/team/_components/TaskListBarList';
 import { cookies } from 'next/headers';
 import { getGroupById } from '@/lib/apis/group';
 import { notFound } from 'next/navigation';
-import TeamBanner from '@/app/(team)/team/_components/TeamBanner';
-import TaskListBarList from '@/app/(team)/team/_components/TaskListBarList';
+import { teamPageWrapperStyle } from '@/app/(team)/team/_components/styles';
 
 export default async function TeamPage({
   params,
@@ -22,9 +23,37 @@ export default async function TeamPage({
   }
 
   return (
-    <div className="flex w-full flex-col items-center gap-6 p-6">
+    <div className="flex w-full flex-col items-center gap-4 p-6">
       <TeamBanner group={groupData} userId={Number(userId)} />
+
+      <div className={`flex w-full justify-between ${teamPageWrapperStyle}`}>
+        <div className="flex items-center gap-2">
+          <h1 className="lg-medium">할 일 목록</h1>
+          <span className="text-lg-regular text-slate-500">
+            ({taskListsData.length}개)
+          </span>
+        </div>
+        <button className="text-md-regular text-green-700">
+          + 새로운 목록 추가하기
+        </button>
+      </div>
       <TaskListBarList items={taskListsData} />
+
+      <div className={`flex w-full justify-between ${teamPageWrapperStyle}`}>
+        리포트
+      </div>
+
+      <div className={`flex w-full justify-between ${teamPageWrapperStyle}`}>
+        <div className="flex items-center gap-2">
+          <h1 className="lg-medium">멤버</h1>
+          <span className="text-lg-regular text-slate-500">
+            ({membersData.length}명)
+          </span>
+        </div>
+        <button className="text-md-regular text-green-700">
+          + 새로운 멤버 초대하기
+        </button>
+      </div>
     </div>
   );
 }
