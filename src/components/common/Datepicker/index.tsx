@@ -1,12 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import DatePicker from 'react-datepicker';
 import IconRenderer from '@/components/common/Icons/IconRenderer';
 import { ko } from 'date-fns/locale';
 import 'react-datepicker/dist/react-datepicker.css';
 
-export default function CustomDatePicker() {
-  const [selectedDate, setSelectedDate] = useState(new Date());
+interface CustomDatePickerProps {
+  selectedDate: Date;
+  setSelectedDate: (date: Date) => void;
+}
 
+export default function CustomDatePicker({
+  selectedDate,
+  setSelectedDate,
+}: CustomDatePickerProps) {
   return (
     <div>
       <DatePicker
