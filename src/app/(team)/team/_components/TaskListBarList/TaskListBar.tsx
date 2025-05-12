@@ -1,8 +1,9 @@
 'use client';
-import ProcessBadge from '@/app/(team)/team/_components/TaskListBarList/ProcessBadge';
-import TaskMenuButton from '@/components/task/TaskMenu/TaskMenuButton';
 import GradientScrollable from '@/components/common/Scroll/GradientScrollable';
+import ProcessBadge from '@/app/(team)/team/_components/TaskListBarList/ProcessBadge';
+import TaskListDropdownMenu from '@/app/(team)/team/_components/TaskListBarList/TaskListDropdownMenu';
 import { useRouter } from 'next/navigation';
+import { ROUTES } from '@/constants/routes';
 import {
   taskListBarWrapperStyle,
   taskListBarTitleStyle,
@@ -28,7 +29,7 @@ const TaskListBar = ({ id, name, index, groupId }: TaskListBarProps) => {
     const dd = String(today.getDate()).padStart(2, '0');
     const formattedDate = `${yyyy}-${mm}-${dd}`;
 
-    router.push(`/team/${groupId}/tasklist?id=${id}&date=${formattedDate}`);
+    router.push(`${ROUTES.TASK(groupId)}?id=${id}&date=${formattedDate}`);
   };
 
   return (
@@ -51,7 +52,7 @@ const TaskListBar = ({ id, name, index, groupId }: TaskListBarProps) => {
 
         <div className="flex items-center gap-1 pr-2">
           <ProcessBadge />
-          <TaskMenuButton size="sm" />
+          <TaskListDropdownMenu />
         </div>
       </div>
     </div>
