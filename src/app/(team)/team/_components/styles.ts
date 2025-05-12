@@ -4,6 +4,7 @@ const RADIUS = 'rounded-[12px]';
 const RADIUS_TL = 'rounded-tl-[12px]';
 const RADIUS_BL = 'rounded-bl-[12px]';
 
+// 팀 페이지 내부 아이템 공통 래퍼
 export const teamItemWrapperStyle = clsx(
   'laptop:max-w-[1200px] tablet:max-w-[696px] max-w-[343px] min-w-0'
 );
@@ -27,6 +28,19 @@ export const teamBannerTitleStyle = clsx(
   'min-w-0'
 );
 
+// 📌TaskListBarList.tsx style
+export const listContainerStyle = clsx(
+  'flex flex-col',
+  'max-w-[343px] tablet:max-w-[696px] laptop:max-w-[1200px]',
+  'w-full'
+);
+
+export const paginationStyle = clsx(
+  'flex items-center justify-center',
+  'size-4 rounded-full',
+  'transition-colors duration-100'
+);
+
 // 📌TaskListBar.tsx style
 export const taskListBarWrapperStyle = clsx(
   'flex items-center justify-between',
@@ -47,15 +61,13 @@ export const colorList = ['#A855F7', '#3B82F6', '#06B6D4', '#EC4899'];
 
 export const colorChipStyle = clsx('w-[12px] h-[40px]', RADIUS_TL, RADIUS_BL);
 
+// 📌ProcessBadge.tsx style
 export const processBadgeWrapperStyle = clsx(
   'h-[25px] w-[58px]',
   'bg-slate-900',
   RADIUS
 );
 
-// TaskListBarList.tsx style
-export const listContainerStyle = clsx(
-  'flex flex-col',
-  'max-w-[343px] tablet:max-w-[696px] laptop:max-w-[1200px]',
-  'w-full'
-);
+// 📌Pagination.tsx style
+export const getButtonStyle = (disabled: boolean) =>
+  `${paginationStyle} ${disabled ? 'bg-slate-700' : 'bg-slate-800 hover:bg-slate-700'}`;
