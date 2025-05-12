@@ -1,3 +1,4 @@
+import CustomDatePicker from '@/components/common/Datepicker';
 import InputBase from '@/components/common/Input/InputBase';
 import InputTextarea from '@/components/common/Input/InputTextarea';
 
@@ -11,6 +12,12 @@ export default function CreateTaskModal() {
         inputClassName="text-lg-regular py-1.5 placeholder-slate-500"
         placeholder="할 일 제목을 입력해주세요."
       />
+      <div className="flex flex-col gap-4">
+        <div className="text-lg-medium">시작 날짜 및 시간</div>
+        <div className="flex gap-2">
+          <CustomDatePicker />
+        </div>
+      </div>
       <InputTextarea
         variant="box"
         id="task-description"
