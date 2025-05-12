@@ -5,8 +5,8 @@ import { listContainerStyle } from '@/app/(team)/team/_components/styles';
 const TaskListBarList = ({ items }: { items: TaskListResponse[] }) => {
   return (
     <div className={`${listContainerStyle}`}>
-      {items.map((item) => (
-        <TaskListBar key={item.id} {...item} />
+      {items.map((item, index) => (
+        <TaskListBar key={item.id} {...item} index={index} />
       ))}
     </div>
   );

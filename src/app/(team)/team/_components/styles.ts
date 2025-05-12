@@ -1,13 +1,13 @@
 import clsx from 'clsx';
 
-const RADIUS = 'rounded-[12px]';
+const RADIUS = '[12px]';
 
 // 📌TeamBanner.tsx style
 export const teamBannerWrapperStyle = clsx(
   'relative flex items-center justify-between p-6',
   'laptop:max-w-[1200px] tablet:max-w-[696px] max-w-[343px] min-w-0',
   'h-[64px] w-full',
-  RADIUS,
+  `rounded-${RADIUS}`,
   'border border-slate-50/10 bg-[#272e3f]'
 );
 
@@ -22,10 +22,10 @@ export const teamBannerTitleStyle = clsx(
 
 // 📌TaskListBar.tsx style
 export const taskListBarWrapperStyle = clsx(
-  'flex items-center justify-between px-4',
+  'flex items-center justify-between pr-4',
   'max-w-[343px] tablet:max-w-[696px] laptop:max-w-[1200px]',
   'w-full h-[40px]',
-  RADIUS,
+  `rounded-${RADIUS}`,
   'bg-slate-800'
 );
 
@@ -35,9 +35,17 @@ export const taskListBarTitleStyle = clsx(
   'laptop:max-w-[800px] tablet:max-w-[460px] max-w-[225px]'
 );
 
+export const colorList = ['#A855F7', '#3B82F6', '#06B6D4', '#EC4899'];
+
+export const colorChipStyle = clsx(
+  'w-[12px] h-[40px]',
+  `rounded-tl-${RADIUS}`,
+  `rounded-bl-${RADIUS}`
+);
+
 export const processBadgeWrapperStyle = clsx(
   'h-[25px] w-[58px]',
-  RADIUS,
+  `rounded-${RADIUS}`,
   'bg-slate-900'
 );
 
