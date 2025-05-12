@@ -1,7 +1,7 @@
-import { ProcessBadgeWrapperStyle } from '@/app/(team)/team/_components/styles';
+import { processBadgeWrapperStyle } from '@/app/(team)/team/_components/styles';
 
 const ProcessBadge = () => {
-  return <div className={`${ProcessBadgeWrapperStyle}`}></div>;
+  return <div className={`${processBadgeWrapperStyle}`}></div>;
 };
 
 export default ProcessBadge;

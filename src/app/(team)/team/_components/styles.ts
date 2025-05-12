@@ -35,8 +35,16 @@ export const taskListBarTitleStyle = clsx(
   'laptop:max-w-[800px] tablet:max-w-[460px] max-w-[225px]'
 );
 
-export const ProcessBadgeWrapperStyle = clsx(
+export const processBadgeWrapperStyle = clsx(
   'h-[25px] w-[58px]',
   RADIUS,
   'bg-slate-900'
+);
+
+// TaskListBarList.tsx style
+export const listContainerStyle = clsx(
+  'flex flex-col gap-4 overflow-hidden',
+  'max-w-[343px] tablet:max-w-[696px] laptop:max-w-[1200px]',
+  'max-h-[208px]',
+  'w-full'
 );
