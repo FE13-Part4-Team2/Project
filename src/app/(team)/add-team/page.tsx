@@ -8,34 +8,46 @@ import IconRenderer from '@/components/common/Icons/IconRenderer';
 export default function AddTeamPage() {
   const [teamName, setTeamName] = useState('');
 
+  const textClass = 'text-md-regular tablet:text-lg-regular';
+  const rootClass = 'flex h-full w-full justify-center pt-50';
+  const cardClass =
+    'flex flex-col items-center w-[343px] h-[374px] tablet:w-[456px] tablet:h-[460px]';
+  const profileClass = 'mb-6 self-start flex flex-col items-center gap-3';
+  const inputWrapper = 'w-full mb-6 self-start';
+  const buttonWrapper = 'w-full mb-4';
+
   return (
-    <div className="flex h-full w-full justify-center pt-50">
-      <div className="tablet:text-lg-medium text-md-regular tablet:h-[460px] tablet:w-[456px] flex h-[374px] w-[343px] flex-col items-center">
-        <h1 className="text-4xl-medium mb-8">팀 생성하기</h1>
+    <div className={rootClass}>
+      <div className={`${cardClass} ${textClass}`}>
+        <h1 className="text-2xl-medium laptop:text-4xl-medium mb-8">
+          팀 생성하기
+        </h1>
 
-        <div className="mb-8 flex cursor-pointer flex-col items-center self-start">
-          <span className="mt-2">팀 프로필</span>
-
+        <div className={profileClass}>
+          <span className="text-lg-medium">팀 프로필</span>
           <IconRenderer
-            name="ProfileImageIcon"
+            name="ProfileEditIcon"
             size={64}
-            className="text-gray-400"
+            className="cursor-pointer"
+            onClick={() => {}}
           />
         </div>
 
-        <div className="mb-6 w-full self-start">
+        <div className={inputWrapper}>
           <InputBase
             id="teamName"
             title="팀 이름"
             placeholder="팀 이름을 입력해주세요."
             value={teamName}
+            isInvalid={false}
             onChange={(e) => setTeamName(e.target.value)}
-            containerClassName="w-full"
-            inputClassName="w-full"
+            titleClassName={`${textClass} mb-6`}
+            containerClassName="w-full bg-slate-800"
+            inputClassName={`${textClass} h-11 tablet:h-12`}
           />
         </div>
 
-        <div className="mb-4 w-full">
+        <div className={buttonWrapper}>
           <Button
             variant="primary"
             styleType="filled"
@@ -43,12 +55,13 @@ export default function AddTeamPage() {
             className="text-lg-semibold w-full"
             onClick={() => {}}
             disabled={!teamName.trim()}
+            radius="sm"
           >
             생성하기
           </Button>
         </div>
 
-        <p className="tablet:text-lg-regular text-md-regular">
+        <p className={textClass}>
           팀 이름은 회사명이나 모임 이름 등으로 설정하면 좋아요.
         </p>
       </div>
