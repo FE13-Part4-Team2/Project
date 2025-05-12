@@ -7,7 +7,13 @@ import { listContainerStyle } from '@/app/(team)/team/_components/styles';
 
 const perPage = 4;
 
-const TaskListBarList = ({ items }: { items: TaskListResponse[] }) => {
+const TaskListBarList = ({
+  items,
+  groupId,
+}: {
+  items: TaskListResponse[];
+  groupId: number;
+}) => {
   const [page, setPage] = useState(1);
 
   const totalPage = Math.ceil(items.length / perPage);
@@ -26,7 +32,14 @@ const TaskListBarList = ({ items }: { items: TaskListResponse[] }) => {
     <div className={`${listContainerStyle}`}>
       <div className={`${listContainerStyle} gap-4`}>
         {currentItems.map((item, index) => (
-          <TaskListBar key={item.id} {...item} index={index + startIndex} />
+          <TaskListBar
+            key={item.id}
+            {...item}
+            id={item.id}
+            name={item.name}
+            index={index + startIndex}
+            groupId={groupId}
+          />
         ))}
       </div>
 

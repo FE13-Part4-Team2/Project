@@ -39,7 +39,7 @@ export default async function TeamPage({
           + 새로운 목록 추가하기
         </button>
       </div>
-      <TaskListBarList items={taskListsData} />
+      <TaskListBarList items={taskListsData} groupId={groupId} />
 
       <div
         className={`${teamItemWrapperStyle} my-8 flex w-full justify-between truncate`}
