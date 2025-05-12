@@ -37,7 +37,7 @@ export const taskListBarWrapperStyle = clsx(
 
 export const taskListBarTitleStyle = clsx(
   'text-md-medium',
-  'laptop:max-w-[800px] tablet:max-w-[460px] max-w-[215px]'
+  'laptop:max-w-[800px] tablet:max-w-[460px] max-w-[205px]'
 );
 
 export const colorList = ['#A855F7', '#3B82F6', '#06B6D4', '#EC4899'];
