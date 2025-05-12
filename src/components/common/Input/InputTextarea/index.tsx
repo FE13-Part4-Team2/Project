@@ -1,55 +1,71 @@
 'use client';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import clsx from 'clsx';
 import IconRenderer from '@/components/common/Icons/IconRenderer';
 
 interface InputTextareaProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   variant?: 'base' | 'box' | 'reply'; // 할 일 댓글 수정 | 자유게시판 | 할 일 댓글 작성
-  className?: string;
+  title?: string; // label 내용
+  titleClassName?: string;
+  inputClassName?: string;
   onClick?: () => void;
+  isSubmitDisabled?: boolean;
 }
 
 const InputTextarea = ({
   variant,
-  className = '',
+  id, // title과 함께 사용 시, label과 input 연결됨
+  title,
+  value,
+  titleClassName = '',
+  inputClassName = '',
   onClick,
+  isSubmitDisabled = false,
   ...props
 }: InputTextareaProps) => {
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
-  const handleInput = () => {
+  useEffect(() => {
     const el = textareaRef.current;
-    if (el) {
-      el.style.height = 'auto';
-      el.style.height = `${el.scrollHeight}px`;
-    }
-  };
+
+    if (!el || variant === 'box') return;
+
+    el.style.height = 'auto';
+    el.style.height = `${el.scrollHeight}px`;
+  }, [value]);
 
   return (
-    <div className="relative w-full">
+    <div className="relative flex w-full flex-col">
+      {title && (
+        <label htmlFor={`${id}`} className={`${titleClassName}`}>
+          {title}
+        </label>
+      )}
       <textarea
         {...props}
+        id={id}
+        value={value}
         ref={textareaRef}
-        onInput={handleInput}
         className={clsx(
           'w-full resize-none overflow-hidden focus:outline-none', // base style
 
           variant === 'box' &&
-            'rounded-[12px] border border-slate-50/10 bg-slate-800',
+            'scrollbar-hide overflow-y-auto rounded-[12px] border border-slate-50/10 bg-slate-800',
 
-          variant === 'reply' && 'border-t border-b border-slate-50/10 py-3',
-          className
+          variant === 'reply' && 'border-t border-b border-slate-50/10 py-3.5',
+          inputClassName
         )}
       />
       {variant === 'reply' && (
         <button
           onClick={onClick}
+          disabled={isSubmitDisabled}
           className={clsx(
             'absolute top-3 right-0',
             'flex items-center justify-center',
             'size-6 rounded-full bg-green-700',
-            'transition-colors duration-100 hover:bg-green-800 focus:bg-green-900 active:bg-green-900',
+            'transition-colors duration-100 hover:bg-green-800',
             'disabled:cursor-default disabled:bg-slate-400'
           )}
         >
