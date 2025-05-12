@@ -1,37 +1,64 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import clientFetcher from '@/lib/client/fetcher.client';
 import InputBase from '@/components/common/Input/InputBase';
 import Button from '@/components/common/Button';
 import IconRenderer from '@/components/common/Icons/IconRenderer';
+import { postGroup } from '@/lib/apis/group';
+import { UserGroupResponse } from '@/lib/apis/user/type';
 
 export default function AddTeamPage() {
+  const router = useRouter();
   const [teamName, setTeamName] = useState('');
-  const [hasProfile, setHasProfile] = useState(false);
-  const [profileError, setProfileError] = useState(false);
   const [nameError, setNameError] = useState(false);
+  const [existingNames, setExistingNames] = useState<string[]>([]);
 
-  const existingNames = ['팀이름'];
+  useEffect(() => {
+    async function fetchMyGroups() {
+      try {
+        const data = await clientFetcher<undefined, UserGroupResponse[]>({
+          url: '/user/groups',
+          method: 'GET',
+        });
+        if (data) {
+          setExistingNames(data.map((g) => g.name));
+        }
+      } catch (e) {
+        console.error('내 그룹 조회 실패:', e);
+      }
+    }
+    fetchMyGroups();
+  }, []);
 
-  const handleProfileClick = () => {
-    setHasProfile(true);
-    setProfileError(false);
-  };
+  const handleProfileClick = () => {};
 
-  const handleCreate = () => {
+  const handleCreate = async () => {
     let hasErr = false;
 
-    if (!hasProfile) {
-      setProfileError(true);
-      hasErr = true;
-    }
     if (existingNames.includes(teamName.trim())) {
       setNameError(true);
       hasErr = true;
     }
-
     if (hasErr) return;
-    console.log('create!', { teamName, hasProfile });
+
+    try {
+      const newGroup = await postGroup({ body: { name: teamName } });
+      if (newGroup?.id) {
+        router.push(`/team/${newGroup.id}`);
+      }
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : '팀 생성 실패';
+      console.error('팀 생성 실패:', message);
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleCreate();
+    }
   };
 
   return (
@@ -50,12 +77,6 @@ export default function AddTeamPage() {
             className="cursor-pointer text-gray-400"
             onClick={handleProfileClick}
           />
-
-          {profileError && (
-            <p className="text-md-medium text-red-500">
-              프로필 이미지를 넣어주세요.
-            </p>
-          )}
         </div>
 
         <div className="mb-6 w-full self-start">
@@ -69,6 +90,7 @@ export default function AddTeamPage() {
               setTeamName(e.target.value);
               setNameError(false);
             }}
+            onKeyDown={handleKeyDown}
             titleClassName="mb-6"
             containerClassName={
               `w-full bg-slate-800 ` +
@@ -87,12 +109,13 @@ export default function AddTeamPage() {
           <Button
             variant="primary"
             styleType="filled"
-            size="md"
+            size="lg"
             radius="sm"
             className="text-lg-semibold w-full"
             onClick={handleCreate}
+            disabled={teamName.length === 0}
           >
-            만들기
+            생성하기
           </Button>
         </div>
 
