@@ -22,6 +22,7 @@ import List from '@/assets/icons/list.svg';
 import Logo from '@/assets/icons/logo.svg';
 import Member from '@/assets/icons/member.svg';
 import Plus from '@/assets/icons/plus.svg';
+import ProfileEdit from '@/assets/icons/profile_edit.svg';
 import ProfileImage from '@/assets/icons/profile_image.svg';
 import ProgressDone from '@/assets/icons/progress_done.svg';
 import ProgressOngoing from '@/assets/icons/progress_ongoing.svg';
@@ -197,6 +198,15 @@ const Icons = {
 
   PlusIcon: ({ size = 24, className, onClick }: IconProps) => (
     <Plus width={size} height={size} className={className} onClick={onClick} />
+  ),
+
+  ProfileEditIcon: ({ size = 24, className, onClick }: IconProps) => (
+    <ProfileEdit
+      width={size}
+      height={size}
+      className={className}
+      onClick={onClick}
+    />
   ),
 
   ProfileImageIcon: ({ size = 24, className, onClick }: IconProps) => (
