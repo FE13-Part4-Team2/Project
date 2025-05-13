@@ -11,7 +11,7 @@ export default function CreateTaskModal() {
       <InputBase
         id="task-title"
         title="할 일 제목"
-        titleClassName="mb-4"
+        titleClassName="mb-4 text-lg-medium"
         inputClassName="text-lg-regular py-1.5 placeholder-slate-500"
         placeholder="할 일 제목을 입력해주세요."
       />
@@ -20,7 +20,7 @@ export default function CreateTaskModal() {
         variant="box"
         id="task-description"
         title="할 일 설명"
-        titleClassName="mb-4"
+        titleClassName="mb-4 text-lg-medium"
         inputClassName="text-lg-regular h-[75px] px-4 py-3 placeholder-slate-500"
         placeholder="할 일 설명을 입력해주세요."
       />

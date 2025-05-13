@@ -1,5 +1,6 @@
-import { formatDate } from '@/utils/formatDate';
+import { formatDate, formatTime } from '@/utils/formatDate';
 import CustomDatePicker from '@/components/common/Datepicker';
+import TimePicker from '@/components/common/Timepicker';
 
 interface StartDateTimeSectionProps {
   date: Date;
@@ -11,6 +12,7 @@ export default function StartDateTimeSection({
   setDate,
 }: StartDateTimeSectionProps) {
   const formattedDate = formatDate(date.toISOString());
+  const formattedTime = formatTime(date.toISOString());
 
   return (
     <div className="flex flex-col gap-4">
@@ -27,10 +29,13 @@ export default function StartDateTimeSection({
             type="button"
             className="text-lg-regular flex basis-2/5 items-center rounded-[12px] border border-slate-50/10 px-4 py-3.5 text-slate-500"
           >
-            오후 12:12
+            {formattedTime}
           </button>
         </div>
-        <CustomDatePicker selectedDate={date} setSelectedDate={setDate} />
+        {false && (
+          <CustomDatePicker selectedDate={date} setSelectedDate={setDate} />
+        )}
+        {true && <TimePicker selectedDate={date} setSelectedDate={setDate} />}
       </div>
     </div>
   );
