@@ -18,14 +18,17 @@ export default function TimePicker({
   );
   const [selectedMinute, setMinute] = useState(selectedDate.getMinutes());
 
+  const convertTo24Hour = (period: 'AM' | 'PM', hour: number) => {
+    return period === 'PM' ? (hour % 12) + 12 : hour % 12;
+  };
+
   const handleUpdateTime = (
     newPeriod = selectedPeriod,
     newHour = selectedHour,
     newMinute = selectedMinute
   ) => {
-    const fullHour = newPeriod === 'PM' ? (newHour % 12) + 12 : newHour % 12;
     const newDate = new Date(selectedDate);
-    newDate.setHours(fullHour);
+    newDate.setHours(convertTo24Hour(newPeriod, newHour));
     newDate.setMinutes(newMinute);
     newDate.setSeconds(0);
     newDate.setMilliseconds(0);
