@@ -1,3 +1,5 @@
+// 팀 페이지: 팀 배너 스타일
+
 import clsx from 'clsx';
 import {
   teamItemWrapperStyle,
