@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useModalStore } from '@/store/useModalStore';
 import InputBase from '@/components/common/Input/InputBase';
 import InputTextarea from '@/components/common/Input/InputTextarea';
 import StartDateTimeSection from '@/components/task-modal/StartDateTimeSection';
@@ -22,11 +23,37 @@ export default function CreateTaskModal() {
     weekDays: [],
     monthDay: null,
   });
+  const [isSubmitValid, setIsSubmitValid] = useState(false);
+
+  const { setRequestBody, setIsButtonDisabled } = useModalStore();
+
+  useEffect(() => {
+    const trimmedName = formData.name.trim();
+    const trimmedDescription = formData.description.trim();
+
+    if (trimmedName !== '' && trimmedDescription !== '') {
+      setIsSubmitValid(true);
+    } else {
+      setIsSubmitValid(false);
+    }
+
+    setRequestBody({
+      name: trimmedName,
+    });
+  }, [formData.name, formData.description]);
+
+  useEffect(() => {
+    setIsButtonDisabled(!isSubmitValid);
+  }, [isSubmitValid]);
 
   return (
     <div className="flex flex-col gap-6">
       <InputBase
         id="task-name"
+        value={formData.name}
+        onChange={(e) =>
+          setFormData((prev) => ({ ...prev, name: e.target.value }))
+        }
         title="할 일 제목"
         titleClassName="mb-4 text-lg-medium"
         inputClassName="text-lg-regular py-1.5 placeholder-slate-500"
@@ -55,6 +82,10 @@ export default function CreateTaskModal() {
       <InputTextarea
         variant="box"
         id="task-description"
+        value={formData.description}
+        onChange={(e) =>
+          setFormData((prev) => ({ ...prev, description: e.target.value }))
+        }
         title="할 일 설명"
         titleClassName="mb-4 text-lg-medium"
         inputClassName="text-lg-regular h-[75px] px-4 py-3 placeholder-slate-500"
