@@ -15,7 +15,7 @@ interface MemberListProps {
 
 const MemberList = ({ items, group }: MemberListProps) => {
   const [page, setPage] = useState(1);
-  const [perPage, setPerPage] = useState(4); // 기본: 모바일
+  const [perPage, setPerPage] = useState(6);
 
   useEffect(() => {
     const handleResize = () => {

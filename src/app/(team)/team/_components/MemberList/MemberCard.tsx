@@ -6,6 +6,7 @@ import { useIsAdmin } from '@/hooks/useIsAdmin';
 import {
   memberCardContainerStyle,
   memberCardItemWrapperStyle,
+  memberCardTextWrapperStyle,
 } from '@/app/(team)/team/_components/styles';
 
 interface MemberCardProps {
@@ -34,7 +35,7 @@ const MemberCard = ({
           <ProfileIcon userImage={userImage} />
 
           {/* 이름 + 이메일 */}
-          <div className="tablet:h-[33px] tablet:w-[102px] flex flex-col justify-center gap-0.5">
+          <div className={`${memberCardTextWrapperStyle}`}>
             <p className="text-md-regular">{name}</p>
             <BreakEmail email={email} />
           </div>

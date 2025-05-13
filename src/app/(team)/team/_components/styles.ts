@@ -80,7 +80,7 @@ export const memberListContainerStyle = clsx(
 );
 
 export const memberListWrapperStyle = clsx(
-  'flex grid grid-cols-2 tablet:grid-cols-3 gap-3',
+  'grid grid-cols-2 tablet:grid-cols-3 tablet:gap-6 gap-4',
   teamItemWrapperStyle,
   'w-full'
 );
@@ -88,9 +88,10 @@ export const memberListWrapperStyle = clsx(
 // 📌MemberCard.tsx style
 export const memberCardContainerStyle = clsx(
   'flex items-center justify-center',
-  'laptop:w-[384px]',
-  'tablet:w-[216px] tablet:h-[73px]',
-  'w-[163.5px] h-[68px]',
+  'laptop:max-w-[384px]',
+  'tablet:max-w-[216px] tablet:h-[73px]',
+  'max-w-[163.5px] h-[68px]',
+  'w-full',
   'bg-slate-800',
   'rounded-[16px]'
 );
@@ -100,4 +101,8 @@ export const memberCardItemWrapperStyle = clsx(
   'laptop:w-[336px] h-full',
   'tablet:w-[168px]',
   'w-[125px]'
+);
+
+export const memberCardTextWrapperStyle = clsx(
+  'laptop:w-[200px] w-[102px] flex flex-col justify-center gap-0.5'
 );

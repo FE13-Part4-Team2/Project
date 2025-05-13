@@ -54,7 +54,7 @@ export default async function TeamPage({
       <div
         className={`${teamItemWrapperStyle} flex w-full justify-between truncate`}
       >
-        <div className="flex items-center gap-2">
+        <div className="mb-3 flex items-center gap-2">
           <h1 className="lg-medium">멤버</h1>
           <span className="text-lg-regular text-slate-500">
             ({membersData.length}명)
