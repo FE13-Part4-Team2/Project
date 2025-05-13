@@ -1,63 +1,82 @@
 'use client';
-
 import Image from 'next/image';
+import WriterInfo from '@/components/user/WriterInfo';
+import Link from 'next/link';
+import { ROUTES } from '@/constants/routes';
 
 type BestPostCardProps = {
+  id: number;
   title: string;
   date: string;
-  username: string;
+  nickname: string;
   likes: number;
   image?: string;
+  writerImage: string | null | undefined;
 };
 
 export default function BestPostCard({
+  id,
   title,
   date,
-  username,
+  nickname,
   likes,
   image,
+  writerImage,
 }: BestPostCardProps) {
   return (
-    <article className="h-full w-[387px] rounded-xl border border-slate-700 bg-slate-800 px-6 py-4">
-      <div className="mb-3.5 flex items-center gap-1">
-        <Image
-          src="/best_badge_icon.svg"
-          alt="베스트 게시글 뱃지"
-          width={16}
-          height={16}
-        />
-        <p className="text-lg-semibold text-white">Best</p>
-      </div>
-      <div className="mb-10">
-        {image ? (
-          <div className="flex h-[52px] gap-3">
-            <p className="text-2lg-medium mb-3 line-clamp-2 w-full overflow-ellipsis text-slate-100">
-              {title}
-            </p>
-            <div className="h-[72px] w-[72px] flex-shrink-0 rounded-lg bg-slate-600"></div>
-          </div>
-        ) : (
-          <p className="text-2lg-medium mb-3 line-clamp-2 w-full overflow-ellipsis text-slate-100">
-            {title}
-          </p>
-        )}
-        <span className="text-md-medium text-slate-400">{date}</span>
-      </div>
-      <div className="item-center mb-4 flex justify-between">
-        <div className="flex items-center gap-3">
-          <p className="h-8 w-8 rounded-full bg-slate-500"></p>
-          <p className="text-md-medium text-slate-50">{username}</p>
-        </div>
-        <div className="flex items-center justify-center gap-2">
+    <Link href={ROUTES.ARTICLE(id)}>
+      <article className="h-full w-[387px] cursor-pointer rounded-xl border border-slate-700 bg-slate-800 px-6 py-4">
+        <div className="mb-3.5 flex items-center gap-1">
           <Image
-            src="/heart_icon.svg"
+            src="/icons/best_badge_icon.svg"
+            alt="베스트 게시글 뱃지"
             width={16}
             height={16}
-            alt="좋아요 아이콘"
           />
-          <p className="text-slate-400">{likes}+</p>
+          <p className="text-lg-semibold text-white">Best</p>
         </div>
-      </div>
-    </article>
+        <div className="mb-10">
+          {image ? (
+            <div className="flex h-[52px] gap-3">
+              <p className="text-2lg-medium mb-3 line-clamp-2 w-full overflow-ellipsis text-slate-100">
+                {title}
+              </p>
+              <div className="mx-4 h-[72px] w-[72px] flex-shrink-0">
+                <Image
+                  src={image}
+                  alt="썸네일"
+                  width={72}
+                  height={72}
+                  className="rounded-lg bg-cover"
+                  unoptimized // 최적화 비활성화 (임시방편)
+                  onError={(e) => {
+                    console.error('실제 요청 URL:', e.currentTarget.src); // 실제 요청 URL 출력
+                  }}
+                />
+              </div>
+            </div>
+          ) : (
+            <p className="text-2lg-medium mb-3 line-clamp-2 h-[42px] w-full overflow-ellipsis text-slate-100">
+              {title}
+            </p>
+          )}
+          <span className="text-md-medium text-slate-400">{date}</span>
+        </div>
+        <div className="item-center mb-4 flex justify-between">
+          <div className="flex items-center gap-3">
+            <WriterInfo nickname={nickname} image={writerImage ?? null} />
+          </div>
+          <div className="flex items-center justify-center gap-2">
+            <Image
+              src="/icons/heart_icon.svg"
+              width={16}
+              height={16}
+              alt="좋아요 아이콘"
+            />
+            <p className="text-slate-400">{likes}</p>
+          </div>
+        </div>
+      </article>
+    </Link>
   );
 }
