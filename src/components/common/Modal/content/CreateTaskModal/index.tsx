@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
-import { useModalStore } from '@/store/useModalStore';
+import { useState } from 'react';
 import InputBase from '@/components/common/Input/InputBase';
 import InputTextarea from '@/components/common/Input/InputTextarea';
 import StartDateTimeSection from '@/components/task-modal/StartDateTimeSection';
 import RecurringSection from '@/components/task-modal/RecurringSection';
+import { useTaskFormValidation } from '@/components/common/Modal/content/CreateTaskModal/hooks/useTaskFormValidation';
 
-interface RecurringTaskFormState {
+export interface RecurringTaskFormState {
   name: string;
   description: string;
   startDate: Date;
@@ -23,28 +23,8 @@ export default function CreateTaskModal() {
     weekDays: [],
     monthDay: null,
   });
-  const [isSubmitValid, setIsSubmitValid] = useState(false);
 
-  const { setRequestBody, setIsButtonDisabled } = useModalStore();
-
-  useEffect(() => {
-    const trimmedName = formData.name.trim();
-    const trimmedDescription = formData.description.trim();
-
-    if (trimmedName !== '' && trimmedDescription !== '') {
-      setIsSubmitValid(true);
-    } else {
-      setIsSubmitValid(false);
-    }
-
-    setRequestBody({
-      name: trimmedName,
-    });
-  }, [formData.name, formData.description]);
-
-  useEffect(() => {
-    setIsButtonDisabled(!isSubmitValid);
-  }, [isSubmitValid]);
+  useTaskFormValidation(formData);
 
   return (
     <div className="flex flex-col gap-6">
