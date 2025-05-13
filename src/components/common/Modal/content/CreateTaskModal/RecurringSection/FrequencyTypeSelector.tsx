@@ -23,11 +23,11 @@ export default function FrequencyTypeSelector({
       <DropDown>
         <DropDown.Trigger
           showIcon
-          className="text-lg-medium! w-[109px] bg-[#18212F] px-[10px] py-2 text-slate-500"
+          className="text-lg-medium! w-[120px] bg-[#18212F] px-[10px] py-2 text-slate-500"
         >
           {FrequencyText[frequencyType]}
         </DropDown.Trigger>
-        <DropDown.Menu className="text-lg-regular! w-[109px] text-slate-50">
+        <DropDown.Menu className="text-lg-regular! w-[120px] text-slate-50">
           <DropDown.Item onClick={() => setFrequencyType('ONCE')}>
             {FrequencyText['ONCE']}
           </DropDown.Item>

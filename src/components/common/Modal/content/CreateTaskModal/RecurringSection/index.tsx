@@ -1,4 +1,6 @@
+import { useEffect } from 'react';
 import FrequencyTypeSelector from '@/components/common/Modal/content/CreateTaskModal/RecurringSection/FrequencyTypeSelector';
+import WeekDaysSelector from '@/components/common/Modal/content/CreateTaskModal/RecurringSection/WeekDaysSelector';
 
 interface RecurringSectionProps {
   frequencyType: 'ONCE' | 'DAILY' | 'WEEKLY' | 'MONTHLY';
@@ -19,6 +21,12 @@ export default function RecurringSection({
   setWeekDays,
   setMonthDay,
 }: RecurringSectionProps) {
+  // 반복 설정 변경 시 선택했던 반복 요일, 반복 날짜 초기화
+  useEffect(() => {
+    if (frequencyType !== 'WEEKLY') setWeekDays([]);
+    if (frequencyType !== 'MONTHLY') setMonthDay(null);
+  }, [frequencyType]);
+
   return (
     <div className="flex flex-col gap-4">
       <div className="text-lg-medium">반복 설정</div>
@@ -26,6 +34,9 @@ export default function RecurringSection({
         frequencyType={frequencyType}
         setFrequencyType={setFrequencyType}
       />
+      {frequencyType === 'WEEKLY' && (
+        <WeekDaysSelector weekDays={weekDays} setWeekDays={setWeekDays} />
+      )}
     </div>
   );
 }
