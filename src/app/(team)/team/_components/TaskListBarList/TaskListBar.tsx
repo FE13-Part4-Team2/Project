@@ -34,7 +34,12 @@ const TaskListBar = ({ id, name, index, groupId }: TaskListBarProps) => {
 
   return (
     <div
+      role="button"
+      tabIndex={0}
       onClick={handleClick}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') handleClick();
+      }}
       className="flex w-full cursor-pointer flex-col items-center justify-between"
     >
       <div className={`${taskListBarWrapperStyle}`}>
