@@ -1,4 +1,4 @@
-import ProfileIcon from '@/components/common/Icons/ProfileIcon';
+import UserIcon from '@/components/user/UserIcon';
 import BreakEmail from '@/app/(team)/team/_components/MemberList/BreakEmail';
 import TaskMenuButton from '@/components/task/TaskMenu/TaskMenuButton';
 import { GroupResponse } from '@/lib/apis/group/type';
@@ -31,8 +31,8 @@ const MemberCard = ({
       {/* 아이템 래퍼 */}
       <div className={`${memberCardItemWrapperStyle}`}>
         <div className="tablet:h-[33px] tablet:w-[146px] flex items-center gap-3">
-          {/* 임시 아이콘 */}
-          <ProfileIcon userImage={userImage} />
+          {/* 프로필 아이콘 */}
+          <UserIcon image={userImage} />
 
           {/* 이름 + 이메일 */}
           <div className={`${memberCardTextWrapperStyle}`}>
