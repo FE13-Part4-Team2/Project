@@ -18,6 +18,11 @@ export default function CustomDatePicker({
       onChange={(date) => date && setSelectedDate(date)}
       locale={ko}
       inline
+      dayClassName={(date) =>
+        date.toDateString() === selectedDate.toDateString()
+          ? 'text-md-semibold! bg-green-700! text-slate-800! hover:text-slate-50! focus:bg-green-700!'
+          : 'bg-slate-800!'
+      }
       renderCustomHeader={({ date, decreaseMonth, increaseMonth }) => {
         const year = date.getFullYear();
         const month = date.getMonth() + 1;
