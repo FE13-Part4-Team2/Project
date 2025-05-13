@@ -29,14 +29,12 @@ export default function PostList({ posts }: PostListProps) {
 
     if (option === '수정하기') {
       try {
-        // 게시글 정보를 가져와서 작성자 확인
         const article = await getArticleById({ articleId: id });
         if (!article) {
           toast.error('게시글을 찾을 수 없습니다.');
           return;
         }
 
-        // 현재 로그인한 사용자 정보 가져오기
         const currentUser = await getUser({});
 
         if (!currentUser) {
@@ -49,7 +47,6 @@ export default function PostList({ posts }: PostListProps) {
           return;
         }
 
-        // 작성자인 경우에만 수정 페이지로 이동
         router.push(ROUTES.ARTICLE_EDIT(id));
       } catch (error) {
         if (error instanceof Error) {
@@ -99,7 +96,7 @@ export default function PostList({ posts }: PostListProps) {
   };
 
   return (
-    <section className="grid h-full w-full grid-cols-2 gap-5">
+    <section className="tablet:gap-5 tablet:grid tablet:grid-cols-1 laptop:gap-5 laptop:grid-cols-2 grid h-full w-full grid-cols-1 flex-col gap-5">
       {posts.map((post) => (
         <PostCard
           key={post.id}

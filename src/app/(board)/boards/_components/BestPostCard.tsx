@@ -25,7 +25,7 @@ export default function BestPostCard({
 }: BestPostCardProps) {
   return (
     <Link href={ROUTES.ARTICLE(id)}>
-      <article className="h-full w-[387px] cursor-pointer rounded-xl border border-slate-700 bg-slate-800 px-6 py-4">
+      <article className="laptop:w-[387px] tablet:w-full tablet:px-6 tablet:overflow-hidden h-full cursor-pointer rounded-xl border border-slate-700 bg-slate-800 px-6 py-4">
         <div className="mb-3.5 flex items-center gap-1">
           <Image
             src="/icons/best_badge_icon.svg"
@@ -41,14 +41,13 @@ export default function BestPostCard({
               <p className="text-2lg-medium mb-3 line-clamp-2 w-full overflow-ellipsis text-slate-100">
                 {title}
               </p>
-              <div className="mx-4 h-[72px] w-[72px] flex-shrink-0">
+              <div className="laptop:h-[72px] laptop:w-[72px] relative ml-4 h-[64px] w-[64px] flex-shrink-0 overflow-hidden rounded-lg">
                 <Image
                   src={image}
                   alt="썸네일"
-                  width={72}
-                  height={72}
-                  className="rounded-lg bg-cover"
-                  unoptimized // 최적화 비활성화 (임시방편)
+                  fill
+                  className="image-cover rounded-lg"
+                  unoptimized // 최적화 비활성화 (임시방편, 더미 글 오류 때문에 추가. 정리되면 지울 예정)
                   onError={(e) => {
                     console.error('실제 요청 URL:', e.currentTarget.src); // 실제 요청 URL 출력
                   }}

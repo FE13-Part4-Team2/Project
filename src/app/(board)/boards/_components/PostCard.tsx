@@ -31,7 +31,7 @@ export default function PostCard({
   onSelect,
 }: PostCardProps) {
   return (
-    <article className="h-[176px] w-[590px] rounded-xl border border-slate-700 bg-slate-800 px-8 py-6">
+    <article className="laptop:h-[176px] laptop:w-[590px] laptop:gap-10 rounded-xl border border-slate-700 bg-slate-800 px-8 py-6">
       <div className="flex justify-between">
         <Link href={ROUTES.ARTICLE(id)} className="flex-1 cursor-pointer">
           <div className="flex items-start">
@@ -39,14 +39,14 @@ export default function PostCard({
               {title}
             </p>
             {image && (
-              <div className="relative ml-4 h-[72px] w-[72px] flex-shrink-0 overflow-hidden rounded-lg">
+              <div className="tablet:h-[72px] tablet:w-[72px] relative ml-4 h-[64px] w-[64px] flex-shrink-0 overflow-hidden rounded-lg">
                 <Image
                   src={image}
                   alt="썸네일"
                   fill
                   style={{ objectFit: 'cover' }}
                   className="image-cover rounded-lg"
-                  unoptimized // 최적화 비활성화 (임시방편, 더미 글에에 오류 때문에 추가. 정리되면 지울 예정)
+                  unoptimized // 최적화 비활성화 (임시방편, 더미 글 오류 때문에 추가. 정리되면 지울 예정)
                   onError={(e) => {
                     console.error('실제 요청 URL:', e.currentTarget.src); // 실제 요청 URL 출력
                   }}
