@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import FrequencyTypeSelector from '@/components/common/Modal/content/CreateTaskModal/RecurringSection/FrequencyTypeSelector';
 import WeekDaysSelector from '@/components/common/Modal/content/CreateTaskModal/RecurringSection/WeekDaysSelector';
+import MonthDaySelector from '@/components/common/Modal/content/CreateTaskModal/RecurringSection/MonthDaySelector';
 
 interface RecurringSectionProps {
   frequencyType: 'ONCE' | 'DAILY' | 'WEEKLY' | 'MONTHLY';
@@ -36,6 +37,9 @@ export default function RecurringSection({
       />
       {frequencyType === 'WEEKLY' && (
         <WeekDaysSelector weekDays={weekDays} setWeekDays={setWeekDays} />
+      )}
+      {frequencyType === 'MONTHLY' && (
+        <MonthDaySelector monthDay={monthDay} setMonthDay={setMonthDay} />
       )}
     </div>
   );
