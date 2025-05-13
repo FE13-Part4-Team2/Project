@@ -4,13 +4,13 @@ import clsx from 'clsx';
 
 interface UserIconProps {
   image: string | null;
-  responsive?: boolean; // 반응형. false 설정 시 tablet 이하에서도 size-8 유지
+  responsive?: boolean; // 반응형. true 설정 시 tablet 이하 size-6으로 변경
   sizeClass?: string; // 사이즈 직접 지정. ex) sizeClass='size-4'
 }
 
 export default function UserIcon({
   image,
-  responsive = true,
+  responsive = false,
   sizeClass,
 }: UserIconProps) {
   const finalsizeClass = sizeClass

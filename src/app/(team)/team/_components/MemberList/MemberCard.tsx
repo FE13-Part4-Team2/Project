@@ -32,7 +32,7 @@ const MemberCard = ({
       <div className={`${memberCardItemWrapperStyle}`}>
         <div className="tablet:h-[33px] tablet:w-[146px] flex items-center gap-3">
           {/* 프로필 아이콘 */}
-          <UserIcon image={userImage} />
+          <UserIcon image={userImage} responsive={true} />
 
           {/* 이름 + 이메일 */}
           <div className={`${memberCardTextWrapperStyle}`}>
