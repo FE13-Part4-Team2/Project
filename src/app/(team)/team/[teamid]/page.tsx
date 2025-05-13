@@ -64,7 +64,11 @@ export default async function TeamPage({
           + 새로운 멤버 초대하기
         </button>
       </div>
-      <MemberList items={membersData} group={groupData} />
+      <MemberList
+        items={membersData}
+        group={groupData}
+        userId={Number(userId)}
+      />
     </div>
   );
 }

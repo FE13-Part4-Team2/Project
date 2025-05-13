@@ -11,9 +11,10 @@ import {
 interface MemberListProps {
   items: GroupMemberResponse[];
   group: GroupResponse;
+  userId: number;
 }
 
-const MemberList = ({ items, group }: MemberListProps) => {
+const MemberList = ({ items, group, userId }: MemberListProps) => {
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(6);
 
@@ -50,7 +51,7 @@ const MemberList = ({ items, group }: MemberListProps) => {
             group={group}
             name={item.userName}
             email={item.userEmail}
-            userId={item.userId}
+            userId={Number(userId)}
             userImage={item.userImage}
           />
         ))}

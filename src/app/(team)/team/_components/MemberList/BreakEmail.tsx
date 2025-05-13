@@ -1,5 +1,4 @@
 'use client';
-import Skeleton from '@/components/common/Loading/Skeleton';
 import { useEffect, useRef, useState } from 'react';
 
 const BreakEmail = ({ email }: { email: string }) => {
@@ -33,9 +32,7 @@ const BreakEmail = ({ email }: { email: string }) => {
         {email}
       </span>
 
-      {shouldBreak === null ? (
-        <Skeleton />
-      ) : email.includes('@') ? (
+      {shouldBreak && email.includes('@') ? (
         <p className="text-xs-regular break-words whitespace-pre-wrap text-slate-300">
           {local}
           {'\n'}@{domain}
