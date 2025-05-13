@@ -1,6 +1,6 @@
 import TeamBanner from '@/app/(team)/team/_components/TeamBanner';
 import TaskListBarList from '@/app/(team)/team/_components/TaskListBarList';
-import MemberCard from '@/app/(team)/team/_components/MemberList/MemberCard';
+import MemberList from '@/app/(team)/team/_components/MemberList';
 import { cookies } from 'next/headers';
 import { getGroupById } from '@/lib/apis/group';
 import { notFound } from 'next/navigation';
@@ -64,16 +64,7 @@ export default async function TeamPage({
           + 새로운 멤버 초대하기
         </button>
       </div>
-      {membersData.map((member) => (
-        <MemberCard
-          group={groupData}
-          userId={Number(userId)}
-          key={member.userId}
-          name={member.userName}
-          email={member.userEmail}
-          userImage={member.userImage}
-        />
-      ))}
+      <MemberList items={membersData} group={groupData} />
     </div>
   );
 }

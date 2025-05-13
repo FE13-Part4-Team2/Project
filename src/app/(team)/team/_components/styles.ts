@@ -31,7 +31,7 @@ export const teamBannerTitleStyle = clsx(
 // 📌TaskListBarList.tsx style
 export const listContainerStyle = clsx(
   'flex flex-col',
-  'max-w-[343px] tablet:max-w-[696px] laptop:max-w-[1200px]',
+  teamItemWrapperStyle,
   'w-full'
 );
 
@@ -73,6 +73,17 @@ export const getButtonStyle = (disabled: boolean) =>
   `${paginationStyle} ${disabled ? 'bg-slate-700' : 'bg-slate-800 hover:bg-slate-700'}`;
 
 // 📌MemberList.tsx style
+export const memberListContainerStyle = clsx(
+  'flex flex-col',
+  teamItemWrapperStyle,
+  'w-full'
+);
+
+export const memberListWrapperStyle = clsx(
+  'flex grid grid-cols-2 tablet:grid-cols-3 gap-3',
+  teamItemWrapperStyle,
+  'w-full'
+);
 
 // 📌MemberCard.tsx style
 export const memberCardContainerStyle = clsx(

@@ -18,7 +18,8 @@ const TaskListBarList = ({
 
   const totalPage = Math.ceil(items.length / perPage);
   const startIndex = (page - 1) * perPage;
-  const currentItems = items.slice(startIndex, startIndex + perPage);
+  const endIndex = startIndex + perPage;
+  const currentItems = items.slice(startIndex, endIndex);
 
   const handlePrev = () => {
     if (page > 1) setPage((prev) => prev - 1);
