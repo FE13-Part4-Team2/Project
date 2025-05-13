@@ -7,7 +7,7 @@ import {
   memberCardContainerStyle,
   memberCardItemWrapperStyle,
   memberCardTextWrapperStyle,
-} from '@/app/(team)/team/_components/styles';
+} from '@/app/(team)/team/_components/MemberList/styles';
 
 interface MemberCardProps {
   group: GroupResponse;

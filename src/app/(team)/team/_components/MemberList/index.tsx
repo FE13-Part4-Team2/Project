@@ -6,7 +6,7 @@ import { GroupResponse, GroupMemberResponse } from '@/lib/apis/group/type';
 import {
   memberListContainerStyle,
   memberListWrapperStyle,
-} from '@/app/(team)/team/_components/styles';
+} from '@/app/(team)/team/_components/MemberList/styles';
 
 interface MemberListProps {
   items: GroupMemberResponse[];

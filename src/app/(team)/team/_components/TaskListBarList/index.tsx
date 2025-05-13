@@ -3,7 +3,7 @@ import TaskListBar from '@/app/(team)/team/_components/TaskListBarList/TaskListB
 import Pagination from '@/app/(team)/team/_components/TaskListBarList/Pagination';
 import { useState } from 'react';
 import { TaskListResponse } from '@/lib/apis/taskList/type';
-import { listContainerStyle } from '@/app/(team)/team/_components/styles';
+import { listContainerStyle } from '@/app/(team)/team/_components/TaskListBarList/styles';
 
 const perPage = 4;
 

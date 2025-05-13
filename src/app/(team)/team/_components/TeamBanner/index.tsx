@@ -8,7 +8,7 @@ import {
   teamBannerWrapperStyle,
   teamBannerImgStyle,
   teamBannerTitleStyle,
-} from '@/app/(team)/team/_components/styles';
+} from '@/app/(team)/team/_components/TeamBanner/styles';
 
 const TeamBanner = ({
   group,

@@ -9,7 +9,7 @@ import {
   taskListBarTitleStyle,
   colorChipStyle,
   colorList,
-} from '@/app/(team)/team/_components/styles';
+} from '@/app/(team)/team/_components/TaskListBarList/styles';
 
 interface TaskListBarProps {
   id: number;

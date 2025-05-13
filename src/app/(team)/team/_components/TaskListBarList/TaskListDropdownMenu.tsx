@@ -7,7 +7,7 @@ const TaskListDropdownMenu = () => {
       <DropDown.Trigger className="mb-0">
         <TaskMenuButton size="sm" />
       </DropDown.Trigger>
-      <DropDown.Menu align="right" className="mt-3 h-[80px] w-[120px]">
+      <DropDown.Menu align="right" className="mt-2 h-[80px] w-[120px]">
         <DropDown.Item className="text-md-regular h-[39px] w-full">
           수정하기
         </DropDown.Item>
