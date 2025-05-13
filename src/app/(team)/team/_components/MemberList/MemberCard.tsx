@@ -1,3 +1,4 @@
+import ProfileIcon from '@/components/common/Icons/ProfileIcon';
 import BreakEmail from '@/app/(team)/team/_components/MemberList/BreakEmail';
 import TaskMenuButton from '@/components/task/TaskMenu/TaskMenuButton';
 import { GroupResponse } from '@/lib/apis/group/type';
@@ -15,7 +16,13 @@ interface MemberCardProps {
   userImage: string | null;
 }
 
-const MemberCard = ({ group, name, email, userId }: MemberCardProps) => {
+const MemberCard = ({
+  group,
+  name,
+  email,
+  userId,
+  userImage,
+}: MemberCardProps) => {
   const isAdmin = useIsAdmin({ membersData: group.members, userId });
 
   return (
@@ -24,7 +31,7 @@ const MemberCard = ({ group, name, email, userId }: MemberCardProps) => {
       <div className={`${memberCardItemWrapperStyle}`}>
         <div className="tablet:h-[33px] tablet:w-[146px] flex items-center gap-3">
           {/* 임시 아이콘 */}
-          <div className="tablet:h-[32px] tablet:w-[32px] h-[24px] w-[24px] shrink-0 rounded-full bg-slate-600" />
+          <ProfileIcon userImage={userImage} />
 
           {/* 이름 + 이메일 */}
           <div className="tablet:h-[33px] tablet:w-[102px] flex flex-col justify-center gap-0.5">

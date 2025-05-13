@@ -71,6 +71,7 @@ export default async function TeamPage({
           key={member.userId}
           name={member.userName}
           email={member.userEmail}
+          userImage={member.userImage}
         />
       ))}
     </div>
