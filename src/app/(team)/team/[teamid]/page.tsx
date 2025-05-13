@@ -1,5 +1,6 @@
 import TeamBanner from '@/app/(team)/team/_components/TeamBanner';
 import TaskListBarList from '@/app/(team)/team/_components/TaskListBarList';
+import MemberCard from '@/app/(team)/team/_components/MemberList/MemberCard';
 import { cookies } from 'next/headers';
 import { getGroupById } from '@/lib/apis/group';
 import { notFound } from 'next/navigation';
@@ -26,6 +27,7 @@ export default async function TeamPage({
     <div className="flex w-full flex-col items-center p-6">
       <TeamBanner group={groupData} userId={Number(userId)} />
 
+      {/* 할 일 목록 리스트 */}
       <div
         className={`${teamItemWrapperStyle} mt-6 mb-3 flex w-full justify-between truncate`}
       >
@@ -41,12 +43,14 @@ export default async function TeamPage({
       </div>
       <TaskListBarList items={taskListsData} groupId={groupId} />
 
+      {/* 리포트 배너 */}
       <div
         className={`${teamItemWrapperStyle} my-8 flex w-full justify-between truncate`}
       >
         <h1 className="lg-medium">리포트</h1>
       </div>
 
+      {/* 멤버 리스트 */}
       <div
         className={`${teamItemWrapperStyle} flex w-full justify-between truncate`}
       >
@@ -60,6 +64,15 @@ export default async function TeamPage({
           + 새로운 멤버 초대하기
         </button>
       </div>
+      {membersData.map((member) => (
+        <MemberCard
+          group={groupData}
+          userId={Number(userId)}
+          key={member.userId}
+          name={member.userName}
+          email={member.userEmail}
+        />
+      ))}
     </div>
   );
 }

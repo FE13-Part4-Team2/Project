@@ -71,3 +71,15 @@ export const processBadgeWrapperStyle = clsx(
 // 📌Pagination.tsx style
 export const getButtonStyle = (disabled: boolean) =>
   `${paginationStyle} ${disabled ? 'bg-slate-700' : 'bg-slate-800 hover:bg-slate-700'}`;
+
+// 📌MemberList.tsx style
+
+// 📌MemberCard.tsx style
+export const memberCardContainerStyle = clsx(
+  'flex items-center justify-center',
+  'laptop:w-[384px]',
+  'tablet:w-[216px] tablet:h-[73px]',
+  'w-[163.5px] h-[68px]',
+  'bg-slate-800',
+  'rounded-[16px]'
+);
