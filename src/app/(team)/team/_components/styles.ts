@@ -83,3 +83,10 @@ export const memberCardContainerStyle = clsx(
   'bg-slate-800',
   'rounded-[16px]'
 );
+
+export const memberCardItemWrapperStyle = clsx(
+  'flex items-center justify-between',
+  'laptop:w-[336px] h-full',
+  'tablet:w-[168px]',
+  'w-[125px]'
+);
