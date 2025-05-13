@@ -5,9 +5,7 @@ export const RADIUS_TL = 'rounded-tl-[12px]';
 export const RADIUS_BL = 'rounded-bl-[12px]';
 
 // 팀 페이지 내부 아이템 공통 래퍼
-export const teamItemWrapperStyle = clsx(
-  'laptop:max-w-[1200px] tablet:max-w-[696px] max-w-[343px] min-w-0'
-);
+export const teamItemWrapperStyle = clsx('laptop:max-w-[1200px] min-w-0');
 
 // 📌Pagination.tsx style
 export const paginationStyle = clsx(

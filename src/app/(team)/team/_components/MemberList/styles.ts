@@ -20,9 +20,9 @@ export const memberListWrapperStyle = clsx(
 export const memberCardContainerStyle = clsx(
   'flex items-center justify-center',
   'laptop:max-w-[384px]',
-  'tablet:max-w-[216px] tablet:h-[73px]',
-  'max-w-[163.5px] h-[68px]',
-  'w-full',
+  'tablet:h-[73px]',
+  'h-[68px]',
+  'min-w-0',
   'bg-slate-800',
   'rounded-[16px]'
 );
