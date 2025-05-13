@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import InputBase from '@/components/common/Input/InputBase';
 import InputTextarea from '@/components/common/Input/InputTextarea';
-import StartDateTimeSection from '@/components/common/Modal/content/CreateTaskModal/StartDateTimeSection';
-import RecurringSection from '@/components/common/Modal/content/CreateTaskModal/RecurringSection';
+import StartDateTimeSection from '@/components/task-modal/StartDateTimeSection';
+import RecurringSection from '@/components/task-modal/RecurringSection';
 
 interface RecurringTaskFormState {
   name: string;
