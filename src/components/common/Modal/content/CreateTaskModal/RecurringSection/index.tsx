@@ -1,3 +1,5 @@
+import FrequencyTypeSelector from '@/components/common/Modal/content/CreateTaskModal/RecurringSection/FrequencyTypeSelector';
+
 interface RecurringSectionProps {
   frequencyType: 'ONCE' | 'DAILY' | 'WEEKLY' | 'MONTHLY';
   weekDays: number[];
@@ -20,6 +22,10 @@ export default function RecurringSection({
   return (
     <div className="flex flex-col gap-4">
       <div className="text-lg-medium">반복 설정</div>
+      <FrequencyTypeSelector
+        frequencyType={frequencyType}
+        setFrequencyType={setFrequencyType}
+      />
     </div>
   );
 }
