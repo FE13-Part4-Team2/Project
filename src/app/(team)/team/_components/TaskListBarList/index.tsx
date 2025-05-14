@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { TaskListResponse } from '@/lib/apis/taskList/type';
 import { listContainerStyle } from '@/app/(team)/team/_components/TaskListBarList/styles';
 
-const perPage = 4;
+const PER_PAGE = 4;
 
 const TaskListBarList = ({
   items,
@@ -16,9 +16,9 @@ const TaskListBarList = ({
 }) => {
   const [page, setPage] = useState(1);
 
-  const totalPage = Math.ceil(items.length / perPage);
-  const startIndex = (page - 1) * perPage;
-  const endIndex = startIndex + perPage;
+  const totalPage = Math.ceil(items.length / PER_PAGE);
+  const startIndex = (page - 1) * PER_PAGE;
+  const endIndex = startIndex + PER_PAGE;
   const currentItems = items.slice(startIndex, endIndex);
 
   const handlePrev = () => {
