@@ -5,7 +5,7 @@ export default function DateInfo({ date }: { date: string }) {
 
   return (
     <div className="flex items-center">
-      <div className="text-xs-medium tablet:text-md-medium border-l border-slate-700 pl-4 text-slate-400">
+      <div className="text-xs-medium tablet:text-md-medium text-slate-400">
         {formattedDate}
       </div>
     </div>

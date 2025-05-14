@@ -22,8 +22,9 @@ export default function ArticleDetailSection({
           <div>메뉴</div>
         </div>
         <div className="laptop:h-16 flex h-[72px] items-center justify-between">
-          <div className="flex gap-4">
+          <div className="flex items-center gap-4">
             {writer && <WriterInfo {...writer} />}
+            <div className="h-3 border border-slate-700"></div>
             {createdAt && <DateInfo date={createdAt} />}
           </div>
           <div className="flex gap-4">
