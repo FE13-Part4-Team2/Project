@@ -8,11 +8,8 @@ interface HistoryCardProps extends TaskResponse {
 
 export default function HistoryCard({
   id,
-  date,
   doneAt,
   name,
-  frequency,
-  commentCount,
   showMenu = false,
 }: HistoryCardProps) {
   return (
