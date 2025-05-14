@@ -2,23 +2,58 @@
 
 import InputWithLabel from '@/components/auth/InputWithLabel';
 import Button from '@/components/common/Button';
-import { validatePassword } from '@/utils/inputValidation';
+import {
+  validatePassword,
+  validatePasswordConfirm,
+} from '@/utils/inputValidation';
 import { useMemo, useState } from 'react';
 import { z } from 'zod';
 
-// schema
-const resetPasswordSchema = z.object({
-  password: z
-    .string()
-    .nonempty({ message: '비밀번호는 필수 입력입니다.' })
-    .refine(validatePassword, {
-      message:
-        '비밀번호는 영문, 숫자, 특수문자를 포함한 8자 이상이어야 합니다.',
-    }),
-  passwordConfirm: z
-    .string()
-    .nonempty({ message: '비밀번호 확인은 필수 입력입니다.' }),
-});
+// reset password schema
+const resetPasswordSchema = z
+  .object({
+    password: z.string(),
+    passwordConfirm: z.string(),
+  })
+
+  .superRefine((val, ctx) => {
+    const { password, passwordConfirm } = val;
+
+    if (!password) {
+      // 비밀번호가 비어있음
+      ctx.addIssue({
+        path: ['password'],
+        code: z.ZodIssueCode.custom,
+        message: '비밀번호는 필수 입력입니다.',
+        fatal: true, // 조건 실패 시, 유효성 검사 중단
+      });
+    } else if (!validatePassword(password)) {
+      // 비밀번호가 입력은 되었지만, 유효하지 않음
+      ctx.addIssue({
+        path: ['password'],
+        code: z.ZodIssueCode.custom,
+        message:
+          '비밀번호는 영문, 숫자, 특수문자를 포함한 8자 이상이어야 합니다.',
+      });
+    }
+
+    if (!passwordConfirm) {
+      // 비밀번호 확인이 비어있는 경우
+      ctx.addIssue({
+        path: ['passwordConfirm'],
+        code: z.ZodIssueCode.custom,
+        message: '비밀번호 확인은 필수 입력입니다.',
+        fatal: true,
+      });
+    } else if (!validatePasswordConfirm({ password, passwordConfirm })) {
+      // 비밀번호 확인이 입력은 되었지만, 비밀번호와 일치하지 않음
+      ctx.addIssue({
+        path: ['passwordConfirm'],
+        code: z.ZodIssueCode.custom,
+        message: '비밀번호가 일치하지 않습니다.',
+      });
+    }
+  });
 
 export default function ResetPasswordForm() {
   const [formValues, setFormValues] = useState<{
