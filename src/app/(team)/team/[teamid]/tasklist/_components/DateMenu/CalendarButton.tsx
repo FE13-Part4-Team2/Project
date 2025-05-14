@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import IconRenderer from '@/components/common/Icons/IconRenderer';
 import CustomDatePicker from '@/components/common/Datepicker';
+import { useIsMobile } from '@/hooks/useCheckViewport';
 
 export default function CalendarButton() {
+  const isMobile = useIsMobile();
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -24,13 +26,15 @@ export default function CalendarButton() {
 
   return (
     <div className="relative">
-      <button
-        type="button"
-        onClick={() => setIsDatePickerOpen((prev) => !prev)}
-        className="flex size-6 items-center justify-center rounded-full bg-slate-800 transition-colors duration-100 hover:bg-slate-700"
-      >
-        <IconRenderer name="CalendarIcon" size={12} />
-      </button>
+      {!isMobile && (
+        <button
+          type="button"
+          onClick={() => setIsDatePickerOpen((prev) => !prev)}
+          className="flex size-6 items-center justify-center rounded-full bg-slate-800 transition-colors duration-100 hover:bg-slate-700"
+        >
+          <IconRenderer name="CalendarIcon" size={12} />
+        </button>
+      )}
       {isDatePickerOpen && (
         <div className="absolute top-7">
           <CustomDatePicker
