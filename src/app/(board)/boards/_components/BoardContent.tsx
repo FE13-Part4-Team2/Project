@@ -1,7 +1,8 @@
 'use client';
-
 import { useSearchParams } from 'next/navigation';
-import { useBoardPosts } from '@/app/(board)/boards/_hooks/useBoardPosts';
+import { useSearchPosts } from '@/app/(board)/boards/_hooks/useSearchPosts';
+import { useBestPosts } from '@/app/(board)/boards/_hooks/useBestPosts';
+import { usePosts } from '@/app/(board)/boards/_hooks/usePosts';
 import SearchInput from '@/app/(board)/boards/_components/SearchInput';
 import BestPostList from '@/app/(board)/boards/_components/BestPostList';
 import SortDropdownArea from '@/app/(board)/boards/_components/SortDropdown';
@@ -16,20 +17,20 @@ export default function BoardContent() {
   const initialOrder =
     (searchParams.get('orderBy') as 'recent' | 'like') || 'recent';
 
+  const { searchQuery, handleSearch } = useSearchPosts(initialQuery);
+  const { bestPosts, isBestLoading, error: bestError } = useBestPosts();
   const {
-    searchQuery,
-    currentPage,
-    bestPosts,
     filteredPosts,
     totalPosts,
-    isBestLoading,
-    isPostsLoading,
-    error,
-    handleSearch,
+    currentPage,
     paginate,
-  } = useBoardPosts(initialQuery, initialPage, initialOrder);
+    deletePost,
+    isPostsLoading,
+    error: postsError,
+  } = usePosts(searchQuery, initialPage, initialOrder);
 
-  const postsPerPage = 10;
+  const POSTS_PER_PAGE = 10;
+  const error = bestError || postsError;
 
   return (
     <>
@@ -53,11 +54,11 @@ export default function BoardContent() {
         </div>
       ) : (
         <>
-          <PostList posts={filteredPosts} />
+          <PostList posts={filteredPosts} deletePost={deletePost} />
           <Pagination
             currentPage={currentPage}
             totalPosts={totalPosts}
-            postsPerPage={postsPerPage}
+            postsPerPage={POSTS_PER_PAGE}
             paginate={paginate}
           />
         </>

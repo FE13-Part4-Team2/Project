@@ -4,22 +4,16 @@ import IconRenderer from '@/components/common/Icons/IconRenderer';
 import DropDown from '@/components/common/Dropdown';
 
 type EditDropdownProps = {
-  isOpen: boolean;
-  onToggle: () => void;
   onSelect: (option: string) => void;
 };
 
-export default function EditDropdown({
-  isOpen,
-  onToggle,
-  onSelect,
-}: EditDropdownProps) {
+export default function EditDropdown({ onSelect }: EditDropdownProps) {
   return (
     <DropDown>
-      <DropDown.Trigger onClick={onToggle} isOpen={isOpen}>
+      <DropDown.Trigger>
         <IconRenderer name="ThreeDotsIcon" size={24} />
       </DropDown.Trigger>
-      <DropDown.Menu isOpen={isOpen} align="right" className="top-7">
+      <DropDown.Menu align="right" className="top-7">
         <DropDown.Item onClick={() => onSelect('수정하기')}>
           수정하기
         </DropDown.Item>

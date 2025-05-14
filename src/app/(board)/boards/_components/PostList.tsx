@@ -1,32 +1,23 @@
 'use client';
-import { useState } from 'react';
-import PostCard from '@/app/(board)/boards/_components/PostCard';
-import { Post } from '@/utils/postMapper';
 import { useRouter } from 'next/navigation';
 import { useModalStore } from '@/store/useModalStore';
-import { deleteArticle } from '@/lib/apis/article';
 import { ROUTES } from '@/constants/routes';
 import { toast } from 'react-toastify';
 import { getArticleById } from '@/lib/apis/article';
 import { getUser } from '@/lib/apis/user';
+import PostCard from '@/app/(board)/boards/_components/PostCard';
+import { Post } from '@/utils/postMapper';
 
 type PostListProps = {
   posts: Post[];
+  deletePost: (articleId: number) => void;
 };
 
-export default function PostList({ posts }: PostListProps) {
-  const [openDropdownId, setOpenDropdownId] = useState<number | null>(null);
-
-  const handleToggle = (id: number) => {
-    setOpenDropdownId(openDropdownId === id ? null : id);
-  };
-
+export default function PostList({ posts, deletePost }: PostListProps) {
   const router = useRouter();
   const { openModal, closeModal } = useModalStore();
 
   const handleSelect = async (id: number, option: string) => {
-    setOpenDropdownId(null);
-
     if (option === '수정하기') {
       try {
         const article = await getArticleById({ articleId: id });
@@ -36,7 +27,6 @@ export default function PostList({ posts }: PostListProps) {
         }
 
         const currentUser = await getUser({});
-
         if (!currentUser) {
           toast.error('로그인이 필요합니다.');
           return;
@@ -49,15 +39,8 @@ export default function PostList({ posts }: PostListProps) {
 
         router.push(ROUTES.ARTICLE_EDIT(id));
       } catch (error) {
-        if (error instanceof Error) {
-          const statusMatch = error.message.match(/Error (\d+):/);
-          const status = statusMatch ? parseInt(statusMatch[1], 10) : 0;
-          if (status === 401) {
-            toast.error('로그인이 필요합니다.');
-          } else {
-            toast.error('게시글 수정 권한을 확인할 수 없습니다.');
-          }
-        }
+        console.error('수정 에러:', error);
+        toast.error('게시글 수정 권한을 확인할 수 없습니다.');
       }
       return;
     }
@@ -72,9 +55,9 @@ export default function PostList({ posts }: PostListProps) {
           text: '삭제',
           onRequest: async () => {
             try {
-              await deleteArticle({ articleId: id });
+              await deletePost(id);
               closeModal();
-              window.location.reload();
+              toast.success('게시글이 삭제되었습니다.');
             } catch (error: unknown) {
               if (error instanceof Error) {
                 const statusMatch = error.message.match(/Error (\d+):/);
@@ -100,15 +83,7 @@ export default function PostList({ posts }: PostListProps) {
       {posts.map((post) => (
         <PostCard
           key={post.id}
-          id={post.id}
-          title={post.title}
-          date={post.date}
-          nickname={post.nickname}
-          likes={post.likes}
-          image={post.image}
-          writerImage={post.writerImage}
-          isOpen={openDropdownId === post.id}
-          onToggle={() => handleToggle(post.id)}
+          {...post}
           onSelect={(option) => handleSelect(post.id, option)}
         />
       ))}

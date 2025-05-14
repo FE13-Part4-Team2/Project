@@ -3,6 +3,7 @@ import Image from 'next/image';
 import WriterInfo from '@/components/user/WriterInfo';
 import Link from 'next/link';
 import { ROUTES } from '@/constants/routes';
+import { useState } from 'react';
 
 type BestPostCardProps = {
   id: number;
@@ -23,9 +24,12 @@ export default function BestPostCard({
   image,
   writerImage,
 }: BestPostCardProps) {
+  const [isValidImage, setIsValidImage] = useState(true);
+  const defaultImage = '/image/default_card.svg';
+
   return (
     <Link href={ROUTES.ARTICLE(id)}>
-      <article className="laptop:w-[387px] tablet:w-full tablet:px-6 tablet:overflow-hidden h-full cursor-pointer rounded-xl border border-slate-700 bg-slate-800 px-6 py-4">
+      <article className="laptop:min-w-[360px] tablet:w-full tablet:px-6 tablet:overflow-hidden h-full cursor-pointer rounded-xl border border-slate-700 bg-slate-800 px-6 py-4">
         <div className="mb-3.5 flex items-center gap-1">
           <Image
             src="/icons/best_badge_icon.svg"
@@ -43,13 +47,14 @@ export default function BestPostCard({
               </p>
               <div className="laptop:h-[72px] laptop:w-[72px] relative ml-4 h-[64px] w-[64px] flex-shrink-0 overflow-hidden rounded-lg">
                 <Image
-                  src={image}
-                  alt="썸네일"
+                  src={isValidImage ? image : defaultImage}
+                  alt={isValidImage ? '썸네일' : '기본 썸네일'}
                   fill
                   className="image-cover rounded-lg"
-                  unoptimized // 최적화 비활성화 (임시방편, 더미 글 오류 때문에 추가. 정리되면 지울 예정)
+                  style={{ objectFit: 'cover' }}
                   onError={(e) => {
-                    console.error('실제 요청 URL:', e.currentTarget.src); // 실제 요청 URL 출력
+                    console.error('실제 요청 URL:', e.currentTarget.src);
+                    setIsValidImage(false);
                   }}
                 />
               </div>

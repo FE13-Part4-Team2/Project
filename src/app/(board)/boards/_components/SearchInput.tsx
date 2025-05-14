@@ -39,7 +39,7 @@ export default function SearchInput({ onSearch }: SearchInputProps) {
   return (
     <div className="relative mb-10">
       <InputBase
-        containerClassName="sm:h-[56px] h-[48px] bg-slate-800"
+        containerClassName="w-full sm:h-[56px] h-[48px] bg-slate-800 gap-3"
         placeholder="검색어를 입력해 주세요"
         leftIcon={<IconRenderer name="SearchIcon" />}
         value={query}

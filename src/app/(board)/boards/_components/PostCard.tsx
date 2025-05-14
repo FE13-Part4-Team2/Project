@@ -4,6 +4,7 @@ import WriterInfo from '@/components/user/WriterInfo';
 import EditDropdown from '@/app/(board)/boards/_components/EditDropdown';
 import Link from 'next/link';
 import { ROUTES } from '@/constants/routes';
+import { useState } from 'react';
 
 type PostCardProps = {
   id: number;
@@ -12,9 +13,7 @@ type PostCardProps = {
   nickname: string;
   likes: number;
   image?: string;
-  writerImage: string | null | undefined;
-  isOpen: boolean;
-  onToggle: () => void;
+  writerImage?: string | null;
   onSelect: (option: string) => void;
 };
 
@@ -26,12 +25,13 @@ export default function PostCard({
   likes,
   image,
   writerImage,
-  isOpen,
-  onToggle,
   onSelect,
 }: PostCardProps) {
+  const [isValidImage, setIsValidImage] = useState(true);
+  const defaultImage = '/image/default_card.svg';
+
   return (
-    <article className="laptop:h-[176px] laptop:w-[590px] laptop:gap-10 rounded-xl border border-slate-700 bg-slate-800 px-8 py-6">
+    <article className="laptop:h-[176px] laptop:min-w-[560px] laptop:gap-10 rounded-xl border border-slate-700 bg-slate-800 px-8 py-6">
       <div className="flex justify-between">
         <Link href={ROUTES.ARTICLE(id)} className="flex-1 cursor-pointer">
           <div className="flex items-start">
@@ -41,21 +41,21 @@ export default function PostCard({
             {image && (
               <div className="tablet:h-[72px] tablet:w-[72px] relative ml-4 h-[64px] w-[64px] flex-shrink-0 overflow-hidden rounded-lg">
                 <Image
-                  src={image}
-                  alt="썸네일"
+                  src={isValidImage ? image : defaultImage}
+                  alt={isValidImage ? '썸네일' : '기본 썸네일'}
                   fill
                   style={{ objectFit: 'cover' }}
                   className="image-cover rounded-lg"
-                  unoptimized // 최적화 비활성화 (임시방편, 더미 글 오류 때문에 추가. 정리되면 지울 예정)
                   onError={(e) => {
-                    console.error('실제 요청 URL:', e.currentTarget.src); // 실제 요청 URL 출력
+                    console.error('실제 요청 URL:', e.currentTarget.src); // 오류 로그
+                    setIsValidImage(false);
                   }}
                 />
               </div>
             )}
           </div>
         </Link>
-        <EditDropdown isOpen={isOpen} onToggle={onToggle} onSelect={onSelect} />
+        <EditDropdown onSelect={onSelect} />
       </div>
       <Link href={ROUTES.ARTICLE(id)} className="cursor-pointer">
         <div className="item-center mb-4 flex justify-between">
