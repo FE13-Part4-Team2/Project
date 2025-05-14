@@ -8,14 +8,14 @@ import { TaskResponse } from '@/lib/apis/task/type';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
+type RangeType = 'all' | '1m' | '3m' | 'custom';
+
 export default function MyHistoryPageWrapper() {
   return <MyHistoryPageClient />;
 }
 
 function MyHistoryPageClient() {
-  const [currentRange, setCurrentRange] = useState<
-    'all' | '1m' | '3m' | 'custom'
-  >('all');
+  const [currentRange, setCurrentRange] = useState<RangeType>('all');
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
   const [grouped, setGrouped] = useState<
@@ -56,7 +56,7 @@ function MyHistoryPageClient() {
     return true;
   });
 
-  const tabs = [
+  const tabs: { key: RangeType; label: string }[] = [
     { key: 'all', label: '전체' },
     { key: '1m', label: '최근 1개월' },
     { key: '3m', label: '최근 3개월' },
@@ -68,11 +68,12 @@ function MyHistoryPageClient() {
       <div className="mx-auto max-w-[1200px]">
         <h1 className="text-xl-bold mb-6 text-white">마이 히스토리</h1>
 
+        {/* 탭 메뉴 */}
         <div className="mb-6 flex flex-wrap gap-3">
           {tabs.map((tab) => (
             <button
               key={tab.key}
-              onClick={() => setCurrentRange(tab.key as any)}
+              onClick={() => setCurrentRange(tab.key)}
               className={`text-md-medium rounded px-3 py-1.5 text-white hover:bg-slate-700 ${
                 currentRange === tab.key
                   ? 'bg-slate-700 font-bold'
@@ -83,6 +84,7 @@ function MyHistoryPageClient() {
             </button>
           ))}
 
+          {/* 사용자 지정 날짜 */}
           {currentRange === 'custom' && (
             <div className="flex items-center gap-2">
               <DatePicker
@@ -109,6 +111,7 @@ function MyHistoryPageClient() {
           )}
         </div>
 
+        {/* 날짜별 히스토리 출력 */}
         <div className="flex flex-col gap-10">
           {filteredDates.map((isoDate) => {
             const { display, items } = grouped[isoDate];
