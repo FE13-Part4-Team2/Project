@@ -20,10 +20,6 @@ export default function CalendarButton() {
   useClosePopup(datepickerRef, () => setIsDatePickerOpen(false));
 
   useEffect(() => {
-    setSelectedDate(new Date(currentDate!));
-  }, [currentDate]);
-
-  useEffect(() => {
     const newDateString = selectedDate.toISOString().slice(0, 10);
     const params = new URLSearchParams(searchParams);
     params.set('id', id!);
