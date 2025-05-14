@@ -10,6 +10,7 @@ export default function InputWithLabel({
   errorMessage = [],
   onInputBlur,
   onInputChange,
+  mode,
   ...props
 }: InputWithLabelProps) {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -42,7 +43,11 @@ export default function InputWithLabel({
           id={inputType}
           name={inputType}
           required
-          placeholder={`${inputTypeMap[inputType]}을 입력해주세요.`}
+          placeholder={
+            mode === 'resetPasswordPage'
+              ? '비밀번호 재설정 페이지'
+              : `${inputTypeMap[inputType]}을 입력해주세요.`
+          }
           autoComplete="true"
           className={clsx(
             'w-full rounded-xl border bg-slate-800 p-4 outline-hidden',
