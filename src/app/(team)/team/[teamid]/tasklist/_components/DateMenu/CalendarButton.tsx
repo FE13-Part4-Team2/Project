@@ -1,19 +1,23 @@
 import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { useIsMobile } from '@/hooks/useCheckViewport';
 import IconRenderer from '@/components/common/Icons/IconRenderer';
 import CustomDatePicker from '@/components/common/Datepicker';
-import { useIsMobile } from '@/hooks/useCheckViewport';
 
 export default function CalendarButton() {
-  const isMobile = useIsMobile();
   const router = useRouter();
   const searchParams = useSearchParams();
+  const isMobile = useIsMobile();
 
   const id = searchParams.get('id');
   const currentDate = searchParams.get('date');
 
   const [selectedDate, setSelectedDate] = useState(new Date(currentDate!));
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
+
+  useEffect(() => {
+    setSelectedDate(new Date(currentDate!));
+  }, [currentDate]);
 
   useEffect(() => {
     const newDateString = selectedDate.toISOString().slice(0, 10);
