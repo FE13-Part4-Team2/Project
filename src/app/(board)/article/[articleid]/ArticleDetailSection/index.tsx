@@ -14,6 +14,8 @@ export default function ArticleDetailSection({
   isLiked,
   commentCount,
 }: ArticleResponse) {
+  // 아직 사용하지 않은 값들 임시로 콘솔에 출력
+  console.log(id, image, likeCount, isLiked);
   return (
     <div className="tablet:min-h-[312px] flex min-h-[242px] flex-col gap-6">
       <div>
