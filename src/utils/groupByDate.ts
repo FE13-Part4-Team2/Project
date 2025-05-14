@@ -1,4 +1,3 @@
-// groupByDate.ts
 import { TaskResponse } from '@/lib/apis/task/type';
 
 export function groupByDate(tasks: TaskResponse[]) {
@@ -6,7 +5,7 @@ export function groupByDate(tasks: TaskResponse[]) {
     {};
 
   for (const task of tasks) {
-    const isoDate = task.date.split('T')[0]; // 예: "2025-05-14"
+    const isoDate = task.date.split('T')[0];
     const display = new Date(task.date).toLocaleDateString('ko-KR', {
       year: 'numeric',
       month: 'long',
