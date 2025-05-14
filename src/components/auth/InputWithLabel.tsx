@@ -22,6 +22,8 @@ export default function InputWithLabel({
     passwordConfirm: '비밀번호 확인',
   };
 
+  const isPasswordResetPage = mode === 'resetPasswordPage';
+
   const togglePasswordVisibility = () => {
     setIsPasswordVisible((prev) => !prev);
   };
@@ -44,9 +46,11 @@ export default function InputWithLabel({
           name={inputType}
           required
           placeholder={
-            mode === 'resetPasswordPage'
-              ? '비밀번호 재설정 페이지'
-              : `${inputTypeMap[inputType]}을 입력해주세요.`
+            isPasswordResetPage && inputType === 'password'
+              ? '비밀번호 (영문, 숫자 포함 8자 이상) 를 입력해주세요.'
+              : isPasswordResetPage && inputType === 'passwordConfirm'
+                ? '새 비밀번호를 다시 한번 입력해주세요.'
+                : `${inputTypeMap[inputType]}을 입력해주세요.`
           }
           autoComplete="true"
           className={clsx(
