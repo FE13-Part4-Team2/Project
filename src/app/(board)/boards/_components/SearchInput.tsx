@@ -3,7 +3,8 @@ import { useState, useMemo } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import InputBase from '@/components/common/Input/InputBase';
 import IconRenderer from '@/components/common/Icons/IconRenderer';
-import { debounce } from 'es-toolkit';
+import debounce from 'lodash.debounce';
+
 interface SearchInputProps {
   onSearch: (query: string) => void;
 }
