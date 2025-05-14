@@ -4,7 +4,6 @@ import WriterInfo from '@/components/user/WriterInfo';
 import Link from 'next/link';
 import { ROUTES } from '@/constants/routes';
 import { useState } from 'react';
-import clsx from 'clsx';
 
 type BestPostCardProps = {
   id: number;
