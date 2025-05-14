@@ -47,7 +47,7 @@ export default function InputWithLabel({
           required
           placeholder={
             isPasswordResetPage && inputType === 'password'
-              ? '비밀번호 (영문, 숫자 포함 8자 이상) 를 입력해주세요.'
+              ? '영문과 숫자를 포함한 8자 이상의 비밀번호를 입력해주세요.'
               : isPasswordResetPage && inputType === 'passwordConfirm'
                 ? '새 비밀번호를 다시 한번 입력해주세요.'
                 : `${inputTypeMap[inputType]}을 입력해주세요.`
