@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { useClosePopup } from '@/hooks/useClosePopup';
 import { useIsMobile } from '@/hooks/useCheckViewport';
 import IconRenderer from '@/components/common/Icons/IconRenderer';
 import CustomDatePicker from '@/components/common/Datepicker';
@@ -14,6 +15,9 @@ export default function CalendarButton() {
 
   const [selectedDate, setSelectedDate] = useState(new Date(currentDate!));
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
+
+  const datepickerRef = useRef<HTMLDivElement>(null);
+  useClosePopup(datepickerRef, () => setIsDatePickerOpen(false));
 
   useEffect(() => {
     setSelectedDate(new Date(currentDate!));
@@ -40,7 +44,7 @@ export default function CalendarButton() {
         </button>
       )}
       {isDatePickerOpen && (
-        <div className="absolute top-7">
+        <div ref={datepickerRef} className="absolute top-7">
           <CustomDatePicker
             selectedDate={selectedDate}
             setSelectedDate={setSelectedDate}
