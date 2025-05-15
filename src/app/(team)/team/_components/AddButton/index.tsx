@@ -1,9 +1,9 @@
 'use client';
 import CreateTaskListModal from '@/components/common/Modal/content/CreateTaskListModal';
-import InviteMemberModal from '@/components/common/Modal/content/InviteMemberModal';
 import { useModalStore } from '@/store/useModalStore';
 import { TaskListBody } from '@/lib/apis/taskList/type';
 import { handleCreateTaskList } from '@/components/tasklist/TaskListMenu/actions/taskListActions';
+import { handleInvite } from '@/app/(team)/team/_components/AddButton/handleInvite';
 
 interface AddButtonProps {
   variant: 'task-list' | 'member';
@@ -30,18 +30,15 @@ const AddButton = ({ variant, groupId }: AddButtonProps) => {
   };
 
   const openInviteMemberModal = () => {
-    openModal(
-      {
-        title: '멤버 초대하기',
-        button: {
-          number: 1,
-          text: '초대 링크 생성',
-          onRequest: (body) =>
-            handleCreateTaskList(groupId, body as TaskListBody),
-        },
+    openModal({
+      title: '멤버 초대',
+      description: '그룹에 참여할 수 있는 링크를 복사합니다.',
+      button: {
+        number: 1,
+        text: '링크 복사하기',
+        onRequest: () => handleInvite(groupId),
       },
-      <InviteMemberModal />
-    );
+    });
   };
 
   return (
