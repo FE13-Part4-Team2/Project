@@ -36,7 +36,7 @@ const MemberCard = ({
           <UserIcon
             image={userImage}
             sizeClass="size-[54px]"
-            size="54px"
+            imageSize="54px"
             iconClass="size-10"
           />
         ),
@@ -63,7 +63,7 @@ const MemberCard = ({
           <UserIcon
             image={userImage}
             sizeClass="tablet:size-8 size-6"
-            size="32px"
+            imageSize="32px"
           />
 
           {/* 이름 + 이메일 */}
