@@ -4,6 +4,10 @@ import {
   reportCardsWrapperStyle,
 } from '@/app/(team)/team/_components/ReportBanner/styles';
 
+interface ReportBannerProps {
+  groupId: number;
+}
+
 const ReportBanner = () => {
   return (
     <div className={`${reportBannerContainerStyle}`}>

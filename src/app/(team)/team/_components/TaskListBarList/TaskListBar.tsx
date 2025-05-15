@@ -34,10 +34,7 @@ const TaskListBar = ({
 
   const handleClick = () => {
     const today = new Date();
-    const yyyy = today.getFullYear();
-    const mm = String(today.getMonth() + 1).padStart(2, '0');
-    const dd = String(today.getDate()).padStart(2, '0');
-    const formattedDate = `${yyyy}-${mm}-${dd}`;
+    const formattedDate = today.toISOString().slice(0, 10);
 
     router.push(`${ROUTES.TASK(groupId)}?id=${id}&date=${formattedDate}`);
   };
