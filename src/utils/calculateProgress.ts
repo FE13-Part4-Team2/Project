@@ -1,4 +1,4 @@
-// done/todo 진행률 계산 로직
+// 전체 done/todo 진행률 계산
 
 import { TaskResponse } from '@/lib/apis/task/type';
 

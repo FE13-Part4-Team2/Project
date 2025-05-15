@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { ROUTES } from '@/constants/routes';
 import { GroupMemberResponse } from '@/lib/apis/group/type';
 import {
-  taskListBarWrapperStyle,
+  taskListBarContainerStyle,
   taskListBarTitleStyle,
   colorChipStyle,
   colorList,
@@ -50,32 +50,30 @@ const TaskListBar = ({
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') handleClick();
       }}
-      className="flex w-full cursor-pointer flex-col items-center justify-between"
+      className={`${taskListBarContainerStyle}`}
     >
-      <div className={`${taskListBarWrapperStyle}`}>
+      {/* left item */}
+      <div className="flex w-full min-w-0 items-center gap-3">
         <div
-          className={`${taskListBarTitleStyle} flex items-center justify-start gap-3`}
-        >
-          <div
-            className={`${colorChipStyle} shrink-0`}
-            style={{ backgroundColor: color }}
-          />
-          <div className={`${taskListBarTitleStyle} pr-2`}>
-            <GradientScrollable color="#1e293b">{name}</GradientScrollable>
-          </div>
+          className={`${colorChipStyle} shrink-0`}
+          style={{ backgroundColor: color }}
+        />
+        <div className={`${taskListBarTitleStyle} pr-2`}>
+          <GradientScrollable color="#1e293b">{name}</GradientScrollable>
         </div>
+      </div>
 
-        <div className="flex items-center gap-1 pr-2">
-          <ProgressBadge total={total} done={done} />
-          <TaskListMenu
-            groupId={groupId}
-            userId={userId}
-            membersData={membersData}
-            taskListId={id}
-            taskListName={name}
-            size="sm"
-          />
-        </div>
+      {/* right item */}
+      <div className="flex items-center gap-1 pr-2">
+        <ProgressBadge total={total} done={done} />
+        <TaskListMenu
+          groupId={groupId}
+          userId={userId}
+          membersData={membersData}
+          taskListId={id}
+          taskListName={name}
+          size="sm"
+        />
       </div>
     </div>
   );

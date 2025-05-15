@@ -15,9 +15,9 @@ const ProgressBadge = ({ total, done }: ProgressBadgeProps) => {
   return (
     <div className={`${progressBadgeContainerStyle}`}>
       {isDone ? (
-        <IconRenderer name="DoneIcon" size={16} />
+        <IconRenderer name="DoneIcon" size={14} />
       ) : (
-        <IconRenderer name="ArrowIcon" size={16} />
+        <IconRenderer name="ArrowIcon" size={14} />
       )}
       <p className={`${progressBadgeTextStyle}`}>
         {done}/{total}

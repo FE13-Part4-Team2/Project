@@ -4,6 +4,7 @@ import Pagination from '@/app/(team)/team/_components/TaskListBarList/Pagination
 import { useState } from 'react';
 import { TaskListResponse } from '@/lib/apis/taskList/type';
 import { GroupMemberResponse } from '@/lib/apis/group/type';
+import { calculateTaskListProgress } from '@/utils/calculateTaskListProgress';
 import { listContainerStyle } from '@/app/(team)/team/_components/TaskListBarList/styles';
 
 const PER_PAGE = 4;
@@ -13,8 +14,6 @@ interface TaskListBarListProps {
   groupId: number;
   userId: number;
   membersData: GroupMemberResponse[];
-  total: number;
-  done: number;
 }
 
 const TaskListBarList = ({
@@ -22,8 +21,6 @@ const TaskListBarList = ({
   groupId,
   userId,
   membersData,
-  total,
-  done,
 }: TaskListBarListProps) => {
   const [page, setPage] = useState(1);
 
@@ -43,20 +40,24 @@ const TaskListBarList = ({
   return (
     <div className={`${listContainerStyle}`}>
       <div className="flex w-full flex-col gap-4">
-        {currentItems.map((item, index) => (
-          <TaskListBar
-            key={item.id}
-            {...item}
-            id={item.id}
-            name={item.name}
-            index={index + startIndex}
-            groupId={groupId}
-            userId={userId}
-            membersData={membersData}
-            total={total}
-            done={done}
-          />
-        ))}
+        {currentItems.map((item, index) => {
+          const { total, done } = calculateTaskListProgress(item.tasks ?? []);
+
+          return (
+            <TaskListBar
+              key={item.id}
+              {...item}
+              id={item.id}
+              name={item.name}
+              index={index + startIndex}
+              groupId={groupId}
+              userId={userId}
+              membersData={membersData}
+              total={total}
+              done={done}
+            />
+          );
+        })}
       </div>
 
       {totalPage > 1 && (
