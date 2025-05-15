@@ -29,7 +29,7 @@ export default async function TeamPage({
       <TeamBanner group={groupData} userId={Number(userId)} />
 
       {/* 할 일 목록 리스트 */}
-      <div className={`${teamHeaderStyle}`}>
+      <div className={`${teamHeaderStyle} mt-6`}>
         <div className="flex items-center gap-2">
           <h1 className="lg-medium">할 일 목록</h1>
           <span className="text-lg-regular text-slate-500">
@@ -48,13 +48,13 @@ export default async function TeamPage({
       />
 
       {/* 리포트 배너 */}
-      <div className={`${teamHeaderStyle}`}>
+      <div className={`${teamHeaderStyle} mt-8`}>
         <h1 className="lg-medium">리포트</h1>
       </div>
       <ReportBanner />
 
       {/* 멤버 리스트 */}
-      <div className={`${teamHeaderStyle}`}>
+      <div className={`${teamHeaderStyle} mt-12`}>
         <div className="flex items-center gap-2">
           <h1 className="lg-medium">멤버</h1>
           <span className="text-lg-regular text-slate-500">

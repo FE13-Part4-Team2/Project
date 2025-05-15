@@ -3,7 +3,7 @@ import { ROUTES } from '@/constants/routes';
 import DropDown from '@/components/common/Dropdown';
 import IconRenderer from '@/components/common/Icons/IconRenderer';
 
-const TeamDropdownMenu = ({ group }: { group: { id: number } }) => {
+const TeamMenu = ({ group }: { group: { id: number } }) => {
   const router = useRouter();
 
   return (
@@ -29,4 +29,4 @@ const TeamDropdownMenu = ({ group }: { group: { id: number } }) => {
   );
 };
 
-export default TeamDropdownMenu;
+export default TeamMenu;

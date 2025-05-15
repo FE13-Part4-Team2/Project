@@ -8,6 +8,7 @@ import {
 
 // 📌ReportBanner.tsx style
 export const reportBannerContainerStyle = clsx(
+  'flex items-center justify-center',
   teamItemWrapperStyle,
   'laptop:h-[217px] h-[224px]',
   'bg-slate-800',
@@ -15,9 +16,18 @@ export const reportBannerContainerStyle = clsx(
 );
 
 // 📌ReportCard.tsx style
+const reportCardMaxWidth =
+  'laptop:max-w-[400px] tablet:max-w-[280px] max-w-[142px]';
+
+export const reportCardsWrapperStyle = clsx(
+  'flex flex-col gap-4',
+  reportCardMaxWidth,
+  'min-w-0 w-full h-full'
+);
+
 export const reportCardContainerStyle = clsx(
-  'laptop:max-w-[400px] tablet:max-w-[280px] max-w-[142px]',
-  'laptop:h-[76.5px] h-[80px] w-full min-w-0',
+  reportCardMaxWidth,
+  'laptop:h-[76.5px] h-[80px] w-full min-w-0 p-3',
   'bg-slate-700',
   RADIUS
 );
