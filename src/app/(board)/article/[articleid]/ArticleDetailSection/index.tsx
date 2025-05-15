@@ -25,7 +25,7 @@ export default function ArticleDetailSection({
     <div className="tablet:min-h-[312px] flex min-h-[242px] flex-col gap-6">
       <div>
         <div className="flex h-16 items-center justify-between border-b border-slate-50/10">
-          <div className="text-2lg-bold tablet:text-xl-bold">{title}</div>
+          <h1 className="text-2lg-bold tablet:text-xl-bold">{title}</h1>
           {writer && (
             <ArticleMenu articleId={id} userId={userId} writerData={writer} />
           )}
