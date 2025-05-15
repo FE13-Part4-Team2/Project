@@ -4,15 +4,15 @@ import clsx from 'clsx';
 
 interface UserIconProps {
   image: string | null;
-  sizeClass?: string; // 아이콘 외부 원형 크기
-  size?: string; // 이미지 예상 크기
-  iconClass?: string;
+  sizeClass?: string; // 외부 원형 아이콘 크기
+  imageSize?: string; // 이미지 예상 크기
+  iconClass?: string; // 내부 아이콘 크기
 }
 
 export default function UserIcon({
   image,
   sizeClass = 'size-8',
-  size = '32px',
+  imageSize = '32px',
   iconClass = 'size-6',
 }: UserIconProps) {
   return (
@@ -27,7 +27,7 @@ export default function UserIcon({
         <Image
           src={image}
           alt="유저 프로필 이미지"
-          sizes={size}
+          sizes={imageSize}
           fill
           className="object-cover"
         />
