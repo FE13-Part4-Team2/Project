@@ -1,8 +1,8 @@
 import { ArticleResponse } from '@/lib/apis/article/type';
+import ArticleMenu from '@/components/article/ArticleMenu';
 import WriterInfo from '@/components/user/WriterInfo';
 import DateInfo from '@/app/(board)/article/[articleid]/ArticleDetailSection/DateInfo';
 import CommentInfo from '@/app/(board)/article/[articleid]/ArticleDetailSection/CommentInfo';
-import ArticleMenu from '@/components/article/ArticleMenu';
 
 interface ArticleDetailSectionProps extends ArticleResponse {
   userId: number;
@@ -21,7 +21,8 @@ export default function ArticleDetailSection({
   userId,
 }: ArticleDetailSectionProps) {
   // 아직 사용하지 않은 값들 임시로 콘솔에 출력
-  console.log(image, likeCount, isLiked);
+  console.log(likeCount, isLiked);
+
   return (
     <div className="tablet:min-h-[312px] flex min-h-[242px] flex-col gap-6">
       <div>
@@ -45,7 +46,18 @@ export default function ArticleDetailSection({
           </div>
         </div>
       </div>
-      <div className="text-md-regular tablet:text-lg-medium">{content}</div>
+      <div className="flex flex-col gap-6">
+        {image && (
+          <div className="tablet:w-[500px] mx-auto w-full">
+            <img
+              src={image}
+              style={{ width: 'auto', height: 'auto' }}
+              alt="아티클 이미지"
+            />
+          </div>
+        )}
+        <div className="text-md-regular tablet:text-lg-medium">{content}</div>
+      </div>
     </div>
   );
 }
