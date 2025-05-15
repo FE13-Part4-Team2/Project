@@ -1,173 +1,58 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import clientFetcher from '@/lib/client/fetcher.client';
-import InputBase from '@/components/common/Input/InputBase';
-import Button from '@/components/common/Button';
-import IconRenderer from '@/components/common/Icons/IconRenderer';
 import { postGroup } from '@/lib/apis/group';
+import postImage from '@/lib/apis/uploadImage';
 import { UserGroupResponse } from '@/lib/apis/user/type';
 import { ROUTES } from '@/constants/routes';
+import TeamProfileForm from '@/app/(team)/_components/TeamProfileForm';
 
 export default function AddTeamPage() {
   const router = useRouter();
-  const fileInputRef = useRef<HTMLInputElement>(null);
-
-  const [teamName, setTeamName] = useState('');
-  const [nameError, setNameError] = useState(false);
   const [existingNames, setExistingNames] = useState<string[]>([]);
-  const [profilePreview, setProfilePreview] = useState<string>('');
-  const [profileError, setProfileError] = useState(false);
 
   useEffect(() => {
-    async function fetchMyGroups() {
-      try {
-        const data = await clientFetcher<undefined, UserGroupResponse[]>({
-          url: '/user/groups',
-          method: 'GET',
-        });
-        if (data) setExistingNames(data.map((g) => g.name));
-      } catch (e) {
-        console.error('그룹 조회 실패:', e);
-      }
-    }
-    fetchMyGroups();
+    clientFetcher<undefined, UserGroupResponse[]>({
+      url: '/user/groups',
+      method: 'GET',
+    }).then((data) => {
+      if (data) setExistingNames(data.map((g) => g.name));
+    });
   }, []);
 
-  const openFileDialog = () => {
-    fileInputRef.current?.click();
-    setProfileError(false);
-  };
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    setProfilePreview(URL.createObjectURL(file));
-  };
-
-  const handleCreate = async () => {
-    let hasErr = false;
-    if (!profilePreview) {
-      setProfileError(true);
-      hasErr = true;
+  const handleCreate = async ({
+    name,
+    file,
+  }: {
+    name: string;
+    file?: File;
+  }) => {
+    let imageUrl: string | undefined;
+    if (file) {
+      imageUrl = await postImage(file);
     }
-    if (existingNames.includes(teamName.trim())) {
-      setNameError(true);
-      hasErr = true;
-    }
-    if (hasErr) return;
-
-    try {
-      const newGroup = await postGroup({ body: { name: teamName } });
-      if (newGroup?.id) router.push(ROUTES.TEAM(newGroup.id));
-    } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : '팀 생성 실패';
-      console.error(msg);
-    }
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      handleCreate();
+    const newGroup = await postGroup({
+      body: {
+        name,
+        ...(imageUrl ? { image: imageUrl } : {}),
+      },
+    });
+    if (newGroup?.id) {
+      router.push(ROUTES.TEAM(newGroup.id));
     }
   };
 
   return (
     <div className="flex h-full w-full justify-center pt-50">
-      <div className="tablet:w-[456px] tablet:h-[460px] text-md-regular tablet:text-lg-regular flex h-[374px] w-[343px] flex-col items-center">
-        <h1 className="text-2xl-medium laptop:text-4xl-medium tablet:mb-20 mb-6">
-          팀 생성하기
-        </h1>
-
-        <input
-          type="file"
-          accept="image/*"
-          ref={fileInputRef}
-          className="hidden"
-          onChange={handleFileChange}
-        />
-
-        <div className="mb-6 flex flex-col gap-3 self-start">
-          <span className="text-lg-medium">팀 프로필</span>
-
-          <button className="relative h-16 w-16" onClick={openFileDialog}>
-            {profilePreview ? (
-              <img
-                src={profilePreview}
-                alt="프로필"
-                className="h-full w-full rounded-full object-cover"
-              />
-            ) : (
-              <IconRenderer
-                name="ProfileEditIcon"
-                size={64}
-                className="cursor-pointer text-gray-400"
-              />
-            )}
-
-            <input
-              type="file"
-              accept="image/*"
-              ref={fileInputRef}
-              className="absolute inset-0 h-full w-full cursor-pointer rounded-full opacity-0"
-              onChange={handleFileChange}
-            />
-          </button>
-
-          {profileError && (
-            <p className="text-md-medium text-red-500">
-              프로필 이미지를 넣어주세요.
-            </p>
-          )}
-        </div>
-
-        <div className="mb-6 w-full self-start">
-          <InputBase
-            id="teamName"
-            title="팀 이름"
-            placeholder="팀 이름을 입력해주세요."
-            value={teamName}
-            autoComplete="off"
-            isInvalid={nameError}
-            onChange={(e) => {
-              setTeamName(e.target.value);
-              setNameError(false);
-            }}
-            onKeyDown={handleKeyDown}
-            titleClassName="mb-6"
-            containerClassName={
-              `w-full bg-slate-800 ` +
-              (nameError ? 'border border-red-500' : '')
-            }
-            inputClassName="w-full h-11 tablet:h-12"
-          />
-          {nameError && (
-            <p className="text-md-medium mt-2 text-red-500">
-              이미 존재하는 이름입니다.
-            </p>
-          )}
-        </div>
-
-        <div className="mb-4 w-full">
-          <Button
-            variant="primary"
-            styleType="filled"
-            size="lg"
-            radius="sm"
-            className="text-lg-semibold w-full"
-            onClick={handleCreate}
-            disabled={!teamName.trim()}
-          >
-            생성하기
-          </Button>
-        </div>
-
-        <p className="text-md-regular tablet:text-lg-regular">
-          팀 이름은 회사명이나 모임 이름 등으로 설정하면 좋아요.
-        </p>
-      </div>
+      <TeamProfileForm
+        existingNames={existingNames}
+        initialName=""
+        initialPreview=""
+        submitLabel="팀 생성하기"
+        onSubmit={handleCreate}
+      />
     </div>
   );
 }
