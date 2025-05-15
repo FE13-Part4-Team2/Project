@@ -1,10 +1,11 @@
+import { cookies } from 'next/headers';
+import { getGroupById } from '@/lib/apis/group';
+import { notFound } from 'next/navigation';
 import TeamBanner from '@/app/(team)/team/_components/TeamBanner';
 import TaskListBarList from '@/app/(team)/team/_components/TaskListBarList';
 import ReportBanner from '@/app/(team)/team/_components/ReportBanner';
 import MemberList from '@/app/(team)/team/_components/MemberList';
-import { cookies } from 'next/headers';
-import { getGroupById } from '@/lib/apis/group';
-import { notFound } from 'next/navigation';
+import AddButton from '@/app/(team)/team/_components/AddButton';
 import { teamHeaderStyle } from '@/app/(team)/team/_components/styles';
 
 export default async function TeamPage({
@@ -36,9 +37,7 @@ export default async function TeamPage({
             ({taskListsData.length}개)
           </span>
         </div>
-        <button className="text-md-regular text-green-700">
-          + 새로운 목록 추가하기
-        </button>
+        <AddButton variant="task-list" groupId={groupId} />
       </div>
       <TaskListBarList
         items={taskListsData}
@@ -61,9 +60,7 @@ export default async function TeamPage({
             ({membersData.length}명)
           </span>
         </div>
-        <button className="text-md-regular text-green-700">
-          + 새로운 멤버 초대하기
-        </button>
+        <AddButton variant="member" groupId={groupId} />
       </div>
       <MemberList
         items={membersData}
