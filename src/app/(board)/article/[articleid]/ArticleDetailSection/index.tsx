@@ -4,6 +4,10 @@ import DateInfo from '@/app/(board)/article/[articleid]/ArticleDetailSection/Dat
 import CommentInfo from '@/app/(board)/article/[articleid]/ArticleDetailSection/CommentInfo';
 import ArticleMenu from '@/components/article/ArticleMenu';
 
+interface ArticleDetailSectionProps extends ArticleResponse {
+  userId: number;
+}
+
 export default function ArticleDetailSection({
   id,
   title,
@@ -14,7 +18,8 @@ export default function ArticleDetailSection({
   likeCount,
   isLiked,
   commentCount,
-}: ArticleResponse) {
+  userId,
+}: ArticleDetailSectionProps) {
   // 아직 사용하지 않은 값들 임시로 콘솔에 출력
   console.log(image, likeCount, isLiked);
   return (
@@ -22,7 +27,9 @@ export default function ArticleDetailSection({
       <div>
         <div className="flex h-16 items-center justify-between border-b border-slate-50/10">
           <div className="text-2lg-bold tablet:text-xl-bold">{title}</div>
-          <ArticleMenu articleId={id} />
+          {writer && (
+            <ArticleMenu articleId={id} userId={userId} writerData={writer} />
+          )}
         </div>
         <div className="laptop:h-16 flex h-[72px] items-center justify-between">
           <div className="flex items-center gap-4">
