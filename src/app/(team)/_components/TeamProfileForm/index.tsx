@@ -25,14 +25,12 @@ export default function TeamProfileForm({
   const [preview, setPreview] = useState(initialPreview);
   const [file, setFile] = useState<File>();
   const [nameError, setNameError] = useState(false);
-  const [profileError, setProfileError] = useState(false);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selected = e.target.files?.[0];
     if (!selected) return;
     setFile(selected);
     setPreview(URL.createObjectURL(selected));
-    setProfileError(false);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -45,7 +43,6 @@ export default function TeamProfileForm({
   const handleSubmit = async () => {
     let hasErr = false;
     if (!preview) {
-      setProfileError(true);
       hasErr = true;
     }
     if (existingNames.includes(name.trim())) {
@@ -90,11 +87,6 @@ export default function TeamProfileForm({
             />
           )}
         </label>
-        {profileError && (
-          <p className="text-md-medium text-red-500">
-            프로필 이미지를 넣어주세요.
-          </p>
-        )}
       </div>
       <div className="mb-6 w-full self-start">
         <InputBase
