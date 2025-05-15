@@ -1,9 +1,10 @@
 'use client';
 import GradientScrollable from '@/components/common/Scroll/GradientScrollable';
 import ProcessBadge from '@/app/(team)/team/_components/TaskListBarList/ProcessBadge';
-import TaskListDropdownMenu from '@/app/(team)/team/_components/TaskListBarList/TaskListDropdownMenu';
+import TaskListMenu from '@/components/tasklist/TaskListMenu';
 import { useRouter } from 'next/navigation';
 import { ROUTES } from '@/constants/routes';
+import { GroupMemberResponse } from '@/lib/apis/group/type';
 import {
   taskListBarWrapperStyle,
   taskListBarTitleStyle,
@@ -16,9 +17,18 @@ interface TaskListBarProps {
   name: string;
   index: number;
   groupId: number;
+  userId: number;
+  membersData: GroupMemberResponse[];
 }
 
-const TaskListBar = ({ id, name, index, groupId }: TaskListBarProps) => {
+const TaskListBar = ({
+  id,
+  name,
+  index,
+  groupId,
+  userId,
+  membersData,
+}: TaskListBarProps) => {
   const router = useRouter();
   const color = colorList[index % colorList.length];
 
@@ -57,7 +67,14 @@ const TaskListBar = ({ id, name, index, groupId }: TaskListBarProps) => {
 
         <div className="flex items-center gap-1 pr-2">
           <ProcessBadge />
-          <TaskListDropdownMenu />
+          <TaskListMenu
+            groupId={groupId}
+            userId={userId}
+            membersData={membersData}
+            taskListId={id}
+            taskListName={name}
+            size="sm"
+          />
         </div>
       </div>
     </div>

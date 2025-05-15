@@ -40,7 +40,12 @@ export default async function TeamPage({
           + 새로운 목록 추가하기
         </button>
       </div>
-      <TaskListBarList items={taskListsData} groupId={groupId} />
+      <TaskListBarList
+        items={taskListsData}
+        groupId={groupId}
+        userId={Number(userId)}
+        membersData={membersData}
+      />
 
       {/* 리포트 배너 */}
       <div className={`${teamHeaderStyle}`}>
