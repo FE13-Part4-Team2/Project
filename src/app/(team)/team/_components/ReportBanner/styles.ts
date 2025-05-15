@@ -26,8 +26,14 @@ export const reportCardsWrapperStyle = clsx(
 );
 
 export const reportCardContainerStyle = clsx(
+  'flex items-center justify-center',
   reportCardMaxWidth,
-  'laptop:h-[76.5px] h-[80px] w-full min-w-0 p-3',
+  'laptop:h-[76.5px] h-[80px] w-full min-w-0 p-4',
   'bg-slate-700',
   RADIUS
+);
+
+export const cardItemWrapperStyle = clsx(
+  'flex items-center justify-between',
+  'h-full w-full'
 );
