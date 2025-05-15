@@ -4,8 +4,8 @@ import clsx from 'clsx';
 
 interface UserIconProps {
   image: string | null;
-  sizeClass: string; // 원형 크기
-  size: string; // 이미지 크기
+  sizeClass: string; // 아이콘 외부 원형 크기
+  size: string; // 이미지 예상 크기 (단위 포함 필수, ex: '32px')
   iconClass?: string;
 }
 

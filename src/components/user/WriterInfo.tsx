@@ -9,7 +9,7 @@ export default function WriterInfo({
 }) {
   return (
     <div className="flex items-center gap-3">
-      <UserIcon image={image} />
+      <UserIcon image={image} sizeClass="size-8" size="32px" />
       <div className="text-md-medium">{nickname}</div>
     </div>
   );
