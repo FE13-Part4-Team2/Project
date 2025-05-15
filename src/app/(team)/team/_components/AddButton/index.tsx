@@ -5,10 +5,17 @@ import { TaskListBody } from '@/lib/apis/taskList/type';
 import { handleCreateTaskList } from '@/components/tasklist/TaskListMenu/actions/taskListActions';
 import { handleInvite } from '@/app/(team)/team/_components/AddButton/handleInvite';
 
+type AddButtonVariant = 'tasklist' | 'member';
+
 interface AddButtonProps {
-  variant: 'task-list' | 'member';
+  variant: AddButtonVariant;
   groupId: number;
 }
+
+const ADD_BUTTON_TEXT: Record<AddButtonVariant, string> = {
+  tasklist: '+ 새로운 목록 추가하기',
+  member: '+ 새로운 멤버 초대하기',
+};
 
 const AddButton = ({ variant, groupId }: AddButtonProps) => {
   const { openModal } = useModalStore();
@@ -44,15 +51,11 @@ const AddButton = ({ variant, groupId }: AddButtonProps) => {
   return (
     <button
       onClick={
-        variant === 'task-list'
-          ? openCreateTaskListModal
-          : openInviteMemberModal
+        variant === 'tasklist' ? openCreateTaskListModal : openInviteMemberModal
       }
       className="text-md-regular text-green-700"
     >
-      {variant === 'task-list'
-        ? '+ 새로운 목록 추가하기'
-        : '+ 새로운 멤버 초대하기'}
+      {ADD_BUTTON_TEXT[variant]}
     </button>
   );
 };

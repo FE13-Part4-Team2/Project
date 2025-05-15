@@ -42,15 +42,13 @@ export default async function TeamPage({
             ({taskListsData.length}개)
           </span>
         </div>
-        <AddButton variant="task-list" groupId={groupId} />
+        <AddButton variant="tasklist" groupId={groupId} />
       </div>
       <TaskListBarList
         items={taskListsData}
         groupId={groupId}
         userId={Number(userId)}
         membersData={membersData}
-        total={total}
-        done={done}
       />
 
       {/* 리포트 */}
