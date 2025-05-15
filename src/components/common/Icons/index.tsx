@@ -21,6 +21,7 @@ import Expansion from '@/assets/icons/expansion.svg';
 import Gear from '@/assets/icons/gear.svg';
 import GnbMenu from '@/assets/icons/gnb_menu.svg';
 import HeartEmpty from '@/assets/icons/heart_empty.svg';
+import HeartFull from '@/assets/icons/heart_full.svg';
 import Img from '@/assets/icons/img.svg';
 import KakaoLogin from '@/assets/icons/kakao_login.svg';
 import List from '@/assets/icons/list.svg';
@@ -211,6 +212,15 @@ const Icons = {
 
   HeartEmptyIcon: ({ size = 16, className, onClick }: IconProps) => (
     <HeartEmpty
+      width={size}
+      height={size}
+      className={className}
+      onClick={onClick}
+    />
+  ),
+
+  HeartFullIcon: ({ size = 16, className, onClick }: IconProps) => (
+    <HeartFull
       width={size}
       height={size}
       className={className}

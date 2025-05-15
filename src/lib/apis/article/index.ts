@@ -99,23 +99,29 @@ export async function deleteArticleById({
 // 게시글 좋아요 등록 (POST /articles/:articleId/like)
 export async function postArticleLike({
   articleId,
+  tag,
 }: {
   articleId: number;
+  tag?: string[];
 }): Promise<ArticleResponse | null> {
-  return clientFetcher<undefined, ArticleResponse>({
+  return serverFetcher<undefined, ArticleResponse>({
     url: `/articles/${articleId}/like`,
     method: 'POST',
+    tag,
   });
 }
 
 // 게시글 좋아요 취소 (DELETE /articles/:articleId/like)
 export async function deleteArticleLike({
   articleId,
+  tag,
 }: {
   articleId: number;
+  tag?: string[];
 }): Promise<ArticleResponse | null> {
-  return clientFetcher<undefined, ArticleResponse>({
+  return serverFetcher<undefined, ArticleResponse>({
     url: `/articles/${articleId}/like`,
     method: 'DELETE',
+    tag,
   });
 }

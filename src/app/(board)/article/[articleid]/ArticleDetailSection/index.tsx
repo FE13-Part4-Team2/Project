@@ -3,7 +3,7 @@ import ArticleMenu from '@/components/article/ArticleMenu';
 import WriterInfo from '@/components/user/WriterInfo';
 import DateInfo from '@/app/(board)/article/[articleid]/ArticleDetailSection/DateInfo';
 import CommentInfo from '@/app/(board)/article/[articleid]/ArticleDetailSection/CommentInfo';
-import LikeButton from '@/app/(board)/article/[articleid]/ArticleDetailSection/LikeButton';
+import ToggleLikeButton from '@/app/(board)/article/[articleid]/ArticleDetailSection/ToggleLikeButton';
 
 interface ArticleDetailSectionProps extends ArticleResponse {
   userId: number;
@@ -21,9 +21,6 @@ export default function ArticleDetailSection({
   commentCount,
   userId,
 }: ArticleDetailSectionProps) {
-  // 아직 사용하지 않은 값들 임시로 콘솔에 출력
-  console.log(likeCount, isLiked);
-
   return (
     <div className="tablet:min-h-[312px] flex min-h-[242px] flex-col gap-6">
       <div>
@@ -43,7 +40,11 @@ export default function ArticleDetailSection({
             {commentCount !== undefined && (
               <CommentInfo commentCount={commentCount} />
             )}
-            <LikeButton />
+            <ToggleLikeButton
+              articleId={id}
+              likeCount={likeCount ?? 0}
+              isLiked={isLiked ?? false}
+            />
           </div>
         </div>
       </div>
