@@ -1,6 +1,6 @@
 import UserIcon from '@/components/user/UserIcon';
 import BreakEmail from '@/app/(team)/team/_components/MemberList/BreakEmail';
-import TaskMenuButton from '@/components/task/TaskMenu/TaskMenuButton';
+import MemberMenu from '@/app/(team)/team/_components/MemberList/MemberMenu';
 import { GroupResponse } from '@/lib/apis/group/type';
 import { useIsAdmin } from '@/hooks/useIsAdmin';
 import {
@@ -42,7 +42,7 @@ const MemberCard = ({
         </div>
 
         {/* 메뉴 버튼 */}
-        {isAdmin && <TaskMenuButton size="sm" />}
+        {isAdmin && <MemberMenu />}
       </div>
     </div>
   );

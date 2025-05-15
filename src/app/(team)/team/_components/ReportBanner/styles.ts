@@ -15,6 +15,12 @@ export const reportBannerContainerStyle = clsx(
   RADIUS
 );
 
+export const reportBannerItemWrapperStyle =
+  'tablet:p-8 flex w-full items-center justify-between p-3';
+
+export const progressPercentStyle =
+  'tablet:text-[40px] bg-gradient-to-r from-green-700 to-green-500 bg-clip-text text-[20px] leading-none font-bold text-transparent';
+
 // 📌ReportCard.tsx style
 const reportCardMaxWidth =
   'laptop:max-w-[400px] tablet:max-w-[280px] max-w-[142px]';
