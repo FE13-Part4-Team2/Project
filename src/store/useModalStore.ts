@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 
 interface ModalOptions {
   variant?: 'default' | 'danger' | 'taskForm';
-  title?: string;
+  title?: ReactNode;
   description?: string;
   button?: {
     number: 1 | 2;

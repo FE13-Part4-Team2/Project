@@ -1,6 +1,8 @@
 import UserIcon from '@/components/user/UserIcon';
 import BreakEmail from '@/app/(team)/team/_components/MemberList/BreakEmail';
 import MemberMenu from '@/app/(team)/team/_components/MemberList/MemberMenu';
+import MemberProfileModal from '@/components/common/Modal/content/MemberProfileModal';
+import { useModalStore } from '@/store/useModalStore';
 import { GroupResponse } from '@/lib/apis/group/type';
 import { useIsAdmin } from '@/hooks/useIsAdmin';
 import {
@@ -26,13 +28,39 @@ const MemberCard = ({
 }: MemberCardProps) => {
   const isAdmin = useIsAdmin({ membersData: group.members, userId });
 
+  const { openModal } = useModalStore();
+  const openMemberProfileModal = () => {
+    openModal(
+      {
+        title: (
+          <UserIcon
+            image={userImage}
+            sizeClass="size-[54px]"
+            size="54px"
+            iconClass="size-10"
+          />
+        ),
+        button: { number: 1, text: '이메일 복사하기', onRequest: () => {} },
+      },
+      <MemberProfileModal />
+    );
+  };
+
   return (
-    <div className={`${memberCardContainerStyle}`}>
+    <div
+      role="button"
+      onClick={openMemberProfileModal}
+      className={`${memberCardContainerStyle}`}
+    >
       {/* 아이템 래퍼 */}
       <div className={`${memberCardItemWrapperStyle}`}>
         <div className="tablet:h-[33px] tablet:w-[146px] flex items-center gap-3">
           {/* 프로필 아이콘 */}
-          <UserIcon image={userImage} responsive={true} />
+          <UserIcon
+            image={userImage}
+            sizeClass="tablet:size-8 size-6"
+            size="32px"
+          />
 
           {/* 이름 + 이메일 */}
           <div className={`${memberCardTextWrapperStyle}`}>
