@@ -5,6 +5,7 @@ import React from 'react';
 import Alert from '@/assets/icons/alert.svg';
 import Arrow from '@/assets/icons/arrow.svg';
 import ArrowTop from '@/assets/icons/arrow_top.svg';
+import BestBadge from '@/assets/icons/best_badge.svg';
 import Calendar from '@/assets/icons/calendar.svg';
 import CalendarArrow from '@/assets/icons/calendar_arrow.svg';
 import CheckGreen from '@/assets/icons/check_green.svg';
@@ -71,6 +72,15 @@ const Icons = {
 
   ArrowTopIcon: ({ size = 24, className, onClick }: IconProps) => (
     <ArrowTop
+      width={size}
+      height={size}
+      className={className}
+      onClick={onClick}
+    />
+  ),
+
+  BestBadgeIcon: ({ size = 16, className, onClick }: IconProps) => (
+    <BestBadge
       width={size}
       height={size}
       className={className}

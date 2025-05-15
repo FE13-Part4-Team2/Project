@@ -31,12 +31,7 @@ export default function BestPostCard({
   return (
     <article className="tablet:px-6 tablet:h-55 tablet:pt-4 flex h-[178px] flex-col gap-3 rounded-xl border border-slate-700 bg-slate-800 px-4 pt-2.5">
       <div className="flex items-center gap-1">
-        <Image
-          src="/icons/best_badge_icon.svg"
-          alt="베스트 게시글 뱃지"
-          width={16}
-          height={16}
-        />
+        <IconRenderer name="BestBadgeIcon" />
         <p className="text-lg-semibold text-white">Best</p>
       </div>
       <div className="tablet:gap-6 flex flex-col gap-4">
