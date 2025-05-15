@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import clientFetcher from '@/lib/client/fetcher.client';
 import InputBase from '@/components/common/Input/InputBase';
@@ -12,9 +12,13 @@ import { ROUTES } from '@/constants/routes';
 
 export default function AddTeamPage() {
   const router = useRouter();
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
   const [teamName, setTeamName] = useState('');
   const [nameError, setNameError] = useState(false);
   const [existingNames, setExistingNames] = useState<string[]>([]);
+  const [profilePreview, setProfilePreview] = useState<string>('');
+  const [profileError, setProfileError] = useState(false);
 
   useEffect(() => {
     async function fetchMyGroups() {
@@ -23,21 +27,31 @@ export default function AddTeamPage() {
           url: '/user/groups',
           method: 'GET',
         });
-        if (data) {
-          setExistingNames(data.map((g) => g.name));
-        }
+        if (data) setExistingNames(data.map((g) => g.name));
       } catch (e) {
-        console.error('내 그룹 조회 실패:', e);
+        console.error('그룹 조회 실패:', e);
       }
     }
     fetchMyGroups();
   }, []);
 
-  const handleProfileClick = () => {};
+  const openFileDialog = () => {
+    fileInputRef.current?.click();
+    setProfileError(false);
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setProfilePreview(URL.createObjectURL(file));
+  };
 
   const handleCreate = async () => {
     let hasErr = false;
-
+    if (!profilePreview) {
+      setProfileError(true);
+      hasErr = true;
+    }
     if (existingNames.includes(teamName.trim())) {
       setNameError(true);
       hasErr = true;
@@ -46,12 +60,10 @@ export default function AddTeamPage() {
 
     try {
       const newGroup = await postGroup({ body: { name: teamName } });
-      if (newGroup?.id) {
-        router.push(ROUTES.TEAM(newGroup.id));
-      }
+      if (newGroup?.id) router.push(ROUTES.TEAM(newGroup.id));
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : '팀 생성 실패';
-      console.error('팀 생성 실패:', message);
+      const msg = err instanceof Error ? err.message : '팀 생성 실패';
+      console.error(msg);
     }
   };
 
@@ -69,15 +81,46 @@ export default function AddTeamPage() {
           팀 생성하기
         </h1>
 
+        <input
+          type="file"
+          accept="image/*"
+          ref={fileInputRef}
+          className="hidden"
+          onChange={handleFileChange}
+        />
+
         <div className="mb-6 flex flex-col gap-3 self-start">
           <span className="text-lg-medium">팀 프로필</span>
 
-          <IconRenderer
-            name="ProfileEditIcon"
-            size={64}
-            className="cursor-pointer text-gray-400"
-            onClick={handleProfileClick}
-          />
+          <button className="relative h-16 w-16" onClick={openFileDialog}>
+            {profilePreview ? (
+              <img
+                src={profilePreview}
+                alt="프로필"
+                className="h-full w-full rounded-full object-cover"
+              />
+            ) : (
+              <IconRenderer
+                name="ProfileEditIcon"
+                size={64}
+                className="cursor-pointer text-gray-400"
+              />
+            )}
+
+            <input
+              type="file"
+              accept="image/*"
+              ref={fileInputRef}
+              className="absolute inset-0 h-full w-full cursor-pointer rounded-full opacity-0"
+              onChange={handleFileChange}
+            />
+          </button>
+
+          {profileError && (
+            <p className="text-md-medium text-red-500">
+              프로필 이미지를 넣어주세요.
+            </p>
+          )}
         </div>
 
         <div className="mb-6 w-full self-start">
@@ -86,6 +129,7 @@ export default function AddTeamPage() {
             title="팀 이름"
             placeholder="팀 이름을 입력해주세요."
             value={teamName}
+            autoComplete="off"
             isInvalid={nameError}
             onChange={(e) => {
               setTeamName(e.target.value);
