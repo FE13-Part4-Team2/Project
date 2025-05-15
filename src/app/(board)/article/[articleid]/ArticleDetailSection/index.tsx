@@ -2,6 +2,7 @@ import { ArticleResponse } from '@/lib/apis/article/type';
 import WriterInfo from '@/components/user/WriterInfo';
 import DateInfo from '@/app/(board)/article/[articleid]/ArticleDetailSection/DateInfo';
 import CommentInfo from '@/app/(board)/article/[articleid]/ArticleDetailSection/CommentInfo';
+import ArticleMenu from '@/components/article/ArticleMenu';
 
 export default function ArticleDetailSection({
   id,
@@ -15,13 +16,13 @@ export default function ArticleDetailSection({
   commentCount,
 }: ArticleResponse) {
   // 아직 사용하지 않은 값들 임시로 콘솔에 출력
-  console.log(id, image, likeCount, isLiked);
+  console.log(image, likeCount, isLiked);
   return (
     <div className="tablet:min-h-[312px] flex min-h-[242px] flex-col gap-6">
       <div>
         <div className="flex h-16 items-center justify-between border-b border-slate-50/10">
           <div className="text-2lg-bold tablet:text-xl-bold">{title}</div>
-          <div>메뉴</div>
+          <ArticleMenu articleId={id} />
         </div>
         <div className="laptop:h-16 flex h-[72px] items-center justify-between">
           <div className="flex items-center gap-4">

@@ -64,7 +64,7 @@ export async function getArticleById({
 }
 
 // 게시글 수정 (PATCH /articles/:articleId)
-export async function patchArticle({
+export async function patchArticleById({
   articleId,
   body,
 }: {
@@ -85,7 +85,7 @@ export async function patchArticle({
 }
 
 // 게시글 삭제 (DELETE /articles/:articleId)
-export async function deleteArticle({
+export async function deleteArticleById({
   articleId,
 }: {
   articleId: number;
