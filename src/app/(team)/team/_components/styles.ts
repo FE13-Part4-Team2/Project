@@ -11,7 +11,7 @@ export const teamItemWrapperStyle = 'laptop:max-w-[1200px] min-w-0 w-full';
 // 📌팀 페이지 헤더 섹션 style
 export const teamHeaderStyle = clsx(
   teamItemWrapperStyle,
-  'mt-6 mb-3 flex justify-between truncate'
+  'mt-8 mb-3 flex justify-between truncate'
 );
 
 // 📌Pagination.tsx style

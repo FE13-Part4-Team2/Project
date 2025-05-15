@@ -89,7 +89,7 @@ export default function TaskListMenu({
   return (
     isAdmin && (
       <DropDown>
-        <DropDown.Trigger>
+        <DropDown.Trigger className="mb-0">
           <TaskListMenuButton size={size} />
         </DropDown.Trigger>
         <DropDown.Menu align="right">
