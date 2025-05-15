@@ -15,25 +15,25 @@ export const reportBannerContainerStyle = clsx(
   RADIUS
 );
 
-export const reportBannerItemWrapperStyle =
-  'tablet:p-8 flex w-full items-center justify-between p-3';
+export const reportBannerItemWrapperStyle = clsx(
+  'flex w-full items-center justify-between',
+  'tablet:p-6 p-3',
+  'tablet:gap-15 gap-6'
+);
 
 export const progressPercentStyle =
   'tablet:text-[40px] bg-gradient-to-r from-green-700 to-green-500 bg-clip-text text-[20px] leading-none font-bold text-transparent';
 
-// 📌ReportCard.tsx style
-const reportCardMaxWidth =
-  'laptop:max-w-[400px] tablet:max-w-[280px] max-w-[142px]';
-
 export const reportCardsWrapperStyle = clsx(
   'flex flex-col gap-4',
-  reportCardMaxWidth,
+  'max-w-[400px]',
   'min-w-0 w-full h-full'
 );
 
+// 📌ReportCard.tsx style
 export const reportCardContainerStyle = clsx(
   'flex items-center justify-center',
-  reportCardMaxWidth,
+  'max-w-[400px]',
   'laptop:h-[76.5px] h-[80px] w-full min-w-0 p-4',
   'bg-slate-700',
   RADIUS

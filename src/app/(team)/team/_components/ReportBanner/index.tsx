@@ -22,7 +22,7 @@ const ReportBanner = () => {
         {/* 진행률 래퍼 */}
         <div className="flex items-center justify-center gap-10">
           {/* 임시 원형 아이콘 */}
-          <div className="relative h-[140px] w-[140px] rounded-full border-[30px] border-green-700" />
+          <div className="tablet:h-[140px] tablet:w-[140px] tablet:border-[30px] relative h-[120px] w-[120px] rounded-full border-[24px] border-green-700" />
           {/* 진행률 텍스트 */}
           <div className="tablet:relative absolute flex flex-col gap-1">
             <p className="tablet:block text-md-medium hidden">

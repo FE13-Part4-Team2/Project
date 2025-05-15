@@ -14,6 +14,7 @@ import {
   handleDeleteTaskList,
   handleEditTaskList,
 } from '@/components/tasklist/TaskListMenu/actions/taskListActions';
+import { dropdownMenuStyle, dropdownItemStyle } from '@/app/styles/dropdown';
 
 interface TaskListMenuProps {
   membersData: GroupMemberResponse[];
@@ -92,16 +93,25 @@ export default function TaskListMenu({
         <DropDown.Trigger className="mb-0">
           <TaskListMenuButton size={size} />
         </DropDown.Trigger>
-        <DropDown.Menu align="right">
+        <DropDown.Menu align="right" className={`${dropdownMenuStyle}`}>
           {size === 'md' && (
-            <DropDown.Item onClick={openCreateTaskListModal}>
+            <DropDown.Item
+              onClick={openCreateTaskListModal}
+              className={`${dropdownItemStyle}`}
+            >
               생성하기
             </DropDown.Item>
           )}
-          <DropDown.Item onClick={openEditTaskListModal}>
+          <DropDown.Item
+            onClick={openEditTaskListModal}
+            className={`${dropdownItemStyle}`}
+          >
             수정하기
           </DropDown.Item>
-          <DropDown.Item onClick={openDeleteTaskListModal}>
+          <DropDown.Item
+            onClick={openDeleteTaskListModal}
+            className={`${dropdownItemStyle}`}
+          >
             삭제하기
           </DropDown.Item>
         </DropDown.Menu>
