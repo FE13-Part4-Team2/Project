@@ -49,7 +49,11 @@ const MemberCard = ({
   return (
     <div
       role="button"
+      tabIndex={0}
       onClick={openMemberProfileModal}
+      onKeyDown={(e) => {
+        if (e.key === 'enter' || e.key === '') openMemberProfileModal();
+      }}
       className={`${memberCardContainerStyle}`}
     >
       {/* 아이템 래퍼 */}
