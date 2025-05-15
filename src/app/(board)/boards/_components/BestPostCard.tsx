@@ -63,7 +63,7 @@ export default function BestPostCard({
         <div className="item-center flex justify-between">
           <WriterInfo nickname={nickname} image={writerImage ?? null} />
           <div className="flex items-center justify-center gap-1">
-            <IconRenderer name="HeartIcon" />
+            <IconRenderer name="HeartEmptyIcon" />
             <p className="text-xs-regular text-slate-400">{likes}</p>
           </div>
         </div>

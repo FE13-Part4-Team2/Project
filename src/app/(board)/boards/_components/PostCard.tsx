@@ -65,7 +65,7 @@ export default function PostCard({
           <span className="text-md-medium text-slate-400">{date}</span>
         </div>
         <div className="flex items-center justify-center gap-1">
-          <IconRenderer name="HeartIcon" />
+          <IconRenderer name="HeartEmptyIcon" />
           <p className="text-xs-regular text-slate-400">{likes}</p>
         </div>
       </div>
