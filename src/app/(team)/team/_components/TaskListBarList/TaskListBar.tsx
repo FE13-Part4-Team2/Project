@@ -1,6 +1,6 @@
 'use client';
 import GradientScrollable from '@/components/common/Scroll/GradientScrollable';
-import ProcessBadge from '@/app/(team)/team/_components/TaskListBarList/ProcessBadge';
+import ProgressBadge from '@/app/(team)/team/_components/TaskListBarList/ProgressBadge';
 import TaskListMenu from '@/components/tasklist/TaskListMenu';
 import { useRouter } from 'next/navigation';
 import { ROUTES } from '@/constants/routes';
@@ -19,6 +19,8 @@ interface TaskListBarProps {
   groupId: number;
   userId: number;
   membersData: GroupMemberResponse[];
+  total: number;
+  done: number;
 }
 
 const TaskListBar = ({
@@ -28,6 +30,8 @@ const TaskListBar = ({
   groupId,
   userId,
   membersData,
+  total,
+  done,
 }: TaskListBarProps) => {
   const router = useRouter();
   const color = colorList[index % colorList.length];
@@ -62,7 +66,7 @@ const TaskListBar = ({
         </div>
 
         <div className="flex items-center gap-1 pr-2">
-          <ProcessBadge />
+          <ProgressBadge total={total} done={done} />
           <TaskListMenu
             groupId={groupId}
             userId={userId}

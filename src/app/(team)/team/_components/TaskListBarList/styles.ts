@@ -35,9 +35,12 @@ export const colorList = ['#A855F7', '#3B82F6', '#06B6D4', '#EC4899'];
 
 export const colorChipStyle = clsx('w-[12px] h-[40px]', RADIUS_TL, RADIUS_BL);
 
-// 📌ProcessBadge.tsx style
-export const processBadgeWrapperStyle = clsx(
+// 📌ProgressBadge.tsx style
+export const progressBadgeContainerStyle = clsx(
+  'flex items-center justify-center',
   'h-[25px] w-[58px]',
   'bg-slate-900',
   RADIUS
 );
+
+export const progressBadgeTextStyle = 'text-md-regular text-green-700';

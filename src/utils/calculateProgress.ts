@@ -1,3 +1,5 @@
+// done/todo 진행률 계산 로직
+
 import { TaskResponse } from '@/lib/apis/task/type';
 
 export function calculateProgress(tasks: TaskResponse[]) {

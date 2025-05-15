@@ -49,6 +49,8 @@ export default async function TeamPage({
         groupId={groupId}
         userId={Number(userId)}
         membersData={membersData}
+        total={total}
+        done={done}
       />
 
       {/* 리포트 */}

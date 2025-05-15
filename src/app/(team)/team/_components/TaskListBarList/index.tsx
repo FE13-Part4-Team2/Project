@@ -13,6 +13,8 @@ interface TaskListBarListProps {
   groupId: number;
   userId: number;
   membersData: GroupMemberResponse[];
+  total: number;
+  done: number;
 }
 
 const TaskListBarList = ({
@@ -20,6 +22,8 @@ const TaskListBarList = ({
   groupId,
   userId,
   membersData,
+  total,
+  done,
 }: TaskListBarListProps) => {
   const [page, setPage] = useState(1);
 
@@ -49,6 +53,8 @@ const TaskListBarList = ({
             groupId={groupId}
             userId={userId}
             membersData={membersData}
+            total={total}
+            done={done}
           />
         ))}
       </div>
