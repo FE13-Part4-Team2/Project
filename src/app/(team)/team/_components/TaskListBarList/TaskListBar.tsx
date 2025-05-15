@@ -33,10 +33,9 @@ const TaskListBar = ({
   const color = colorList[index % colorList.length];
 
   const handleClick = () => {
-    const today = new Date();
-    const formattedDate = today.toISOString().slice(0, 10);
+    const today = new Date().toISOString().split('T')[0];
 
-    router.push(`${ROUTES.TASK(groupId)}?id=${id}&date=${formattedDate}`);
+    router.push(`${ROUTES.TASK(groupId)}?id=${id}&date=${today}`);
   };
 
   return (

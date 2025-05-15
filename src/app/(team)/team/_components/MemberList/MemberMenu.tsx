@@ -9,7 +9,7 @@ const MemberMenu = () => {
       </DropDown.Trigger>
       <DropDown.Menu align="right" className="mt-2 h-[40px] w-[120px]">
         <DropDown.Item className="text-md-regular h-[38px] w-full">
-          삭제하기
+          내보내기
         </DropDown.Item>
       </DropDown.Menu>
     </DropDown>

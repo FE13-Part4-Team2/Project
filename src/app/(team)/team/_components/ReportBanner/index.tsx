@@ -1,6 +1,5 @@
 'use client';
 import ReportCard from '@/app/(team)/team/_components/ReportBanner/ReportCard';
-import { useIsMobile } from '@/hooks/useCheckViewport';
 import {
   reportBannerContainerStyle,
   reportBannerItemWrapperStyle,
@@ -9,12 +8,12 @@ import {
 } from '@/app/(team)/team/_components/ReportBanner/styles';
 
 interface ReportBannerProps {
-  groupId: number;
+  progress: number;
+  total: number;
+  done: number;
 }
 
-const ReportBanner = () => {
-  const isMobile = useIsMobile();
-
+const ReportBanner = ({ progress, total, done }: ReportBannerProps) => {
   return (
     <div className={`${reportBannerContainerStyle}`}>
       {/* 아이템 래퍼 */}
@@ -31,14 +30,14 @@ const ReportBanner = () => {
               진행 상황
             </p>
             <p className="tablet:hidden text-md-medium block">오늘</p>
-            <p className={`${progressPercentStyle}`}>25%</p>
+            <p className={`${progressPercentStyle}`}>{progress}%</p>
           </div>
         </div>
 
         {/* Todo & Done Card */}
         <div className={`${reportCardsWrapperStyle}`}>
-          <ReportCard variant="todo" />
-          <ReportCard variant="done" />
+          <ReportCard variant="todo" value={total - done} />
+          <ReportCard variant="done" value={done} />
         </div>
       </div>
     </div>

@@ -6,9 +6,10 @@ import {
 
 interface ReportCardProps {
   variant: 'todo' | 'done';
+  value: number;
 }
 
-const ReportCard = ({ variant }: ReportCardProps) => {
+const ReportCard = ({ variant, value }: ReportCardProps) => {
   return (
     <div className={`${reportCardContainerStyle}`}>
       <div className={`${cardItemWrapperStyle}`}>
@@ -17,7 +18,7 @@ const ReportCard = ({ variant }: ReportCardProps) => {
           <h3 className="text-xs-medium text-slate-300">
             {variant === 'todo' ? '오늘의 할 일' : '한 일'}
           </h3>
-          <p className="text-2xl-bold text-green-500">20개</p>
+          <p className="text-2xl-bold text-green-500">{value}개</p>
         </div>
 
         {/* 아이콘 */}
