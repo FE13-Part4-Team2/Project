@@ -1,7 +1,7 @@
 import { getGroupInvitation } from '@/lib/apis/group';
 import { toast } from 'react-toastify';
 import { INVITE_SUCCESS } from '@/constants/successMessage';
-import { INVITE_FAILD } from '@/constants/errorMessage';
+import { INVITE_FAILED } from '@/constants/errorMessage';
 
 export const handleInvite = async (groupId: number) => {
   try {
@@ -14,7 +14,7 @@ export const handleInvite = async (groupId: number) => {
       toast.success(INVITE_SUCCESS);
     }
   } catch (error) {
-    console.log(INVITE_FAILD, error);
-    toast.error(INVITE_FAILD);
+    console.log(INVITE_FAILED, error);
+    toast.error(INVITE_FAILED);
   }
 };

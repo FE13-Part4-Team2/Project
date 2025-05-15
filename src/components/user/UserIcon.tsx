@@ -4,15 +4,15 @@ import clsx from 'clsx';
 
 interface UserIconProps {
   image: string | null;
-  sizeClass: string; // 아이콘 외부 원형 크기
-  size: string; // 이미지 예상 크기 (단위 포함 필수, ex: '32px')
+  sizeClass?: string; // 아이콘 외부 원형 크기
+  size?: string; // 이미지 예상 크기
   iconClass?: string;
 }
 
 export default function UserIcon({
   image,
-  sizeClass,
-  size,
+  sizeClass = 'size-8',
+  size = '32px',
   iconClass = 'size-6',
 }: UserIconProps) {
   return (
