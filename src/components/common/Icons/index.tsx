@@ -16,9 +16,12 @@ import Comment from '@/assets/icons/comment.svg';
 import Coworkers from '@/assets/icons/coworkers.svg';
 import Done from '@/assets/icons/done.svg';
 import Edit from '@/assets/icons/edit.svg';
+import Expansion from '@/assets/icons/expansion.svg';
 import Gear from '@/assets/icons/gear.svg';
 import GnbMenu from '@/assets/icons/gnb_menu.svg';
+import Heart from '@/assets/icons/heart.svg';
 import Img from '@/assets/icons/img.svg';
+import KakaoLogin from '@/assets/icons/kakao_login.svg';
 import List from '@/assets/icons/list.svg';
 import Logo from '@/assets/icons/logo.svg';
 import Member from '@/assets/icons/member.svg';
@@ -36,8 +39,6 @@ import User from '@/assets/icons/user.svg';
 import VisibilityOff from '@/assets/icons/visibility_off.svg';
 import VisibilityOn from '@/assets/icons/visibility_on.svg';
 import X from '@/assets/icons/x.svg';
-import Expansion from '@/assets/icons/expansion.svg';
-import KakaoLogin from '@/assets/icons/kakao_login.svg';
 
 interface IconProps {
   size?: number;
@@ -176,6 +177,15 @@ const Icons = {
     />
   ),
 
+  ExpansionIcon: ({ size = 24, className, onClick }: IconProps) => (
+    <Expansion
+      width={size}
+      height={size}
+      className={`text-slate-500 ${className}`}
+      onClick={onClick}
+    />
+  ),
+
   GearIcon: ({ size = 24, className, onClick }: IconProps) => (
     <Gear width={size} height={size} className={className} onClick={onClick} />
   ),
@@ -189,8 +199,16 @@ const Icons = {
     />
   ),
 
+  HeartIcon: ({ size = 16, className, onClick }: IconProps) => (
+    <Heart width={size} height={size} className={className} onClick={onClick} />
+  ),
+
   ImgIcon: ({ size = 24, className, onClick }: IconProps) => (
     <Img width={size} height={size} className={className} onClick={onClick} />
+  ),
+
+  KakaoLoginIcon: ({ size = 42, onClick }: IconProps) => (
+    <KakaoLogin width={size} height={size} onClick={onClick} />
   ),
 
   ListIcon: ({ size = 24, className, onClick }: IconProps) => (
@@ -324,19 +342,6 @@ const Icons = {
       className={`text-slate-500 ${className}`}
       onClick={onClick}
     />
-  ),
-
-  ExpansionIcon: ({ size = 24, className, onClick }: IconProps) => (
-    <Expansion
-      width={size}
-      height={size}
-      className={`text-slate-500 ${className}`}
-      onClick={onClick}
-    />
-  ),
-
-  KakaoLoginIcon: ({ size = 42, onClick }: IconProps) => (
-    <KakaoLogin width={size} height={size} onClick={onClick} />
   ),
 };
 

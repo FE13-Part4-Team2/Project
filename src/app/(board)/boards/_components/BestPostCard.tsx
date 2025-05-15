@@ -1,6 +1,7 @@
 'use client';
 import Image from 'next/image';
 import WriterInfo from '@/components/user/WriterInfo';
+import IconRenderer from '@/components/common/Icons/IconRenderer';
 import Link from 'next/link';
 import { ROUTES } from '@/constants/routes';
 import { useState } from 'react';
@@ -67,12 +68,7 @@ export default function BestPostCard({
         <div className="item-center flex justify-between">
           <WriterInfo nickname={nickname} image={writerImage ?? null} />
           <div className="flex items-center justify-center gap-1">
-            <Image
-              src="/icons/heart_icon.svg"
-              width={16}
-              height={16}
-              alt="좋아요 아이콘"
-            />
+            <IconRenderer name="HeartIcon" />
             <p className="text-xs-regular text-slate-400">{likes}</p>
           </div>
         </div>

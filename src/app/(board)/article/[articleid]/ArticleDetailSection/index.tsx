@@ -3,6 +3,7 @@ import ArticleMenu from '@/components/article/ArticleMenu';
 import WriterInfo from '@/components/user/WriterInfo';
 import DateInfo from '@/app/(board)/article/[articleid]/ArticleDetailSection/DateInfo';
 import CommentInfo from '@/app/(board)/article/[articleid]/ArticleDetailSection/CommentInfo';
+import LikeButton from '@/app/(board)/article/[articleid]/ArticleDetailSection/LikeButton';
 
 interface ArticleDetailSectionProps extends ArticleResponse {
   userId: number;
@@ -42,7 +43,7 @@ export default function ArticleDetailSection({
             {commentCount !== undefined && (
               <CommentInfo commentCount={commentCount} />
             )}
-            <div>좋아요</div>
+            <LikeButton />
           </div>
         </div>
       </div>
