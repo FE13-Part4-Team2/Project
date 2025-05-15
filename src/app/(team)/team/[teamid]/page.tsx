@@ -6,6 +6,7 @@ import TaskListBarList from '@/app/(team)/team/_components/TaskListBarList';
 import ReportBanner from '@/app/(team)/team/_components/ReportBanner';
 import MemberList from '@/app/(team)/team/_components/MemberList';
 import AddButton from '@/app/(team)/team/_components/AddButton';
+import { calculateProgress } from '@/utils/calculateProgress';
 import { teamHeaderStyle } from '@/app/(team)/team/_components/styles';
 
 export default async function TeamPage({
@@ -23,25 +24,11 @@ export default async function TeamPage({
 
   const allTasks =
     groupData?.taskLists?.flatMap((taskList) => taskList.tasks ?? []) ?? [];
-
-  const toDateOnly = (dateString: string) =>
-    new Date(dateString).toISOString().split('T')[0];
-  const today = new Date().toISOString().split('T')[0];
-  const todaysTasks = allTasks.filter((task) => {
-    return task.date && toDateOnly(task.date) === today; // task.date의 시간 탈락시킨 후 연월일로만 비교
-  });
-  const doneTasks = todaysTasks.filter((task) => task.doneAt !== null);
-
-  const total = todaysTasks.length;
-  const done = doneTasks.length;
-  const progress = total === 0 ? 0 : Math.round((done / total) * 100);
+  const { total, done, progress } = calculateProgress(allTasks);
 
   if (!groupData) {
     notFound();
   }
-
-  console.log(todaysTasks.length, '오늘의 할 일 목록');
-  console.log(doneTasks.length, '오늘의 완료 목록');
 
   return (
     <div className="flex w-full flex-col items-center p-6">
