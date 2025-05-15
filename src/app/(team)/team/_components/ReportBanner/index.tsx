@@ -29,7 +29,9 @@ const ReportBanner = ({ progress, total, done }: ReportBannerProps) => {
               <br />
               진행 상황
             </p>
-            <p className="tablet:hidden text-md-medium block">오늘</p>
+            <p className="tablet:hidden text-md-medium block text-center">
+              오늘
+            </p>
             <p className={`${progressPercentStyle}`}>{progress}%</p>
           </div>
         </div>

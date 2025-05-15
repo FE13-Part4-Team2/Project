@@ -1,4 +1,5 @@
 import IconRenderer from '@/components/common/Icons/IconRenderer';
+import CircularProgress from '@/app/(team)/team/_components/TaskListBarList/CircularProgress';
 import {
   progressBadgeContainerStyle,
   progressBadgeTextStyle,
@@ -11,13 +12,14 @@ interface ProgressBadgeProps {
 
 const ProgressBadge = ({ total, done }: ProgressBadgeProps) => {
   const isDone = total === done;
+  const percentage = total === 0 ? 0 : Math.round((done / total) * 100);
 
   return (
     <div className={`${progressBadgeContainerStyle}`}>
       {isDone ? (
-        <IconRenderer name="DoneIcon" size={14} />
+        <IconRenderer name="DoneIcon" size={14} className="text-green-700" />
       ) : (
-        <IconRenderer name="ArrowIcon" size={14} />
+        <CircularProgress percentage={percentage} />
       )}
       <p className={`${progressBadgeTextStyle}`}>
         {done}/{total}
