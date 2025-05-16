@@ -76,7 +76,7 @@ export default function EditTeamPage() {
       },
     });
     router.replace(ROUTES.TEAM(Number(teamid)));
-    router.push(ROUTES.TEAM(Number(teamid)));
+    router.refresh();
   };
 
   return (
