@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { useModalStore } from '@/store/useModalStore';
 import { useClosePopup } from '@/hooks/useClosePopup';
 import { useLockBackgroundScroll } from '@/hooks/useLockBackgroundScroll';
@@ -17,18 +17,29 @@ export default function Modal() {
     closeModal,
   } = useModalStore();
 
+  const formId = button?.formId;
   const modalRef = useRef<HTMLDivElement>(null);
   const isModalOpen = Boolean(title || content);
+
+  const isSubmittedRef = useRef(false); // 🔁 버튼 클릭 플래그
 
   useClosePopup(modalRef, closeModal);
   useLockBackgroundScroll(isModalOpen);
 
-  if (!isModalOpen) return null;
+  // ✅ requestBody가 설정되면 onRequest 실행
+  useEffect(() => {
+    if (isSubmittedRef.current && requestBody) {
+      button?.onRequest?.(requestBody);
+      closeModal();
+      isSubmittedRef.current = false; // 초기화
+    }
+  }, [requestBody]);
 
   const handleRequest = () => {
-    button?.onRequest?.(requestBody);
-    closeModal();
+    isSubmittedRef.current = true; // 버튼 클릭됨 → form 제출을 기다림
   };
+
+  if (!isModalOpen) return null;
 
   return (
     <div className="tablet:items-center fixed inset-0 z-80 flex h-full w-full items-end justify-center bg-black/50">
@@ -82,7 +93,11 @@ export default function Modal() {
                 )}
               </div>
             )}
-            {content && <div className="overflow-y-auto">{content}</div>}
+            {content && (
+              <div className="overflow-y-auto">
+                {typeof content === 'function' ? content() : content}
+              </div>
+            )}
           </div>
         </div>
         <div className="flex gap-2">
@@ -99,12 +114,14 @@ export default function Modal() {
             </Button>
           )}
           <Button
+            {...(formId ? { form: formId } : {})}
+            // type="submit"
             variant="primary"
             styleType={variant === 'danger' ? 'danger' : 'filled'}
             className="flex-1"
             radius="sm"
             size="lg"
-            onClick={handleRequest}
+            onClick={handleRequest} // ✅ 유지됨
             disabled={isButtonDisabled}
           >
             {button?.text}

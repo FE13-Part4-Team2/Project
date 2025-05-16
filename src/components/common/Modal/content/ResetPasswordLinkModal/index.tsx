@@ -1,43 +1,41 @@
 'use client';
 
 import InputBase from '@/components/common/Input/InputBase';
-
-interface ResetPasswordLinkModalProps {
-  value: string;
-  onValueChange: (value: string) => void;
-  onFormSubmit: () => void; // handleFormSubmit
-  submitButton?: {
-    number: 1 | 2;
-    text: string;
-    onRequest: (body?: unknown) => void;
-  };
-}
+import { useModalStore } from '@/store/useModalStore';
+import { validateEmail } from '@/utils/inputValidation';
+import { useRef } from 'react';
 
 // content
-export default function ResetPasswordLinkModal({
-  value,
-  onValueChange,
-  onFormSubmit,
-  submitButton,
-}: ResetPasswordLinkModalProps) {
-  console.log('modal 렌더링됨');
+export default function ResetPasswordLinkModal() {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const { setRequestBody } = useModalStore();
+
+  // 이메일 유효성 판단, 요청 보내고, toast 띄우기, 모달 닫기
+  const handleFormSubmit = () => {
+    const email = inputRef.current?.value.trim();
+    console.log('email', email); // x
+
+    if (!email) return;
+
+    if (validateEmail(email)) {
+      setRequestBody({ email });
+      console.log('if'); // x 
+    }
+  };
+
   return (
     <form
+      id="reset-password-form"
       onSubmit={(e) => {
-        e.preventDefault(); // form 이벤트 기본 동작은 자식이 처리
-        onFormSubmit(); // 부모 handleFormSubmit 호출
-        console.log('자식이 폼 제출');
+        e.preventDefault();
+        handleFormSubmit();
       }}
     >
       <InputBase
+        ref={inputRef}
         placeholder="이메일을 입력하세요."
-        value={value}
-        onChange={(e) => {
-          onValueChange(e.target.value);
-          console.log(e.target.value);
-        }}
+        defaultValue="" // 초기값 설정
       />
-      <button type="submit">{submitButton}</button>
     </form>
   );
 }
