@@ -44,7 +44,7 @@ export default function ArticleCommentSection({
   }
 
   return (
-    <div>
+    <div className="flex flex-col gap-4">
       {data?.pages.map((page, pageIdx) =>
         page?.list.map((item, itemIdx) => {
           const isLast =
