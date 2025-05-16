@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import clientFetcher from '@/lib/client/fetcher.client';
-import { patchGroupById } from '@/lib/apis/group';
+import { patchGroupById, deleteGroupById } from '@/lib/apis/group';
 import postImage from '@/lib/apis/uploadImage';
 import { UserGroupResponse } from '@/lib/apis/user/type';
 import { ROUTES } from '@/constants/routes';
@@ -56,15 +56,29 @@ export default function EditTeamPage() {
     router.push(ROUTES.TEAM(Number(teamid)));
   };
 
+  const handleDelete = async () => {
+    // 삭제 모달
+    await deleteGroupById({ groupId: Number(teamid) });
+    router.push(ROUTES.HOME);
+  };
+
   return (
     <div className="flex h-full w-full justify-center pt-50">
-      <TeamProfileForm
-        existingNames={existingNames}
-        initialName={initialName}
-        initialPreview={initialPreview}
-        submitLabel="팀 수정하기"
-        onSubmit={handleEdit}
-      />
+      <div className="flex flex-col items-center">
+        <TeamProfileForm
+          existingNames={existingNames}
+          initialName={initialName}
+          initialPreview={initialPreview}
+          submitLabel="팀 수정하기"
+          onSubmit={handleEdit}
+        />
+        <button
+          onClick={handleDelete}
+          className="mt-6 text-red-500 hover:underline"
+        >
+          팀 삭제하기
+        </button>
+      </div>
     </div>
   );
 }
