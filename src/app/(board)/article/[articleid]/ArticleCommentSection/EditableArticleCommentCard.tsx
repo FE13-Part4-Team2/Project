@@ -58,20 +58,21 @@ export default function EditableArticleCommentCard({
           <button
             type="button"
             onClick={exitCommentEditMode}
-            className="text-md-semibold px-3 py-1 text-slate-500"
+            className="text-md-semibold tablet:text-lg-semibold px-3 py-1 text-slate-500"
           >
             취소
           </button>
           <Button
             variant="secondary"
             styleType="outlined"
-            className="w-[74px]"
+            className="tablet:min-h-12 tablet:min-w-[100px] min-h-8 min-w-[74px]"
             radius="sm"
-            size="sm"
             onClick={() => handleEditComment.mutate(editedComment)}
             disabled={!isEditValid}
           >
-            <div className="text-md-semibold">수정하기</div>
+            <div className="text-md-semibold tablet:text-lg-semibold">
+              수정하기
+            </div>
           </Button>
         </div>
       </div>
