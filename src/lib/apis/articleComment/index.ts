@@ -1,4 +1,5 @@
 import clientFetcher from '@/lib/client/fetcher.client';
+import serverFetcher from '@/lib/server/fetcher.server';
 import {
   ArticleCommentBody,
   ArticleCommentListResponse,
@@ -28,14 +29,14 @@ export async function getCommentsByArticleId({
 }: {
   articleId: number;
   limit: number;
-  cursor?: number;
+  cursor?: number | null;
 }): Promise<ArticleCommentListResponse | null> {
   let query = `limit=${limit}`;
   if (cursor) {
     query += `&cursor=${cursor}`;
   }
 
-  return clientFetcher<undefined, ArticleCommentListResponse>({
+  return serverFetcher<undefined, ArticleCommentListResponse>({
     url: `/articles/${articleId}/comments?${query}`,
     method: 'GET',
   });
