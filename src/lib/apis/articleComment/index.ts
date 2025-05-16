@@ -10,14 +10,17 @@ import {
 export async function postCommentByArticleId({
   articleId,
   body,
+  tag,
 }: {
   articleId: number;
   body: ArticleCommentBody;
+  tag?: string[];
 }): Promise<ArticleCommentResponse | null> {
-  return clientFetcher<ArticleCommentBody, ArticleCommentResponse>({
-    url: `articles/${articleId}/comments`,
+  return serverFetcher<ArticleCommentBody, ArticleCommentResponse>({
+    url: `/articles/${articleId}/comments`,
     method: 'POST',
     body,
+    tag,
   });
 }
 
