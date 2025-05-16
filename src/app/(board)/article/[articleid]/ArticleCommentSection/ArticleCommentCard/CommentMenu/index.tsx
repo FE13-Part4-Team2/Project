@@ -1,8 +1,9 @@
 import Cookies from 'js-cookie';
 import { useState, useEffect } from 'react';
-import { deleteTaskComment } from '@/lib/apis/comment';
+import { deleteCommentByArticleId } from '@/lib/apis/articleComment';
 import DropDown from '@/components/common/Dropdown';
 import CommentMenuButton from '@/app/(team)/team/[teamid]/task/[taskid]/_components/TaskCommentSection/TaskCommentCard/CommentMenu/CommentMenuButton';
+import { useQueryClient } from '@tanstack/react-query';
 
 export default function CommentMenu({
   commentId,
@@ -14,6 +15,7 @@ export default function CommentMenu({
   // enterCommentEditMode: () => void;
 }) {
   const [userId, setUserId] = useState<number | null>(null);
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     const id = Cookies.get('userId') || undefined;
@@ -24,23 +26,24 @@ export default function CommentMenu({
 
   const handleDeleteComment = async () => {
     try {
-      await deleteTaskComment({ commentId, tag: ['task-comment'] });
+      await deleteCommentByArticleId({ commentId, tag: ['article'] });
+      queryClient.invalidateQueries({ queryKey: ['article-comment'] });
     } catch (error) {
-      console.error('Failed to delete the comment on the task :', error);
+      console.error('Failed to delete the comment on the article :', error);
     }
   };
 
-  return (
-    isWriter && (
-      <DropDown>
-        <DropDown.Trigger>
-          <CommentMenuButton />
-        </DropDown.Trigger>
-        <DropDown.Menu align="right">
-          <DropDown.Item onClick={handleDeleteComment}>수정하기</DropDown.Item>
-          <DropDown.Item onClick={handleDeleteComment}>삭제하기</DropDown.Item>
-        </DropDown.Menu>
-      </DropDown>
-    )
+  return isWriter ? (
+    <DropDown>
+      <DropDown.Trigger>
+        <CommentMenuButton />
+      </DropDown.Trigger>
+      <DropDown.Menu align="right">
+        <DropDown.Item onClick={handleDeleteComment}>수정하기</DropDown.Item>
+        <DropDown.Item onClick={handleDeleteComment}>삭제하기</DropDown.Item>
+      </DropDown.Menu>
+    </DropDown>
+  ) : (
+    <div className="size-4 shrink-0"></div>
   );
 }

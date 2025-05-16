@@ -19,12 +19,13 @@ export default function ArticleCommentSection({
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status } =
     useInfiniteQuery<ArticleCommentListResponse | null, Error>({
-      queryKey: [articleId],
+      queryKey: ['article-comment'],
       queryFn: ({ pageParam }) =>
         getCommentsByArticleId({
           articleId,
           limit: LIMIT,
           cursor: pageParam as number | null,
+          tag: ['article'],
         }),
       getNextPageParam: (lastPage) => lastPage?.nextCursor,
       initialPageParam: null,

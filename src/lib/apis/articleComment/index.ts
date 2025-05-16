@@ -26,10 +26,12 @@ export async function getCommentsByArticleId({
   articleId,
   limit,
   cursor,
+  tag,
 }: {
   articleId: number;
   limit: number;
   cursor?: number | null;
+  tag?: string[];
 }): Promise<ArticleCommentListResponse | null> {
   let query = `limit=${limit}`;
   if (cursor) {
@@ -39,6 +41,7 @@ export async function getCommentsByArticleId({
   return serverFetcher<undefined, ArticleCommentListResponse>({
     url: `/articles/${articleId}/comments?${query}`,
     method: 'GET',
+    tag,
   });
 }
 
@@ -60,11 +63,14 @@ export async function patchCommentByArticleId({
 // 게시글 댓글 삭제 (DELETE /comments/:commentId)
 export async function deleteCommentByArticleId({
   commentId,
+  tag,
 }: {
   commentId: number;
+  tag?: string[];
 }): Promise<ArticleCommentResponse | null> {
-  return clientFetcher<undefined, ArticleCommentResponse>({
+  return serverFetcher<undefined, ArticleCommentResponse>({
     url: `/comments/${commentId}`,
     method: 'DELETE',
+    tag,
   });
 }
