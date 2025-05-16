@@ -8,6 +8,7 @@ import { getCommentsByArticleId } from '@/lib/apis/articleComment';
 import { toast } from 'react-toastify';
 import ArticleCommentCard from './ArticleCommentCard';
 import EditableArticleCommentCard from '@/app/(board)/article/[articleid]/ArticleCommentSection/EditableArticleCommentCard';
+import Skeleton from '@/components/common/Loading/Skeleton';
 
 const LIMIT = 3;
 
@@ -46,6 +47,24 @@ export default function ArticleCommentSection({
     toast.error('댓글을 불러오지 못했습니다');
   }
 
+  if (status === 'pending') {
+    return (
+      <div className="flex flex-col gap-4">
+        {[...Array(3)].map((_, idx) => (
+          <div
+            key={idx}
+            className="flex flex-col gap-2 rounded-lg bg-slate-800 p-4"
+          >
+            <Skeleton width="60%" height="1rem" />
+            <Skeleton width="80%" height="1rem" />
+            <Skeleton width="70%" height="1rem" />
+            <Skeleton width="40%" height="1rem" />
+          </div>
+        ))}
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col gap-4">
       {data?.pages.map((page, pageIdx) =>
@@ -69,7 +88,6 @@ export default function ArticleCommentSection({
           );
         })
       )}
-
       {isFetchingNextPage && <p>Loading...</p>}
     </div>
   );
