@@ -8,6 +8,7 @@ import postImage from '@/lib/apis/uploadImage';
 import { UserGroupResponse } from '@/lib/apis/user/type';
 import { ROUTES } from '@/constants/routes';
 import TeamProfileForm from '@/app/(team)/_components/TeamProfileForm';
+import { useModalStore } from '@/store/useModalStore';
 
 export default function EditTeamPage() {
   const router = useRouter();
@@ -15,6 +16,28 @@ export default function EditTeamPage() {
   const [existingNames, setExistingNames] = useState<string[]>([]);
   const [initialName, setInitialName] = useState('');
   const [initialPreview, setInitialPreview] = useState('');
+
+  const { openModal } = useModalStore();
+
+  const handleDelete = async () => {
+    await deleteGroupById({ groupId: Number(teamid) });
+    router.push(ROUTES.HOME);
+  };
+
+  const openDeleteTaskModal = () => {
+    openModal({
+      variant: 'danger',
+      title: `'${initialName}'\n팀을 정말 삭제하시겠어요?`,
+      description: '삭제 후에는 되돌릴 수 없습니다.',
+      button: {
+        number: 2,
+        text: '삭제하기',
+        onRequest: () => {
+          handleDelete();
+        },
+      },
+    });
+  };
 
   useEffect(() => {
     clientFetcher<undefined, UserGroupResponse[]>({
@@ -52,14 +75,8 @@ export default function EditTeamPage() {
         ...(imageUrl ? { image: imageUrl } : {}),
       },
     });
-
+    router.replace(ROUTES.TEAM(Number(teamid)));
     router.push(ROUTES.TEAM(Number(teamid)));
-  };
-
-  const handleDelete = async () => {
-    // 삭제 모달
-    await deleteGroupById({ groupId: Number(teamid) });
-    router.push(ROUTES.HOME);
   };
 
   return (
@@ -73,7 +90,7 @@ export default function EditTeamPage() {
           onSubmit={handleEdit}
         />
         <button
-          onClick={handleDelete}
+          onClick={openDeleteTaskModal}
           className="mt-6 text-red-500 hover:underline"
         >
           팀 삭제하기
