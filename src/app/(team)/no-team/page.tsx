@@ -1,27 +1,34 @@
+'use client';
 import Image from 'next/image';
 import Button from '@/components/common/Button';
+import { useRouter } from 'next/navigation';
+import { ROUTES } from '@/constants/routes';
 
 export default function NoTeamPage() {
+  const router = useRouter();
+
   return (
-    <div className="flex h-full max-h-[1080px] w-full flex-col items-center justify-center gap-20">
+    <div className="tablet:p-[120px] tablet:gap-20 flex h-[calc(100vh-60px)] w-full flex-col items-center justify-center gap-12 p-8">
       <Image
         src="/image/no_team.png"
         alt="인부 3명이 아이템을 들고 가는 배경 일러스트"
         width={810}
         height={255}
         className="object-contain"
+        priority
       />
 
       <div>
-        <p className="laptop:text-lg-medium tablet:text-md-medium text-center text-slate-500">
+        <p className="laptop:text-lg-medium text-md-medium text-center text-slate-500">
           아직 소속된 팀이 없습니다.
           <br />
           팀을 생성하거나 팀에 참여해 보세요.
         </p>
       </div>
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col items-center gap-4">
         <Button
+          onClick={() => router.push(ROUTES.TEAM_ADD)}
           variant="primary"
           styleType="filled"
           radius="sm"
@@ -30,6 +37,7 @@ export default function NoTeamPage() {
           팀 생성하기
         </Button>
         <Button
+          onClick={() => router.push(ROUTES.TEAM_JOIN)}
           variant="secondary"
           styleType="outlined"
           radius="sm"
