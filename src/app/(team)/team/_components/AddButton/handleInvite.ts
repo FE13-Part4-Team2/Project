@@ -1,7 +1,6 @@
 import { getGroupInvitation } from '@/lib/apis/group';
 import { toast } from 'react-toastify';
-import { INVITE_SUCCESS } from '@/constants/successMessage';
-import { INVITE_FAILED } from '@/constants/errorMessage';
+import { TOAST_MESSAGES } from '@/constants/messages';
 
 export const handleInvite = async (groupId: number) => {
   try {
@@ -11,10 +10,10 @@ export const handleInvite = async (groupId: number) => {
 
     if (inviteUrl) {
       await navigator.clipboard.writeText(inviteUrl);
-      toast.success(INVITE_SUCCESS);
+      toast.success(TOAST_MESSAGES.clipboard.copyLinkSuccess);
     }
   } catch (error) {
-    console.log(INVITE_FAILED, error);
-    toast.error(INVITE_FAILED);
+    console.log('링크 복사 실패', error);
+    toast.error(TOAST_MESSAGES.clipboard.copyLinkFail);
   }
 };

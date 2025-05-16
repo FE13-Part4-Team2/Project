@@ -10,6 +10,8 @@ import {
   memberCardItemWrapperStyle,
   memberCardTextWrapperStyle,
 } from '@/app/(team)/team/_components/MemberList/styles';
+import { toast } from 'react-toastify';
+import { TOAST_MESSAGES } from '@/constants/messages';
 
 interface MemberCardProps {
   group: GroupResponse;
@@ -32,17 +34,23 @@ const MemberCard = ({
   const openMemberProfileModal = () => {
     openModal(
       {
-        title: (
-          <UserIcon
-            image={userImage}
-            sizeClass="size-[54px]"
-            imageSize="54px"
-            iconClass="size-10"
-          />
-        ),
-        button: { number: 1, text: '이메일 복사하기', onRequest: () => {} },
+        button: {
+          number: 1,
+          text: '이메일 복사하기',
+          onRequest: () => {
+            navigator.clipboard
+              .writeText(email)
+              .then(() => {
+                toast.success(TOAST_MESSAGES.clipboard.copyEmailSuccess);
+              })
+              .catch((error) => {
+                console.log('이메일 복사 실패', error);
+                toast.error(TOAST_MESSAGES.clipboard.copyEmailFail);
+              });
+          },
+        },
       },
-      <MemberProfileModal />
+      <MemberProfileModal image={userImage} name={name} email={email} />
     );
   };
 
