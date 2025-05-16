@@ -1,7 +1,7 @@
 import { ArticleCommentResponse } from '@/lib/apis/articleComment/type';
 import WriterInfo from '@/components/user/WriterInfo';
-import DateInfo from '@/app/(board)/article/[articleid]/ArticleCommentSection/ArticleCommentCard/DateInfo';
-import CommentMenu from '@/app/(board)/article/[articleid]/ArticleCommentSection/ArticleCommentCard/CommentMenu';
+import DateInfo from '@/app/(board)/article/[articleid]/ArticleCommentSection/ArticleCommentList/ArticleCommentCard/DateInfo';
+import CommentMenu from '@/app/(board)/article/[articleid]/ArticleCommentSection/ArticleCommentList/ArticleCommentCard/CommentMenu';
 
 export default function ArticleCommentCard({
   id,
