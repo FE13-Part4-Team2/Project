@@ -58,6 +58,7 @@ export default function ForgotPasswordButton({ ...props }) {
               value={email}
               onValueChange={setEmail}
               onFormSubmit={handleFormSubmit}
+              submitButton={options.button}
             /> // content
           );
         }}

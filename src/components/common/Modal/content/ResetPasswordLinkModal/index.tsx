@@ -6,6 +6,11 @@ interface ResetPasswordLinkModalProps {
   value: string;
   onValueChange: (value: string) => void;
   onFormSubmit: () => void; // handleFormSubmit
+  submitButton: {
+    number: 1 | 2;
+    text: string;
+    onRequest: (body?: unknown) => void;
+  };
 }
 
 // content
@@ -13,6 +18,7 @@ export default function ResetPasswordLinkModal({
   value,
   onValueChange,
   onFormSubmit,
+  submitButton,
 }: ResetPasswordLinkModalProps) {
   console.log('modal 렌더링됨');
   return (
@@ -31,7 +37,7 @@ export default function ResetPasswordLinkModal({
           console.log(e.target.value);
         }}
       />
-      <button type="submit">제출</button>
+      <button type="submit">{submitButton}</button>
     </form>
   );
 }
