@@ -6,7 +6,7 @@ interface ResetPasswordLinkModalProps {
   value: string;
   onValueChange: (value: string) => void;
   onFormSubmit: () => void; // handleFormSubmit
-  submitButton: {
+  submitButton?: {
     number: 1 | 2;
     text: string;
     onRequest: (body?: unknown) => void;
