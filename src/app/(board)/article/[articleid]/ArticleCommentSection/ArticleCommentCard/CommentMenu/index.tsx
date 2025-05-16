@@ -1,18 +1,18 @@
 import Cookies from 'js-cookie';
 import { useState, useEffect } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
 import { deleteCommentByArticleId } from '@/lib/apis/articleComment';
 import DropDown from '@/components/common/Dropdown';
 import CommentMenuButton from '@/app/(team)/team/[teamid]/task/[taskid]/_components/TaskCommentSection/TaskCommentCard/CommentMenu/CommentMenuButton';
-import { useQueryClient } from '@tanstack/react-query';
 
 export default function CommentMenu({
   commentId,
   writerId,
-  // enterCommentEditMode,
+  enterCommentEditMode,
 }: {
   commentId: number;
   writerId: number;
-  // enterCommentEditMode: () => void;
+  enterCommentEditMode: () => void;
 }) {
   const [userId, setUserId] = useState<number | null>(null);
   const queryClient = useQueryClient();
@@ -39,7 +39,7 @@ export default function CommentMenu({
         <CommentMenuButton />
       </DropDown.Trigger>
       <DropDown.Menu align="right">
-        <DropDown.Item onClick={handleDeleteComment}>수정하기</DropDown.Item>
+        <DropDown.Item onClick={enterCommentEditMode}>수정하기</DropDown.Item>
         <DropDown.Item onClick={handleDeleteComment}>삭제하기</DropDown.Item>
       </DropDown.Menu>
     </DropDown>

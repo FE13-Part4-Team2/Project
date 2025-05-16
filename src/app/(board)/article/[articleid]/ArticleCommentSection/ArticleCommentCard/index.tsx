@@ -8,12 +8,21 @@ export default function ArticleCommentCard({
   content,
   createdAt,
   writer,
-}: ArticleCommentResponse) {
+  enterCommentEditMode,
+}: ArticleCommentResponse & {
+  enterCommentEditMode: () => void;
+}) {
   return (
     <div className="tablet:px-6 tablet:py-5 flex flex-col gap-8 rounded-lg bg-slate-800 p-4">
       <div className="flex justify-between">
         <div className="text-md-regular tablet:text-lg-regular">{content}</div>
-        {writer && <CommentMenu commentId={id} writerId={writer.id} />}
+        {writer && (
+          <CommentMenu
+            enterCommentEditMode={enterCommentEditMode}
+            commentId={id}
+            writerId={writer.id}
+          />
+        )}
       </div>
       <div className="flex items-center gap-4">
         {writer && <WriterInfo {...writer} />}

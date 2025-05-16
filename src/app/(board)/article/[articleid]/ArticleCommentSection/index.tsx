@@ -1,12 +1,13 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useIntersection } from '@/hooks/useIntersection';
 import { ArticleCommentListResponse } from '@/lib/apis/articleComment/type';
 import { getCommentsByArticleId } from '@/lib/apis/articleComment';
 import { toast } from 'react-toastify';
 import ArticleCommentCard from './ArticleCommentCard';
+import EditableArticleCommentCard from '@/app/(board)/article/[articleid]/ArticleCommentSection/EditableArticleCommentCard';
 
 const LIMIT = 3;
 
@@ -15,6 +16,7 @@ export default function ArticleCommentSection({
 }: {
   articleId: number;
 }) {
+  const [editingCommentId, setEditingCommentId] = useState<number | null>(null);
   const observerRef = useRef<HTMLDivElement | null>(null);
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status } =
@@ -51,9 +53,18 @@ export default function ArticleCommentSection({
           const isLast =
             pageIdx === data.pages.length - 1 &&
             itemIdx === page.list.length - 1;
-          return (
+          return editingCommentId === item.id ? (
+            <EditableArticleCommentCard
+              key={item.id}
+              {...item}
+              exitCommentEditMode={() => setEditingCommentId(null)}
+            />
+          ) : (
             <div key={item.id} ref={isLast ? observerRef : null}>
-              <ArticleCommentCard {...item} />
+              <ArticleCommentCard
+                {...item}
+                enterCommentEditMode={() => setEditingCommentId(item.id)}
+              />
             </div>
           );
         })
