@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import InputBase from '@/components/common/Input/InputBase';
 import Button from '@/components/common/Button';
 import IconRenderer from '@/components/common/Icons/IconRenderer';
@@ -25,6 +25,11 @@ export default function TeamProfileForm({
   const [preview, setPreview] = useState(initialPreview);
   const [file, setFile] = useState<File>();
   const [nameError, setNameError] = useState(false);
+
+  useEffect(() => {
+    setName(initialName);
+    setPreview(initialPreview);
+  }, [initialName, initialPreview]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selected = e.target.files?.[0];
