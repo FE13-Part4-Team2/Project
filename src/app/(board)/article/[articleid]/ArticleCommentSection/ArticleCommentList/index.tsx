@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 import ArticleCommentCard from './ArticleCommentCard';
 import EditableArticleCommentCard from '@/app/(board)/article/[articleid]/ArticleCommentSection/ArticleCommentList/EditableArticleCommentCard';
 import Skeleton from '@/components/common/Loading/Skeleton';
+import Spinner from '@/components/common/Loading/Spinner';
 
 const LIMIT = 3;
 
@@ -88,7 +89,11 @@ export default function ArticleCommentList({
           );
         })
       )}
-      {isFetchingNextPage && <p>Loading...</p>}
+      {isFetchingNextPage && (
+        <div className="flex justify-center">
+          <Spinner />
+        </div>
+      )}
     </div>
   );
 }
