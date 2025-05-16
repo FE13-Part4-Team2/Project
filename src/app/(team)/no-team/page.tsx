@@ -1,12 +1,9 @@
-'use client';
+import Link from 'next/link';
 import Image from 'next/image';
 import Button from '@/components/common/Button';
-import { useRouter } from 'next/navigation';
 import { ROUTES } from '@/constants/routes';
 
 export default function NoTeamPage() {
-  const router = useRouter();
-
   return (
     <div className="tablet:p-[120px] tablet:gap-20 flex h-[calc(100vh-60px)] w-full flex-col items-center justify-center gap-12 p-8">
       <Image
@@ -27,24 +24,26 @@ export default function NoTeamPage() {
       </div>
 
       <div className="flex flex-col items-center gap-4">
-        <Button
-          onClick={() => router.push(ROUTES.TEAM_ADD)}
-          variant="primary"
-          styleType="filled"
-          radius="sm"
-          className="text-lg-semibold h-[48px] w-[186px] text-white"
-        >
-          팀 생성하기
-        </Button>
-        <Button
-          onClick={() => router.push(ROUTES.TEAM_JOIN)}
-          variant="secondary"
-          styleType="outlined"
-          radius="sm"
-          className="text-lg-semibold h-[48px] w-[186px] text-green-700"
-        >
-          팀 참여하기
-        </Button>
+        <Link href={ROUTES.TEAM_ADD}>
+          <Button
+            variant="primary"
+            styleType="filled"
+            radius="sm"
+            className="text-lg-semibold h-[48px] w-[186px] text-white"
+          >
+            팀 생성하기
+          </Button>
+        </Link>
+        <Link href={ROUTES.TEAM_JOIN}>
+          <Button
+            variant="secondary"
+            styleType="outlined"
+            radius="sm"
+            className="text-lg-semibold h-[48px] w-[186px] text-green-700"
+          >
+            팀 참여하기
+          </Button>
+        </Link>
       </div>
     </div>
   );
