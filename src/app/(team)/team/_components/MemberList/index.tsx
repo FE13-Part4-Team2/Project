@@ -26,7 +26,7 @@ const MemberList = ({ group, items, userId }: MemberListProps) => {
 
   const handleMemberDelete = async (memberId: number) => {
     try {
-      await deleteGroupMemberById({ groupId, memberId });
+      await deleteGroupMemberById({ groupId, memberId, tag: ['group'] });
       setMemberList(
         (prev) => prev.filter((items) => items.userId !== memberId) // delete 함수에 전달하지 않은 id만 남김
       );
