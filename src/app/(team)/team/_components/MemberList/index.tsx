@@ -2,21 +2,40 @@
 import MemberCard from '@/app/(team)/team/_components/MemberList/MemberCard';
 import Pagination from '@/app/(team)/team/_components/TaskListBarList/Pagination';
 import { useState, useEffect } from 'react';
-import { GroupMemberResponse } from '@/lib/apis/group/type';
+import { GroupResponse, GroupMemberResponse } from '@/lib/apis/group/type';
+import { deleteGroupMemberById } from '@/lib/apis/group';
 import {
   memberListContainerStyle,
   memberListWrapperStyle,
 } from '@/app/(team)/team/_components/MemberList/styles';
+import { toast } from 'react-toastify';
+import { TOAST_MESSAGES } from '@/constants/messages';
 
 interface MemberListProps {
+  group: GroupResponse;
   items: GroupMemberResponse[];
-  groupId: number;
   userId: number;
 }
 
-const MemberList = ({ items, groupId, userId }: MemberListProps) => {
+const MemberList = ({ group, items, userId }: MemberListProps) => {
+  const groupId = group.id;
+
+  const [memberList, setMemberList] = useState(items);
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(6);
+
+  const handleMemberDelete = async (memberId: number) => {
+    try {
+      await deleteGroupMemberById({ groupId, memberId });
+      setMemberList(
+        (prev) => prev.filter((items) => items.userId !== memberId) // delete 함수에 전달하지 않은 id만 남김
+      );
+      toast.success(TOAST_MESSAGES.member.deleteSuccess);
+    } catch (error) {
+      console.error('멤버 삭제 실패', error);
+      toast.error(TOAST_MESSAGES.member.deleteFail);
+    }
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -31,7 +50,7 @@ const MemberList = ({ items, groupId, userId }: MemberListProps) => {
   const totalPage = Math.ceil(items.length / perPage);
   const startIndex = (page - 1) * perPage;
   const endIndex = startIndex + perPage;
-  const currentItems = items.slice(startIndex, endIndex);
+  const currentItems = memberList.slice(startIndex, endIndex);
 
   const handlePrev = () => {
     if (page > 1) setPage((prev) => prev - 1);
@@ -51,10 +70,10 @@ const MemberList = ({ items, groupId, userId }: MemberListProps) => {
             members={items}
             name={item.userName}
             email={item.userEmail}
-            groupId={groupId}
             memberId={item.userId}
             userId={Number(userId)}
             profileImage={item.userImage}
+            onDelete={handleMemberDelete}
           />
         ))}
       </div>

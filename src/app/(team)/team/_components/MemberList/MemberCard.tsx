@@ -14,23 +14,23 @@ import { toast } from 'react-toastify';
 import { TOAST_MESSAGES } from '@/constants/messages';
 
 interface MemberCardProps {
-  groupId: number;
   members: GroupMemberResponse[];
   name: string;
   email: string;
   memberId: number;
   userId: number;
   profileImage: string | null;
+  onDelete: (memberId: number, name: string) => void;
 }
 
 const MemberCard = ({
-  groupId,
   members,
   name,
   email,
   memberId,
   userId,
   profileImage,
+  onDelete,
 }: MemberCardProps) => {
   const isAdmin = useIsAdmin({ membersData: members, userId });
 
@@ -88,10 +88,10 @@ const MemberCard = ({
         {/* 메뉴 버튼 */}
         {isAdmin && userId !== memberId && (
           <MemberMenu
-            groupId={groupId}
             members={members}
             memberId={memberId}
             name={name}
+            onDelete={onDelete}
           />
         )}
       </div>
