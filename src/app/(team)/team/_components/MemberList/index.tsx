@@ -24,6 +24,11 @@ const MemberList = ({ group, items, userId }: MemberListProps) => {
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(6);
 
+  const totalPage = Math.ceil(memberList.length / perPage);
+  const startIndex = (page - 1) * perPage;
+  const endIndex = startIndex + perPage;
+  const currentItems = memberList.slice(startIndex, endIndex);
+
   const handleMemberDelete = async (memberId: number) => {
     try {
       await deleteGroupMemberById({ groupId, memberId, tag: ['group'] });
@@ -37,6 +42,7 @@ const MemberList = ({ group, items, userId }: MemberListProps) => {
     }
   };
 
+  // MOBILE: MemberCard 4개씩 표시
   useEffect(() => {
     const handleResize = () => {
       setPerPage(window.innerWidth >= 744 ? 6 : 4);
@@ -47,10 +53,13 @@ const MemberList = ({ group, items, userId }: MemberListProps) => {
     return () => window.addEventListener('resize', handleResize);
   }, []);
 
-  const totalPage = Math.ceil(items.length / perPage);
-  const startIndex = (page - 1) * perPage;
-  const endIndex = startIndex + perPage;
-  const currentItems = memberList.slice(startIndex, endIndex);
+  // 멤버 수 변경 발생 시 페이지 즉시 반영
+  useEffect(() => {
+    const newTotalPage = Math.ceil(memberList.length / perPage);
+    if (page > newTotalPage) {
+      setPage(newTotalPage);
+    }
+  }, [memberList.length, perPage]);
 
   const handlePrev = () => {
     if (page > 1) setPage((prev) => prev - 1);
@@ -67,7 +76,7 @@ const MemberList = ({ group, items, userId }: MemberListProps) => {
           <MemberCard
             key={item.userId}
             {...item}
-            members={items}
+            group={group}
             name={item.userName}
             email={item.userEmail}
             memberId={item.userId}

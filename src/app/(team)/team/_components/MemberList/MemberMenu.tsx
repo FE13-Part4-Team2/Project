@@ -1,13 +1,11 @@
 import TaskMenuButton from '@/components/task/TaskMenu/TaskMenuButton';
 import DropDown from '@/components/common/Dropdown';
 import { useModalStore } from '@/store/useModalStore';
-import { GroupMemberResponse } from '@/lib/apis/group/type';
 
 interface MemberMenuProps {
-  members: GroupMemberResponse[];
   memberId: number;
   name: string;
-  onDelete: (memberId: number, name: string) => void;
+  onDelete: (memberId: number) => void;
 }
 
 const MemberMenu = ({ memberId, name, onDelete }: MemberMenuProps) => {
@@ -20,7 +18,7 @@ const MemberMenu = ({ memberId, name, onDelete }: MemberMenuProps) => {
       button: {
         number: 2,
         text: '확인',
-        onRequest: () => onDelete(memberId, name),
+        onRequest: () => onDelete(memberId),
       },
     });
   };

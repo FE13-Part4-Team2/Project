@@ -4,7 +4,7 @@ import MemberMenu from '@/app/(team)/team/_components/MemberList/MemberMenu';
 import MemberProfileModal from '@/components/common/Modal/content/MemberProfileModal';
 import { useModalStore } from '@/store/useModalStore';
 import { useIsAdmin } from '@/hooks/useIsAdmin';
-import { GroupMemberResponse } from '@/lib/apis/group/type';
+import { GroupResponse } from '@/lib/apis/group/type';
 import {
   memberCardContainerStyle,
   memberCardItemWrapperStyle,
@@ -14,17 +14,17 @@ import { toast } from 'react-toastify';
 import { TOAST_MESSAGES } from '@/constants/messages';
 
 interface MemberCardProps {
-  members: GroupMemberResponse[];
+  group: GroupResponse;
   name: string;
   email: string;
   memberId: number;
   userId: number;
   profileImage: string | null;
-  onDelete: (memberId: number, name: string) => void;
+  onDelete: (memberId: number) => void;
 }
 
 const MemberCard = ({
-  members,
+  group,
   name,
   email,
   memberId,
@@ -32,7 +32,7 @@ const MemberCard = ({
   profileImage,
   onDelete,
 }: MemberCardProps) => {
-  const isAdmin = useIsAdmin({ membersData: members, userId });
+  const isAdmin = useIsAdmin({ membersData: group.members, userId });
 
   const { openModal } = useModalStore();
   const openMemberProfileModal = () => {
@@ -87,12 +87,7 @@ const MemberCard = ({
 
         {/* 메뉴 버튼 */}
         {isAdmin && userId !== memberId && (
-          <MemberMenu
-            members={members}
-            memberId={memberId}
-            name={name}
-            onDelete={onDelete}
-          />
+          <MemberMenu memberId={memberId} name={name} onDelete={onDelete} />
         )}
       </div>
     </div>
