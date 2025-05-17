@@ -84,7 +84,9 @@ const MemberCard = ({
         </div>
 
         {/* 메뉴 버튼 */}
-        {isAdmin && userId !== memberId && <MemberMenu />}
+        {isAdmin && userId !== memberId && (
+          <MemberMenu groupId={group.id} memberId={memberId} name={name} />
+        )}
       </div>
     </div>
   );
