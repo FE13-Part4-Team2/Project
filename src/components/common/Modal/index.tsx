@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { useModalStore } from '@/store/useModalStore';
 import { useClosePopup } from '@/hooks/useClosePopup';
 import { useLockBackgroundScroll } from '@/hooks/useLockBackgroundScroll';
@@ -17,18 +17,30 @@ export default function Modal() {
     closeModal,
   } = useModalStore();
 
+  const formId = button?.formId; // formId 추출
   const modalRef = useRef<HTMLDivElement>(null);
   const isModalOpen = Boolean(title || content);
+
+  const isSubmittedRef = useRef(false);
 
   useClosePopup(modalRef, closeModal);
   useLockBackgroundScroll(isModalOpen);
 
-  if (!isModalOpen) return null;
+  // IIFE 호출 방식에 따라 onRequest 실행 시점 조절을 위한 타이밍 처리
+  // requestBody 설정 이후 onRequest 가 실행되도록 타이밍 제어용 처리
+  useEffect(() => {
+    if (isSubmittedRef.current && requestBody) {
+      button?.onRequest?.(requestBody);
+      closeModal();
+      isSubmittedRef.current = false; // 초기화
+    }
+  }, [requestBody]);
 
   const handleRequest = () => {
-    button?.onRequest?.(requestBody);
-    closeModal();
+    isSubmittedRef.current = true;
   };
+
+  if (!isModalOpen) return null;
 
   return (
     <div className="tablet:items-center fixed inset-0 z-80 flex h-full w-full items-end justify-center bg-black/50">
@@ -82,7 +94,11 @@ export default function Modal() {
                 )}
               </div>
             )}
-            {content && <div className="overflow-y-auto">{content}</div>}
+            {content && (
+              <div className="overflow-y-auto">
+                {typeof content === 'function' ? content() : content}
+              </div>
+            )}
           </div>
         </div>
         <div className="flex gap-2">
@@ -99,6 +115,7 @@ export default function Modal() {
             </Button>
           )}
           <Button
+            {...(formId ? { form: formId } : {})} // formId 존재 여부에 따라 form 속성 추가
             variant="primary"
             styleType={variant === 'danger' ? 'danger' : 'filled'}
             className="flex-1"
