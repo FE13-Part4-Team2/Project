@@ -51,8 +51,9 @@ const MemberList = ({ items, group, userId }: MemberListProps) => {
             group={group}
             name={item.userName}
             email={item.userEmail}
+            memberId={item.userId}
             userId={Number(userId)}
-            userImage={item.userImage}
+            profileImage={item.userImage}
           />
         ))}
       </div>

@@ -17,16 +17,18 @@ interface MemberCardProps {
   group: GroupResponse;
   name: string;
   email: string;
+  memberId: number;
   userId: number;
-  userImage: string | null;
+  profileImage: string | null;
 }
 
 const MemberCard = ({
   group,
   name,
   email,
+  memberId,
   userId,
-  userImage,
+  profileImage,
 }: MemberCardProps) => {
   const isAdmin = useIsAdmin({ membersData: group.members, userId });
 
@@ -50,7 +52,7 @@ const MemberCard = ({
           },
         },
       },
-      <MemberProfileModal image={userImage} name={name} email={email} />
+      <MemberProfileModal image={profileImage} name={name} email={email} />
     );
   };
 
@@ -69,7 +71,7 @@ const MemberCard = ({
         <div className="tablet:h-[33px] tablet:w-[146px] flex items-center gap-3">
           {/* 프로필 아이콘 */}
           <UserIcon
-            image={userImage}
+            image={profileImage}
             sizeClass="tablet:size-8 size-6"
             imageSize="32px"
           />
@@ -82,7 +84,7 @@ const MemberCard = ({
         </div>
 
         {/* 메뉴 버튼 */}
-        {isAdmin && <MemberMenu />}
+        {isAdmin && userId !== memberId && <MemberMenu />}
       </div>
     </div>
   );
