@@ -2,7 +2,7 @@
 import MemberCard from '@/app/(team)/team/_components/MemberList/MemberCard';
 import Pagination from '@/app/(team)/team/_components/TaskListBarList/Pagination';
 import { useState, useEffect } from 'react';
-import { GroupResponse, GroupMemberResponse } from '@/lib/apis/group/type';
+import { GroupMemberResponse } from '@/lib/apis/group/type';
 import {
   memberListContainerStyle,
   memberListWrapperStyle,
@@ -10,11 +10,11 @@ import {
 
 interface MemberListProps {
   items: GroupMemberResponse[];
-  group: GroupResponse;
+  groupId: number;
   userId: number;
 }
 
-const MemberList = ({ items, group, userId }: MemberListProps) => {
+const MemberList = ({ items, groupId, userId }: MemberListProps) => {
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(6);
 
@@ -48,9 +48,10 @@ const MemberList = ({ items, group, userId }: MemberListProps) => {
           <MemberCard
             key={item.userId}
             {...item}
-            group={group}
+            members={items}
             name={item.userName}
             email={item.userEmail}
+            groupId={groupId}
             memberId={item.userId}
             userId={Number(userId)}
             profileImage={item.userImage}

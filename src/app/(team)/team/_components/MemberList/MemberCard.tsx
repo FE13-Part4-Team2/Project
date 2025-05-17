@@ -3,8 +3,8 @@ import BreakEmail from '@/app/(team)/team/_components/MemberList/BreakEmail';
 import MemberMenu from '@/app/(team)/team/_components/MemberList/MemberMenu';
 import MemberProfileModal from '@/components/common/Modal/content/MemberProfileModal';
 import { useModalStore } from '@/store/useModalStore';
-import { GroupResponse } from '@/lib/apis/group/type';
 import { useIsAdmin } from '@/hooks/useIsAdmin';
+import { GroupMemberResponse } from '@/lib/apis/group/type';
 import {
   memberCardContainerStyle,
   memberCardItemWrapperStyle,
@@ -14,7 +14,8 @@ import { toast } from 'react-toastify';
 import { TOAST_MESSAGES } from '@/constants/messages';
 
 interface MemberCardProps {
-  group: GroupResponse;
+  groupId: number;
+  members: GroupMemberResponse[];
   name: string;
   email: string;
   memberId: number;
@@ -23,14 +24,15 @@ interface MemberCardProps {
 }
 
 const MemberCard = ({
-  group,
+  groupId,
+  members,
   name,
   email,
   memberId,
   userId,
   profileImage,
 }: MemberCardProps) => {
-  const isAdmin = useIsAdmin({ membersData: group.members, userId });
+  const isAdmin = useIsAdmin({ membersData: members, userId });
 
   const { openModal } = useModalStore();
   const openMemberProfileModal = () => {
@@ -85,7 +87,12 @@ const MemberCard = ({
 
         {/* 메뉴 버튼 */}
         {isAdmin && userId !== memberId && (
-          <MemberMenu groupId={group.id} memberId={memberId} name={name} />
+          <MemberMenu
+            groupId={groupId}
+            members={members}
+            memberId={memberId}
+            name={name}
+          />
         )}
       </div>
     </div>

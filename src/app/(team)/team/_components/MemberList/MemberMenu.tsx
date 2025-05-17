@@ -1,22 +1,24 @@
 import TaskMenuButton from '@/components/task/TaskMenu/TaskMenuButton';
 import DropDown from '@/components/common/Dropdown';
+import { useQueryClient } from '@tanstack/react-query';
 import { useModalStore } from '@/store/useModalStore';
+import { GroupMemberResponse } from '@/lib/apis/group/type';
 import { deleteGroupMemberById } from '@/lib/apis/group';
 import { toast } from 'react-toastify';
 
 interface MemberMenuProps {
   groupId: number;
+  members: GroupMemberResponse[];
   memberId: number;
   name: string;
 }
 
-const MemberMenu = ({ groupId, memberId, name }: MemberMenuProps) => {
+const MemberMenu = ({ groupId, members, memberId, name }: MemberMenuProps) => {
   const { openModal } = useModalStore();
 
   const handleMemberDelete = async () => {
     try {
       await deleteGroupMemberById({ groupId, memberId });
-
       toast.success(`'${name}'님을 내보냈습니다.`);
     } catch (error) {
       console.log('멤버 삭제 실패', error);

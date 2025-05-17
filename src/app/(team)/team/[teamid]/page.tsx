@@ -69,7 +69,7 @@ export default async function TeamPage({
       </div>
       <MemberList
         items={membersData}
-        group={groupData}
+        groupId={groupId}
         userId={Number(userId)}
       />
     </div>
