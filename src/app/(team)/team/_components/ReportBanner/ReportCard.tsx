@@ -15,7 +15,7 @@ const ReportCard = ({ variant, value }: ReportCardProps) => {
     <div className={`${reportCardContainerStyle}`}>
       <div className={`${cardItemWrapperStyle}`}>
         {/* 텍스트 */}
-        <div className="flex flex-col">
+        <div className="flex flex-col gap-1">
           <h3 className="text-xs-medium text-slate-300">
             {variant === 'todo' ? '오늘의 할 일' : '한 일'}
           </h3>
