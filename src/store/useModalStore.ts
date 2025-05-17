@@ -9,17 +9,21 @@ interface ModalOptions {
     number: 1 | 2;
     text: string;
     onRequest: (body?: unknown) => void;
+    formId?: string; // 외부 form 과 연결하기 위한 HTML form 속성
   };
 }
 
 interface ModalState {
   options: ModalOptions;
-  content: ReactNode | null;
+  content: ReactNode | (() => ReactNode) | null;
   requestBody: unknown;
   setRequestBody: (body: unknown) => void;
   isButtonDisabled: boolean;
   setIsButtonDisabled: (isValid: boolean) => void;
-  openModal: (options: ModalOptions, content?: ReactNode) => void;
+  openModal: (
+    options: ModalOptions,
+    content?: ReactNode | (() => ReactNode) // 함수형 컴포넌트 호출(IIFE) 지원 위한 타입 확장
+  ) => void;
   closeModal: () => void;
 }
 
@@ -30,7 +34,11 @@ export const useModalStore = create<ModalState>((set) => ({
   setRequestBody: (body) => set({ requestBody: body }),
   isButtonDisabled: false,
   setIsButtonDisabled: (isButtonDisabled) => set({ isButtonDisabled }),
-  openModal: (options, content) => set({ options, content }),
+  openModal: (options, content) => {
+    const resolvedContent = typeof content === 'function' ? content() : content; // content 타입에 따른 조건 분기
+    set({ options, content: resolvedContent });
+  },
+
   closeModal: () =>
     set({
       options: {},
