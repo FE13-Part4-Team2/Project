@@ -5,15 +5,20 @@ import { getUserHistory } from '@/lib/apis/user';
 import { groupByDate } from '@/utils/groupByDate';
 import MyHistorySection from './_components/MyHistorySection';
 import { TaskResponse } from '@/lib/apis/task/type';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 import Pagination from '@/app/(board)/boards/_components/BoardPagination';
+import CustomDatePicker from '@/components/common/Datepicker';
+
+// 상수
+const ITEMS_PER_PAGE = 4;
 
 type RangeType = 'all' | '1m' | '3m' | 'custom';
 
-// export default function MyHistoryPageWrapper() {
-//   return <MyHistoryPageClient />;
-// }
+const TABS: { key: RangeType; label: string }[] = [
+  { key: 'all', label: '전체' },
+  { key: '1m', label: '최근 1개월' },
+  { key: '3m', label: '최근 3개월' },
+  { key: 'custom', label: '사용자 지정' },
+];
 
 export default function MyHistoryPageClient() {
   const [currentRange, setCurrentRange] = useState<RangeType>('all');
@@ -24,20 +29,26 @@ export default function MyHistoryPageClient() {
   >({});
   const [sortedDates, setSortedDates] = useState<string[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  const [showStartCalendar, setShowStartCalendar] = useState(false);
+  const [showEndCalendar, setShowEndCalendar] = useState(false);
 
   useEffect(() => {
     async function fetchHistory() {
-      const res = await getUserHistory({ tag: ['user-history'] });
-      if (!res || !res.tasksDone) return;
+      try {
+        const res = await getUserHistory({ tag: ['user-history'] });
+        if (!res || !res.tasksDone) return;
 
-      const groupedData = groupByDate(res.tasksDone);
-      const sorted = Object.keys(groupedData).sort(
-        (a, b) => new Date(b).getTime() - new Date(a).getTime()
-      );
+        const groupedData = groupByDate(res.tasksDone);
+        const sorted = Object.keys(groupedData).sort(
+          (a, b) => new Date(b).getTime() - new Date(a).getTime()
+        );
 
-      setGrouped(groupedData);
-      setSortedDates(sorted);
+        setGrouped(groupedData);
+        setSortedDates(sorted);
+        setCurrentPage(1);
+      } catch (error) {
+        console.error('히스토리 조회 실패:', error);
+      }
     }
 
     fetchHistory();
@@ -51,25 +62,25 @@ export default function MyHistoryPageClient() {
 
   const filteredDates = sortedDates.filter((isoDate) => {
     const date = new Date(isoDate);
+
     if (currentRange === '1m') return date >= oneMonthAgo;
     if (currentRange === '3m') return date >= threeMonthsAgo;
+
     if (currentRange === 'custom' && startDate && endDate) {
-      return date >= startDate && date <= endDate;
+      const dateOnly = date.toISOString().split('T')[0];
+      const startOnly = startDate.toISOString().split('T')[0];
+      const endOnly = endDate.toISOString().split('T')[0];
+
+      return dateOnly >= startOnly && dateOnly <= endOnly;
     }
+
     return true;
   });
 
   const paginatedDates = filteredDates.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
   );
-
-  const tabs: { key: RangeType; label: string }[] = [
-    { key: 'all', label: '전체' },
-    { key: '1m', label: '최근 1개월' },
-    { key: '3m', label: '최근 3개월' },
-    { key: 'custom', label: '사용자 지정' },
-  ];
 
   return (
     <main className="laptop:py-10 tablet:p-6 relative min-h-[calc(100vh-60px)] px-4 py-6">
@@ -78,7 +89,7 @@ export default function MyHistoryPageClient() {
 
         {/* 탭 메뉴 */}
         <div className="mb-6 flex flex-wrap gap-3">
-          {tabs.map((tab) => (
+          {TABS.map((tab) => (
             <button
               key={tab.key}
               onClick={() => {
@@ -97,27 +108,55 @@ export default function MyHistoryPageClient() {
 
           {/* 사용자 지정 날짜 */}
           {currentRange === 'custom' && (
-            <div className="flex items-center gap-2">
-              <DatePicker
-                selected={startDate}
-                onChange={setStartDate}
-                selectsStart
-                startDate={startDate ?? undefined}
-                endDate={endDate ?? undefined}
-                placeholderText="시작일"
-                className="rounded bg-slate-800 px-2 py-1 text-white"
-              />
+            <div className="relative flex items-center gap-2">
+              <div className="relative">
+                <button
+                  onClick={() => setShowStartCalendar((prev) => !prev)}
+                  className="rounded bg-slate-800 px-2 py-1 text-white"
+                >
+                  {startDate ? startDate.toLocaleDateString('ko-KR') : '시작일'}
+                </button>
+                {showStartCalendar && (
+                  <div className="absolute z-10 mt-2">
+                    <CustomDatePicker
+                      selectedDate={startDate ?? new Date()}
+                      setSelectedDate={(date) => {
+                        setStartDate(date);
+                        setShowStartCalendar(false);
+                      }}
+                      selectsStart
+                      startDate={startDate ?? undefined}
+                      endDate={endDate ?? undefined}
+                    />
+                  </div>
+                )}
+              </div>
+
               <span className="text-white">~</span>
-              <DatePicker
-                selected={endDate}
-                onChange={setEndDate}
-                selectsEnd
-                startDate={startDate ?? undefined}
-                endDate={endDate ?? undefined}
-                minDate={startDate ?? undefined}
-                placeholderText="종료일"
-                className="rounded bg-slate-800 px-2 py-1 text-white"
-              />
+
+              <div className="relative">
+                <button
+                  onClick={() => setShowEndCalendar((prev) => !prev)}
+                  className="rounded bg-slate-800 px-2 py-1 text-white"
+                >
+                  {endDate ? endDate.toLocaleDateString('ko-KR') : '종료일'}
+                </button>
+                {showEndCalendar && (
+                  <div className="absolute z-10 mt-2">
+                    <CustomDatePicker
+                      selectedDate={endDate ?? new Date()}
+                      setSelectedDate={(date) => {
+                        setEndDate(date);
+                        setShowEndCalendar(false);
+                      }}
+                      selectsEnd
+                      startDate={startDate ?? undefined}
+                      endDate={endDate ?? undefined}
+                      minDate={startDate ?? undefined}
+                    />
+                  </div>
+                )}
+              </div>
             </div>
           )}
         </div>
@@ -142,11 +181,11 @@ export default function MyHistoryPageClient() {
           )}
 
           {/* Pagination 컴포넌트 */}
-          {filteredDates.length > itemsPerPage && (
+          {filteredDates.length > ITEMS_PER_PAGE && (
             <Pagination
               currentPage={currentPage}
               totalPosts={filteredDates.length}
-              postsPerPage={itemsPerPage}
+              postsPerPage={ITEMS_PER_PAGE}
               paginate={(page) => setCurrentPage(page)}
             />
           )}
