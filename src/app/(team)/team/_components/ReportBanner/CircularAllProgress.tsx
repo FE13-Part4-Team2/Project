@@ -24,7 +24,7 @@ const CircularAllProgress = ({
   }, [percentage, circumference]);
 
   return (
-    <svg width={size} height={size}>
+    <svg width="100%" height="100%" viewBox={`0 0 ${size} ${size}`}>
       <defs>
         <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="0%">
           <stop offset="0%" stopColor="#10b981" />

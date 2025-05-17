@@ -1,8 +1,6 @@
 'use client';
 import CircularAllProgress from '@/app/(team)/team/_components/ReportBanner/CircularAllProgress';
 import ReportCard from '@/app/(team)/team/_components/ReportBanner/ReportCard';
-import Skeleton from '@/components/common/Loading/Skeleton';
-import useWindowSize from '@/hooks/useGetViewport';
 import {
   reportBannerContainerStyle,
   reportBannerItemWrapperStyle,
@@ -17,21 +15,14 @@ interface ReportBannerProps {
 }
 
 const ReportBanner = ({ progress, total, done }: ReportBannerProps) => {
-  const { width } = useWindowSize();
-  const isMobile = width < 768;
-  const isReady = width > 0;
-
-  if (!isReady) return <Skeleton height="217px" rounded="rounded-[12px]" />;
-
   return (
     <div className={`${reportBannerContainerStyle}`}>
       <div className={`${reportBannerItemWrapperStyle}`}>
         {/* 왼쪽 아이템 */}
         <div className="flex items-center justify-center gap-10">
-          <CircularAllProgress
-            percentage={progress}
-            size={isMobile ? 120 : 165}
-          />
+          <div className="tablet:w-[140px] tablet:h-[140px] flex h-[110px] w-[110px] items-center justify-center">
+            <CircularAllProgress percentage={progress} />
+          </div>
           <div className="tablet:relative absolute flex flex-col gap-1">
             {/* TABLET 이상 표시 */}
             <p className="tablet:block text-md-medium hidden">
