@@ -35,7 +35,7 @@ export const useModalStore = create<ModalState>((set) => ({
   isButtonDisabled: false,
   setIsButtonDisabled: (isButtonDisabled) => set({ isButtonDisabled }),
   openModal: (options, content) => {
-    const resolvedContent = typeof content === 'function' ? content() : content; // content 타입에 따른 조건 분기
+    const resolvedContent = typeof content === 'function' ? content() : content; // 함수형 content 처리 (IIFE)
     set({ options, content: resolvedContent });
   },
 
