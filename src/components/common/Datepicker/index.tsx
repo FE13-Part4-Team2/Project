@@ -1,33 +1,32 @@
 'use client';
 
 import DatePicker from 'react-datepicker';
-import type { ComponentProps } from 'react';
 import { ko } from 'date-fns/locale';
 import 'react-datepicker/dist/react-datepicker.css';
 import IconRenderer from '@/components/common/Icons/IconRenderer';
 
-type BaseDatePickerProps = ComponentProps<typeof DatePicker>;
-
-interface CustomDatePickerProps
-  extends Omit<BaseDatePickerProps, 'selected' | 'onChange'> {
+interface CustomDatePickerProps {
   selectedDate: Date | null;
   setSelectedDate: (date: Date) => void;
+  selectsStart?: boolean;
+  selectsEnd?: boolean;
+  startDate?: Date;
+  endDate?: Date;
+  minDate?: Date;
+  disablePastDate?: boolean;
 }
 
 export default function CustomDatePicker({
   selectedDate,
   setSelectedDate,
-  ...rest
 }: CustomDatePickerProps) {
   return (
     <DatePicker
       selected={selectedDate}
-      onChange={
-        ((date: Date | [Date, Date] | null) => {
-          if (!date || Array.isArray(date)) return;
-          setSelectedDate(date);
-        }) as (date: Date | [Date, Date] | null, event?: any) => void
-      }
+      onChange={(date) => {
+        if (!date || Array.isArray(date)) return;
+        setSelectedDate(date);
+      }}
       locale={ko}
       inline
       renderCustomHeader={({ date, decreaseMonth, increaseMonth }) => {
