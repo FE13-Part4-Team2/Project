@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import AnimatedFaceIcon from '@/app/(team)/team/_components/ReportBanner/AnimatedFaceIcon';
-import { motion } from 'framer-motion';
 import {
   reportCardContainerStyle,
   cardItemWrapperStyle,
