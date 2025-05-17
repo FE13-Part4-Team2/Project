@@ -10,7 +10,7 @@ import {
 export const reportBannerContainerStyle = clsx(
   'flex items-center justify-center',
   teamItemWrapperStyle,
-  'laptop:h-[217px] h-[224px]',
+  'h-[217px]',
   'bg-slate-800',
   RADIUS
 );

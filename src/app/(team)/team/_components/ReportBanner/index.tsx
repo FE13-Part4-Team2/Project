@@ -1,5 +1,8 @@
 'use client';
+import CircularAllProgress from '@/app/(team)/team/_components/ReportBanner/CircularAllProgress';
 import ReportCard from '@/app/(team)/team/_components/ReportBanner/ReportCard';
+import Skeleton from '@/components/common/Loading/Skeleton';
+import useWindowSize from '@/hooks/useGetViewport';
 import {
   reportBannerContainerStyle,
   reportBannerItemWrapperStyle,
@@ -14,21 +17,29 @@ interface ReportBannerProps {
 }
 
 const ReportBanner = ({ progress, total, done }: ReportBannerProps) => {
+  const { width } = useWindowSize();
+  const isMobile = width < 768;
+  const isReady = width > 0;
+
+  if (!isReady) return <Skeleton height="217px" rounded="rounded-[12px]" />;
+
   return (
     <div className={`${reportBannerContainerStyle}`}>
       <div className={`${reportBannerItemWrapperStyle}`}>
+        {/* 왼쪽 아이템 */}
         <div className="flex items-center justify-center gap-10">
-          {/* 임시 원형 아이콘 */}
-          <div className="tablet:h-[140px] tablet:w-[140px] tablet:border-[30px] relative h-[120px] w-[120px] rounded-full border-[24px] border-green-700" />
-          {/* progress text wrapper */}
+          <CircularAllProgress
+            percentage={progress}
+            size={isMobile ? 120 : 165}
+          />
           <div className="tablet:relative absolute flex flex-col gap-1">
-            {/* TABLET 이상 */}
+            {/* TABLET 이상 표시 */}
             <p className="tablet:block text-md-medium hidden">
               오늘의
               <br />
               진행 상황
             </p>
-            {/* MOBILE */}
+            {/* MOBILE 이하 표시 */}
             <p className="tablet:hidden text-md-medium block text-center">
               오늘
             </p>
@@ -36,7 +47,7 @@ const ReportBanner = ({ progress, total, done }: ReportBannerProps) => {
           </div>
         </div>
 
-        {/* todo & done Card */}
+        {/* 오른쪽 아이템 */}
         <div className={`${reportCardsWrapperStyle}`}>
           <ReportCard variant="todo" value={total - done} />
           <ReportCard variant="done" value={done} />
