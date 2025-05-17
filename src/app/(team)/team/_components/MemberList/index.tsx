@@ -53,7 +53,7 @@ const MemberList = ({ group, items, userId }: MemberListProps) => {
     return () => window.addEventListener('resize', handleResize);
   }, []);
 
-  // 멤버 수 변경 발생 시 페이지 즉시 반영
+  // 멤버 수 변경 시 페이지 즉시 반영
   useEffect(() => {
     const newTotalPage = Math.ceil(memberList.length / perPage);
     if (page > newTotalPage) {
