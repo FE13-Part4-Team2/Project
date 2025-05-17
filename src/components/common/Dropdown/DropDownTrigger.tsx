@@ -1,5 +1,4 @@
 'use client';
-
 import { ReactNode } from 'react';
 import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
@@ -8,7 +7,7 @@ import IconRenderer from '@/components/common/Icons/IconRenderer';
 interface DropDownTriggerProps {
   children?: ReactNode;
   placeholder?: string;
-  onClick?: () => void;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
   isOpen?: boolean;
   showIcon?: boolean;
   className?: string;
@@ -34,7 +33,13 @@ const DropDownTrigger = ({
   );
 
   return (
-    <button className={triggerStyles} onClick={onClick}>
+    <button
+      className={triggerStyles}
+      onClick={(e) => {
+        e.stopPropagation();
+        onClick?.(e);
+      }}
+    >
       <span>{children ?? (showIcon ? placeholder : null)}</span>
       {showIcon && (
         <IconRenderer

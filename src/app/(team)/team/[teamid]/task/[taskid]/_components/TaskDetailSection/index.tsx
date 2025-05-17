@@ -8,15 +8,13 @@ import clsx from 'clsx';
 
 export default function TaskDetailSection({
   id,
-  recurring,
+  date,
   doneAt,
   name,
   description,
   frequency,
   writer,
 }: TaskResponse) {
-  const date = recurring?.startDate;
-
   return (
     <div className="tablet:min-h-[312px] min-h-[242px]">
       <div className="tablet:gap-4 flex flex-col gap-3">
@@ -30,7 +28,12 @@ export default function TaskDetailSection({
           >
             {name}
           </h1>
-          <TaskMenu taskId={id} taskName={name} size="md" />
+          <TaskMenu
+            taskId={id}
+            taskName={name}
+            taskDescription={description}
+            size="md"
+          />
         </div>
         <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-4">

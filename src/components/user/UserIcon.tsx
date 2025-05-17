@@ -1,18 +1,39 @@
 import IconRenderer from '@/components/common/Icons/IconRenderer';
 import Image from 'next/image';
+import clsx from 'clsx';
 
-export default function UserIcon({ image }: { image: string | null }) {
-  return image ? (
-    <Image
-      src={image}
-      width={32}
-      height={32}
-      className="rounded-full border-1 border-slate-50/10"
-      alt="user"
-    />
-  ) : (
-    <div className="flex size-8 items-center justify-center rounded-full border-1 border-slate-50/10 bg-slate-700">
-      <IconRenderer name="MemberIcon" />
+interface UserIconProps {
+  image: string | null;
+  sizeClass?: string; // 외부 원형 아이콘 크기
+  imageSize?: string; // 이미지 예상 크기
+  iconClass?: string; // 내부 아이콘 크기
+}
+
+export default function UserIcon({
+  image,
+  sizeClass = 'size-8',
+  imageSize = '32px',
+  iconClass = 'size-6',
+}: UserIconProps) {
+  return (
+    <div
+      className={clsx(
+        'relative flex shrink-0 items-center justify-center overflow-hidden',
+        'rounded-full border border-slate-50/10 bg-slate-700',
+        sizeClass
+      )}
+    >
+      {image ? (
+        <Image
+          src={image}
+          alt="유저 프로필 이미지"
+          sizes={imageSize}
+          fill
+          className="object-cover"
+        />
+      ) : (
+        <IconRenderer name="MemberIcon" className={iconClass} />
+      )}
     </div>
   );
 }
