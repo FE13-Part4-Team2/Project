@@ -20,7 +20,7 @@ const ReportBanner = ({ progress, total, done }: ReportBannerProps) => {
       <div className={`${reportBannerItemWrapperStyle}`}>
         {/* 왼쪽 아이템 */}
         <div className="flex items-center justify-center gap-10">
-          <div className="tablet:w-[140px] tablet:h-[140px] flex h-[110px] w-[110px] items-center justify-center">
+          <div className="tablet:w-[165px] tablet:h-[165px] flex h-[130px] w-[130px] items-center justify-center">
             <CircularAllProgress percentage={progress} />
           </div>
           <div className="tablet:relative absolute flex flex-col gap-1">
