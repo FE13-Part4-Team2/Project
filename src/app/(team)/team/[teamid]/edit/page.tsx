@@ -34,7 +34,6 @@ export default function EditTeamPage() {
   const handleEdit = async ({ name, file }: { name: string; file?: File }) => {
     await updateGroup.mutateAsync({ name, file });
     router.replace(ROUTES.TEAM(id));
-    router.refresh();
   };
 
   const handleDelete = async () => {
