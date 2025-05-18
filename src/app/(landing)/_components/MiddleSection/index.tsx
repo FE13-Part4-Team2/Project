@@ -11,7 +11,7 @@ const LandingMiddleSection = ({ className }: { className?: string }) => {
       {/* BOX 1 */}
       <motion.div {...fadeInUp}>
         <LandingBox
-          imageSrc={`${LANDING_IMAGE_URL}landing_mockup_team.png`}
+          imageSrc={`${LANDING_IMAGE_URL}mockup_team.png`}
           imageAlt="팀 페이지 이미지"
           iconSrc={`${LANDING_IMAGE_URL}icon_box_folder.svg`}
           iconAlt="폴더 아이콘"
@@ -25,7 +25,7 @@ const LandingMiddleSection = ({ className }: { className?: string }) => {
       {/* BOX 2 */}
       <motion.div {...fadeInUp}>
         <LandingBox
-          imageSrc={`${LANDING_IMAGE_URL}landing_mockup_invitation.png`}
+          imageSrc={`${LANDING_IMAGE_URL}mockup_invitation.png`}
           imageAlt="멤버 초대 이미지"
           imageOnTop
           iconSrc={`${LANDING_IMAGE_URL}icon_box_message.svg`}
@@ -40,7 +40,7 @@ const LandingMiddleSection = ({ className }: { className?: string }) => {
       {/* BOX 3 */}
       <motion.div {...fadeInUp}>
         <LandingBox
-          imageSrc={`${LANDING_IMAGE_URL}landing_mockup_reply.png`}
+          imageSrc={`${LANDING_IMAGE_URL}mockup_reply.png`}
           imageAlt="댓글 이미지"
           imageOnTop
           tabletReverse
