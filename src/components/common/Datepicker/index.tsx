@@ -2,6 +2,7 @@ import DatePicker from 'react-datepicker';
 import IconRenderer from '@/components/common/Icons/IconRenderer';
 import { ko } from 'date-fns/locale';
 import 'react-datepicker/dist/react-datepicker.css';
+
 interface CustomDatePickerProps {
   selectedDate: Date;
   setSelectedDate: (date: Date) => void;
