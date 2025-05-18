@@ -15,7 +15,6 @@ export default function EditTeamPage() {
   const router = useRouter();
   const { teamid } = useParams();
   const id = Number(teamid);
-
   const { memberships } = useMemberships(true);
   const groupQuery = useGroup(id);
   const updateGroup = useUpdateGroup(id);
@@ -23,18 +22,11 @@ export default function EditTeamPage() {
   const { openModal } = useModalStore();
 
   if (groupQuery.isLoading) {
-    return (
-      <div className="flex h-full w-full items-center justify-center">
-        <p>팀 정보를 불러오는 중...</p>
-      </div>
-    );
+    return <p>팀 정보를 불러오는 중...</p>;
   }
+
   if (groupQuery.isError || !groupQuery.data) {
-    return (
-      <div className="flex h-full w-full items-center justify-center">
-        <p>팀 정보를 가져오지 못했습니다.</p>
-      </div>
-    );
+    return <p>팀 정보를 가져오지 못했습니다.</p>;
   }
 
   const group = groupQuery.data;
@@ -53,7 +45,7 @@ export default function EditTeamPage() {
   const openDeleteTaskModal = () => {
     openModal({
       variant: 'danger',
-      title: `'${group.name}'\n팀을 정말 삭제하시겠어요?`,
+      title: `'${group.name}'\n\n팀을 정말 삭제하시겠어요?`,
       description: '삭제 후에는 되돌릴 수 없습니다.',
       button: {
         number: 2,
