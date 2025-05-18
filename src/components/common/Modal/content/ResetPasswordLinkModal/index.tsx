@@ -5,21 +5,18 @@ import { useModalStore } from '@/store/useModalStore';
 import { validateEmail } from '@/utils/inputValidation';
 import { useRef } from 'react';
 
-// content
+// contents
 export default function ResetPasswordLinkModal() {
   const inputRef = useRef<HTMLInputElement>(null);
   const { setRequestBody } = useModalStore();
 
-  // 이메일 유효성 판단, 요청 보내고, toast 띄우기, 모달 닫기
-  const handleFormSubmit = () => {
+  const handleEmailValidation = () => {
     const email = inputRef.current?.value.trim();
-    console.log('email', email); // x
 
     if (!email) return;
 
     if (validateEmail(email)) {
       setRequestBody({ email });
-      console.log('if'); // x
     }
   };
 
@@ -28,7 +25,7 @@ export default function ResetPasswordLinkModal() {
       id="reset-password-form"
       onSubmit={(e) => {
         e.preventDefault();
-        handleFormSubmit();
+        handleEmailValidation();
       }}
     >
       <InputBase
