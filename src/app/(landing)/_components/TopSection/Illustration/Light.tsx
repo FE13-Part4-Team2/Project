@@ -11,6 +11,7 @@ const Light = () => {
         width={1920}
         height={1080}
         className="laptop:block top-0 hidden object-contain"
+        priority
       />
       <Image
         src={`${LANDING_IMAGE_URL}landing_light_m_01.png`}

@@ -13,7 +13,7 @@ const LandingMiddleSection = ({ className }: { className?: string }) => {
         <LandingBox
           imageSrc={`${LANDING_IMAGE_URL}landing_mockup_team.png`}
           imageAlt="팀 페이지 이미지"
-          iconSrc={`${LANDING_IMAGE_URL}landing_icon_folder.png`}
+          iconSrc={`${LANDING_IMAGE_URL}icon_box_folder.svg`}
           iconAlt="폴더 아이콘"
           textLines={['그룹으로', '일정을 관리해요']}
           tabletReverse
@@ -28,7 +28,7 @@ const LandingMiddleSection = ({ className }: { className?: string }) => {
           imageSrc={`${LANDING_IMAGE_URL}landing_mockup_invitation.png`}
           imageAlt="멤버 초대 이미지"
           imageOnTop
-          iconSrc={`${LANDING_IMAGE_URL}landing_icon_message.png`}
+          iconSrc={`${LANDING_IMAGE_URL}icon_box_message.svg`}
           iconAlt="메시지 아이콘"
           textLines={['간단하게 멤버들을', '초대해요']}
           textLeft={false}
@@ -45,7 +45,7 @@ const LandingMiddleSection = ({ className }: { className?: string }) => {
           imageOnTop
           tabletReverse
           mobileReverse
-          iconSrc={`${LANDING_IMAGE_URL}landing_icon_check.png`}
+          iconSrc={`${LANDING_IMAGE_URL}icon_box_check.svg`}
           iconAlt="체크 아이콘"
           textLines={['할 일도 간편하게', '체크해요']}
           className="items-start bg-slate-950"

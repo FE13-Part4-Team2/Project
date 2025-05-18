@@ -11,7 +11,7 @@ const Workers = ({ className }: { className?: string }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setIsFirstFrame((prev) => !prev);
-    }, 500); // 이미지 변경 간격(프레임 단위)
+    }, 500); // 이미지 변경 간격
 
     return () => clearInterval(interval);
   }, []);

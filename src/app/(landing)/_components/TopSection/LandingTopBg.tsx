@@ -20,6 +20,7 @@ const LandingTopBg = ({ className }: { className?: string }) => {
         width={1920}
         height={1080}
         className="laptop:block top-0 hidden object-contain"
+        priority
       />
       <Image
         src={`${LANDING_IMAGE_URL}landing_top_pattern_m.png`}
