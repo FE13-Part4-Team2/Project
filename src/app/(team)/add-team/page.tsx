@@ -1,26 +1,15 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import clientFetcher from '@/lib/client/fetcher.client';
-import { postGroup } from '@/lib/apis/group';
-import postImage from '@/lib/apis/uploadImage';
-import { UserGroupResponse } from '@/lib/apis/user/type';
 import { ROUTES } from '@/constants/routes';
 import TeamProfileForm from '@/app/(team)/_components/TeamProfileForm';
+import { useMemberships } from '@/hooks/useMemberships';
+import { useCreateGroup } from '@/hooks/useGroupQueries';
 
 export default function AddTeamPage() {
   const router = useRouter();
-  const [existingNames, setExistingNames] = useState<string[]>([]);
-
-  useEffect(() => {
-    clientFetcher<undefined, UserGroupResponse[]>({
-      url: '/user/groups',
-      method: 'GET',
-    }).then((data) => {
-      if (data) setExistingNames(data.map((g) => g.name));
-    });
-  }, []);
+  const { memberships } = useMemberships(true);
+  const createGroup = useCreateGroup();
 
   const handleCreate = async ({
     name,
@@ -29,27 +18,16 @@ export default function AddTeamPage() {
     name: string;
     file?: File;
   }) => {
-    let imageUrl: string | undefined;
-    if (file) {
-      imageUrl = await postImage(file);
-    }
-    const newGroup = await postGroup({
-      body: {
-        name,
-        ...(imageUrl ? { image: imageUrl } : {}),
-      },
-    });
+    const newGroup = await createGroup.mutateAsync({ name, file });
     if (newGroup?.id) {
       router.push(ROUTES.TEAM(newGroup.id));
     }
   };
 
   return (
-    <div className="flex h-full w-full justify-center pt-50">
+    <div className="mt-35 flex h-full w-full justify-center">
       <TeamProfileForm
-        existingNames={existingNames}
-        initialName=""
-        initialPreview=""
+        existingNames={memberships.map((m) => m.group.name)}
         submitLabel="팀 생성하기"
         onSubmit={handleCreate}
       />

@@ -1,91 +1,77 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
-import clientFetcher from '@/lib/client/fetcher.client';
-import { patchGroupById, deleteGroupById } from '@/lib/apis/group';
-import postImage from '@/lib/apis/uploadImage';
-import { UserGroupResponse } from '@/lib/apis/user/type';
 import { ROUTES } from '@/constants/routes';
 import TeamProfileForm from '@/app/(team)/_components/TeamProfileForm';
 import { useModalStore } from '@/store/useModalStore';
+import { useMemberships } from '@/hooks/useMemberships';
+import {
+  useDeleteGroup,
+  useGroup,
+  useUpdateGroup,
+} from '@/hooks/useGroupQueries';
 
 export default function EditTeamPage() {
   const router = useRouter();
   const { teamid } = useParams();
-  const [existingNames, setExistingNames] = useState<string[]>([]);
-  const [initialName, setInitialName] = useState('');
-  const [initialPreview, setInitialPreview] = useState('');
+  const id = Number(teamid);
 
+  const { memberships } = useMemberships(true);
+  const groupQuery = useGroup(id);
+  const updateGroup = useUpdateGroup(id);
+  const deleteGroup = useDeleteGroup(id);
   const { openModal } = useModalStore();
 
+  if (groupQuery.isLoading) {
+    return (
+      <div className="flex h-full w-full items-center justify-center">
+        <p>팀 정보를 불러오는 중...</p>
+      </div>
+    );
+  }
+  if (groupQuery.isError || !groupQuery.data) {
+    return (
+      <div className="flex h-full w-full items-center justify-center">
+        <p>팀 정보를 가져오지 못했습니다.</p>
+      </div>
+    );
+  }
+
+  const group = groupQuery.data;
+
+  const handleEdit = async ({ name, file }: { name: string; file?: File }) => {
+    await updateGroup.mutateAsync({ name, file });
+    router.replace(ROUTES.TEAM(id));
+    router.refresh();
+  };
+
   const handleDelete = async () => {
-    await deleteGroupById({ groupId: Number(teamid) });
+    await deleteGroup.mutateAsync();
     router.push(ROUTES.HOME);
   };
 
   const openDeleteTaskModal = () => {
     openModal({
       variant: 'danger',
-      title: `'${initialName}'\n팀을 정말 삭제하시겠어요?`,
+      title: `'${group.name}'\n팀을 정말 삭제하시겠어요?`,
       description: '삭제 후에는 되돌릴 수 없습니다.',
       button: {
         number: 2,
         text: '삭제하기',
-        onRequest: () => {
-          handleDelete();
-        },
+        onRequest: handleDelete,
       },
     });
-  };
-
-  useEffect(() => {
-    clientFetcher<undefined, UserGroupResponse[]>({
-      url: '/user/groups',
-      method: 'GET',
-    }).then((data) => {
-      if (data) {
-        const names = data.map((g) => g.name).filter((n) => n !== initialName);
-        setExistingNames(names);
-      }
-    });
-
-    clientFetcher<undefined, { name: string; image?: string }>({
-      url: `/groups/${teamid}`,
-      method: 'GET',
-    }).then((data) => {
-      if (data) {
-        setInitialName(data.name);
-        setInitialPreview(data.image ?? '');
-      }
-    });
-  }, [teamid, initialName]);
-
-  const handleEdit = async ({ name, file }: { name: string; file?: File }) => {
-    let imageUrl = initialPreview;
-
-    if (file) {
-      imageUrl = await postImage(file);
-    }
-
-    await patchGroupById({
-      groupId: Number(teamid),
-      body: {
-        name,
-        ...(imageUrl ? { image: imageUrl } : {}),
-      },
-    });
-    router.replace(ROUTES.TEAM(Number(teamid)));
-    router.refresh();
   };
 
   return (
-    <div className="flex h-full w-full justify-center pt-50">
+    <div className="mt-35 flex h-full w-full justify-center">
       <div className="flex flex-col items-center">
         <TeamProfileForm
-          existingNames={existingNames}
-          initialName={initialName}
-          initialPreview={initialPreview}
+          existingNames={memberships
+            .map((m) => m.group.name)
+            .filter((n) => n !== group.name)}
+          initialName={group.name}
+          initialPreview={group.image ?? ''}
           submitLabel="팀 수정하기"
           onSubmit={handleEdit}
         />

@@ -47,9 +47,7 @@ export default function TeamProfileForm({
 
   const handleSubmit = async () => {
     let hasErr = false;
-    if (!preview) {
-      hasErr = true;
-    }
+
     if (existingNames.includes(name.trim())) {
       setNameError(true);
       hasErr = true;
@@ -63,35 +61,36 @@ export default function TeamProfileForm({
       <h1 className="text-2xl-medium laptop:text-4xl-medium tablet:mb-20 mb-6">
         {submitLabel}
       </h1>
-      <input
-        id="team-profile-input"
-        type="file"
-        accept="image/*"
-        className="hidden"
-        onChange={handleFileChange}
-      />
-      <div className="mb-6 flex w-full flex-col gap-3 self-start">
+
+      <div className="relative mb-6 flex w-full flex-col gap-3 self-start">
         <span className="text-lg-medium">팀 프로필</span>
+
         <label
           htmlFor="team-profile-input"
-          className={`relative flex h-16 w-16 cursor-pointer items-center justify-center rounded-full`}
+          className={`relative h-16 w-16 cursor-pointer rounded-full`}
         >
           {preview ? (
-            <Image
-              src={preview}
-              alt="프로필"
-              width={64}
-              height={64}
-              className="rounded-full object-cover"
-            />
+            <div className="absolute inset-0 overflow-hidden rounded-full border-2 border-slate-600">
+              <Image src={preview} alt="프로필" fill className="object-cover" />
+            </div>
           ) : (
-            <IconRenderer
-              name="ProfileEditIcon"
-              size={64}
-              className="text-gray-400"
-            />
+            <IconRenderer name="ProfileImageIcon" size={64} />
           )}
         </label>
+        <label
+          htmlFor="team-profile-input"
+          className="absolute bottom-0 left-11 flex h-5 w-5 cursor-pointer items-center justify-center rounded-full border-2 border-slate-900 bg-slate-600"
+        >
+          <IconRenderer name="EditIcon" size={9} />
+        </label>
+
+        <input
+          id="team-profile-input"
+          type="file"
+          accept="image/*"
+          className="hidden"
+          onChange={handleFileChange}
+        />
       </div>
       <div className="mb-6 w-full self-start">
         <InputBase
