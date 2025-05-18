@@ -21,13 +21,13 @@ const Workers = ({ className }: { className?: string }) => {
       {/* 인부1 */}
       <motion.div {...workersMotion}>
         <img
-          src={`${LANDING_IMAGE_URL}workers1.svg`}
+          src={`${LANDING_IMAGE_URL}il_workers1.svg`}
           style={{ display: isFirstFrame ? 'block' : 'none' }}
           alt="걷는 인부1"
           className={workersStyle}
         />
         <img
-          src={`${LANDING_IMAGE_URL}workers3_01.svg`}
+          src={`${LANDING_IMAGE_URL}il_workers3_01.svg`}
           style={{ display: isFirstFrame ? 'none' : 'block' }}
           alt="걷는 인부1"
           className={workersStyle}
@@ -37,13 +37,13 @@ const Workers = ({ className }: { className?: string }) => {
       {/* 인부2 */}
       <motion.div {...workersMotion}>
         <img
-          src={`${LANDING_IMAGE_URL}workers2.svg`}
+          src={`${LANDING_IMAGE_URL}il_workers2.svg`}
           style={{ display: isFirstFrame ? 'block' : 'none' }}
           alt="걷는 인부2"
           className={workersStyle}
         />
         <img
-          src={`${LANDING_IMAGE_URL}workers1_01.svg`}
+          src={`${LANDING_IMAGE_URL}il_workers1_01.svg`}
           style={{ display: isFirstFrame ? 'none' : 'block' }}
           alt="걷는 인부2"
           className={workersStyle}
@@ -53,13 +53,13 @@ const Workers = ({ className }: { className?: string }) => {
       {/* 인부3 */}
       <motion.div {...workersMotion}>
         <img
-          src={`${LANDING_IMAGE_URL}workers3.svg`}
+          src={`${LANDING_IMAGE_URL}il_workers3.svg`}
           style={{ display: isFirstFrame ? 'block' : 'none' }}
           alt="걷는 인부3"
           className={workersStyle}
         />
         <img
-          src={`${LANDING_IMAGE_URL}workers2_01.svg`}
+          src={`${LANDING_IMAGE_URL}il_workers2_01.svg`}
           style={{ display: isFirstFrame ? 'none' : 'block' }}
           alt="걷는 인부3"
           className={workersStyle}
