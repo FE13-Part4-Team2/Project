@@ -4,7 +4,8 @@ import ReportCard from '@/app/(team)/team/_components/ReportBanner/ReportCard';
 import {
   reportBannerContainerStyle,
   reportBannerItemWrapperStyle,
-  progressPercentStyle,
+  circularProgressWrapperStyle,
+  progressTextStyle,
   reportCardsWrapperStyle,
 } from '@/app/(team)/team/_components/ReportBanner/styles';
 
@@ -20,7 +21,7 @@ const ReportBanner = ({ progress, total, done }: ReportBannerProps) => {
       <div className={`${reportBannerItemWrapperStyle}`}>
         {/* 왼쪽 아이템 */}
         <div className="flex items-center justify-center gap-10">
-          <div className="tablet:w-[165px] tablet:h-[165px] flex h-[130px] w-[130px] items-center justify-center">
+          <div className={`${circularProgressWrapperStyle}`}>
             <CircularAllProgress percentage={progress} />
           </div>
           <div className="tablet:relative absolute flex flex-col gap-1">
@@ -34,7 +35,7 @@ const ReportBanner = ({ progress, total, done }: ReportBannerProps) => {
             <p className="tablet:hidden text-md-medium block text-center">
               오늘
             </p>
-            <p className={`${progressPercentStyle}`}>{progress}%</p>
+            <p className={`${progressTextStyle}`}>{progress}%</p>
           </div>
         </div>
 
