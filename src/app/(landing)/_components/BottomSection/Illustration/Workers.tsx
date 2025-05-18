@@ -3,10 +3,11 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { LANDING_IMAGE_URL } from '@/app/(landing)/_components/landingImageUrl';
 import { workersStyle } from '@/app/(landing)/_components/styles/illustrationStyle';
-import { workersMotion } from '@/app/(landing)/_components/styles/motionStyle';
+import { useIsMobile } from '@/hooks/useCheckViewport';
 
 const Workers = ({ className }: { className?: string }) => {
   const [isFirstFrame, setIsFirstFrame] = useState(true);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -15,6 +16,22 @@ const Workers = ({ className }: { className?: string }) => {
 
     return () => clearInterval(interval);
   }, []);
+
+  const workersMotion = {
+    initial: { x: 0 },
+    whileInView: { x: isMobile ? 80 : 200, y: [0, 5, 0] },
+    transition: {
+      x: {
+        duration: 2,
+        ease: 'easeOut',
+      },
+      y: {
+        duration: 0.7,
+        ease: 'easeInOut',
+        repeat: Infinity,
+      },
+    },
+  };
 
   return (
     <div className={`${className} flex w-full`}>
