@@ -25,7 +25,7 @@ export default function AddTeamPage() {
   };
 
   return (
-    <div className="mt-35 flex h-full w-full justify-center">
+    <div className="flex w-full justify-center pt-35">
       <TeamProfileForm
         existingNames={memberships.map((m) => m.group.name)}
         submitLabel="팀 생성하기"

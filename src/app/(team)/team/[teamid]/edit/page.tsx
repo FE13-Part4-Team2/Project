@@ -56,7 +56,7 @@ export default function EditTeamPage() {
   };
 
   return (
-    <div className="mt-35 flex h-full w-full justify-center">
+    <div className="flex w-full justify-center pt-[140px]">
       <div className="flex flex-col items-center">
         <TeamProfileForm
           existingNames={memberships
