@@ -1,34 +1,30 @@
-'use client';
-
 import DatePicker from 'react-datepicker';
+import IconRenderer from '@/components/common/Icons/IconRenderer';
 import { ko } from 'date-fns/locale';
 import 'react-datepicker/dist/react-datepicker.css';
-import IconRenderer from '@/components/common/Icons/IconRenderer';
-
 interface CustomDatePickerProps {
-  selectedDate: Date | null;
+  selectedDate: Date;
   setSelectedDate: (date: Date) => void;
-  selectsStart?: boolean;
-  selectsEnd?: boolean;
-  startDate?: Date;
-  endDate?: Date;
-  minDate?: Date;
   disablePastDate?: boolean;
 }
 
 export default function CustomDatePicker({
   selectedDate,
   setSelectedDate,
+  disablePastDate = false,
 }: CustomDatePickerProps) {
   return (
     <DatePicker
       selected={selectedDate}
-      onChange={(date) => {
-        if (!date || Array.isArray(date)) return;
-        setSelectedDate(date);
-      }}
+      onChange={(date) => date && setSelectedDate(date)}
       locale={ko}
       inline
+      {...(disablePastDate ? { minDate: new Date() } : {})}
+      dayClassName={(date) =>
+        date.toDateString() === selectedDate.toDateString()
+          ? 'text-md-semibold! bg-green-700! text-slate-800! hover:text-slate-50! focus:bg-green-700!'
+          : 'bg-slate-800!'
+      }
       renderCustomHeader={({ date, decreaseMonth, increaseMonth }) => {
         const year = date.getFullYear();
         const month = date.getMonth() + 1;
