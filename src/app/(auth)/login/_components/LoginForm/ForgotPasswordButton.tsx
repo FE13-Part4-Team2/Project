@@ -4,26 +4,27 @@ import ResetPasswordLinkModal from '@/components/common/Modal/content/ResetPassw
 import { postResetPasswordToEmail } from '@/lib/apis/user';
 import { ResetPasswordToEmailBody } from '@/lib/apis/user/type';
 import { useModalStore } from '@/store/useModalStore';
+import { toast } from 'react-toastify/unstyled';
 
-// 클릭 시 비밀번호 재설정 모달 열림
-// openModal : options, content 를 받아서 모달을 렌더링 & store 에 상태 저장
 export default function ForgotPasswordButton({ ...props }) {
-  const { openModal } = useModalStore();
+  const { openModal, closeModal } = useModalStore();
 
+  // send reset password link
   const handleSendResetPasswordLink = async (
     requestBody: ResetPasswordToEmailBody
   ) => {
-    // send link to email
-    console.log('requestBody', requestBody);
-
     try {
       const response = await postResetPasswordToEmail({ body: requestBody });
-      console.log('response', response);
       if (!response) {
-        throw new Error('Failed to send reset password link');
+        throw new Error('204 : No Content');
       }
+      toast.success('비밀번호 재설정 링크가 전송되었습니다.');
+      closeModal();
     } catch (error) {
-      console.error('Error sending reset password link:', error);
+      console.error('비밀번호 재설정 요청 실패:', error);
+      toast.error(
+        '비밀번호 재설정 링크 전송에 실패했습니다. 이메일을 다시 확인해주세요.'
+      );
     }
   };
 
@@ -61,4 +62,7 @@ export default function ForgotPasswordButton({ ...props }) {
       </button>
     </div>
   );
+}
+function closeModal() {
+  throw new Error('Function not implemented.');
 }
