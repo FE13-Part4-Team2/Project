@@ -4,10 +4,12 @@ import ResetPasswordLinkModal from '@/components/common/Modal/content/ResetPassw
 import { postResetPasswordToEmail } from '@/lib/apis/user';
 import { ResetPasswordToEmailBody } from '@/lib/apis/user/type';
 import { useModalStore } from '@/store/useModalStore';
-import { toast } from 'react-toastify/unstyled';
+import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
 
 export default function ForgotPasswordButton({ ...props }) {
   const { openModal, closeModal } = useModalStore();
+  const router = useRouter();
 
   // send reset password link
   const handleSendResetPasswordLink = async (
@@ -15,16 +17,24 @@ export default function ForgotPasswordButton({ ...props }) {
   ) => {
     try {
       const response = await postResetPasswordToEmail({ body: requestBody });
+
       if (!response) {
         throw new Error('204 : No Content');
       }
       toast.success('비밀번호 재설정 링크가 전송되었습니다.');
       closeModal();
     } catch (error) {
-      console.error('비밀번호 재설정 요청 실패:', error);
-      toast.error(
-        '비밀번호 재설정 링크 전송에 실패했습니다. 이메일을 다시 확인해주세요.'
-      );
+      if (error instanceof Error) {
+        const errorMessage = error.message;
+
+        // 존재하지 않는 유저 : User not found
+        if (errorMessage.includes('User not found')) {
+          toast.error('존재하지 않는 이메일입니다. 회원가입을 먼저 해주세요.');
+          router.push('/signup');
+        } else {
+          toast.error(`Error : ${error}`);
+        }
+      }
     }
   };
 
@@ -62,7 +72,4 @@ export default function ForgotPasswordButton({ ...props }) {
       </button>
     </div>
   );
-}
-function closeModal() {
-  throw new Error('Function not implemented.');
 }
