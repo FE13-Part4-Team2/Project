@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 
 export default function ForgotPasswordButton({ ...props }) {
-  const { openModal, closeModal } = useModalStore();
+  const { openModal } = useModalStore();
   const router = useRouter();
 
   // send reset password link
@@ -22,7 +22,6 @@ export default function ForgotPasswordButton({ ...props }) {
         throw new Error('204 : No Content');
       }
       toast.success('비밀번호 재설정 링크가 전송되었습니다.');
-      closeModal();
     } catch (error) {
       if (error instanceof Error) {
         const errorMessage = error.message;
