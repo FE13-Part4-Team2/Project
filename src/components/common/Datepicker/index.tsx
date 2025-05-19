@@ -28,7 +28,9 @@ export default function CustomDatePicker({
         if (type === 'start') {
           setStartDate(date);
         } else {
-          setEndDate?.(date);
+          const endOfDay = new Date(date);
+          endOfDay.setHours(23, 59, 59, 999);
+          setEndDate?.(endOfDay);
         }
       }}
       startDate={startDate ?? undefined}

@@ -34,7 +34,7 @@ export default function CustomDateSelector({
     : '종료일';
 
   return (
-    <div ref={selectorRef} className="relative w-[320px]">
+    <div ref={selectorRef} className="relative z-5 w-[320px]">
       <div className="flex items-center gap-2">
         <button
           type="button"
