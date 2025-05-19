@@ -4,8 +4,7 @@ import { getUserHistory } from '@/lib/apis/user';
 import { groupByDate } from '@/utils/groupByDate';
 import MyHistorySection from './_components/MyHistorySection';
 import { TaskResponse } from '@/lib/apis/task/type';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+import CustomDateSelector from '@/app/(user)/myhistory/_components/CustomDateSelector';
 import Pagination from '@/app/(board)/boards/_components/BoardPagination';
 
 type RangeType = 'all' | '1m' | '3m' | 'custom';
@@ -98,43 +97,12 @@ export default function MyHistoryPageClient() {
           })}
           {/* 사용자 지정 날짜 */}
           {currentRange === 'custom' && (
-            <div className="flex items-center gap-2">
-              <DatePicker
-                selected={startDate}
-                onChange={(date: Date | null) => {
-                  if (!date) return; // null 체크
-                  setStartDate(date);
-                  if (endDate && date > endDate) {
-                    alert('시작일은 종료일보다 이전이어야 합니다.');
-                    setEndDate(null);
-                  }
-                }}
-                selectsStart
-                startDate={startDate ?? undefined}
-                endDate={endDate ?? undefined}
-                placeholderText="시작일"
-                className="text-md-medium rounded bg-slate-800 px-3 py-1.5 text-white"
-              />
-              <span className="text-white">~</span>
-              <DatePicker
-                selected={endDate}
-                onChange={(date: Date | null) => {
-                  if (!date) return;
-                  if (startDate && date < startDate) {
-                    alert('종료일은 시작일보다 이후여야 합니다.');
-                    setEndDate(null);
-                  } else {
-                    setEndDate(date);
-                  }
-                }}
-                selectsEnd
-                startDate={startDate ?? undefined}
-                endDate={endDate ?? undefined}
-                minDate={startDate ?? undefined}
-                placeholderText="종료일"
-                className="text-md-medium rounded bg-slate-800 px-3 py-1.5 text-white"
-              />
-            </div>
+            <CustomDateSelector
+              startDate={startDate}
+              endDate={endDate}
+              setStartDate={setStartDate}
+              setEndDate={setEndDate}
+            />
           )}
         </div>
 
