@@ -21,6 +21,7 @@ export default function Modal() {
   const modalRef = useRef<HTMLDivElement>(null);
   const isModalOpen = Boolean(title || content);
 
+  // 폼 제출 시도 여부를 추적하는 플래그
   const isSubmittedRef = useRef(false);
 
   useClosePopup(modalRef, closeModal);
