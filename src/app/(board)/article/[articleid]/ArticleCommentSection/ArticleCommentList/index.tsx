@@ -35,6 +35,8 @@ export default function ArticleCommentList({
       initialPageParam: null,
     });
 
+  const isCommentListEmpty = Boolean(data?.pages[0]?.list.length === 0);
+
   useIntersection({
     target: observerRef,
     onIntersect: () => {
@@ -92,6 +94,11 @@ export default function ArticleCommentList({
       {isFetchingNextPage && (
         <div className="flex justify-center">
           <Spinner />
+        </div>
+      )}
+      {isCommentListEmpty && (
+        <div className="text-md-medium tablet:py-[120px] py-[180px] text-center text-slate-500">
+          <p>아직 작성된 댓글이 없습니다.</p>
         </div>
       )}
     </div>
