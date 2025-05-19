@@ -58,7 +58,9 @@ export default function ArticleDetailSection({
             />
           </div>
         )}
-        <div className="text-md-regular tablet:text-lg-medium">{content}</div>
+        <div className="text-md-regular tablet:text-lg-medium tablet:leading-6 leading-5 whitespace-pre-wrap">
+          {content}
+        </div>
       </div>
     </div>
   );
