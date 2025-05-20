@@ -105,8 +105,8 @@ export default function TeamProfileForm({
             setNameError(false);
           }}
           onKeyDown={handleKeyDown}
-          titleClassName="mb-6"
-          containerClassName={`w-full bg-slate-800${nameError ? ' border border-red-500' : ''}`}
+          titleClassName="mb-2"
+          containerClassName="h-12 bg-slate-800"
           inputClassName="w-full h-11 tablet:h-12"
         />
         {nameError && (
