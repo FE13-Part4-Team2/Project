@@ -1,20 +1,42 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import Image from 'next/image';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import postImage from '@/lib/apis/uploadImage';
+import { getUser } from '@/lib/apis/user';
 import IconRenderer from '@/components/common/Icons/IconRenderer';
+import { UserResponse } from '@/lib/apis/user/type';
+import { toast } from 'react-toastify';
+import Spinner from '@/components/common/Loading/Spinner';
 
-const ProfileImageUploader = () => {
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+interface ProfileImageUploaderProps {
+  image: string | null;
+  setImage: (image: string | null) => void;
+}
+
+const ProfileImageUploader = ({
+  image,
+  setImage,
+}: ProfileImageUploaderProps) => {
+  const { data: userData } = useQuery<UserResponse | null>({
+    queryKey: ['user'],
+    queryFn: () => getUser({ tag: ['user'] }),
+  });
+
+  useEffect(() => {
+    if (userData?.image) {
+      setImage(userData.image);
+    }
+  }, [userData, setImage]);
 
   const { mutate, isPending } = useMutation({
     mutationFn: (file: File) => postImage(file),
     onSuccess: (url) => {
-      setPreviewUrl(url);
+      setImage(url);
+      toast.success('프로필 이미지가 성공적으로 업로드되었습니다.');
     },
-    onError: (error: Error) => {
-      console.error('업로드 오류:', error.message);
+    onError: () => {
+      toast.error('이미지 파일의 최대용량은 10MB를 넘길 수 없습니다.');
     },
   });
 
@@ -28,20 +50,18 @@ const ProfileImageUploader = () => {
   return (
     <div className="relative mb-6 h-[64px] w-[64px]">
       {isPending ? (
-        <div className="text-md-semibold flex h-full w-full items-center justify-center rounded-full bg-slate-500">
-          {/* 로딩 스피너 (리팩토링) */}
-          Loading...
+        <div className="flex h-full w-full items-center justify-center rounded-full bg-slate-800">
+          <Spinner size={32} color="text-slate-400" />
         </div>
-      ) : previewUrl ? (
-        <div className="relative h-full w-full">
+      ) : image ? (
+        <>
           <Image
-            src={previewUrl}
+            src={image}
             alt="프로필 미리보기"
             fill
-            style={{
-              objectFit: 'cover',
-              borderRadius: '50%',
-            }}
+            sizes="64px"
+            priority
+            className="rounded-full object-cover"
           />
           <label
             htmlFor="image-upload"
@@ -49,11 +69,11 @@ const ProfileImageUploader = () => {
           >
             <IconRenderer
               name="EditIcon"
-              size={18}
+              size={24}
               className="rounded-full border-2 border-slate-900 bg-slate-700"
             />
           </label>
-        </div>
+        </>
       ) : (
         <label
           htmlFor="image-upload"
@@ -67,7 +87,7 @@ const ProfileImageUploader = () => {
           <span className="absolute right-0 bottom-0">
             <IconRenderer
               name="EditIcon"
-              size={20}
+              size={24}
               className="rounded-full border-2 border-slate-900 bg-slate-700"
             />
           </span>

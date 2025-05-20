@@ -1,8 +1,47 @@
 'use client';
-import React from 'react';
 import Button from '@/components/common/Button';
+import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query';
+import { patchUser } from '@/lib/apis/user';
+import { toast } from 'react-toastify';
+import { getUser } from '@/lib/apis/user';
+import { UserResponse } from '@/lib/apis/user/type';
 
-const AccountUpdateButton = () => {
+interface AccountUpdateButtonProps {
+  name: string;
+  image: string | null;
+}
+
+const AccountUpdateButton = ({ name, image }: AccountUpdateButtonProps) => {
+  const queryClient = useQueryClient();
+
+  const { data: userData } = useQuery<UserResponse | null>({
+    queryKey: ['user'],
+    queryFn: () => getUser({ tag: ['user'] }),
+  });
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: () => {
+      const body: { nickname?: string; image?: string } = {};
+
+      if (name !== userData?.nickname) {
+        body.nickname = name;
+      }
+
+      if (image !== userData?.image) {
+        body.image = image || '';
+      }
+
+      return patchUser({ body });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['user'] });
+      toast.success('계정 정보가 성공적으로 업데이트되었습니다.');
+    },
+    onError: () => {
+      toast.error('계정 정보 업데이트에 실패했습니다.');
+    },
+  });
+
   return (
     <div className="mb-6">
       <Button
@@ -10,8 +49,10 @@ const AccountUpdateButton = () => {
         styleType="filled"
         radius="sm"
         className="w-full"
+        onClick={() => mutate()}
+        disabled={isPending}
       >
-        계정 정보 변경하기
+        {isPending ? '업데이트 중' : '이미지 / 이름 변경하기'}
       </Button>
     </div>
   );
