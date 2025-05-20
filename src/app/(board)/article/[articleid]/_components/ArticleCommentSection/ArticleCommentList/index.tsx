@@ -6,8 +6,8 @@ import { useIntersection } from '@/hooks/useIntersection';
 import { ArticleCommentListResponse } from '@/lib/apis/articleComment/type';
 import { getCommentsByArticleId } from '@/lib/apis/articleComment';
 import { toast } from 'react-toastify';
-import ArticleCommentCard from './ArticleCommentCard';
-import EditableArticleCommentCard from '@/app/(board)/article/[articleid]/ArticleCommentSection/ArticleCommentList/EditableArticleCommentCard';
+import ArticleCommentCard from '@/app/(board)/article/[articleid]/_components/ArticleCommentSection/ArticleCommentList/ArticleCommentCard';
+import EditableArticleCommentCard from '@/app/(board)/article/[articleid]/_components/ArticleCommentSection/ArticleCommentList/EditableArticleCommentCard';
 import Skeleton from '@/components/common/Loading/Skeleton';
 import Spinner from '@/components/common/Loading/Spinner';
 
