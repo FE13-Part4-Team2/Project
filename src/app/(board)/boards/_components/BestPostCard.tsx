@@ -35,7 +35,7 @@ export default function BestPostCard({
         <p className="text-lg-semibold text-white">Best</p>
       </div>
       <div className="tablet:gap-6 flex flex-col gap-4">
-        <div className="tablet:h-[96px] tablet:gap-4 flex h-[74px] gap-6">
+        <div className="tablet:h-[96px] tablet:gap-4 flex h-[74px] justify-between gap-6">
           <div className="flex flex-col justify-between">
             <Link href={ROUTES.ARTICLE(id)}>
               <p className="tablet:h-14 tablet:leading-7 tablet:text-2lg-medium text-md-medium line-clamp-2 h-12 leading-6 overflow-ellipsis text-slate-300">
