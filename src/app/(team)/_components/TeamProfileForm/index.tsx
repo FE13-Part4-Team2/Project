@@ -119,7 +119,7 @@ export default function TeamProfileForm({
           <button
             type="button"
             onClick={handleClearImage}
-            className="absolute top-0 right-0 flex h-5 w-5 items-center justify-center rounded-full bg-white"
+            className="absolute top-0 right-0 flex h-5 w-5 items-center justify-center rounded-full bg-gray-500 hover:bg-gray-100"
           >
             <IconRenderer name="XIcon" size={12} />
           </button>
