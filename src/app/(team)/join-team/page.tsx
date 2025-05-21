@@ -1,47 +1,40 @@
 'use client';
 
-import Button from '@/components/common/Button';
-import InputBase from '@/components/common/Input/InputBase';
+import JoinTeamForm from '@/app/(team)/_components/JoinTeamForm';
+import { ROUTES } from '@/constants/routes';
+import { useMemberships } from '@/hooks/useMemberships';
+import { postGroupInvitation } from '@/lib/apis/group';
+import { useRouter } from 'next/navigation';
 
 export default function JoinTeamPage() {
-  const handleSubmit = () => {
-    console.log('join team');
+  const router = useRouter();
+  const { memberships } = useMemberships(true);
+
+  const handleJoin = async (link: string) => {
+    const jwtRegex = /^[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+$/;
+    if (!jwtRegex.test(link)) {
+      throw new Error('유효한 링크가 아닙니다.');
+    }
+
+    const email = memberships[0]?.userEmail;
+    if (!email) {
+      throw new Error('유저 정보를 불러올 수 없습니다.');
+    }
+
+    const res = await postGroupInvitation({
+      body: { token: link, userEmail: email },
+    });
+
+    if (res?.groupId == null) {
+      throw new Error(res?.message || '초대 수락에 실패했습니다.');
+    }
+
+    router.push(ROUTES.TEAM(res.groupId));
   };
 
   return (
     <div className="flex w-full justify-center pt-35">
-      <div className="text-md-regular tablet:w-[456px] tablet:h-[460px] tablet:text-lg-regular flex h-[374px] w-[343px] flex-col items-center">
-        <h1 className="text-2xl-medium laptop:text-4xl-medium tablet:mb-20 mb-6">
-          팀 참여하기
-        </h1>
-
-        <div className="mb-10 w-full self-start">
-          <InputBase
-            id="teamName"
-            title="팀 링크"
-            placeholder="팀 링크를 입력해주세요."
-            autoComplete="off"
-            titleClassName="mb-6"
-            containerClassName={`w-full bg-slate-800`}
-            inputClassName="w-full h-11 tablet:h-12"
-          />
-        </div>
-        <div className="mb-12 w-full">
-          <Button
-            variant="primary"
-            styleType="filled"
-            size="lg"
-            radius="sm"
-            className="text-lg-semibold w-full"
-            onClick={handleSubmit}
-          >
-            참여하기
-          </Button>
-        </div>
-        <p className="text-md-regular tablet:text-lg-regular">
-          공유받은 팀 링크를 입력해 참여할 수 있어요.
-        </p>
-      </div>
+      <JoinTeamForm onSubmit={handleJoin} />
     </div>
   );
 }
