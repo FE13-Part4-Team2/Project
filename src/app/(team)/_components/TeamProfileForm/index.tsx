@@ -14,6 +14,8 @@ export interface TeamProfileFormProps {
   onSubmit: (data: { name: string; file?: File }) => Promise<void> | void;
 }
 
+const MAX_FILE_SIZE = 10 * 1024 * 1024;
+
 export default function TeamProfileForm({
   initialName = '',
   existingNames,
@@ -25,15 +27,27 @@ export default function TeamProfileForm({
   const [preview, setPreview] = useState(initialPreview);
   const [file, setFile] = useState<File>();
   const [nameError, setNameError] = useState(false);
+  const [imageError, setImageError] = useState('');
 
   useEffect(() => {
     setName(initialName);
     setPreview(initialPreview);
+    setFile(undefined);
+    setNameError(false);
+    setImageError('');
   }, [initialName, initialPreview]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selected = e.target.files?.[0];
     if (!selected) return;
+
+    if (selected.size > MAX_FILE_SIZE) {
+      setPreview(initialPreview);
+      setImageError('10MB 이하의 이미지만 업로드할 수 있습니다.');
+      return;
+    }
+
+    setImageError('');
     setFile(selected);
     setPreview(URL.createObjectURL(selected));
   };
@@ -52,6 +66,11 @@ export default function TeamProfileForm({
       setNameError(true);
       hasErr = true;
     }
+
+    if (imageError) {
+      hasErr = true;
+    }
+
     if (hasErr) return;
     await onSubmit({ name: name.trim(), file });
   };
@@ -79,7 +98,7 @@ export default function TeamProfileForm({
         </label>
         <label
           htmlFor="team-profile-input"
-          className="absolute bottom-0 left-11 flex h-5 w-5 cursor-pointer items-center justify-center rounded-full border-2 border-slate-900 bg-slate-600"
+          className="absolute top-19 left-11 flex h-5 w-5 cursor-pointer items-center justify-center rounded-full border-2 border-slate-900 bg-slate-600"
         >
           <IconRenderer name="EditIcon" size={9} />
         </label>
@@ -91,6 +110,9 @@ export default function TeamProfileForm({
           className="hidden"
           onChange={handleFileChange}
         />
+        {imageError && (
+          <p className="mt-1 text-xs text-red-500">{imageError}</p>
+        )}
       </div>
       <div className="mb-10 w-full self-start">
         <InputBase
