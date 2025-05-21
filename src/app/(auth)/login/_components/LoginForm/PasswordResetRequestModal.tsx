@@ -6,7 +6,7 @@ import { ResetPasswordToEmailBody } from '@/lib/apis/user/type';
 import { useModalStore } from '@/store/useModalStore';
 import { validateEmail } from '@/utils/inputValidation';
 import { useRouter } from 'next/navigation';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { toast } from 'react-toastify';
 
 export default function ForgotPasswordButton({ ...props }) {
@@ -14,6 +14,29 @@ export default function ForgotPasswordButton({ ...props }) {
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
   const { setRequestBody } = useModalStore();
+
+  //   // const { email } = newBody as { email: string };
+
+  useEffect(() => {
+    // requestBody 에서 email 을 추출
+    const unsubscribe = useModalStore.subscribe(
+      (state) => state.requestBody, // 구독할 상태를 선택하는 함수. selectorFn
+      // 해당 상태가 변경됬을 때 실행될 함수. listenerFn
+      // newRequestBody : 최신 상태
+      (newRequestBody) => {
+        if (newRequestBody?.email) {
+          const requestBody = {
+            email: newRequestBody.email,
+            redirectUrl: `${window.location.origin}/`,
+          };
+          handleSendResetPasswordLink(requestBody);
+        }
+      }
+    );
+    return () => {
+      unsubscribe(); // 언마운트, 구독 해제
+    };
+  }, []);
 
   // send reset password link
   const handleSendResetPasswordLink = async (
@@ -60,18 +83,8 @@ export default function ForgotPasswordButton({ ...props }) {
                   const email = inputRef.current?.value.trim();
                   if (!email) return;
                   if (validateEmail(email)) {
-                    setRequestBody({ email });
+                    setRequestBody({ email }); // Zustand requestBody 설정
                   }
-
-                  // const { email } = newBody as { email: string };
-
-                  const requestBodyApi: ResetPasswordToEmailBody = {
-                    email,
-                    redirectUrl: `${window.location.origin}/`,
-                  };
-
-                  console.log('requestBody:', requestBodyApi); // x
-                  handleSendResetPasswordLink(requestBodyApi);
                 },
               },
             },
