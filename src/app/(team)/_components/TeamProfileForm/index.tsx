@@ -41,15 +41,22 @@ export default function TeamProfileForm({
     const selected = e.target.files?.[0];
     if (!selected) return;
 
+    setPreview(URL.createObjectURL(selected));
+
     if (selected.size > MAX_FILE_SIZE) {
-      setPreview(initialPreview);
       setImageError('10MB 이하의 이미지만 업로드할 수 있습니다.');
+      setFile(undefined);
       return;
     }
 
     setImageError('');
     setFile(selected);
-    setPreview(URL.createObjectURL(selected));
+  };
+
+  const handleClearImage = () => {
+    setImageError('');
+    setFile(undefined);
+    setPreview('');
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -61,7 +68,6 @@ export default function TeamProfileForm({
 
   const handleSubmit = async () => {
     let hasErr = false;
-
     if (existingNames.includes(name.trim())) {
       setNameError(true);
       hasErr = true;
@@ -70,10 +76,12 @@ export default function TeamProfileForm({
     if (imageError) {
       hasErr = true;
     }
-
     if (hasErr) return;
+
     await onSubmit({ name: name.trim(), file });
   };
+
+  const isDisabled = !name.trim() || Boolean(imageError);
 
   return (
     <div className="text-md-regular tablet:w-[460px] tablet:text-lg-regular flex w-[343px] flex-col items-center">
@@ -103,6 +111,16 @@ export default function TeamProfileForm({
           <IconRenderer name="EditIcon" size={9} />
         </label>
 
+        {preview && (
+          <button
+            type="button"
+            onClick={handleClearImage}
+            className="absolute top-0 right-0 flex h-5 w-5 items-center justify-center rounded-full bg-white"
+          >
+            <IconRenderer name="XIcon" size={12} />
+          </button>
+        )}
+
         <input
           id="team-profile-input"
           type="file"
@@ -110,10 +128,12 @@ export default function TeamProfileForm({
           className="hidden"
           onChange={handleFileChange}
         />
+
         {imageError && (
           <p className="mt-1 text-xs text-red-500">{imageError}</p>
         )}
       </div>
+
       <div className="mb-10 w-full self-start">
         <InputBase
           id="teamName"
@@ -137,6 +157,7 @@ export default function TeamProfileForm({
           </p>
         )}
       </div>
+
       <div className="mb-6 w-full">
         <Button
           variant="primary"
@@ -145,11 +166,12 @@ export default function TeamProfileForm({
           radius="sm"
           className="text-lg-semibold w-full"
           onClick={handleSubmit}
-          disabled={!name.trim()}
+          disabled={isDisabled}
         >
           {submitLabel}
         </Button>
       </div>
+
       <p className="text-md-regular tablet:text-lg-regular">
         팀 이름은 회사명이나 모임 이름 등으로 설정하면 좋아요.
       </p>

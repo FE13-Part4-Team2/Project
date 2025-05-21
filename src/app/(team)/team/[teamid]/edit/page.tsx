@@ -49,7 +49,7 @@ export default function EditTeamPage() {
   const openDeleteTaskModal = () => {
     openModal({
       variant: 'danger',
-      title: `'${group.name}'\n\n팀을 정말 삭제하시겠어요?`,
+      title: `${group.name}'\n\n팀을 정말 삭제하시겠어요?`,
       description: '삭제 후에는 되돌릴 수 없습니다.',
       button: {
         number: 2,
