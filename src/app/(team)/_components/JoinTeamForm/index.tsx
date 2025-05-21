@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import InputBase from '@/components/common/Input/InputBase';
 import Button from '@/components/common/Button';
+import { INVITATION_ERROR_MAP } from '@/utils/errorMap';
 
 export interface JoinTeamFormProps {
   onSubmit: (link: string) => void | Promise<void>;
@@ -26,8 +27,9 @@ export default function JoinTeamForm({ onSubmit }: JoinTeamFormProps) {
     try {
       await onSubmit(link.trim());
     } catch (err: unknown) {
+      const raw = err instanceof Error ? err.message : '';
       setError(
-        err instanceof Error ? err.message : '알 수 없는 오류가 발생했습니다.'
+        INVITATION_ERROR_MAP[raw] ?? '초대 수락 중 오류가 발생했습니다.'
       );
     }
   };
@@ -40,7 +42,7 @@ export default function JoinTeamForm({ onSubmit }: JoinTeamFormProps) {
   };
 
   return (
-    <div className="text-md-regular tablet:w-[456px] tablet:h-[460px] tablet:text-lg-regular flex h-[374px] w-[343px] flex-col items-center">
+    <div className="text-md-regular tablet:w-[460px] tablet:text-lg-regular flex w-[343px] flex-col items-center">
       <h1 className="text-2xl-medium laptop:text-4xl-medium tablet:mb-20 mb-6">
         팀 참여하기
       </h1>
@@ -57,13 +59,13 @@ export default function JoinTeamForm({ onSubmit }: JoinTeamFormProps) {
           }}
           onKeyDown={handleKeyDown}
           autoComplete="off"
-          titleClassName="mb-6"
-          containerClassName="w-full bg-slate-800"
+          titleClassName="mb-3"
+          containerClassName="h-11 tablet:h-12ll  bg-slate-800"
           inputClassName="w-full h-11 tablet:h-12"
         />
         {error && <p className="text-md-medium mt-2 text-red-500">{error}</p>}
       </div>
-      <div className="mb-12 w-full">
+      <div className="mb-6 w-full">
         <Button
           variant="primary"
           styleType="filled"

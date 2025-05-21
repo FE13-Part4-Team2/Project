@@ -57,7 +57,7 @@ export default function TeamProfileForm({
   };
 
   return (
-    <div className="text-md-regular tablet:w-[456px] tablet:h-[460px] tablet:text-lg-regular flex h-[374px] w-[343px] flex-col items-center">
+    <div className="text-md-regular tablet:w-[460px] tablet:text-lg-regular flex w-[343px] flex-col items-center">
       <h1 className="text-2xl-medium laptop:text-4xl-medium tablet:mb-20 mb-6">
         {submitLabel}
       </h1>
@@ -92,7 +92,7 @@ export default function TeamProfileForm({
           onChange={handleFileChange}
         />
       </div>
-      <div className="mb-6 w-full self-start">
+      <div className="mb-10 w-full self-start">
         <InputBase
           id="teamName"
           title="팀 이름"
@@ -105,8 +105,8 @@ export default function TeamProfileForm({
             setNameError(false);
           }}
           onKeyDown={handleKeyDown}
-          titleClassName="mb-2"
-          containerClassName="h-12 bg-slate-800"
+          titleClassName="mb-3"
+          containerClassName=" h-11 tablet:h-12 bg-slate-800"
           inputClassName="w-full h-11 tablet:h-12"
         />
         {nameError && (
@@ -115,7 +115,7 @@ export default function TeamProfileForm({
           </p>
         )}
       </div>
-      <div className="mb-4 w-full">
+      <div className="mb-6 w-full">
         <Button
           variant="primary"
           styleType="filled"
