@@ -1,5 +1,3 @@
-'use client';
-
 import InputBase from '@/components/common/Input/InputBase';
 import Button from '@/components/common/Button';
 

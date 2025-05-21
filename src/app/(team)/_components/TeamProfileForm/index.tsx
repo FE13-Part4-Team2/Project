@@ -1,5 +1,3 @@
-'use client';
-
 import { useEffect, useState } from 'react';
 import InputBase from '@/components/common/Input/InputBase';
 import Button from '@/components/common/Button';
@@ -84,7 +82,7 @@ export default function TeamProfileForm({
     }
     if (hasErr) return;
 
-    await onSubmit({ name: name.trim(), file,removeImage });
+    await onSubmit({ name: name.trim(), file, removeImage });
   };
 
   const isDisabled = !name.trim() || Boolean(imageError);
