@@ -16,7 +16,7 @@ export interface TeamProfileFormProps {
   }) => Promise<void> | void;
 }
 
-const MAX_FILE_SIZE = 10 * 1024 * 1024;
+const MAX_FILE_SIZE = 4.2 * 1024 * 1024;
 
 export default function TeamProfileForm({
   initialName = '',
@@ -46,7 +46,7 @@ export default function TeamProfileForm({
     setPreview(URL.createObjectURL(selected));
 
     if (selected.size > MAX_FILE_SIZE) {
-      setImageError('10MB 이하의 이미지만 업로드할 수 있습니다.');
+      setImageError('4.2MB 이하의 이미지만 업로드할 수 있습니다.');
       setFile(undefined);
       return;
     }
