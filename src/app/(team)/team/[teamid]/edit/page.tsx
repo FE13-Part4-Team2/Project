@@ -36,8 +36,16 @@ export default function EditTeamPage() {
 
   const group = groupQuery.data;
 
-  const handleEdit = async ({ name, file }: { name: string; file?: File }) => {
-    await updateGroup.mutateAsync({ name, file });
+  const handleEdit = async ({
+    name,
+    file,
+    removeImage,
+  }: {
+    name: string;
+    file?: File;
+    removeImage?: boolean;
+  }) => {
+    await updateGroup.mutateAsync({ name, file, removeImage });
     router.replace(ROUTES.TEAM(id));
   };
 

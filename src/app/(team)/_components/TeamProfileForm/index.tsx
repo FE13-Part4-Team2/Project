@@ -11,7 +11,11 @@ export interface TeamProfileFormProps {
   existingNames: string[];
   initialPreview?: string;
   submitLabel: string;
-  onSubmit: (data: { name: string; file?: File }) => Promise<void> | void;
+  onSubmit: (data: {
+    name: string;
+    file?: File;
+    removeImage?: boolean;
+  }) => Promise<void> | void;
 }
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024;
@@ -66,6 +70,8 @@ export default function TeamProfileForm({
     }
   };
 
+  const removeImage = preview === '' && !file;
+
   const handleSubmit = async () => {
     let hasErr = false;
     if (existingNames.includes(name.trim())) {
@@ -78,7 +84,7 @@ export default function TeamProfileForm({
     }
     if (hasErr) return;
 
-    await onSubmit({ name: name.trim(), file });
+    await onSubmit({ name: name.trim(), file,removeImage });
   };
 
   const isDisabled = !name.trim() || Boolean(imageError);
