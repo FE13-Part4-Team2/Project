@@ -19,9 +19,7 @@ export default function JoinTeamPage() {
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (error) {
-      setError(undefined);
-    }
+    setError(undefined);
   }, [link]);
 
   const handleJoin = async () => {
