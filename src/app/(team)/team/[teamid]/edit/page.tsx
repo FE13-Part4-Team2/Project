@@ -10,6 +10,7 @@ import {
   useGroup,
   useUpdateGroup,
 } from '@/hooks/useGroupQueries';
+import Spinner from '@/components/common/Loading/Spinner';
 
 export default function EditTeamPage() {
   const router = useRouter();
@@ -22,7 +23,11 @@ export default function EditTeamPage() {
   const { openModal } = useModalStore();
 
   if (groupQuery.isLoading) {
-    return <p>팀 정보를 불러오는 중...</p>;
+    return (
+      <div className="mt-30 flex h-full w-full items-center justify-center">
+        <Spinner size={48} />
+      </div>
+    );
   }
 
   if (groupQuery.isError || !groupQuery.data) {
