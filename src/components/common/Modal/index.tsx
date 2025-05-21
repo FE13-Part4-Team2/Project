@@ -27,16 +27,29 @@ export default function Modal() {
   useClosePopup(modalRef, closeModal);
   useLockBackgroundScroll(isModalOpen);
 
-  // ResetPasswordModal IIFE 호출에 따라 onRequest 실행 시점 조절을 위한 타이밍 처리
+  // button 클릭 시 실행되는 함수 (form 존재 여부에 따른 분기 처리 )
   const handleRequest = () => {
     isSubmittedRef.current = true;
-    console.log('handleRequest');
-    if (isSubmittedRef.current) {
-      button?.onRequest?.(requestBody);
-      console.log('handleRequest 실행');
-      closeModal();
-      isSubmittedRef.current = false;
+
+    // 기존 모달 흐름
+    if (!formId) {
+      if (isSubmittedRef.current) {
+        button?.onRequest?.(requestBody);
+        closeModal();
+        isSubmittedRef.current = false;
+        console.log('handleRequest 실행');
+        return;
+      }
     }
+
+    // formId 존재 (브라우저 submit 트리거)
+    const form = document.getElementById(
+      formId as string
+    ) as HTMLFormElement | null;
+    if (form) {
+      form.requestSubmit(); // 폼 제출만 담당
+    }
+    isSubmittedRef.current = false;
   };
 
   if (!isModalOpen) return null;
