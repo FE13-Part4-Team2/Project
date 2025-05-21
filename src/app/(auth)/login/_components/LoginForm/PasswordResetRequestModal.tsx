@@ -4,12 +4,16 @@ import ResetPasswordLinkModal from '@/components/common/Modal/content/ResetPassw
 import { postResetPasswordToEmail } from '@/lib/apis/user';
 import { ResetPasswordToEmailBody } from '@/lib/apis/user/type';
 import { useModalStore } from '@/store/useModalStore';
+import { validateEmail } from '@/utils/inputValidation';
 import { useRouter } from 'next/navigation';
+import { useRef } from 'react';
 import { toast } from 'react-toastify';
 
 export default function ForgotPasswordButton({ ...props }) {
   const { openModal } = useModalStore();
   const router = useRouter();
+  const inputRef = useRef<HTMLInputElement>(null);
+  const { setRequestBody } = useModalStore();
 
   // send reset password link
   const handleSendResetPasswordLink = async (
@@ -51,17 +55,27 @@ export default function ForgotPasswordButton({ ...props }) {
                 formId: 'reset-password-form', // formId 연결
                 number: 2,
                 text: '링크 보내기',
-                onRequest: (body) => {
-                  const { email } = body as { email: string };
+                onRequest: () => {
+                  // 이메일 유효성 검사
+                  const email = inputRef.current?.value.trim();
+                  if (!email) return;
+                  if (validateEmail(email)) {
+                    setRequestBody({ email });
+                  }
 
-                  const requestBody: ResetPasswordToEmailBody = {
+                  // const { email } = newBody as { email: string };
+
+                  const requestBodyApi: ResetPasswordToEmailBody = {
                     email,
                     redirectUrl: `${window.location.origin}/`,
                   };
-                  handleSendResetPasswordLink(requestBody);
+
+                  console.log('requestBody:', requestBodyApi); // x
+                  handleSendResetPasswordLink(requestBodyApi);
                 },
               },
             },
+
             (() => <ResetPasswordLinkModal />)()
           );
         }}
