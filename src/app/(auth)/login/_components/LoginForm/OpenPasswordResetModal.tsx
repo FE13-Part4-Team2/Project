@@ -1,36 +1,32 @@
 'use client';
 
-import ResetPasswordLinkModal from '@/components/common/Modal/content/ResetPasswordLinkModal';
+import ResetPasswordModal from '@/components/common/Modal/content/ResetPasswordModal';
 import { postResetPasswordToEmail } from '@/lib/apis/user';
 import { ResetPasswordToEmailBody } from '@/lib/apis/user/type';
 import { useModalStore } from '@/store/useModalStore';
-import { validateEmail } from '@/utils/inputValidation';
 import { useRouter } from 'next/navigation';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 
-export default function ForgotPasswordButton({ ...props }) {
+export default function OpenPasswordResetModal({ ...props }) {
   const { openModal } = useModalStore();
   const router = useRouter();
-  const inputRef = useRef<HTMLInputElement>(null);
-  const { setRequestBody } = useModalStore();
-
-  //   // const { email } = newBody as { email: string };
 
   useEffect(() => {
-    // requestBody 에서 email 을 추출
     const unsubscribe = useModalStore.subscribe(
-      (state) => state.requestBody, // 구독할 상태를 선택하는 함수. selectorFn
-      // 해당 상태가 변경됬을 때 실행될 함수. listenerFn
-      // newRequestBody : 최신 상태
+      (state) => state.requestBody, // selector
+      // listener
       (newRequestBody) => {
-        if (newRequestBody?.email) {
-          const requestBody = {
-            email: newRequestBody.email,
-            redirectUrl: `${window.location.origin}/`,
-          };
-          handleSendResetPasswordLink(requestBody);
-        }
+        if (!newRequestBody) return;
+        const { email } = newRequestBody as { email: string };
+
+        if (!email) return;
+
+        const requestBody = {
+          email,
+          redirectUrl: `${window.location.origin}/`,
+        };
+        handleSendResetPasswordLink(requestBody);
       }
     );
     return () => {
@@ -78,18 +74,12 @@ export default function ForgotPasswordButton({ ...props }) {
                 formId: 'reset-password-form', // formId 연결
                 number: 2,
                 text: '링크 보내기',
-                onRequest: () => {
-                  // 이메일 유효성 검사
-                  const email = inputRef.current?.value.trim();
-                  if (!email) return;
-                  if (validateEmail(email)) {
-                    setRequestBody({ email }); // Zustand requestBody 설정
-                  }
-                },
+                // 기존 모달 컴포넌트의 onRequest 호출 방식과의 일관성을 위해 빈 함수 전달
+                onRequest: () => {},
               },
             },
 
-            (() => <ResetPasswordLinkModal />)()
+            (() => <ResetPasswordModal />)()
           );
         }}
         {...props}
