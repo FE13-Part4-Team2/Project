@@ -32,6 +32,7 @@ export default function TeamMenu({
   useEffect(() => {
     if (teamId == null || isNaN(teamId)) return;
     if (selectedGroup?.id === teamId) return;
+
     const found = memberships.find(
       (membership) => membership.group.id === teamId
     );
@@ -40,25 +41,35 @@ export default function TeamMenu({
     }
   }, [teamId, memberships, selectedGroup, onSelect]);
 
-  const label = teamId != null ? selectedGroup?.name : '팀 목록';
-  const close = () => setIsOpen(false);
-
-  const baseLink = selectedGroup
-    ? ROUTES.TEAM(selectedGroup.id)
-    : ROUTES.TEAM_NO;
+  const dropdpwnClose = () => setIsOpen(false);
+  const dropdownOpen = () => setIsOpen((prev) => !prev);
 
   return (
     <div className="relative ml-8 flex gap-3">
-      <Link href={baseLink} className="text-md font-medium hover:text-gray-700">
-        {label}
-      </Link>
+      {teamId !== undefined && selectedGroup ? (
+        <Link
+          href={ROUTES.TEAM(selectedGroup.id)}
+          className="text-md truncate font-medium hover:text-gray-700"
+          onClick={dropdpwnClose}
+        >
+          {selectedGroup.name}
+        </Link>
+      ) : (
+        <button
+          type="button"
+          className="text-md font-medium hover:text-gray-700"
+          onClick={dropdownOpen}
+        >
+          팀 목록
+        </button>
+      )}
 
       <button
         type="button"
         className={`z-50 cursor-pointer hover:text-gray-700 ${
           isOpen ? 'rotate-180' : ''
         } transition-transform`}
-        onClick={() => setIsOpen((o) => !o)}
+        onClick={dropdownOpen}
       >
         <IconRenderer name="CheckIcon" className="hover:text-gray-700" />
       </button>
@@ -68,7 +79,7 @@ export default function TeamMenu({
           <button
             type="button"
             className="fixed inset-0 z-40 cursor-default"
-            onClick={close}
+            onClick={dropdpwnClose}
           />
 
           <div className="absolute top-[45px] left-[-140px] z-50 flex w-[240px] flex-col gap-4 rounded-xl border border-slate-50/10 bg-slate-800 p-4">
