@@ -25,6 +25,9 @@ export default function TeamMenu({
   const teamId = teamIdParam ? Number(teamIdParam) : undefined;
 
   const [isOpen, setIsOpen] = useState(false);
+  const sortedMemberships = [...memberships].sort(
+    (a, b) => a.group.id - b.group.id
+  );
 
   useEffect(() => {
     if (teamId == null || isNaN(teamId)) return;
@@ -70,7 +73,7 @@ export default function TeamMenu({
 
           <div className="absolute top-[45px] left-[-140px] z-50 flex w-[240px] flex-col gap-4 rounded-xl border border-slate-50/10 bg-slate-800 p-4">
             <div className="header-scroll flex max-h-[350px] flex-col gap-4 overflow-y-auto">
-              {memberships.map(({ group, role }) => (
+              {sortedMemberships.map(({ group, role }) => (
                 <div
                   key={group.id}
                   className="flex items-center gap-x-3 rounded-md px-2 py-2"

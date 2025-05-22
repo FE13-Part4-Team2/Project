@@ -14,6 +14,10 @@ export default function SideMenu({
   onClose: () => void;
   memberships: UserMembershipResponse[];
 }) {
+  const sortedMemberships = [...memberships].sort(
+    (a, b) => a.group.id - b.group.id
+  );
+
   return (
     <>
       {isSideMenuOpen && (
@@ -38,7 +42,7 @@ export default function SideMenu({
             </div>
 
             <ul className="header-scroll flex h-[700px] flex-col gap-6 overflow-y-auto overscroll-contain text-sm font-normal">
-              {memberships.map(({ group, role }) => (
+              {sortedMemberships.map(({ group, role }) => (
                 <li
                   key={group.id}
                   className="flex items-center justify-between"
