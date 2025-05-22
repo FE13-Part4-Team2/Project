@@ -37,7 +37,7 @@ const resetPasswordSchema = z
         path: ['password'],
         code: z.ZodIssueCode.custom,
         message:
-          '비밀번호는 영문, 숫자, 특수문자를 포함한 8자 이상이어야 합니다.',
+          '비밀번호는 영문, 숫자, 특수문자를 포함한 8자 이상이어야 합니다∆.',
       });
     }
 
@@ -122,8 +122,7 @@ export default function ResetPasswordForm() {
 
     try {
       const token = searchParams.get('token');
-      if (!token) return; // null
-
+      if (!token) return; // null 방어 처리
       const res = await patchResetPassword({
         body: {
           passwordConfirmation: formValues.passwordConfirm,
