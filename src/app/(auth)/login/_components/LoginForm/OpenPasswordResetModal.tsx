@@ -53,7 +53,6 @@ export default function OpenPasswordResetModal({ ...props }) {
         // 존재하지 않는 유저 : User not found
         if (errorMessage.includes('User not found')) {
           toast.error('존재하지 않는 이메일입니다. 회원가입을 먼저 해주세요.');
-          router.push('/signup');
         } else {
           toast.error(`Error : ${error}`);
         }
