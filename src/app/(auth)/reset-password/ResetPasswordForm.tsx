@@ -24,7 +24,6 @@ const resetPasswordSchema = z
     const { password, passwordConfirm } = val;
 
     if (!password) {
-      // 비밀번호가 비어있음
       ctx.addIssue({
         path: ['password'],
         code: z.ZodIssueCode.custom,
@@ -32,7 +31,6 @@ const resetPasswordSchema = z
         fatal: true, // 조건 실패 시, 유효성 검사 중단
       });
     } else if (!validatePassword(password)) {
-      // 비밀번호가 입력은 되었지만, 유효하지 않음
       ctx.addIssue({
         path: ['password'],
         code: z.ZodIssueCode.custom,
@@ -42,7 +40,6 @@ const resetPasswordSchema = z
     }
 
     if (!passwordConfirm) {
-      // 비밀번호 확인이 비어있는 경우
       ctx.addIssue({
         path: ['passwordConfirm'],
         code: z.ZodIssueCode.custom,
@@ -50,7 +47,6 @@ const resetPasswordSchema = z
         fatal: true,
       });
     } else if (!validatePasswordConfirm({ password, passwordConfirm })) {
-      // 비밀번호 확인이 입력은 되었지만, 비밀번호와 일치하지 않음
       ctx.addIssue({
         path: ['passwordConfirm'],
         code: z.ZodIssueCode.custom,
@@ -122,7 +118,12 @@ export default function ResetPasswordForm() {
 
     try {
       const token = searchParams.get('token');
-      if (!token) return; // null 방어 처리
+      // early return
+      if (!token) {
+        toast.error('유효하지 않은 링크입니다. 다시 시도해주세요.');
+        return;
+      }
+
       const res = await patchResetPassword({
         body: {
           passwordConfirmation: formValues.passwordConfirm,
