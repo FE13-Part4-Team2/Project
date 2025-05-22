@@ -61,7 +61,7 @@ export default function SideMenu({
                 </Link>
               </li>
               {!!sortedMemberships.length && (
-                <li className="mx-auto">- 팀 목록 -</li>
+                <li className="mx-auto text-slate-300">- 팀 목록 -</li>
               )}
               {sortedMemberships.map(({ group, role }) => (
                 <li
