@@ -4,12 +4,13 @@ import ResetPasswordModal from '@/components/common/Modal/content/ResetPasswordM
 import { postResetPasswordToEmail } from '@/lib/apis/user';
 import { ResetPasswordToEmailBody } from '@/lib/apis/user/type';
 import { useModalStore } from '@/store/useModalStore';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 
 export default function OpenPasswordResetModal({ ...props }) {
   const { openModal } = useModalStore();
+  const pathName = usePathname();
   const router = useRouter();
 
   useEffect(() => {
@@ -78,7 +79,6 @@ export default function OpenPasswordResetModal({ ...props }) {
                 onRequest: () => {},
               },
             },
-
             (() => <ResetPasswordModal />)()
           );
         }}

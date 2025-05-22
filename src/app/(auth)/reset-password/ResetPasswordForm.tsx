@@ -2,11 +2,15 @@
 
 import InputWithLabel from '@/components/auth/InputWithLabel';
 import Button from '@/components/common/Button';
+import { ROUTES } from '@/constants/routes';
+import { patchResetPassword } from '@/lib/apis/user';
 import {
   validatePassword,
   validatePasswordConfirm,
 } from '@/utils/inputValidation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useMemo, useState } from 'react';
+import { toast } from 'react-toastify';
 import { z } from 'zod';
 
 // reset password schema
@@ -71,6 +75,9 @@ export default function ResetPasswordForm() {
     passwordConfirm: [],
   });
 
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
   const isFormValid = useMemo(() => {
     return (
       formValues.password !== '' &&
@@ -102,12 +109,42 @@ export default function ResetPasswordForm() {
       setFormValues(newFormValues);
     };
 
-  const handleFormSubmit = () => {
-    console.log('form submit');
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!isFormValid) return;
+
+    // formErrors 초기화
     setFormErrors({
       password: [],
       passwordConfirm: [],
     });
+
+    try {
+      const token = searchParams.get('token');
+      if (!token) return; // null
+
+      const res = await patchResetPassword({
+        body: {
+          passwordConfirmation: formValues.passwordConfirm,
+          password: formValues.password,
+          token,
+        },
+      });
+      console.log('res', res);
+      toast.success('비밀번호 재설정이 완료되었습니다.');
+      router.push(ROUTES.LOGIN);
+    } catch (error) {
+      if (error instanceof Error) {
+        const errorMessage = error.message;
+        if (errorMessage.includes('유효하지 않은 토큰입니다.')) {
+          toast.error(
+            '비밀번호 재설정 링크카 만료되었습니다. 다시 요청해주세요.'
+          );
+        }
+        console.error(errorMessage);
+      }
+    }
   };
   return (
     <form onSubmit={handleFormSubmit}>
