@@ -45,11 +45,11 @@ export default function TeamMenu({
   const dropdownOpen = () => setIsOpen((prev) => !prev);
 
   return (
-    <div className="relative ml-8 flex gap-3">
+    <div className="ml-8 flex items-center gap-3">
       {teamId !== undefined && selectedGroup ? (
         <Link
           href={ROUTES.TEAM(selectedGroup.id)}
-          className="text-md truncate font-medium hover:text-gray-700"
+          className="text-md max-w-60 truncate font-medium hover:text-gray-700"
           onClick={dropdpwnClose}
         >
           {selectedGroup.name}
@@ -63,91 +63,91 @@ export default function TeamMenu({
           팀 목록
         </button>
       )}
+      <div className="relative flex items-center">
+        <button
+          type="button"
+          className={`z-50 cursor-pointer hover:text-gray-700 ${
+            isOpen ? 'rotate-180' : ''
+          } transition-transform`}
+          onClick={dropdownOpen}
+        >
+          <IconRenderer name="CheckIcon" className="hover:text-gray-700" />
+        </button>
 
-      <button
-        type="button"
-        className={`z-50 cursor-pointer hover:text-gray-700 ${
-          isOpen ? 'rotate-180' : ''
-        } transition-transform`}
-        onClick={dropdownOpen}
-      >
-        <IconRenderer name="CheckIcon" className="hover:text-gray-700" />
-      </button>
+        {isOpen && (
+          <>
+            <button
+              type="button"
+              className="fixed inset-0 z-40 cursor-default"
+              onClick={dropdpwnClose}
+            />
 
-      {isOpen && (
-        <>
-          <button
-            type="button"
-            className="fixed inset-0 z-40 cursor-default"
-            onClick={dropdpwnClose}
-          />
-
-          <div className="absolute top-[45px] left-[-140px] z-50 flex w-[240px] flex-col gap-4 rounded-xl border border-slate-50/10 bg-slate-800 p-4">
-            <div className="header-scroll flex max-h-[350px] flex-col gap-4 overflow-y-auto">
-              {sortedMemberships.map(({ group, role }) => (
-                <div
-                  key={group.id}
-                  className="flex items-center gap-x-3 rounded-md px-2 py-2"
-                >
-                  <Link
-                    href={ROUTES.TEAM(group.id)}
-                    className="py flex flex-1 items-center gap-x-3 rounded-md p-1 transition-colors hover:bg-slate-700"
-                    onClick={() => {
-                      onSelect(group);
-                      setIsOpen(false);
-                    }}
+            <div className="absolute top-12 right-0 z-50 mt-2 flex w-[240px] flex-col gap-4 rounded-xl border border-slate-50/10 bg-slate-800 p-4">
+              <div className="header-scroll flex max-h-[350px] flex-col gap-4 overflow-y-auto">
+                {sortedMemberships.map(({ group, role }) => (
+                  <div
+                    key={group.id}
+                    className="flex items-center gap-x-3 rounded-md px-2 py-2"
                   >
-                    <div className="relative h-8 w-8">
-                      {group.image ? (
-                        <Image
-                          src={`${group.image}`}
-                          alt={group.name}
-                          fill
-                          // 임시조치 - 나중에 도메인 추가 예정
-                          unoptimized
-                          className="rounded-sm object-cover"
-                        />
-                      ) : (
-                        <IconRenderer name="ImgIcon" size={32} />
-                      )}
-                    </div>
-                    <span className="text-sm whitespace-nowrap">
-                      {group.name}
-                    </span>
-                  </Link>
-
-                  {role === 'ADMIN' && (
                     <Link
-                      href={ROUTES.TEAM_EDIT(group.id)}
-                      onClick={() => setIsOpen(false)}
+                      href={ROUTES.TEAM(group.id)}
+                      className="py flex min-w-0 flex-1 items-center gap-x-3 rounded-md p-1 transition-colors hover:bg-slate-700"
+                      onClick={() => {
+                        onSelect(group);
+                        setIsOpen(false);
+                      }}
                     >
-                      <IconRenderer
-                        name="EditIcon"
-                        size={20}
-                        className="cursor-pointer hover:text-green-700"
-                      />
+                      <div className="relative h-8 w-8">
+                        {group.image ? (
+                          <Image
+                            src={`${group.image}`}
+                            alt={group.name}
+                            fill
+                            // 임시조치 - 나중에 도메인 추가 예정
+                            unoptimized
+                            className="rounded-sm object-cover"
+                          />
+                        ) : (
+                          <IconRenderer name="ImgIcon" size={32} />
+                        )}
+                      </div>
+                      <span className="truncate text-sm">{group.name}</span>
                     </Link>
-                  )}
-                </div>
-              ))}
-            </div>
 
-            <Link href={ROUTES.TEAM_ADD}>
-              <Button
-                variant="floating"
-                styleType="transparent"
-                radius="sm"
-                size="lg"
-                className="!w-full"
-                startIcon="plus"
-                onClick={close}
-              >
-                팀 추가하기
-              </Button>
-            </Link>
-          </div>
-        </>
-      )}
+                    {role === 'ADMIN' && (
+                      <Link
+                        href={ROUTES.TEAM_EDIT(group.id)}
+                        className="ml-2 flex-shrink-0"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        <IconRenderer
+                          name="EditIcon"
+                          size={20}
+                          className="ml-auto flex-shrink-0 cursor-pointer hover:text-green-700"
+                        />
+                      </Link>
+                    )}
+                  </div>
+                ))}
+              </div>
+
+              <Link href={ROUTES.TEAM_ADD}>
+                <Button
+                  variant="floating"
+                  styleType="transparent"
+                  radius="sm"
+                  size="lg"
+                  className="!w-full"
+                  startIcon="plus"
+                  onClick={close}
+                >
+                  팀 추가하기
+                </Button>
+              </Link>
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 }
