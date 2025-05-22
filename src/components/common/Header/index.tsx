@@ -49,6 +49,7 @@ export default function Header() {
       sameSite: 'Strict',
     });
     Cookies.remove('userId', { path: '/', secure: true, sameSite: 'Strict' });
+    location.href = '/';
     toast.success('로그아웃 되었습니다');
   };
 
