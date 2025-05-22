@@ -37,9 +37,18 @@ export default function Header() {
   });
 
   const handleLogout = () => {
-    Cookies.remove('accessToken', { path: '/' });
-    Cookies.remove('refreshToken', { path: '/' });
-    Cookies.remove('userId', { path: '/' });
+    Cookies.remove('accessToken', {
+      path: '/',
+      secure: true,
+      sameSite: 'Strict',
+    });
+
+    Cookies.remove('refreshToken', {
+      path: '/',
+      secure: true,
+      sameSite: 'Strict',
+    });
+    Cookies.remove('userId', { path: '/', secure: true, sameSite: 'Strict' });
     toast.success('로그아웃 되었습니다');
   };
 
