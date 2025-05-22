@@ -188,7 +188,7 @@ export default function LoginForm() {
 
   return (
     <form onSubmit={handleFormSubmit}>
-      <h1 className="text-4xl-medium mb-20 text-center">로그인</h1>
+      <h1 className="text-4xl-medium tablet:mb-20 mb-10 text-center">로그인</h1>
 
       <div className="flex flex-col gap-6">
         <InputWithLabel
@@ -212,7 +212,7 @@ export default function LoginForm() {
         variant="primary"
         styleType="filled"
         radius="sm"
-        className="w-[460px]"
+        className="w-full"
         disabled={!isFormValid}
       >
         로그인
