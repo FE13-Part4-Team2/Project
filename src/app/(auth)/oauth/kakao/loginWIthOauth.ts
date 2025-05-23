@@ -40,19 +40,19 @@ export default async function loginWithOauth({
     cookieStore.set('accessToken', accessToken, {
       path: '/',
       secure: true,
-      httpOnly: true,
+      //httpOnly: true,
       sameSite: 'strict',
     });
     cookieStore.set('refreshToken', refreshToken, {
       path: '/',
       secure: true,
-      httpOnly: true,
+      // httpOnly: true,
       sameSite: 'strict',
     });
     cookieStore.set('userId', user.id.toString(), {
       path: '/',
       secure: true,
-      httpOnly: true,
+      // httpOnly: true,
       sameSite: 'strict',
     });
     console.log('로그인 성공:', data);
