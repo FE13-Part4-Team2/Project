@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import fetcher from '@/lib/client/fetcher.client';
 import { UserMembershipResponse } from '@/lib/apis/user/type';
+import { getUserMemberships } from '@/lib/apis/user';
 
 export function useMemberships(isLogin: boolean) {
   const { data: memberships = [] } = useQuery<
@@ -13,10 +13,8 @@ export function useMemberships(isLogin: boolean) {
   >({
     queryKey: ['memberships'],
     queryFn: async () => {
-      const res = await fetcher<undefined, UserMembershipResponse[]>({
-        url: '/user/memberships',
-        method: 'GET',
-      });
+      const res = await getUserMemberships({ tag: ['memberships'] });
+      console.log(res);
       return res ?? [];
     },
     enabled: isLogin,
