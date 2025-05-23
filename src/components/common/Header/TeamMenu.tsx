@@ -139,7 +139,7 @@ export default function TeamMenu({
                   size="lg"
                   className="!w-full"
                   startIcon="plus"
-                  onClick={close}
+                  onClick={dropdpwnClose}
                 >
                   팀 추가하기
                 </Button>

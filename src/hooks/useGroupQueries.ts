@@ -31,7 +31,7 @@ export function useCreateGroup() {
       });
     },
     onSuccess: () => {
-      qc.invalidateQueries({ queryKey: ['userGroups'] });
+      qc.invalidateQueries({ queryKey: ['memberships'] });
     },
   });
 }
@@ -57,7 +57,7 @@ export function useUpdateGroup(teamId: number) {
     },
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ['group', teamId] });
-      qc.invalidateQueries({ queryKey: ['userGroups'] });
+      qc.invalidateQueries({ queryKey: ['memberships'] });
     },
   });
 }
@@ -67,7 +67,7 @@ export function useDeleteGroup(teamId: number) {
   return useMutation({
     mutationFn: () => deleteGroupById({ groupId: teamId }),
     onSuccess: () => {
-      qc.invalidateQueries({ queryKey: ['userGroups'] });
+      qc.invalidateQueries({ queryKey: ['memberships'] });
     },
   });
 }
