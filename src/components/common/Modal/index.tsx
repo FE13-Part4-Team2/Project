@@ -17,25 +17,48 @@ export default function Modal() {
     closeModal,
   } = useModalStore();
 
+  const formId = button?.formId; // formId 추출
   const modalRef = useRef<HTMLDivElement>(null);
   const isModalOpen = Boolean(title || content);
+
+  // 폼 제출 시도 여부를 추적하는 플래그
+  const isSubmittedRef = useRef(false);
 
   useClosePopup(modalRef, closeModal);
   useLockBackgroundScroll(isModalOpen);
 
-  if (!isModalOpen) return null;
-
+  // button 클릭 시 실행되는 함수 (form 존재 여부에 따른 분기 처리 )
   const handleRequest = () => {
-    button?.onRequest?.(requestBody);
-    closeModal();
+    isSubmittedRef.current = true;
+
+    // 기존 모달 흐름
+    if (!formId) {
+      if (isSubmittedRef.current) {
+        button?.onRequest?.(requestBody);
+        closeModal();
+        isSubmittedRef.current = false;
+        return;
+      }
+    }
+
+    // formId 존재 (브라우저 submit 트리거)
+    const form = document.getElementById(
+      formId as string
+    ) as HTMLFormElement | null;
+    if (form) {
+      form.requestSubmit(); // 폼 제출만 담당
+    }
+    isSubmittedRef.current = false;
   };
+
+  if (!isModalOpen) return null;
 
   return (
     <div className="tablet:items-center fixed inset-0 z-80 flex h-full w-full items-end justify-center bg-black/50">
       <div
         ref={modalRef}
         className={clsx(
-          'tablet:w-[384px] tablet:rounded-b-xl relative flex w-full flex-col rounded-t-3xl border-none bg-slate-800 pb-8',
+          'tablet:w-[384px] tablet:rounded-xl relative flex w-full flex-col rounded-t-3xl border-none bg-slate-800 pb-8',
           variant === 'default' && 'gap-6 px-[52px] pt-12',
           variant === 'danger' && 'gap-6 px-[52px] pt-8',
           variant === 'taskForm' && 'gap-8 px-6 pt-8'
@@ -82,7 +105,11 @@ export default function Modal() {
                 )}
               </div>
             )}
-            {content && <div className="overflow-y-auto">{content}</div>}
+            {content && (
+              <div className="overflow-y-auto">
+                {typeof content === 'function' ? content() : content}
+              </div>
+            )}
           </div>
         </div>
         <div className="flex gap-2">
@@ -99,6 +126,7 @@ export default function Modal() {
             </Button>
           )}
           <Button
+            {...(formId ? { form: formId } : {})} // formId 존재 여부에 따라 form 속성 추가
             variant="primary"
             styleType={variant === 'danger' ? 'danger' : 'filled'}
             className="flex-1"
