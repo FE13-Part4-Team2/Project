@@ -39,19 +39,19 @@ export default async function loginWithOauth({
 
     cookieStore.set('accessToken', accessToken, {
       path: '/',
-      secure: true,
+      secure: false,
       //httpOnly: true,
       sameSite: 'strict',
     });
     cookieStore.set('refreshToken', refreshToken, {
       path: '/',
-      secure: true,
+      secure: false,
       // httpOnly: true,
       sameSite: 'strict',
     });
     cookieStore.set('userId', user.id.toString(), {
       path: '/',
-      secure: true,
+      secure: false,
       // httpOnly: true,
       sameSite: 'strict',
     });
