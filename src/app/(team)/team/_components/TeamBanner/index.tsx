@@ -1,7 +1,9 @@
 'use client';
 import Image from 'next/image';
-import TeamDropdownMenu from '@/app/(team)/team/_components/TeamBanner/TeamMenu';
+import IconRenderer from '@/components/common/Icons/IconRenderer';
 import GradientScrollable from '@/components/common/Scroll/GradientScrollable';
+import { useRouter } from 'next/navigation';
+import { ROUTES } from '@/constants/routes';
 import { useIsAdmin } from '@/hooks/useIsAdmin';
 import { GroupResponse } from '@/lib/apis/group/type';
 import {
@@ -17,6 +19,7 @@ const TeamBanner = ({
   group: GroupResponse;
   userId: number;
 }) => {
+  const router = useRouter();
   const isAdmin = useIsAdmin({ membersData: group.members, userId });
 
   return (
@@ -34,7 +37,13 @@ const TeamBanner = ({
         <GradientScrollable>{group.name}</GradientScrollable>
       </div>
 
-      {isAdmin && <TeamDropdownMenu group={group} />}
+      {isAdmin && (
+        <IconRenderer
+          onClick={() => router.push(ROUTES.TEAM_EDIT(group.id))}
+          name="GearIcon"
+          className="cursor-pointer"
+        />
+      )}
     </div>
   );
 };
