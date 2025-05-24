@@ -14,7 +14,6 @@ export function useMemberships(isLogin: boolean) {
     queryKey: ['memberships'],
     queryFn: async () => {
       const res = await getUserMemberships({ tag: ['memberships'] });
-      console.log(res);
       return res ?? [];
     },
     enabled: isLogin,
