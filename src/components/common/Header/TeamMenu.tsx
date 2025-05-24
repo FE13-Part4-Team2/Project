@@ -97,7 +97,7 @@ export default function TeamMenu({
                         setIsOpen(false);
                       }}
                     >
-                      <div className="relative h-8 w-8">
+                      <div className="relative h-8 w-8 shrink-0">
                         {group.image ? (
                           <Image
                             src={`${group.image}`}
