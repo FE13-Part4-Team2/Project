@@ -26,11 +26,12 @@ export function useMemberships(isLogin: boolean) {
 
   useEffect(() => {
     if (memberships.length > 0) {
-      setSelectedGroup((prev) =>
-        prev && memberships.some((m) => m.group.id === prev.id)
-          ? prev
-          : memberships[0].group
-      );
+      setSelectedGroup((prev) => {
+        const newGroup = memberships.find(
+          (m) => m.group.id === prev?.id
+        )?.group;
+        return newGroup ?? memberships[0].group;
+      });
     } else {
       setSelectedGroup(null);
     }

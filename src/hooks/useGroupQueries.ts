@@ -59,7 +59,9 @@ export function useUpdateGroup(teamId: number) {
     },
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ['group', teamId] });
-      qc.invalidateQueries({ queryKey: ['memberships'] });
+      qc.invalidateQueries({
+        queryKey: ['memberships'],
+      });
     },
   });
 }
