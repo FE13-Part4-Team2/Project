@@ -6,6 +6,7 @@ import { GroupResponse } from '@/lib/apis/group/type';
 import { useModalStore } from '@/store/useModalStore';
 import { useRouter } from 'next/navigation';
 import { ROUTES } from '@/constants/routes';
+import { toast } from 'react-toastify';
 
 interface TeamBannerMenuProps {
   group: GroupResponse;
@@ -21,6 +22,7 @@ const TeamBannerMenu = ({ group, userId }: TeamBannerMenuProps) => {
     try {
       await deleteGroupMemberById({ groupId: group.id, memberId: userId });
       router.push(ROUTES.HOME);
+      toast.success(`'${group.name}' 팀을 탈퇴했습니다.`);
     } catch (error) {
       console.error('탈퇴 실패', error);
     }
