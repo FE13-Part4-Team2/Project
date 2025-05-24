@@ -34,11 +34,11 @@ const AccountUpdateButton = ({ name, image }: AccountUpdateButtonProps) => {
       return patchUser({ body });
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['user'] });
-      toast.success('계정 정보가 성공적으로 업데이트되었습니다.');
+      queryClient.invalidateQueries({ queryKey: ['currentUser'] });
+      toast.success('개인 정보가 수정되었습니다.');
     },
     onError: () => {
-      toast.error('계정 정보 업데이트에 실패했습니다.');
+      toast.error('개인 정보 수정에 실패했습니다.');
     },
   });
 
