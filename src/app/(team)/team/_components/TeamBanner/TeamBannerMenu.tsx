@@ -25,6 +25,7 @@ const TeamBannerMenu = ({ group, userId }: TeamBannerMenuProps) => {
       toast.success(`'${group.name}' 팀을 탈퇴했습니다.`);
     } catch (error) {
       console.error('탈퇴 실패', error);
+      toast.error('탈퇴에 실패했습니다. 잠시 후 다시 시도해 주세요.');
     }
   };
 
